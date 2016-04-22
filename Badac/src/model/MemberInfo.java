@@ -43,6 +43,18 @@ public class MemberInfo {
 		this.company_photo=company_photo;
 	}
 	
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval){
+		this.company_id=company_id;
+		this.company_ownername=company_ownername;
+		this.company_email=company_email;
+		this.company_password=company_password;
+		this.company_name=company_name;
+		this.company_region=company_region;
+		this.company_telephone=company_telephone;
+		this.company_phone=company_phone;
+		this.company_approval=company_approval;
+	}
+	
 	public int getCompany_id() {
 		return company_id;
 	}

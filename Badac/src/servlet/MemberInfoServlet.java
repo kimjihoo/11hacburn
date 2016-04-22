@@ -2,13 +2,12 @@ package servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,27 +17,26 @@ import javax.servlet.http.Part;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import db.UserInfoDAO;
-import model.UserInfo;
+import db.MemberInfoDAO;
+import model.MemberInfo;
 
 /**
- * Servlet implementation class UserInfoServlet
+ * Servlet implementation class MemberInfoServlet
  */
-@MultipartConfig
-//@WebServlet(urlPatterns = { "", "/index", "/user_email_check", "/user_sign_up", "/user_login", "/logout", "/user_login_page", "/user_sign_up_page", "/user_main_page"})
-public class UserInfoServlet extends HttpServlet {
+
+public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String emailRegex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
 	private static final String passwordRegex = "^[a-z0-9]{4,12}$";
 	private static final String nameRegex = "^[°¡-ÆRa-z]{2,8}$";
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
@@ -49,35 +47,32 @@ public class UserInfoServlet extends HttpServlet {
 
 		String dispatchUrl = null;
 		
-		//if (action.equals("index") || action.trim().equals("") || action.trim().equals("Badac")) {			
-		if (action.equals("user")) {		
-			String userId = null;
+		//if (action.equals("index") || action.trim().equals("") || action.trim().equals("Badac")) {
+		if (action.equals("member")) {
+			String memberId = null;
 			
 			Cookie[] cookie = request.getCookies();
 			
 			if( cookie != null ){
 				int cLen = cookie.length;
 				for (int i = 0; i < cLen; i++) {
-					if( cookie[i].getName().equals("user_id")){ // ¿©·¯´ë È®ÀÎÇØ
+					if( cookie[i].getName().equals("company_id")){ // ¿©·¯´ë È®ÀÎÇØ
 						//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
 						//System.out.println("Index : " +cookie[i].getValue());
-						userId = cookie[i].getValue();
+						memberId = cookie[i].getValue();
 					}
 				}
 				
-				if (userId != null && !(userId.equals("")) && Pattern.matches("^[0-9]+$", userId)) {
-					response.sendRedirect("user_main_page");
+				if (memberId != null && !(memberId.equals("")) && Pattern.matches("^[0-9]+$", memberId)) {
+					response.sendRedirect("member_main_page");
 				} else {
-					response.sendRedirect("user_login_page");
+					response.sendRedirect("member_login_page");
 				}
 			}
 			else{
-				response.sendRedirect("user_login_page");
+				response.sendRedirect("member_login_page");
 			}
-		}else if(action.equals("start")){
-			response.sendRedirect("user_login_page");
-		}
-		else if (action.equals("user_logout")) {
+		} else if (action.equals("member_logout")) {
 			Cookie[] cookie = request.getCookies();
 			
 			if( cookie != null ){
@@ -86,7 +81,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id") || cookieName.equals("user_check") || cookieName.equals("user_email") || cookieName.equals("user_name")){
+						if( cookieName.equals("company_id") || cookieName.equals("user_check") || cookieName.equals("company_email") || cookieName.equals("company_name")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -96,7 +91,7 @@ public class UserInfoServlet extends HttpServlet {
 			}
 
 			response.sendRedirect("");
-		} else if( action.equals("user_sign_up_page") ){
+		} else if( action.equals("member_sign_up_page") ){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -107,7 +102,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // ¿©·¯´ë È®ÀÎÇØ
+						if( cookieName.equals("comapny_id")){ // ¿©·¯´ë È®ÀÎÇØ
 							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
 							//System.out.println("Index : " +cookie[i].getValue());
 							userCode = cookie[i].getValue();
@@ -117,12 +112,12 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("user_main_page");
+				response.sendRedirect("member_main_page");
 			}
 			else{
-				dispatchUrl = "UserSignUP.jsp";
+				dispatchUrl = "MemberSignUP.jsp";
 			}
-		} else if( action.equals("user_login_page") ){
+		} else if( action.equals("member_login_page") ){
 			//System.out.println("·Î±×ÀÎ ÆäÀÌÁö");
 			
 			String userCode = null;
@@ -135,7 +130,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // ¿©·¯´ë È®ÀÎÇØ
+						if( cookieName.equals("company_id")){ // ¿©·¯´ë È®ÀÎÇØ
 							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
 							//System.out.println("Index : " +cookie[i].getValue());
 							userCode = cookie[i].getValue();
@@ -145,12 +140,12 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("user_main_page");
+				response.sendRedirect("member_main_page");
 			}
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		} else if( action.equals("user_main_page") ){
+		} else if( action.equals("member_main_page") ){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -161,7 +156,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // ¿©·¯´ë È®ÀÎÇØ
+						if( cookieName.equals("company_id")){ // ¿©·¯´ë È®ÀÎÇØ
 							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
 							//System.out.println("Index : " +cookie[i].getValue());
 							userCode = cookie[i].getValue();
@@ -171,10 +166,10 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "UserMainPage.jsp";
+				dispatchUrl = "MemberMainPage.jsp";
 			}
 			else{
-				response.sendRedirect("user_login_page");
+				response.sendRedirect("member_login_page");
 			}
 		} 
 
@@ -189,7 +184,6 @@ public class UserInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
@@ -200,7 +194,7 @@ public class UserInfoServlet extends HttpServlet {
 
 		String dispatchUrl = null;
 		
-		if (action.equals("user_email_check")) {
+		if (action.equals("member_email_check")) {
 			String errorMsg = "Success";
 
 			String email = request.getParameter("email");
@@ -211,9 +205,9 @@ public class UserInfoServlet extends HttpServlet {
 			}
 
 			// ÀÖ´Â e-mailÀÎÁö °Ë»ç
-			UserInfoDAO uid = new UserInfoDAO();
-			UserInfo temp = uid.selectUserInfoByUserEmail(email);
-			uid.disconnect();
+			MemberInfoDAO mid = new MemberInfoDAO();
+			MemberInfo temp = mid.selectMemberInfoByCompanyEmail(email);
+			mid.disconnect();
 
 			if (temp != null) {
 				errorMsg = "ExistentEmailError";
@@ -222,18 +216,23 @@ public class UserInfoServlet extends HttpServlet {
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(errorMsg);
-		} else if(action.equals("user_sign_up")){
-			String name = request.getParameter("name");
+		} else if(action.equals("member_sign_up")){
+			String ownername = request.getParameter("ownername");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
+			String name = request.getParameter("name");
 			String region = request.getParameter("region");
+			int telephone = Integer.parseInt(request.getParameter("telephone"));
 			int phone = Integer.parseInt(request.getParameter("phone"));
-			String bicycletype = request.getParameter("bicycletype");
-			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
+			String photo = request.getParameter("photo");
+			
 			
 			String msg = "Success";
 
-			if (email == null || email.trim().equals("")) {
+			if (ownername == null || ownername.trim().equals("")) {
+				msg = "NoInputOwnerName";
+			} 
+			else if (email == null || email.trim().equals("")) {
 				msg = "NoInputEmail";
 			} 
 			else if (password == null || password.trim().equals("")) {
@@ -245,15 +244,12 @@ public class UserInfoServlet extends HttpServlet {
 			else if (region == null || region.trim().equals("")) {
 				msg = "NoInputRegion";
 			} 
+			else if (telephone == -1) {
+				msg = "NoInputTelePhone";
+			}
 			else if (phone == -1) {
 				msg = "NoInputPhone";
-			} 
-			else if (bicycletype == null || bicycletype.trim().equals("")) {
-				msg = "NoInputBicycletype";
-			} 
-			else if (emailpush==-1) {
-				msg = "NoInputEmailpush";
-			} 
+			}
 			else {
 				int flag = 1;
 
@@ -264,9 +260,9 @@ public class UserInfoServlet extends HttpServlet {
 				}
 
 				// ÀÖ´Â e-mailÀÎÁö °Ë»ç
-				UserInfoDAO uid = new UserInfoDAO();
-				UserInfo temp = uid.selectUserInfoByUserEmail(email);
-				uid.disconnect();
+				MemberInfoDAO mid = new MemberInfoDAO();
+				MemberInfo temp = mid.selectMemberInfoByCompanyEmail(email);
+				mid.disconnect();
 
 				if (temp != null) {
 					msg = "ExistentEmailError";
@@ -285,13 +281,13 @@ public class UserInfoServlet extends HttpServlet {
 				}
 
 				if (flag == 1) {
-					uid = new UserInfoDAO();
-					uid.insertUserInfo(name, email, password, region, phone, bicycletype,emailpush);
-					uid.disconnect();
+					mid = new MemberInfoDAO();
+					mid.insertMemberInfo(ownername, email, password, name, region, telephone, phone, photo);
+					mid.disconnect();
 
-					uid = new UserInfoDAO();
-					UserInfo userInfo = uid.selectUserInfoByUserEmail(email);
-					uid.disconnect();
+					mid = new MemberInfoDAO();
+					MemberInfo memberInfo = mid.selectMemberInfoByCompanyEmail(email);
+					mid.disconnect();
 				}
 			}
 			
@@ -307,7 +303,7 @@ public class UserInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
-		} else if(action.equals("user_login")){
+		} else if(action.equals("member_login")){
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
@@ -327,9 +323,9 @@ public class UserInfoServlet extends HttpServlet {
 				}
 
 				// ÀÖ´Â e-mailÀÎÁö °Ë»ç
-				UserInfoDAO uid = new UserInfoDAO();
-				UserInfo temp = uid.selectUserInfoByUserEmail(email);
-				uid.disconnect();
+				MemberInfoDAO mid = new MemberInfoDAO();
+				MemberInfo temp = mid.selectMemberInfoByCompanyEmail(email);
+				mid.disconnect();
 
 				if (temp == null) {
 					msg = "NoEmailError";
@@ -343,21 +339,21 @@ public class UserInfoServlet extends HttpServlet {
 				}
 				
 				if (flag == 1) {
-					if (temp.getUser_password().equals(password)) {
+					if (temp.getCompany_password().equals(password)) {
 						// ·Î±×ÀÎ ¼º°ø
-						Cookie cookie = new Cookie("user_id", Integer.toString(temp.getUser_id()));
+						Cookie cookie = new Cookie("company_id", Integer.toString(temp.getCompany_id()));
 						
 						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("user_name", URLEncoder.encode(temp.getUser_name(), "UTF-8"));
+						cookie = new Cookie("company_name", URLEncoder.encode(temp.getCompany_name(), "UTF-8"));
 						
 						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("user_email", temp.getUser_email());
+						cookie = new Cookie("company_email", temp.getCompany_email());
 						
 						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 						

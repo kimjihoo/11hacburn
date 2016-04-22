@@ -35,77 +35,79 @@
         	var regix_pw = /^[a-z0-9]{4,12}$/;
     		var regix_name = /^[a-zA-Z0-9가-힣]{2,8}$/;
 
-			var user_name = document.getElementById("user_name");
-			var user_email = document.getElementById("user_email");
-			var user_pw = document.getElementById("user_password");
-			var user_chk_pw = document.getElementById("user_password_confirm");
-			var user_region = document.getElementById("user_region");
-			var user_phone = document.getElementById("user_phone");
-			var user_bicycletype = document.getElementById("user_bicycletype");
-			var user_emailpush = document.getElementById("user_emailpush");
+    		var company_ownername = document.getElementById("company_ownername");
+			var company_email = document.getElementById("company_email");
+			var company_pw = document.getElementById("company_password");
+			var company_chk_pw = document.getElementById("company_password_confirm");
+			var company_name = document.getElementById("company_name");
+			var company_region = document.getElementById("company_region");
+			var company_telephone = document.getElementById("company_telephone");
+			var company_phone = document.getElementById("company_phone");
+			var company_photo = document.getElementById("company_photo");
 			
-            if(user_name.value == ""){
+            if(company_name.value == ""){
                 alert("이름을 입력하세요.");
-                user_name.focus();
+                company_name.focus();
                 return;
             }
-            if(regix_name.test(user_name.value) != true){
+            if(regix_name.test(company_name.value) != true){
                 alert("이름 형식이 틀렸습니다. (영문 / 한글 - 2~8글자)");
-                user_name.focus();
+                company_name.focus();
                 return;
             }
-            if(user_email.value == ""){
+            if(company_email.value == ""){
                 alert("이메일을 입력하세요.");
-                user_email.focus();
+                company_email.focus();
                 return;
             }
-            if(regix_email.test(user_email.value) != true){
+            if(regix_email.test(company_email.value) != true){
             	alert("이메일 형식이 틀렸습니다. (xx@xx.xx)");
-            	user_email.focus();
+            	company_email.focus();
                 return;
             }
-            if(user_pw.value == ""){
+            if(company_pw.value == ""){
                 alert("비밀번호를 입력하세요.");
-                user_pw.focus();
+                company_pw.focus();
                 return;
             }
-            if(regix_pw.test(user_pw.value) != true){
+            if(regix_pw.test(company_pw.value) != true){
             	alert("비밀번호 형식이 틀렸습니다. (영문 / 숫자 - 4~12글자)");
-            	user_pw.focus();
+            	company_pw.focus();
                 return;
             }
-            if(user_chk_pw.value == ""){
+            if(company_chk_pw.value == ""){
                 alert("확인 비밀번호를 입력하세요.");
-                user_chk_pw.focus();
+                company_chk_pw.focus();
                 return;
             }
-            if(regix_pw.test(user_chk_pw.value) != true){
+            if(regix_pw.test(company_chk_pw.value) != true){
             	alert("확인 비밀번호 형식이 틀렸습니다. (4~12글자 영문 / 숫자)");
-            	user_chk_pw.focus();
+            	company_chk_pw.focus();
                 return;
             }
-            if(!(user_pw.value == user_chk_pw.value)){
+            if(!(company_pw.value == company_chk_pw.value)){
                 alert("비밀번호와 확인 비밀번호가 다릅니다.");
-                user_chk_pw.focus();
+                company_chk_pw.focus();
                 return;
             }
             
-            /* alert(user_email.value);
-            alert(user_pw.value);
-            alert(user_name.value); */
+            /* alert(company_email.value);
+            alert(company_pw.value);
+            alert(company_name.value); */
             
-            $.post("http://localhost:8100/Badac/user_sign_up", {
-            	name : user_name.value,
-            	email : user_email.value,
-            	password : user_pw.value,
-            	region : user_region.value,
-            	phone : user_phone.value,
-            	bicycletype : user_bicycletype.value,
-            	emailpush : user_emailpush.value,
+            $.post("http://localhost:8100/Badac/member_sign_up", {
+            	ownername : company_ownername.value,
+            	email : company_email.value,
+            	password : company_pw.value,
+            	name : company_name.value,
+            	region : company_region.value,
+            	telephone : company_telephone.value,
+            	phone : company_phone.value,
+            	photo : company_photo.value,
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원가입이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/";
+            			location.href = "http://localhost:8100/Badac/member";
             		}
             		else{
             			alert(data.msg);
@@ -114,7 +116,7 @@
         }
 
         function toLoginPage(){
-            location.href = "http://localhost:8100/Badac/login_page";
+            location.href = "http://localhost:8100/Badac/member_login_page";
         }
     </script>
 </head>
@@ -124,39 +126,35 @@
     <tbody>
     <tr style="width:100%">
         <td style="width:40%"></td>
-        <td style="width:20%; padding-top:10%;">
-            <img src="image/logo_all.png" width="400" height="200">
-        </td>
-        <td style="width:40%"></td>
-    </tr>
-    <tr style="width:100%">
-        <td style="width:40%"></td>
         <td style="width:20%; padding-top:5%;">
             <div style="width:100%;">
         <div style="width:60%; margin:auto;">
-            <div class="form-group">
-                    <input name="user_name" id="user_name" type="text" class="form-control" placeholder="Enter your Name">
+        <div class="form-group">
+                    <input name="company_onwername" id="company_ownername" type="text" class="form-control" placeholder="Enter your Name">
                 </div>
                 <div class="form-group">
-                    <input name="user_email" id="user_email" type="email" class="form-control" placeholder="Enter your E-mail">
+                    <input name="company_email" id="company_email" type="email" class="form-control" placeholder="Enter your E-mail">
                 </div>
                 <div class="form-group">
-                    <input name="user_password" id="user_password" type="password" class="form-control" placeholder="Enter your Password">
+                    <input name="company_password" id="company_password" type="password" class="form-control" placeholder="Enter your Password">
                 </div>
                 <div class="form-group">
-                    <input name="user_password_confirm" id="user_password_confirm" type="password" class="form-control" placeholder="Confirm Password">
+                    <input name="company_password_confirm" id="company_password_confirm" type="password" class="form-control" placeholder="Confirm Password">
                 </div>
                 <div class="form-group">
-                    <input name="user_region" id="user_region" type="text" class="form-control" placeholder="지역을 입력하세요">
+                    <input name="company_name" id="company_name" type="text" class="form-control" placeholder="Enter your CompanyName">
                 </div>
                 <div class="form-group">
-                    <input name="user_phone" id="user_phone" type="text" class="form-control" placeholder="폰번호입력">
+                    <input name="company_region" id="company_region" type="text" class="form-control" placeholder="지역을 입력하세요">
                 </div>
                 <div class="form-group">
-                    <input name="user_bicycletype" id="user_bicycletype" type="text" class="form-control" placeholder="자전거 종류 입력">
+                    <input name="company_telephone" id="company_telephone" type="text" class="form-control" placeholder="가게번호입력">
                 </div>
                 <div class="form-group">
-                    <input name="user_emailpush" id="user_emailpush" type="text" class="form-control" placeholder="이메일 푸쉬 확인">
+                    <input name="company_phone" id="company_phone" type="text" class="form-control" placeholder="폰번호입력">
+                </div>
+                <div class="form-group">
+                    <input name="company_photo" id="company_photo" type="text" class="form-control" placeholder="그림">
                 </div>
             <div>
                 <button style="float:right;" class="btn btn-default" onclick="toLoginPage()">Cancel</button>

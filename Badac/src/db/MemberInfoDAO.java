@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import model.MemberInfo;
 
 public class MemberInfoDAO extends BaseDAO {
-	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, Date company_approvaldate, String company_photo){
+	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, String company_photo){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
@@ -24,8 +24,8 @@ public class MemberInfoDAO extends BaseDAO {
 			ps.setString(6,company_region);
 			ps.setInt(7,company_telephone);
 			ps.setInt(8,company_phone);
-			ps.setInt(9,company_approval);
-			ps.setDate(10,company_approvaldate);
+			ps.setInt(9,0);
+			ps.setDate(10,null);
 			ps.setString(11,company_photo);
 			
 			while(true){

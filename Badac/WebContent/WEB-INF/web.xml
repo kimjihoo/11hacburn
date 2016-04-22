@@ -10,83 +10,139 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-  	<servlet-name>UserNull</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>start</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserNull</servlet-name>
-  	<url-pattern>/</url-pattern>
+    <servlet-name>start</servlet-name>
+    <url-pattern>/start</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserIndex</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserIndex</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserIndex</servlet-name>
-  	<url-pattern>/index</url-pattern>
+    <servlet-name>UserIndex</servlet-name>
+    <url-pattern>/user</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserEmailCheck</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserEmailCheck</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserEmailCheck</servlet-name>
-  	<url-pattern>/user_email_check</url-pattern>
+    <servlet-name>UserEmailCheck</servlet-name>
+    <url-pattern>/user_email_check</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserSignUp</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserSignUp</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserSignUp</servlet-name>
-  	<url-pattern>/user_sign_up</url-pattern>
+    <servlet-name>UserSignUp</servlet-name>
+    <url-pattern>/user_sign_up</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserLogin</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserLogin</servlet-name>
-  	<url-pattern>/user_login</url-pattern>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/user_login</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserLogout</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserLogout</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserLogout</servlet-name>
-  	<url-pattern>/logout</url-pattern>
+    <servlet-name>UserLogout</servlet-name>
+    <url-pattern>/user_logout</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserLoginPage</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserLoginPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserLoginPage</servlet-name>
-  	<url-pattern>/user_login_page</url-pattern>
+    <servlet-name>UserLoginPage</servlet-name>
+    <url-pattern>/user_login_page</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserSignUpPage</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserSignUpPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserSignUpPage</servlet-name>
-  	<url-pattern>/user_sign_up_page</url-pattern>
+    <servlet-name>UserSignUpPage</servlet-name>
+    <url-pattern>/user_sign_up_page</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  	<servlet-name>UserMainPage</servlet-name>
-  	<servlet-class>servlet.UserInfoServlet</servlet-class>
+    <servlet-name>UserMainPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<servlet-name>UserMainPage</servlet-name>
-  	<url-pattern>/user_main_page</url-pattern>
+    <servlet-name>UserMainPage</servlet-name>
+    <url-pattern>/user_main_page</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberIndex</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberIndex</servlet-name>
+    <url-pattern>/member</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberEmailCheck</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberEmailCheck</servlet-name>
+    <url-pattern>/member_email_check</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberSignUp</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberSignUp</servlet-name>
+    <url-pattern>/member_sign_up</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberLogin</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLogin</servlet-name>
+    <url-pattern>/member_login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberLogout</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLogout</servlet-name>
+    <url-pattern>/member_logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberLoginPage</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLoginPage</servlet-name>
+    <url-pattern>/member_login_page</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberSignUpPage</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberSignUpPage</servlet-name>
+    <url-pattern>/member_sign_up_page</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberMainPage</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberMainPage</servlet-name>
+    <url-pattern>/member_main_page</url-pattern>
   </servlet-mapping>
 </web-app>
