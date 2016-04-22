@@ -41,8 +41,20 @@
 			var user_chk_pw = document.getElementById("user_password_confirm");
 			var user_region = document.getElementById("user_region");
 			var user_phone = document.getElementById("user_phone");
-			var user_bicycletype = document.getElementById("user_bicycletype");
-			var user_emailpush = document.getElementById("user_emailpush");
+			var x = document.getElementById("user_bicycletype").selectedIndex;
+			var user_bicycletype = document.getElementsByTagName("option")[x];
+			
+			var chk=0;
+			var temp = document.user_emailpush.elements['email_push'];
+			var user_emailpush;
+	    	var size = temp.length;
+	        for(var i = 0; i < size; i++) {
+	          if(temp[i].checked) {
+	        	  user_emailpush = temp[i];
+	        	  chk=1;
+	               break;
+	          }
+	       	}
 			
             if(user_name.value == ""){
                 alert("이름을 입력하세요.");
@@ -89,10 +101,10 @@
                 user_chk_pw.focus();
                 return;
             }
-            
-            /* alert(user_email.value);
-            alert(user_pw.value);
-            alert(user_name.value); */
+            if(chk==0){
+            	alert("이메일 착신 여부를 설정해주세요");
+            	return;
+            }
             
             $.post("http://localhost:8100/Badac/user_sign_up", {
             	name : user_name.value,
@@ -105,7 +117,7 @@
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원가입이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/user";
+            			location.href = "http://localhost:8100/Badac/";
             		}
             		else{
             			alert(data.msg);
@@ -114,53 +126,32 @@
         }
 
         function toLoginPage(){
-            location.href = "http://localhost:8100/Badac/user_login_page";
+            location.href = "http://localhost:8100/Badac/login_page";
+        	//location.href="LoginPage.jsp";
         }
     </script>
 </head>
 <body>
-
-<table id="login_Table" style="width:100%">
-    <tbody>
-    <tr style="width:100%">
-        <td style="width:40%"></td>
-        <td style="width:20%; padding-top:5%;">
-            <div style="width:100%;">
-        <div style="width:60%; margin:auto;">
-            <div class="form-group">
-                    <input name="user_name" id="user_name" type="text" class="form-control" placeholder="Enter your Name">
-                </div>
-                <div class="form-group">
-                    <input name="user_email" id="user_email" type="email" class="form-control" placeholder="Enter your E-mail">
-                </div>
-                <div class="form-group">
-                    <input name="user_password" id="user_password" type="password" class="form-control" placeholder="Enter your Password">
-                </div>
-                <div class="form-group">
-                    <input name="user_password_confirm" id="user_password_confirm" type="password" class="form-control" placeholder="Confirm Password">
-                </div>
-                <div class="form-group">
-                    <input name="user_region" id="user_region" type="text" class="form-control" placeholder="지역을 입력하세요">
-                </div>
-                <div class="form-group">
-                    <input name="user_phone" id="user_phone" type="text" class="form-control" placeholder="폰번호입력">
-                </div>
-                <div class="form-group">
-                    <input name="user_bicycletype" id="user_bicycletype" type="text" class="form-control" placeholder="자전거 종류 입력">
-                </div>
-                <div class="form-group">
-                    <input name="user_emailpush" id="user_emailpush" type="text" class="form-control" placeholder="이메일 푸쉬 확인">
-                </div>
-            <div>
-                <button style="float:right;" class="btn btn-default" onclick="toLoginPage()">Cancel</button>
-                <button style="margin-right:10px; float:right;" class="btn btn-default" onclick="signUp()">Sign up</button>
-            </div>
-            </div>
-            </div>
-        </td>
-        <td style="width:40%"></td>
-    </tr>
-    </tbody>
-</table>
+	이름 : <input name="user_name" id="user_name" type="text" placeholder="Enter your Name"><br />
+	이메일 : <input name="user_email" id="user_email" type="email" placeholder="Enter your E-mail"><br />
+	비밀번호 : <input name="user_password" id="user_password" type="password" placeholder="Enter your Password"><br />
+	비밀번호 확인 : <input name="user_password_confirm" id="user_password_confirm" type="password" placeholder="Confirm Password"><br />
+	지역 : <input name="user_region" id="user_region" type="text" placeholder="지역을 입력하세요"><br />
+	핸드폰 번호 : <input name="user_phone" id="user_phone" type="text" placeholder="폰번호입력"><br />
+	자전거 타입 : <select id="user_bicycletype">
+            <option value="픽시">픽시</option>
+            <option value="로드">로드</option>
+            <option value="알톤">알톤</option>
+            <option value="삼천리">알톤</option>
+            <option value="etc">기타</option>
+        </select><br />
+	이메일 착신 여부 : <form name="user_emailpush">
+					<input type="radio" name="email_push" value=1>착신
+					<input type="radio" name="email_push" value=0>미착신
+				</form><br />
+	<div>
+		<button onclick="toLoginPage()">Cancel</button>
+        <button onclick="signUp()">Sign up</button>
+    </div>
 </body>
 </html>

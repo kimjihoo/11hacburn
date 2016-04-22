@@ -5,8 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function userLogout(){
+		location.href = "http://localhost:8100/Badac/user_logout";
+	}
+</script>
 </head>
 <body>
 유저 페이지
+<button onclick="userLogout()">로그아웃</button>
 </body>
 </html>

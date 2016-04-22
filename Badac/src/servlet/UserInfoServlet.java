@@ -25,7 +25,7 @@ import model.UserInfo;
  * Servlet implementation class UserInfoServlet
  */
 @MultipartConfig
-//@WebServlet(urlPatterns = { "", "/index", "/user_email_check", "/user_sign_up", "/user_login", "/logout", "/user_login_page", "/user_sign_up_page", "/user_main_page"})
+//@WebServlet(urlPatterns = { "", "/index", "/user_email_check", "/user_sign_up", "/user_login", "/logout", "/login_page", "/user_sign_up_page", "/user_main_page"})
 public class UserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -49,33 +49,36 @@ public class UserInfoServlet extends HttpServlet {
 
 		String dispatchUrl = null;
 		
-		//if (action.equals("index") || action.trim().equals("") || action.trim().equals("Badac")) {			
-		if (action.equals("user")) {		
+		if (action.equals("index") || action.trim().equals("") || action.trim().equals("Badac")) {
 			String userId = null;
+			String companyId = null;
 			
 			Cookie[] cookie = request.getCookies();
 			
 			if( cookie != null ){
 				int cLen = cookie.length;
 				for (int i = 0; i < cLen; i++) {
-					if( cookie[i].getName().equals("user_id")){ // 여러대 확인해
-						//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-						//System.out.println("Index : " +cookie[i].getValue());
+					if( cookie[i].getName().equals("user_id")){
 						userId = cookie[i].getValue();
+					}else if( cookie[i].getName().equals("company_id")){
+						companyId = cookie[i].getValue();
 					}
 				}
 				
 				if (userId != null && !(userId.equals("")) && Pattern.matches("^[0-9]+$", userId)) {
 					response.sendRedirect("user_main_page");
-				} else {
-					response.sendRedirect("user_login_page");
+				}else if(companyId != null && !(companyId.equals("")) && Pattern.matches("^[0-9]+$", companyId)){
+					response.sendRedirect("member_main_page");
+				}
+				else {
+					response.sendRedirect("login_page");
 				}
 			}
 			else{
-				response.sendRedirect("user_login_page");
+				response.sendRedirect("login_page");
 			}
-		}else if(action.equals("start")){
-			response.sendRedirect("user_login_page");
+		}else if(action.equals("signup_type")){
+			dispatchUrl = "SignUpConfirm.jsp";
 		}
 		else if (action.equals("user_logout")) {
 			Cookie[] cookie = request.getCookies();
@@ -86,7 +89,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id") || cookieName.equals("user_check") || cookieName.equals("user_email") || cookieName.equals("user_name")){
+						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password") || cookieName.equals("user_region") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -94,35 +97,10 @@ public class UserInfoServlet extends HttpServlet {
 					}
 				}
 			}
-
-			response.sendRedirect("");
+			response.sendRedirect("login_page");
 		} else if( action.equals("user_sign_up_page") ){
-			String userCode = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					String cookieName = cookie[i].getName();
-					
-					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // 여러대 확인해
-							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
-						}
-					}
-				}
-			}
-			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("user_main_page");
-			}
-			else{
-				dispatchUrl = "UserSignUP.jsp";
-			}
-		} else if( action.equals("user_login_page") ){
+			dispatchUrl = "UserSignUp.jsp";
+		} else if( action.equals("login_page") ){
 			//System.out.println("로그인 페이지");
 			
 			String userCode = null;
@@ -174,7 +152,7 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			else{
 				
-				response.sendRedirect("user_login_page");
+				response.sendRedirect("login_page");
 			}
 		} 
 

@@ -85,9 +85,7 @@
     	}
     	
     	function gotoSignUp(){
-    		
-    		
-    		
+    		location.href = "http://localhost:8100/Badac/signup_type";
     	}
     
     </script>

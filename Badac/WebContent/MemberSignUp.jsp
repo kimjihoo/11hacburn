@@ -45,6 +45,18 @@
 			var company_phone = document.getElementById("company_phone");
 			var company_photo = document.getElementById("company_photo");
 			
+			var chk=0;
+			var temp = document.company_emailpush.elements['email_push'];
+			var company_emailpush;
+	    	var size = temp.length;
+	        for(var i = 0; i < size; i++) {
+	          if(temp[i].checked) {
+	        	  company_emailpush = temp[i];
+	        	  chk=1;
+	               break;
+	          }
+	       	}
+			
             if(company_name.value == ""){
                 alert("이름을 입력하세요.");
                 company_name.focus();
@@ -90,10 +102,10 @@
                 company_chk_pw.focus();
                 return;
             }
-            
-            /* alert(company_email.value);
-            alert(company_pw.value);
-            alert(company_name.value); */
+            if(chk==0){
+            	alert("이메일 착신 여부를 설정해주세요");
+            	return;
+            }
             
             $.post("http://localhost:8100/Badac/member_sign_up", {
             	ownername : company_ownername.value,
@@ -104,10 +116,11 @@
             	telephone : company_telephone.value,
             	phone : company_phone.value,
             	photo : company_photo.value,
+            	emailpush : company_emailpush.value,
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원가입이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/member";
+            			location.href = "http://localhost:8100/Badac/";
             		}
             		else{
             			alert(data.msg);
@@ -116,56 +129,28 @@
         }
 
         function toLoginPage(){
-            location.href = "http://localhost:8100/Badac/member_login_page";
+            location.href = "http://localhost:8100/Badac/login_page";
+        	//location.href="LoginPage.jsp";
         }
     </script>
 </head>
 <body>
-
-<table id="login_Table" style="width:100%">
-    <tbody>
-    <tr style="width:100%">
-        <td style="width:40%"></td>
-        <td style="width:20%; padding-top:5%;">
-            <div style="width:100%;">
-        <div style="width:60%; margin:auto;">
-        <div class="form-group">
-                    <input name="company_onwername" id="company_ownername" type="text" class="form-control" placeholder="Enter your Name">
-                </div>
-                <div class="form-group">
-                    <input name="company_email" id="company_email" type="email" class="form-control" placeholder="Enter your E-mail">
-                </div>
-                <div class="form-group">
-                    <input name="company_password" id="company_password" type="password" class="form-control" placeholder="Enter your Password">
-                </div>
-                <div class="form-group">
-                    <input name="company_password_confirm" id="company_password_confirm" type="password" class="form-control" placeholder="Confirm Password">
-                </div>
-                <div class="form-group">
-                    <input name="company_name" id="company_name" type="text" class="form-control" placeholder="Enter your CompanyName">
-                </div>
-                <div class="form-group">
-                    <input name="company_region" id="company_region" type="text" class="form-control" placeholder="지역을 입력하세요">
-                </div>
-                <div class="form-group">
-                    <input name="company_telephone" id="company_telephone" type="text" class="form-control" placeholder="가게번호입력">
-                </div>
-                <div class="form-group">
-                    <input name="company_phone" id="company_phone" type="text" class="form-control" placeholder="폰번호입력">
-                </div>
-                <div class="form-group">
-                    <input name="company_photo" id="company_photo" type="text" class="form-control" placeholder="그림">
-                </div>
-            <div>
-                <button style="float:right;" class="btn btn-default" onclick="toLoginPage()">Cancel</button>
-                <button style="margin-right:10px; float:right;" class="btn btn-default" onclick="signUp()">Sign up</button>
-            </div>
-            </div>
-            </div>
-        </td>
-        <td style="width:40%"></td>
-    </tr>
-    </tbody>
-</table>
+	대표자 명 : <input name="company_onwername" id="company_ownername" type="text" placeholder="Enter your Name"><br />
+	대표자 이메일 : <input name="company_email" id="company_email" type="email" placeholder="Enter your E-mail"><br />
+	비밀번호 : <input name="company_password" id="company_password" type="password" placeholder="Enter your Password"><br />
+	비밀번호 확인 : <input name="company_password_confirm" id="company_password_confirm" type="password" placeholder="Confirm Password"><br />
+	상호 명 : <input name="company_name" id="company_name" type="text" placeholder="Enter your CompanyName"><br />
+	회사 위치 : <input name="company_region" id="company_region" type="text" placeholder="지역을 입력하세요"><br />
+	전화번호 : <input name="company_telephone" id="company_telephone" type="text" placeholder="가게번호입력"><br />
+	핸드폰 번호 : <input name="company_phone" id="company_phone" type="text" placeholder="폰번호입력"><br />
+	상호 사진<input name="company_photo" id="company_photo" type="text" placeholder="그림"><br />
+	이메일 착신 여부 : <form name="company_emailpush">
+					<input type="radio" name="email_push" value=1>착신
+					<input type="radio" name="email_push" value=0>미착신
+				</form><br />
+	<div>
+        <button onclick="toLoginPage()">Cancel</button>
+        <button onclick="signUp()">Sign up</button>
+    </div>
 </body>
 </html>

@@ -47,32 +47,7 @@ public class MemberInfoServlet extends HttpServlet {
 
 		String dispatchUrl = null;
 		
-		//if (action.equals("index") || action.trim().equals("") || action.trim().equals("Badac")) {
-		if (action.equals("member")) {
-			String memberId = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					if( cookie[i].getName().equals("company_id")){ // 여러대 확인해
-						//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-						//System.out.println("Index : " +cookie[i].getValue());
-						memberId = cookie[i].getValue();
-					}
-				}
-				
-				if (memberId != null && !(memberId.equals("")) && Pattern.matches("^[0-9]+$", memberId)) {
-					response.sendRedirect("member_main_page");
-				} else {
-					response.sendRedirect("member_login_page");
-				}
-			}
-			else{
-				response.sendRedirect("member_login_page");
-			}
-		} else if (action.equals("member_logout")) {
+		if (action.equals("member_logout")) {
 			Cookie[] cookie = request.getCookies();
 			
 			if( cookie != null ){
@@ -81,7 +56,7 @@ public class MemberInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("company_id") || cookieName.equals("user_check") || cookieName.equals("company_email") || cookieName.equals("company_name")){
+						if( cookieName.equals("company_id") || cookieName.equals("company_ownername") || cookieName.equals("company_email") || cookieName.equals("company_password") || cookieName.equals("company_name") || cookieName.equals("company_region") || cookieName.equals("company_telephone") || cookieName.equals("company_phone") || cookieName.equals("company_emailpush")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -90,34 +65,10 @@ public class MemberInfoServlet extends HttpServlet {
 				}
 			}
 
-			response.sendRedirect("");
+			response.sendRedirect("login_page");
 		} else if( action.equals("member_sign_up_page") ){
-			String userCode = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					String cookieName = cookie[i].getName();
-					
-					if( cookieName != null ){
-						if( cookieName.equals("comapny_id")){ // 여러대 확인해
-							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
-						}
-					}
-				}
-			}
-			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("member_main_page");
-			}
-			else{
-				dispatchUrl = "MemberSignUP.jsp";
-			}
-		} else if( action.equals("member_login_page") ){
+			dispatchUrl = "MemberSignUp.jsp";
+		} else if( action.equals("login_page") ){
 			//System.out.println("로그인 페이지");
 			
 			String userCode = null;
@@ -169,7 +120,7 @@ public class MemberInfoServlet extends HttpServlet {
 				dispatchUrl = "MemberMainPage.jsp";
 			}
 			else{
-				response.sendRedirect("member_login_page");
+				response.sendRedirect("login_page");
 			}
 		} 
 
@@ -225,6 +176,7 @@ public class MemberInfoServlet extends HttpServlet {
 			int telephone = Integer.parseInt(request.getParameter("telephone"));
 			int phone = Integer.parseInt(request.getParameter("phone"));
 			String photo = request.getParameter("photo");
+			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
 			
 			
 			String msg = "Success";
@@ -249,6 +201,9 @@ public class MemberInfoServlet extends HttpServlet {
 			}
 			else if (phone == -1) {
 				msg = "NoInputPhone";
+			}
+			else if(emailpush == -1){
+				msg = "NoInputEmailpush";
 			}
 			else {
 				int flag = 1;
@@ -282,7 +237,7 @@ public class MemberInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					mid = new MemberInfoDAO();
-					mid.insertMemberInfo(ownername, email, password, name, region, telephone, phone, photo);
+					mid.insertMemberInfo(ownername, email, password, name, region, telephone, phone, photo, emailpush);
 					mid.disconnect();
 
 					mid = new MemberInfoDAO();
@@ -347,7 +302,7 @@ public class MemberInfoServlet extends HttpServlet {
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("company_name", URLEncoder.encode(temp.getCompany_name(), "UTF-8"));
+						cookie = new Cookie("company_ownername", URLEncoder.encode(temp.getCompany_ownername(), "UTF-8"));
 						
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						
@@ -359,17 +314,41 @@ public class MemberInfoServlet extends HttpServlet {
 						
 						response.addCookie(cookie);
 						
-						//if( checkBox != null ){ // 세션
-							cookie = new Cookie("user_check", "true");
-							
-							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
-							
-							response.addCookie(cookie);
-						//}
+						cookie = new Cookie("company_password", temp.getCompany_password());
 						
-						//response.sendRedirect("");
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						
-						//dispatchUrl = "MainPage.jsp";
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_name", URLEncoder.encode(temp.getCompany_name(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_region", URLEncoder.encode(temp.getCompany_region(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_telephone", Integer.toString(temp.getCompany_telephone()));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_phone", Integer.toString(temp.getCompany_phone()));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_emailpush", Integer.toString(temp.getCompany_emailpush()));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
 					} 
 					else {
 						msg = "PasswordError";

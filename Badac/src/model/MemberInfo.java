@@ -14,6 +14,7 @@ public class MemberInfo {
 	private	int company_approval;
 	private Date company_approvaldate;
 	private String company_photo;
+	private int company_emailpush;
 	
 	public MemberInfo(){
 		this.company_id=-1;
@@ -27,9 +28,10 @@ public class MemberInfo {
 		this.company_approval=-1;
 		this.company_approvaldate = new Date(0000-00-00);
 		this.company_photo="";
+		this.company_emailpush=-1;
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, Date company_approvaldate, String company_photo){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, Date company_approvaldate, String company_photo, int company_emailpush){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -41,9 +43,10 @@ public class MemberInfo {
 		this.company_approval=company_approval;
 		this.company_approvaldate = company_approvaldate;
 		this.company_photo=company_photo;
+		this.company_emailpush = company_emailpush;
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, int company_emailpush){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -53,6 +56,7 @@ public class MemberInfo {
 		this.company_telephone=company_telephone;
 		this.company_phone=company_phone;
 		this.company_approval=company_approval;
+		this.company_emailpush = company_emailpush;
 	}
 	
 	public int getCompany_id() {
@@ -142,6 +146,12 @@ public class MemberInfo {
 	public void setCompany_photo(String company_photo) {
 		this.company_photo = company_photo;
 	}
+	public int getCompany_emailpush() {
+		return company_emailpush;
+	}
 
+	public void setCompany_emailpush(int company_emailpush) {
+		this.company_emailpush = company_emailpush;
+	}
 	
 }

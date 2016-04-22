@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import model.MemberInfo;
 
 public class MemberInfoDAO extends BaseDAO {
-	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, String company_photo){
+	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, String company_photo, int company_emailpush){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
 		PreparedStatement ps=null;
 		try
 		{
-			String sql="INSERT INTO company_user VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO company_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps=super.getConn().prepareStatement(sql);
 			
 			ps.setString(2,company_ownername);
@@ -27,6 +27,7 @@ public class MemberInfoDAO extends BaseDAO {
 			ps.setInt(9,0);
 			ps.setDate(10,null);
 			ps.setString(11,company_photo);
+			ps.setInt(12,company_emailpush);
 			
 			while(true){
 				randomNum = (int)(Math.random() * 100000000);
@@ -128,8 +129,9 @@ public class MemberInfoDAO extends BaseDAO {
 				int companyApproval = rs.getInt("company_approval");
 				Date companyApprovaldate = rs.getDate("company_approvaldate");
 				String companyPhoto = rs.getString("company_photo");
+				int companyEmailpush = rs.getInt("company_emailpush");
 				
-				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyPhoto);
+				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyPhoto, companyEmailpush);
 				memberInfo.setCompany_name(companyName);
 			}
 		}
@@ -181,8 +183,9 @@ public class MemberInfoDAO extends BaseDAO {
 				int companyApproval = rs.getInt("company_approval");
 				Date companyApprovaldate = rs.getDate("company_approvaldate");
 				String companyPhoto = rs.getString("company_photo");
+				int companyEmailpush = rs.getInt("company_emailpush");
 				
-				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyPhoto);
+				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyPhoto, companyEmailpush);
 				memberInfo.setCompany_name(companyName);
 			}
 		}
