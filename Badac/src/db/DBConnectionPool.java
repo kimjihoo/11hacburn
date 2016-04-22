@@ -8,7 +8,7 @@ public final class DBConnectionPool
 {
 	private static DBConnectionPool instance;
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://210.0.0.1:3306/badac";
+	private String url = "jdbc:mysql://127.0.0.1:3306/badac";
 	private String user = "root";
 	private String password = "tonykim";
 
@@ -30,7 +30,6 @@ public final class DBConnectionPool
 	}
 
 	public void driverLoading(String driver,String url,String user,String password){
-		//System.out.println("driverLoading:" +driver + ":" + url +":"+user+":"+password);
 		if(driver != null)
 			this.driver = driver;
 		if(url != null)
@@ -41,10 +40,12 @@ public final class DBConnectionPool
 			this.password = password;
 		try
 		{
+			System.out.println(this.url);
 			Class.forName(driver);
 		}
 		catch (Exception e)
 		{
+			
 			System.out.println("Driver Loading Error :");
 		}
 	}

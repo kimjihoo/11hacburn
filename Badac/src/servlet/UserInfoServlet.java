@@ -27,21 +27,13 @@ import model.MemberInfo;
  * Servlet implementation class UserInfoServlet
  */
 @MultipartConfig
-//@WebServlet(urlPatterns = { "", "/index", "/id_check", "/sign_up", "/login", "/logout", "/login_page", "/sign_up_page", "/main_page"})
+//@WebServlet(urlPatterns = { "", "/index", "/user_email_check", "/user_sign_up", "/user_login", "/logout", "/user_login_page", "/user_sign_up_page", "/user_main_page"})
 public class UserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String emailRegex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
 	private static final String passwordRegex = "^[a-z0-9]{4,12}$";
 	private static final String nameRegex = "^[°¡-ÆRa-z]{2,8}$";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserInfoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,13 +67,13 @@ public class UserInfoServlet extends HttpServlet {
 				}
 				
 				if (userCode != null && !(userCode.equals("")) && Pattern.matches("^[0-9]+$", userCode)) {
-					response.sendRedirect("main_page");
+					response.sendRedirect("user_main_page");
 				} else {
-					response.sendRedirect("login_page");
+					response.sendRedirect("user_login_page");
 				}
 			}
 			else{
-				response.sendRedirect("login_page");
+				response.sendRedirect("user_login_page");
 			}
 		} else if (action.equals("logout")) {
 			Cookie[] cookie = request.getCookies();
@@ -102,7 +94,7 @@ public class UserInfoServlet extends HttpServlet {
 			}
 
 			response.sendRedirect("");
-		} else if( action.equals("sign_up_page") ){
+		} else if( action.equals("user_sign_up_page") ){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -123,12 +115,12 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("main_page");
+				response.sendRedirect("user_main_page");
 			}
 			else{
 				dispatchUrl = "GeneralSignUP.jsp";
 			}
-		} else if( action.equals("login_page") ){
+		} else if( action.equals("user_login_page") ){
 			//System.out.println("·Î±×ÀÎ ÆäÀÌÁö");
 			
 			String userCode = null;
@@ -151,12 +143,12 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("main_page");
+				response.sendRedirect("user_main_page");
 			}
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		} else if( action.equals("main_page") ){
+		} else if( action.equals("user_main_page") ){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -177,10 +169,10 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "MainPage.jsp";
+				dispatchUrl = "UserMainPage.jsp";
 			}
 			else{
-				response.sendRedirect("login_page");
+				response.sendRedirect("user_login_page");
 			}
 		} 
 
@@ -206,7 +198,7 @@ public class UserInfoServlet extends HttpServlet {
 
 		String dispatchUrl = null;
 		
-		if (action.equals("email_check")) {
+		if (action.equals("user_email_check")) {
 			String errorMsg = "Success";
 
 			String email = request.getParameter("email");
@@ -228,7 +220,7 @@ public class UserInfoServlet extends HttpServlet {
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(errorMsg);
-		} else if(action.equals("sign_up")){
+		} else if(action.equals("user_sign_up")){
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
@@ -237,11 +229,85 @@ public class UserInfoServlet extends HttpServlet {
 			String bicycletype = request.getParameter("bicycletype");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
 			
+			String msg = "Success";
+
+			if (email == null || email.trim().equals("")) {
+				msg = "NoInputEmail";
+			} 
+			else if (password == null || password.trim().equals("")) {
+				msg = "NoInputPassword";
+			} 
+			else if (name == null || name.trim().equals("")) {
+				msg = "NoInputName";
+			} 
+			else if (region == null || region.trim().equals("")) {
+				msg = "NoInputRegion";
+			} 
+			else if (phone == -1) {
+				msg = "NoInputPhone";
+			} 
+			else if (bicycletype == null || bicycletype.trim().equals("")) {
+				msg = "NoInputBicycletype";
+			} 
+			else if (emailpush==-1) {
+				msg = "NoInputEmailpush";
+			} 
+			else {
+				int flag = 1;
+
+				// email Çü½Ä°Ë»ç
+				if (!(Pattern.matches(emailRegex, email))) {
+					msg = "EmailRegixError";
+					flag = -1;
+				}
+
+				// ÀÖ´Â e-mailÀÎÁö °Ë»ç
+				UserInfoDAO uid = new UserInfoDAO();
+				UserInfo temp = uid.selectUserInfoByUserEmail(email);
+				uid.disconnect();
+
+				if (temp != null) {
+					msg = "ExistentEmailError";
+					flag = -1;
+				}
+
+				// ºñ¹Ð¹øÈ£ À¯È¿¼º °Ë»ç (¿µ¹® ¼ýÀÚ Á¶ÇÕ 8~12±ÛÀÚ)
+				if (!(Pattern.matches(passwordRegex, password))) {
+					msg = "PasswordRegixError";
+					flag = -1;
+				}
+
+				if (!(Pattern.matches(nameRegex, name))) {
+					msg = "NameRegixError";
+					flag = -1;
+				}
+
+				if (flag == 1) {
+					uid = new UserInfoDAO();
+					uid.insertUserInfo(name, email, password, region, phone, bicycletype,emailpush);
+					uid.disconnect();
+
+					uid = new UserInfoDAO();
+					UserInfo userInfo = uid.selectUserInfoByUserEmail(email);
+					uid.disconnect();
+				}
+			}
 			
-		} else if(action.equals("login")){
+			JSONObject json = new JSONObject();
+
+			try {
+				json.put("msg", msg);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
+		} else if(action.equals("user_login")){
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
-			int userormember = Integer.parseInt(request.getParameter("userormember"));
 			
 			String msg = "Success";
 			
@@ -258,113 +324,57 @@ public class UserInfoServlet extends HttpServlet {
 					flag = -1;
 				}
 
-				if(userormember==0){
-					// ÀÖ´Â e-mailÀÎÁö °Ë»ç
-					UserInfoDAO uid = new UserInfoDAO();
-					UserInfo temp = uid.selectUserInfoByUserEmail(email);
-					uid.disconnect();
+				// ÀÖ´Â e-mailÀÎÁö °Ë»ç
+				UserInfoDAO uid = new UserInfoDAO();
+				UserInfo temp = uid.selectUserInfoByUserEmail(email);
+				uid.disconnect();
 
-					if (temp == null) {
-						msg = "NoEmailError";
-						flag = -1;
-					}
+				if (temp == null) {
+					msg = "NoEmailError";
+					flag = -1;
+				}
 
-					// ºñ¹Ð¹øÈ£ À¯È¿¼º °Ë»ç (¿µ¹® ¼ýÀÚ Á¶ÇÕ 8~12±ÛÀÚ)
-					if (!(Pattern.matches(passwordRegex, password))) {
-						msg = "PasswordRegixError";
-						flag = -1;
-					}
-					
-					if (flag == 1) {
-						if (temp.getUser_password().equals(password)) {
-							// ·Î±×ÀÎ ¼º°ø
-							Cookie cookie = new Cookie("user_id", Integer.toString(temp.getUser_id()));
+				// ºñ¹Ð¹øÈ£ À¯È¿¼º °Ë»ç (¿µ¹® ¼ýÀÚ Á¶ÇÕ 8~12±ÛÀÚ)
+				if (!(Pattern.matches(passwordRegex, password))) {
+					msg = "PasswordRegixError";
+					flag = -1;
+				}
+				
+				if (flag == 1) {
+					if (temp.getUser_password().equals(password)) {
+						// ·Î±×ÀÎ ¼º°ø
+						Cookie cookie = new Cookie("user_id", Integer.toString(temp.getUser_id()));
+						
+						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_name", URLEncoder.encode(temp.getUser_name(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_email", temp.getUser_email());
+						
+						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
+						
+						response.addCookie(cookie);
+						
+						//if( checkBox != null ){ // ¼¼¼Ç
+							cookie = new Cookie("user_check", "true");
 							
 							cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 							
 							response.addCookie(cookie);
-							
-							cookie = new Cookie("user_name", URLEncoder.encode(temp.getUser_name(), "UTF-8"));
-							
-							cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-							
-							response.addCookie(cookie);
-							
-							cookie = new Cookie("user_email", temp.getUser_email());
-							
-							cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-							
-							response.addCookie(cookie);
-							
-							//if( checkBox != null ){ // ¼¼¼Ç
-								cookie = new Cookie("user_check", "true");
-								
-								cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-								
-								response.addCookie(cookie);
-							//}
-							
-							//response.sendRedirect("");
-							
-							//dispatchUrl = "MainPage.jsp";
-						} 
-						else {
-							msg = "PasswordError";
-						}
-					}
-				}else if(userormember==1){
-					// ÀÖ´Â e-mailÀÎÁö °Ë»ç
-					MemberInfoDAO mid = new MemberInfoDAO();
-					MemberInfo temp = mid.selectMemberInfoByCompanyEmail(email);
-					mid.disconnect();
-
-					if (temp == null) {
-						msg = "NoEmailError";
-						flag = -1;
-					}
-
-					// ºñ¹Ð¹øÈ£ À¯È¿¼º °Ë»ç (¿µ¹® ¼ýÀÚ Á¶ÇÕ 8~12±ÛÀÚ)
-					if (!(Pattern.matches(passwordRegex, password))) {
-						msg = "PasswordRegixError";
-						flag = -1;
-					}
-					
-					if (flag == 1) {
-						if (temp.getCompany_password().equals(password)) {
-							// ·Î±×ÀÎ ¼º°ø
-							Cookie cookie = new Cookie("company_id", Integer.toString(temp.getCompany_id()));
-							
-							cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-							
-							response.addCookie(cookie);
-							
-							cookie = new Cookie("company_name", URLEncoder.encode(temp.getCompany_name(), "UTF-8"));
-							
-							cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-							
-							response.addCookie(cookie);
-							
-							cookie = new Cookie("company_email", temp.getCompany_email());
-							
-							cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-							
-							response.addCookie(cookie);
-							
-							//if( checkBox != null ){ // ¼¼¼Ç
-								cookie = new Cookie("member_check", "true");
-								
-								cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
-								
-								response.addCookie(cookie);
-							//}
-							
-							//response.sendRedirect("");
-							
-							//dispatchUrl = "MainPage.jsp";
-						} 
-						else {
-							msg = "PasswordError";
-						}
+						//}
+						
+						//response.sendRedirect("");
+						
+						//dispatchUrl = "MainPage.jsp";
+					} 
+					else {
+						msg = "PasswordError";
 					}
 				}
 				
