@@ -19,7 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import db.UserInfoDAO;
+import db.MemberInfoDAO;
 import model.UserInfo;
+import model.MemberInfo;
 
 /**
  * Servlet implementation class UserInfoServlet
@@ -239,6 +241,7 @@ public class UserInfoServlet extends HttpServlet {
 		} else if(action.equals("login")){
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
+			int userormember = Integer.parseInt(request.getParameter("userormember"));
 			
 			String msg = "Success";
 			
@@ -255,61 +258,116 @@ public class UserInfoServlet extends HttpServlet {
 					flag = -1;
 				}
 
-				// 있는 e-mail인지 검사
-				UserInfoDAO uid = new UserInfoDAO();
-				UserInfo temp = uid.selectUserInfoByUserEmail(email);
-				uid.disconnect();
+				if(userormember==0){
+					// 있는 e-mail인지 검사
+					UserInfoDAO uid = new UserInfoDAO();
+					UserInfo temp = uid.selectUserInfoByUserEmail(email);
+					uid.disconnect();
 
-				if (temp == null) {
-					msg = "NoEmailError";
-					flag = -1;
-				}
+					if (temp == null) {
+						msg = "NoEmailError";
+						flag = -1;
+					}
 
-				// 비밀번호 유효성 검사 (영문 숫자 조합 8~12글자)
-				if (!(Pattern.matches(passwordRegex, password))) {
-					msg = "PasswordRegixError";
-					flag = -1;
-				}
-				
-				if (flag == 1) {
-					if (temp.getUser_password().equals(password)) {
-						// 로그인 성공
-						Cookie cookie = new Cookie("user_id", Integer.toString(temp.getUser_id()));
-						
-						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
-						
-						response.addCookie(cookie);
-						
-						cookie = new Cookie("user_name", URLEncoder.encode(temp.getUser_name(), "UTF-8"));
-						
-						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
-						
-						response.addCookie(cookie);
-						
-						cookie = new Cookie("user_email", temp.getUser_email());
-						
-						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
-						
-						response.addCookie(cookie);
-						
-						//if( checkBox != null ){ // 세션
-							cookie = new Cookie("user_check", "true");
+					// 비밀번호 유효성 검사 (영문 숫자 조합 8~12글자)
+					if (!(Pattern.matches(passwordRegex, password))) {
+						msg = "PasswordRegixError";
+						flag = -1;
+					}
+					
+					if (flag == 1) {
+						if (temp.getUser_password().equals(password)) {
+							// 로그인 성공
+							Cookie cookie = new Cookie("user_id", Integer.toString(temp.getUser_id()));
 							
 							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 							
 							response.addCookie(cookie);
-						//}
-						
-						//response.sendRedirect("");
-						
-						//dispatchUrl = "MainPage.jsp";
-					} 
-					else {
-						msg = "PasswordError";
+							
+							cookie = new Cookie("user_name", URLEncoder.encode(temp.getUser_name(), "UTF-8"));
+							
+							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+							
+							response.addCookie(cookie);
+							
+							cookie = new Cookie("user_email", temp.getUser_email());
+							
+							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+							
+							response.addCookie(cookie);
+							
+							//if( checkBox != null ){ // 세션
+								cookie = new Cookie("user_check", "true");
+								
+								cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+								
+								response.addCookie(cookie);
+							//}
+							
+							//response.sendRedirect("");
+							
+							//dispatchUrl = "MainPage.jsp";
+						} 
+						else {
+							msg = "PasswordError";
+						}
+					}
+				}else if(userormember==1){
+					// 있는 e-mail인지 검사
+					MemberInfoDAO mid = new MemberInfoDAO();
+					MemberInfo temp = mid.selectMemberInfoByMemberEmail(email);
+					mid.disconnect();
+
+					if (temp == null) {
+						msg = "NoEmailError";
+						flag = -1;
+					}
+
+					// 비밀번호 유효성 검사 (영문 숫자 조합 8~12글자)
+					if (!(Pattern.matches(passwordRegex, password))) {
+						msg = "PasswordRegixError";
+						flag = -1;
 					}
 					
-					
+					if (flag == 1) {
+						if (temp.getCompany_password().equals(password)) {
+							// 로그인 성공
+							Cookie cookie = new Cookie("company_id", Integer.toString(temp.getCompany_id()));
+							
+							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+							
+							response.addCookie(cookie);
+							
+							cookie = new Cookie("company_name", URLEncoder.encode(temp.getCompany_name(), "UTF-8"));
+							
+							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+							
+							response.addCookie(cookie);
+							
+							cookie = new Cookie("user_email", temp.getUser_email());
+							
+							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+							
+							response.addCookie(cookie);
+							
+							//if( checkBox != null ){ // 세션
+								cookie = new Cookie("user_check", "true");
+								
+								cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+								
+								response.addCookie(cookie);
+							//}
+							
+							//response.sendRedirect("");
+							
+							//dispatchUrl = "MainPage.jsp";
+						} 
+						else {
+							msg = "PasswordError";
+						}
+					}
 				}
+				
 			}
 			
 			JSONObject json = new JSONObject();
