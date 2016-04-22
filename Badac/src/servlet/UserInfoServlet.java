@@ -151,8 +151,7 @@ public class UserInfoServlet extends HttpServlet {
 				dispatchUrl = "LoginPage.jsp";
 			}
 		} else if( action.equals("user_main_page") ){
-			String userCode = null;
-			
+			String userId = null;
 			Cookie[] cookie = request.getCookies();
 			
 			if( cookie != null ){
@@ -164,16 +163,17 @@ public class UserInfoServlet extends HttpServlet {
 						if( cookieName.equals("user_id")){ // 여러대 확인해
 							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
 							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
+							userId = cookie[i].getValue();
 						}
 					}
 				}
 			}
 			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
+			if (userId != null && !(userId.equals("") && Pattern.matches("^[0-9]+$", userId))){
 				dispatchUrl = "UserMainPage.jsp";
 			}
 			else{
+				
 				response.sendRedirect("user_login_page");
 			}
 		} 
@@ -330,7 +330,7 @@ public class UserInfoServlet extends HttpServlet {
 				UserInfoDAO uid = new UserInfoDAO();
 				UserInfo temp = uid.selectUserInfoByUserEmail(email);
 				uid.disconnect();
-
+				
 				if (temp == null) {
 					msg = "NoEmailError";
 					flag = -1;
@@ -341,7 +341,7 @@ public class UserInfoServlet extends HttpServlet {
 					msg = "PasswordRegixError";
 					flag = -1;
 				}
-				
+
 				if (flag == 1) {
 					if (temp.getUser_password().equals(password)) {
 						// 로그인 성공
@@ -363,12 +363,42 @@ public class UserInfoServlet extends HttpServlet {
 						
 						response.addCookie(cookie);
 						
+						cookie = new Cookie("user_password", temp.getUser_password());
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_region", URLEncoder.encode(temp.getUser_region(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_phone", Integer.toString(temp.getUser_phone()));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_bicycletype", URLEncoder.encode(temp.getUser_bicycletype(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_emailpush", Integer.toString(temp.getUser_emailpush()));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
 						//if( checkBox != null ){ // 세션
-							cookie = new Cookie("user_check", "true");
+							//cookie = new Cookie("user_check", "true");
 							
-							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+							//cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 							
-							response.addCookie(cookie);
+							//response.addCookie(cookie);
 						//}
 						
 						//response.sendRedirect("");
@@ -384,8 +414,6 @@ public class UserInfoServlet extends HttpServlet {
 			
 			JSONObject json = new JSONObject();
 			
-			//System.out.println(msg);
-			
 			try{
 				json.put("msg", msg);
 			}
@@ -398,7 +426,6 @@ public class UserInfoServlet extends HttpServlet {
 			response.getWriter().write(json.toString());
 			
 		}
-		doGet(request, response);
 	}
 
 }

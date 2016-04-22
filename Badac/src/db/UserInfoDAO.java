@@ -106,12 +106,11 @@ public class UserInfoDAO extends BaseDAO {
 	public UserInfo selectUserInfoByUserEmail(String user_email){
 		UserInfo userInfo = null;
 		PreparedStatement ps=null;
-		
 		try
 		{
 			String sql="SELECT * FROM normal_user WHERE user_email=?";
 			ps=super.getConn().prepareStatement(sql);
-			ps.setString(3, user_email);
+			ps.setString(1, user_email);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				int userId = rs.getInt("user_id");
@@ -125,6 +124,7 @@ public class UserInfoDAO extends BaseDAO {
 				userInfo = new UserInfo(userId, userName, user_email, userPw, userRegion, userPhone, userBicycletype, userEmailpush);
 				userInfo.setUser_name(userName);
 			}
+			
 		}
 		catch (SQLException se)
 		{

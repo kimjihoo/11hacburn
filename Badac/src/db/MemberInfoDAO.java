@@ -114,7 +114,7 @@ public class MemberInfoDAO extends BaseDAO {
 		{
 			String sql="SELECT * FROM company_user WHERE company_email=?";
 			ps=super.getConn().prepareStatement(sql);
-			ps.setString(3, company_email);
+			ps.setString(1, company_email);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				int companyId = rs.getInt("company_id");
