@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;;
+import java.sql.Date;
 
 public class MemberInfo {
 	private int company_id;
@@ -12,6 +12,7 @@ public class MemberInfo {
 	private int company_telephone;
 	private int company_phone;
 	private	int company_approval;
+	private Date company_approvaldate;
 	private String company_photo;
 	
 	public MemberInfo(){
@@ -24,10 +25,11 @@ public class MemberInfo {
 		this.company_telephone=-1;
 		this.company_phone=-1;
 		this.company_approval=-1;
+		this.company_approvaldate = new Date(0000-00-00);
 		this.company_photo="";
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, String company_photo){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, Date company_approvaldate, String company_photo){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -37,6 +39,7 @@ public class MemberInfo {
 		this.company_telephone=company_telephone;
 		this.company_phone=company_phone;
 		this.company_approval=company_approval;
+		this.company_approvaldate = company_approvaldate;
 		this.company_photo=company_photo;
 	}
 	
@@ -110,6 +113,14 @@ public class MemberInfo {
 
 	public void setCompany_approval(int company_approval) {
 		this.company_approval = company_approval;
+	}
+	
+	public Date getCompany_approvaldate() {
+		return company_approvaldate;
+	}
+
+	public void setCompany_approvaldate(Date company_approvaldate) {
+		this.company_approvaldate = company_approvaldate;
 	}
 
 	public String getCompany_photo() {

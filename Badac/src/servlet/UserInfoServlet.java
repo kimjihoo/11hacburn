@@ -315,7 +315,7 @@ public class UserInfoServlet extends HttpServlet {
 				}else if(userormember==1){
 					// 있는 e-mail인지 검사
 					MemberInfoDAO mid = new MemberInfoDAO();
-					MemberInfo temp = mid.selectMemberInfoByMemberEmail(email);
+					MemberInfo temp = mid.selectMemberInfoByCompanyEmail(email);
 					mid.disconnect();
 
 					if (temp == null) {
@@ -344,14 +344,14 @@ public class UserInfoServlet extends HttpServlet {
 							
 							response.addCookie(cookie);
 							
-							cookie = new Cookie("user_email", temp.getUser_email());
+							cookie = new Cookie("company_email", temp.getCompany_email());
 							
 							cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 							
 							response.addCookie(cookie);
 							
 							//if( checkBox != null ){ // 세션
-								cookie = new Cookie("user_check", "true");
+								cookie = new Cookie("member_check", "true");
 								
 								cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 								
