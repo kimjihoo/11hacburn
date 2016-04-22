@@ -11,8 +11,8 @@
 			name="user" type="radio" />일반<br /> 이메일 <input id="Text1"
 			type="text" /><br /> 비밀번호 <input id="Password1" type="password" /><br />
 
-		<input id="Submit1" type="submit" value="submit" /><input id="Reset1"
-			type="reset" value="reset" />
+		<input id="signUpBtn" type="button" value="Sign Up" />
+		<input id="signInBtn" type="submit" value="Sign In" />
 	</form>
 </body>
 </html>
