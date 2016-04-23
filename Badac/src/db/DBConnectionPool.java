@@ -8,7 +8,7 @@ public final class DBConnectionPool
 {
 	private static DBConnectionPool instance;
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://127.0.0.1:3306/badac";
+	private String url = "jdbc:mysql://127.0.0.1:3306/badac?useSSL=false";
 	private String user = "root";
 	private String password = "tonykim";
 

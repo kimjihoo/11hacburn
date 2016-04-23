@@ -9,11 +9,10 @@ public class MemberInfo {
 	private String company_password;
 	private String company_name;
 	private String company_region;
-	private int company_telephone;
-	private int company_phone;
+	private String company_telephone;
+	private String company_phone;
 	private	int company_approval;
 	private Date company_approvaldate;
-	private String company_photo;
 	private int company_emailpush;
 	
 	public MemberInfo(){
@@ -23,15 +22,14 @@ public class MemberInfo {
 		this.company_password="";
 		this.company_name="";
 		this.company_region="";
-		this.company_telephone=-1;
-		this.company_phone=-1;
+		this.company_telephone="";
+		this.company_phone="";
 		this.company_approval=-1;
 		this.company_approvaldate = new Date(0000-00-00);
-		this.company_photo="";
 		this.company_emailpush=-1;
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, Date company_approvaldate, String company_photo, int company_emailpush){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, String company_telephone, String company_phone, int company_approval, Date company_approvaldate, int company_emailpush){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -42,11 +40,10 @@ public class MemberInfo {
 		this.company_phone=company_phone;
 		this.company_approval=company_approval;
 		this.company_approvaldate = company_approvaldate;
-		this.company_photo=company_photo;
 		this.company_emailpush = company_emailpush;
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, int company_telephone, int company_phone, int company_approval, int company_emailpush){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region, String company_telephone, String company_phone, int company_approval, int company_emailpush){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -57,6 +54,13 @@ public class MemberInfo {
 		this.company_phone=company_phone;
 		this.company_approval=company_approval;
 		this.company_emailpush = company_emailpush;
+	}
+	
+	public MemberInfo(int company_id, String company_ownername, String company_name, String company_telephone){
+		this.company_id = company_id;
+		this.company_ownername = company_ownername;
+		this.company_name = company_name;
+		this.company_telephone = company_telephone;
 	}
 	
 	public int getCompany_id() {
@@ -107,19 +111,19 @@ public class MemberInfo {
 		this.company_region = company_region;
 	}
 
-	public int getCompany_telephone() {
+	public String getCompany_telephone() {
 		return company_telephone;
 	}
 
-	public void setCompany_telephone(int company_telephone) {
+	public void setCompany_telephone(String company_telephone) {
 		this.company_telephone = company_telephone;
 	}
 
-	public int getCompany_phone() {
+	public String getCompany_phone() {
 		return company_phone;
 	}
 
-	public void setCompany_phone(int company_phone) {
+	public void setCompany_phone(String company_phone) {
 		this.company_phone = company_phone;
 	}
 
@@ -139,13 +143,6 @@ public class MemberInfo {
 		this.company_approvaldate = company_approvaldate;
 	}
 
-	public String getCompany_photo() {
-		return company_photo;
-	}
-
-	public void setCompany_photo(String company_photo) {
-		this.company_photo = company_photo;
-	}
 	public int getCompany_emailpush() {
 		return company_emailpush;
 	}

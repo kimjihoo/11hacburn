@@ -31,9 +31,10 @@
 	</style>
     <script type="text/javascript">
         function signUp(){
-        	var regix_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-        	var regix_pw = /^[a-z0-9]{4,12}$/;
-    		var regix_name = /^[a-zA-Z0-9가-힣]{2,8}$/;
+        	var regex_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+        	var regex_pw = /^[a-z0-9]{4,12}$/;
+    		var regex_name = /^[a-zA-Z0-9가-힣]{2,8}$/;
+    		var regex_phone = /^[0-9]*$/;
 
     		var company_ownername = document.getElementById("company_ownername");
 			var company_email = document.getElementById("company_email");
@@ -43,7 +44,6 @@
 			var company_region = document.getElementById("company_region");
 			var company_telephone = document.getElementById("company_telephone");
 			var company_phone = document.getElementById("company_phone");
-			var company_photo = document.getElementById("company_photo");
 			
 			var chk=0;
 			var temp = document.company_emailpush.elements['email_push'];
@@ -56,14 +56,25 @@
 	               break;
 	          }
 	       	}
-			
+	        if(company_ownername.value == ""){
+                alert("대표자 이름을 입력하세요.");
+                company_ownername.focus();
+                return;
+            }
+            if(regex_name.test(company_ownername.value) != true){
+                alert("이름 형식이 틀렸습니다. (영문 / 한글 - 2~8글자)");
+                company_ownername.value="";
+                company_ownername.focus();
+                return;
+            }
             if(company_name.value == ""){
                 alert("이름을 입력하세요.");
                 company_name.focus();
                 return;
             }
-            if(regix_name.test(company_name.value) != true){
+            if(regex_name.test(company_name.value) != true){
                 alert("이름 형식이 틀렸습니다. (영문 / 한글 - 2~8글자)");
+                company_name.value="";
                 company_name.focus();
                 return;
             }
@@ -72,8 +83,9 @@
                 company_email.focus();
                 return;
             }
-            if(regix_email.test(company_email.value) != true){
+            if(regex_email.test(company_email.value) != true){
             	alert("이메일 형식이 틀렸습니다. (xx@xx.xx)");
+            	company_email.value="";
             	company_email.focus();
                 return;
             }
@@ -82,8 +94,9 @@
                 company_pw.focus();
                 return;
             }
-            if(regix_pw.test(company_pw.value) != true){
+            if(regex_pw.test(company_pw.value) != true){
             	alert("비밀번호 형식이 틀렸습니다. (영문 / 숫자 - 4~12글자)");
+            	company_pw.value="";
             	company_pw.focus();
                 return;
             }
@@ -92,8 +105,9 @@
                 company_chk_pw.focus();
                 return;
             }
-            if(regix_pw.test(company_chk_pw.value) != true){
+            if(regex_pw.test(company_chk_pw.value) != true){
             	alert("확인 비밀번호 형식이 틀렸습니다. (4~12글자 영문 / 숫자)");
+            	company_chk_pw.value="";
             	company_chk_pw.focus();
                 return;
             }
@@ -101,6 +115,33 @@
                 alert("비밀번호와 확인 비밀번호가 다릅니다.");
                 company_chk_pw.focus();
                 return;
+            }
+            if(company_phone.value==""){
+            	alert("핸드폰 번호를 입력하세요.");
+            	company_phone.focus();
+            	return;
+            }
+            if(regex_phone.test(company_phone.value)!=true){
+            	alert("핸드폰 번호 형식이 틀렸습니다. 숫자만 입력해 주세요.");
+            	company_phone.value="";
+            	company_phone.focus();
+            	return;
+            }
+            if(company_telephone.value==""){
+            	alert("전화번호를 입력하세요.");
+            	company_telephone.focus();
+            	return;
+            }
+            if(regex_phone.test(company_telephone.value)!=true){
+            	alert("전화번호 형식이 틀렸습니다. 숫자만 입력해 주세요.");
+            	company_telephone.value="";
+            	company_telephone.focus();
+            	return;
+            }
+            if(company_region.value ==""){
+            	alert("지역을 입력해 주세요.");
+            	company_region.focus();
+            	return;
             }
             if(chk==0){
             	alert("이메일 착신 여부를 설정해주세요");
@@ -115,11 +156,10 @@
             	region : company_region.value,
             	telephone : company_telephone.value,
             	phone : company_phone.value,
-            	photo : company_photo.value,
             	emailpush : company_emailpush.value,
             }, function(data){
             		if( data.msg == "Success" ){
-            			alert("회원가입이 완료되었습니다.");
+            			alert("회원가입이 완료되었습니다. 승인까지 1~2일 소모되며 승인 후 로그인이 가능합니다.");
             			location.href = "http://localhost:8100/Badac/";
             		}
             		else{
@@ -143,7 +183,6 @@
 	회사 위치 : <input name="company_region" id="company_region" type="text" placeholder="지역을 입력하세요"><br />
 	전화번호 : <input name="company_telephone" id="company_telephone" type="text" placeholder="가게번호입력"><br />
 	핸드폰 번호 : <input name="company_phone" id="company_phone" type="text" placeholder="폰번호입력"><br />
-	상호 사진<input name="company_photo" id="company_photo" type="text" placeholder="그림"><br />
 	이메일 착신 여부 : <form name="company_emailpush">
 					<input type="radio" name="email_push" value=1>착신
 					<input type="radio" name="email_push" value=0>미착신

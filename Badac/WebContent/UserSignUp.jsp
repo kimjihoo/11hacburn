@@ -31,9 +31,10 @@
 	</style>
     <script type="text/javascript">
         function signUp(){
-        	var regix_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-        	var regix_pw = /^[a-z0-9]{4,12}$/;
-    		var regix_name = /^[a-zA-Z0-9가-힣]{2,8}$/;
+        	var regex_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+        	var regex_pw = /^[a-z0-9]{4,12}$/;
+    		var regex_name = /^[a-zA-Z0-9가-힣]{2,8}$/;
+    		var regex_phone = /^[0-9]*$/;
 
 			var user_name = document.getElementById("user_name");
 			var user_email = document.getElementById("user_email");
@@ -61,8 +62,9 @@
                 user_name.focus();
                 return;
             }
-            if(regix_name.test(user_name.value) != true){
+            if(regex_name.test(user_name.value) != true){
                 alert("이름 형식이 틀렸습니다. (영문 / 한글 - 2~8글자)");
+                user_name.value="";
                 user_name.focus();
                 return;
             }
@@ -71,8 +73,9 @@
                 user_email.focus();
                 return;
             }
-            if(regix_email.test(user_email.value) != true){
+            if(regex_email.test(user_email.value) != true){
             	alert("이메일 형식이 틀렸습니다. (xx@xx.xx)");
+            	user_email.value="";
             	user_email.focus();
                 return;
             }
@@ -81,8 +84,9 @@
                 user_pw.focus();
                 return;
             }
-            if(regix_pw.test(user_pw.value) != true){
+            if(regex_pw.test(user_pw.value) != true){
             	alert("비밀번호 형식이 틀렸습니다. (영문 / 숫자 - 4~12글자)");
+            	user_pw.value="";
             	user_pw.focus();
                 return;
             }
@@ -91,15 +95,33 @@
                 user_chk_pw.focus();
                 return;
             }
-            if(regix_pw.test(user_chk_pw.value) != true){
+            if(regex_pw.test(user_chk_pw.value) != true){
             	alert("확인 비밀번호 형식이 틀렸습니다. (4~12글자 영문 / 숫자)");
+            	user_chk_pw.value="";
             	user_chk_pw.focus();
                 return;
             }
             if(!(user_pw.value == user_chk_pw.value)){
                 alert("비밀번호와 확인 비밀번호가 다릅니다.");
+                user_chk_pw.value="";
                 user_chk_pw.focus();
                 return;
+            }
+            if(user_phone.value==""){
+            	alert("핸드폰 번호를 입력하세요.");
+            	user_phone.focus();
+            	return;
+            }
+            if(regex_phone.test(user_phone.value)!=true){
+            	alert("핸드폰 번호 형식이 틀렸습니다. 숫자만 입력해 주세요.");
+            	user_phone.value="";
+            	user_phone.focus();
+            	return;
+            }
+            if(user_region.value ==""){
+            	alert("지역을 입력해 주세요.");
+            	user_region.focus();
+            	return;
             }
             if(chk==0){
             	alert("이메일 착신 여부를 설정해주세요");

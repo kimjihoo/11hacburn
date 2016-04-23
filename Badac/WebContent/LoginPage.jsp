@@ -31,57 +31,61 @@
     		var email = document.getElementById("login_id");
     		var pw = document.getElementById("login_pw");
     		
-    		if(email.value == ""){
-                alert("이메일을 입력하세요.");
-                email.focus();
-                return;
-            }
-            if(regix_email.test(email.value) != true){
-            	alert("이메일 형식이 틀렸습니다. (xx@xx.xx)");
-            	email.focus();
-                return;
-            }
-            if(pw.value == ""){
-                alert("비밀번호를 입력하세요.");
-                pw.focus();
-                return;
-            }
-            if(regix_pw.test(pw.value) != true){
-            	alert("비밀번호 형식이 틀렸습니다. (영문 / 숫자 - 4~12글자)");
-            	pw.focus();
-                return;
-            }
-            if(chk==0){
-            	alert("타입을 선택하세요");
-            	return;
-            }
-            if(user_type.value=="normal"){
-            	$.post("http://localhost:8100/Badac/user_login", {
-                	email : email.value,
-                	password : pw.value,
-                }, function(data){
-                		if( data.msg == "Success" ){
-                			alert("로그인 성공");
-                			location.href = "http://localhost:8100/Badac/user_main_page";
-                		}
-                		else{
-                			alert(data.msg);
-                		}
-                });
-            }else if(user_type.value=="company"){
-            	$.post("http://localhost:8100/Badac/member_login", {
-            		email : email.value,
-                	password : pw.value,
-                }, function(data){
-                		if( data.msg == "Success" ){
-                			alert("로그인 성공");
-                			location.href = "http://localhost:8100/Badac/member_main_page";
-                		}
-                		else{
-                			alert(data.msg);
-                		}
-                });
-            }
+    		if(email.value=="admin" && pw.value=="admin"){
+    			location.href = "AdminPage.jsp";
+    		}else{
+    			if(email.value == ""){
+                    alert("이메일을 입력하세요.");
+                    email.focus();
+                    return;
+                }
+                if(regix_email.test(email.value) != true){
+                	alert("이메일 형식이 틀렸습니다. (xx@xx.xx)");
+                	email.focus();
+                    return;
+                }
+                if(pw.value == ""){
+                    alert("비밀번호를 입력하세요.");
+                    pw.focus();
+                    return;
+                }
+                if(regix_pw.test(pw.value) != true){
+                	alert("비밀번호 형식이 틀렸습니다. (영문 / 숫자 - 4~12글자)");
+                	pw.focus();
+                    return;
+                }
+                if(chk==0){
+                	alert("타입을 선택하세요");
+                	return;
+                }
+                if(user_type.value=="normal"){
+                	$.post("http://localhost:8100/Badac/user_login", {
+                    	email : email.value,
+                    	password : pw.value,
+                    }, function(data){
+                    		if( data.msg == "Success" ){
+                    			alert("로그인 성공");
+                    			location.href = "http://localhost:8100/Badac/user_main_page";
+                    		}
+                    		else{
+                    			alert(data.msg);
+                    		}
+                    });
+                }else if(user_type.value=="company"){
+                	$.post("http://localhost:8100/Badac/member_login", {
+                		email : email.value,
+                    	password : pw.value,
+                    }, function(data){
+                    		if( data.msg == "Success" ){
+                    			alert("로그인 성공");
+                    			location.href = "http://localhost:8100/Badac/member_main_page";
+                    		}
+                    		else{
+                    			alert(data.msg);
+                    		}
+                    });
+                }
+    		}
     	}
     	
     	function gotoSignUp(){

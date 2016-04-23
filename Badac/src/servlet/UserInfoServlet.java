@@ -32,6 +32,7 @@ public class UserInfoServlet extends HttpServlet {
 	private static final String emailRegex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
 	private static final String passwordRegex = "^[a-z0-9]{4,12}$";
 	private static final String nameRegex = "^[°¡-ÆRa-z]{2,8}$";
+	private static final String phoneRegex = "^[0-9]*$";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -205,7 +206,7 @@ public class UserInfoServlet extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String region = request.getParameter("region");
-			int phone = Integer.parseInt(request.getParameter("phone"));
+			String phone = request.getParameter("phone");
 			String bicycletype = request.getParameter("bicycletype");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
 			
@@ -223,7 +224,7 @@ public class UserInfoServlet extends HttpServlet {
 			else if (region == null || region.trim().equals("")) {
 				msg = "NoInputRegion";
 			} 
-			else if (phone == -1) {
+			else if (phone == null) {
 				msg = "NoInputPhone";
 			} 
 			else if (bicycletype == null || bicycletype.trim().equals("")) {
@@ -259,6 +260,11 @@ public class UserInfoServlet extends HttpServlet {
 
 				if (!(Pattern.matches(nameRegex, name))) {
 					msg = "NameRegixError";
+					flag = -1;
+				}
+				
+				if(!(Pattern.matches(phoneRegex, phone))){
+					msg = "PhoneRegixError";
 					flag = -1;
 				}
 
@@ -353,7 +359,7 @@ public class UserInfoServlet extends HttpServlet {
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("user_phone", Integer.toString(temp.getUser_phone()));
+						cookie = new Cookie("user_phone", temp.getUser_phone());
 						
 						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 						

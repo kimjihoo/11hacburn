@@ -145,4 +145,20 @@
     <servlet-name>MemberMainPage</servlet-name>
     <url-pattern>/member_main_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberNotApprovalList</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberNotApprovalList</servlet-name>
+    <url-pattern>/member_not_approval_list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberApproval</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberApproval</servlet-name>
+    <url-pattern>/member_approval</url-pattern>
+  </servlet-mapping>
 </web-app>

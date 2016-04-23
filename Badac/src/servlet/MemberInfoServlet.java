@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +31,7 @@ public class MemberInfoServlet extends HttpServlet {
 	private static final String emailRegex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
 	private static final String passwordRegex = "^[a-z0-9]{4,12}$";
 	private static final String nameRegex = "^[°¡-ÆRa-z]{2,8}$";
+	private static final String phoneRegex = "^[0-9]*$";
     
 
 	/**
@@ -69,8 +71,6 @@ public class MemberInfoServlet extends HttpServlet {
 		} else if( action.equals("member_sign_up_page") ){
 			dispatchUrl = "MemberSignUp.jsp";
 		} else if( action.equals("login_page") ){
-			//System.out.println("·Î±×ÀÎ ÆäÀÌÁö");
-			
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -96,7 +96,53 @@ public class MemberInfoServlet extends HttpServlet {
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		} else if( action.equals("member_main_page") ){
+		} else if(action.equals("member_not_approval_list")){
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			
+			ArrayList<MemberInfo> na_memberList = mid.notApprovalMemberList();
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			
+			if(na_memberList.size()==0){
+				msg = "Not Approval Member is none";
+			}else{
+				JSONArray na_memberListJson = new JSONArray();
+				JSONObject na_memberInfo;
+				
+				try{
+					for(MemberInfo temp : na_memberList){
+						na_memberInfo = new JSONObject();
+						
+						na_memberInfo.put("id", temp.getCompany_id());
+						na_memberInfo.put("ownername", temp.getCompany_ownername());
+						na_memberInfo.put("name", temp.getCompany_name());
+						na_memberInfo.put("telephone", temp.getCompany_telephone());
+						
+						na_memberListJson.put(na_memberInfo);
+					}
+					json.put("na_memberList", na_memberListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
+		}else if( action.equals("member_main_page") ){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -173,9 +219,8 @@ public class MemberInfoServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
 			String region = request.getParameter("region");
-			int telephone = Integer.parseInt(request.getParameter("telephone"));
-			int phone = Integer.parseInt(request.getParameter("phone"));
-			String photo = request.getParameter("photo");
+			String telephone = request.getParameter("telephone");
+			String phone = request.getParameter("phone");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
 			
 			
@@ -196,10 +241,10 @@ public class MemberInfoServlet extends HttpServlet {
 			else if (region == null || region.trim().equals("")) {
 				msg = "NoInputRegion";
 			} 
-			else if (telephone == -1) {
+			else if (telephone == null) {
 				msg = "NoInputTelePhone";
 			}
-			else if (phone == -1) {
+			else if (phone == null) {
 				msg = "NoInputPhone";
 			}
 			else if(emailpush == -1){
@@ -234,10 +279,20 @@ public class MemberInfoServlet extends HttpServlet {
 					msg = "NameRegixError";
 					flag = -1;
 				}
+				
+				if(!(Pattern.matches(phoneRegex, phone))){
+					msg = "PhoneRegixError";
+					flag = -1;
+				}
+				
+				if(!(Pattern.matches(phoneRegex, telephone))){
+					msg = "TelePhoneRegixError";
+					flag = -1;
+				}
 
 				if (flag == 1) {
 					mid = new MemberInfoDAO();
-					mid.insertMemberInfo(ownername, email, password, name, region, telephone, phone, photo, emailpush);
+					mid.insertMemberInfo(ownername, email, password, name, region, telephone, phone, emailpush);
 					mid.disconnect();
 
 					mid = new MemberInfoDAO();
@@ -258,7 +313,32 @@ public class MemberInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
-		} else if(action.equals("member_login")){
+		}else if(action.equals("member_approval")){
+			int company_id = Integer.parseInt(request.getParameter("company_id"));
+			MemberInfoDAO mid = new MemberInfoDAO();
+			String temp = mid.memberApproval(company_id);
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			if(temp =="fail"){
+				msg = "UpdateFail";
+			}
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
+		}else if(action.equals("member_login")){
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
@@ -284,6 +364,11 @@ public class MemberInfoServlet extends HttpServlet {
 
 				if (temp == null) {
 					msg = "NoEmailError";
+					flag = -1;
+				}
+				
+				if(temp.getCompany_approval()==0){
+					msg = "No Approval Member";
 					flag = -1;
 				}
 
@@ -332,13 +417,13 @@ public class MemberInfoServlet extends HttpServlet {
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("company_telephone", Integer.toString(temp.getCompany_telephone()));
+						cookie = new Cookie("company_telephone", temp.getCompany_telephone());
 						
 						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("company_phone", Integer.toString(temp.getCompany_phone()));
+						cookie = new Cookie("company_phone", temp.getCompany_phone());
 						
 						cookie.setMaxAge(24*60*60); // 24½Ã°£ ÄíÅ° À¯Áö
 						

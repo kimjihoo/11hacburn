@@ -7,7 +7,7 @@ public class UserInfo {
 	private String user_email;
 	private String user_password;
 	private String user_region;
-	private int user_phone;
+	private String user_phone;
 	private String user_bicycletype;
 	private int user_emailpush;
 	
@@ -17,12 +17,12 @@ public class UserInfo {
 		this.user_email="";
 		this.user_password="";
 		this.user_region="";
-		this.user_phone=-1;
+		this.user_phone="";
 		this.user_bicycletype="";
 		this.user_emailpush=0;
 	}
 	
-	public UserInfo(int user_id, String user_name, String user_email, String user_password, String user_region, int user_phone, String user_bicycletype, int user_emailpush){
+	public UserInfo(int user_id, String user_name, String user_email, String user_password, String user_region, String user_phone, String user_bicycletype, int user_emailpush){
 		this.user_id = user_id;
 		this.user_name=user_name;
 		this.user_email=user_email;
@@ -73,11 +73,11 @@ public class UserInfo {
 		this.user_region = user_region;
 	}
 
-	public int getUser_phone() {
+	public String getUser_phone() {
 		return user_phone;
 	}
 
-	public void setUser_phone(int user_phone) {
+	public void setUser_phone(String user_phone) {
 		this.user_phone = user_phone;
 	}
 

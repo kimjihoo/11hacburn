@@ -7,7 +7,7 @@ import model.UserInfo;
 
 public class UserInfoDAO extends BaseDAO {
 	
-	public int insertUserInfo(String user_name, String user_email, String user_password, String user_region, int user_phone, String user_bicycletype, int user_emailpush){
+	public int insertUserInfo(String user_name, String user_email, String user_password, String user_region, String user_phone, String user_bicycletype, int user_emailpush){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
@@ -21,7 +21,7 @@ public class UserInfoDAO extends BaseDAO {
 			ps.setString(3,user_email);
 			ps.setString(4,user_password);
 			ps.setString(5,user_region);
-			ps.setInt(6,user_phone);
+			ps.setString(6,user_phone);
 			ps.setString(7,user_bicycletype);
 			ps.setInt(8,user_emailpush);
 			
@@ -117,7 +117,7 @@ public class UserInfoDAO extends BaseDAO {
 				String userName = rs.getString("user_name");
 				String userPw = rs.getString("user_password");
 				String userRegion = rs.getString("user_region");
-				int userPhone = rs.getInt("user_phone");
+				String userPhone = rs.getString("user_phone");
 				String userBicycletype = rs.getString("user_bicycletype");
 				int userEmailpush = rs.getInt("user_emailpush");
 				
@@ -167,7 +167,7 @@ public class UserInfoDAO extends BaseDAO {
 				String userEmail = rs.getString("user_email");
 				String userPw = rs.getString("user_password");
 				String userRegion = rs.getString("user_region");
-				int userPhone = rs.getInt("user_phone");
+				String userPhone = rs.getString("user_phone");
 				String userBicycletype = rs.getString("user_bicycletype");
 				int userEmailpush = rs.getInt("user_emailpush");
 				
