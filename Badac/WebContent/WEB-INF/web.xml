@@ -89,7 +89,7 @@
     <servlet-name>UserMainPage</servlet-name>
     <url-pattern>/user_main_page</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>SignUpType</servlet-name>
     <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
@@ -161,4 +161,22 @@
     <servlet-name>MemberApproval</servlet-name>
     <url-pattern>/member_approval</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>InsertApplication</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertApplication</servlet-name>
+    <url-pattern>/insert_application</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteApplication</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteApplication</servlet-name>
+    <url-pattern>/write_application</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>
