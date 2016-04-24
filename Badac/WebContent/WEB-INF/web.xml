@@ -90,6 +90,14 @@
     <url-pattern>/user_main_page</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>UserCnt</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserCnt</servlet-name>
+    <url-pattern>/return_user_cnt</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>SignUpType</servlet-name>
     <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
@@ -160,6 +168,14 @@
   <servlet-mapping>
     <servlet-name>MemberApproval</servlet-name>
     <url-pattern>/member_approval</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberCnt</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberCnt</servlet-name>
+    <url-pattern>/return_member_cnt</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>InsertApplication</servlet-name>

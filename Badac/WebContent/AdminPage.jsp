@@ -16,9 +16,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
+    <style type="text/css">
+    	html { height:100%; overflow:scroll; }
+    	body { height:100%;}
+	</style>
 <script>
-	
-
 	onload = function on_load(){
 		$.get("http://localhost:8100/Badac/member_not_approval_list",
 			function(data){
@@ -85,6 +87,26 @@
 					alert(data.msg);
 				}
 		});
+		
+		$.get("http://localhost:8100/Badac/return_user_cnt",
+			function(data){
+				if(data.msg=="Success"){
+					document.getElementById("normalUserCnt").appendChild(document.createTextNode(data.userCnt));
+				}else{
+					alert(data.msg);
+				}
+			
+		});
+		
+		$.get("http://localhost:8100/Badac/return_member_cnt",
+				function(data){
+					if(data.msg=="Success"){
+						document.getElementById("memberUserCnt").appendChild(document.createTextNode(data.memberCnt));
+					}else{
+						alert(data.msg);
+					}
+				
+			});
 	}
 </script>
 <script>
@@ -94,14 +116,43 @@
 </script>
 </head>
 <body>
-<div style="width:60%; margin:auto; border:1px solid black;">
-	<table id="na_memberListTable" style="width:100%; text-align:center;">
-		<tr style="width:100%;">
-			<td style="width:15%; padding-top:10px; padding-bottom:10px;">코드</td>
-			<td style="width:15%; padding-top:10px; padding-bottom:10px;">대표자 명</td>
-			<td style="width:30%; padding-top:10px; padding-bottom:10px;">가게 이름</td>
-			<td style="width:30%; padding-top:10px; padding-bottom:10px;">전화번호</td>
-			<td style="width:10%; padding-top:10px; padding-bottom:10px;">승인 여부</td>
+<div style="width:100%; height:100%;">
+	<div style="width:100%; height:40px; border-bottom:1px solid rgb(231,231,231);">
+		<table style="width:100%; height:40px;">
+			<tr style="width:100%;">
+				<td style="width:30%; padding-left:20px; color:gray;">BADAC Admin</td>
+				<td style="width:40%;"></td>
+				<td style="width:30%;"></td>
+			</tr>
+		</table>
+	</div>
+	<table style="width:100%; height:100%;">
+		<tr style="width:100%; height:100%;">
+			<td style="width:15%; padding-left:20px; padding-top:10px; border-right:1px solid rgb(231,231,231);" valign="top"></td>
+			<td style="width:85%; padding-top:30px; padding-left:40px;" valign="top">
+				<div style="width:200px; margin-bottom:30px; height:120px; background-color:rgb(51,122,183); border-radius:7px; display:inline-block;">
+					<div style="display:table; width:100%; height:100%; text-align:center;">
+						<div id="normalUserCnt" style="display:table-cell; vertical-align:middle; font-size:40px; color:white;">일반 : </div>
+					</div>
+				</div>
+				<div style="width:200px; margin-bottom:30px; height:120px; background-color:rgb(92,184,92); margin-left:20px; border-radius:7px; display:inline-block;">
+					<div style="display:table; width:100%; height:100%; text-align:center;">
+						<div id="memberUserCnt" style="display:table-cell; vertical-align:middle; font-size:40px; color:white;">가맹 : </div>
+					</div>
+				</div>
+				<p style="color:gray; padding-left:10px; ">미승인 업체 목록</p>
+				<div style="width:80%; margin-top:5px; border:1px solid #E7E7E7;">
+					<table id="na_memberListTable" style="width:100%; text-align:center;">
+						<tr style="width:100%;">
+							<td style="width:15%; padding-top:10px; padding-bottom:10px;">코드</td>
+							<td style="width:15%; padding-top:10px; padding-bottom:10px;">대표자 명</td>
+							<td style="width:30%; padding-top:10px; padding-bottom:10px;">가게 이름</td>
+							<td style="width:30%; padding-top:10px; padding-bottom:10px;">전화번호</td>
+							<td style="width:10%; padding-top:10px; padding-bottom:10px;">승인 여부</td>
+						</tr>
+					</table>
+				</div>
+			</td>
 		</tr>
 	</table>
 </div>

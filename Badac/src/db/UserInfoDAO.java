@@ -200,5 +200,45 @@ public class UserInfoDAO extends BaseDAO {
 		
 		return userInfo;
 	}
+	
+	public int returnUserCnt(){
+		int result_cnt=0;
+		
+		PreparedStatement ps = null;
+		
+		try{
+			String sql = "SELECT COUNT(*) FROM normal_user";
+			ps=super.getConn().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				result_cnt = rs.getInt(1);
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return result_cnt;
+	}
 
 }

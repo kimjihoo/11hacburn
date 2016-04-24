@@ -18,6 +18,7 @@ import javax.servlet.http.Part;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import db.MemberInfoDAO;
 import db.UserInfoDAO;
 import model.UserInfo;
 
@@ -155,7 +156,27 @@ public class UserInfoServlet extends HttpServlet {
 				
 				response.sendRedirect("login_page");
 			}
-		} 
+		} else if(action.equals("return_user_cnt")){
+			
+			UserInfoDAO uid = new UserInfoDAO();
+			int userCnt = uid.returnUserCnt();
+			uid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("userCnt", userCnt);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
 
 		if (dispatchUrl != null) {
 			RequestDispatcher view = request.getRequestDispatcher(dispatchUrl);

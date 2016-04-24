@@ -168,7 +168,28 @@ public class MemberInfoServlet extends HttpServlet {
 			else{
 				response.sendRedirect("login_page");
 			}
-		} 
+		} else if(action.equals("return_member_cnt")){
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			int memberCnt = mid.returnMemberCnt();
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("memberCnt", memberCnt);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
+		
 
 		if (dispatchUrl != null) {
 			RequestDispatcher view = request.getRequestDispatcher(dispatchUrl);
