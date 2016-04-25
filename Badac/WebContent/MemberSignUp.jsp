@@ -68,12 +68,12 @@
                 return;
             }
             if(company_name.value == ""){
-                alert("이름을 입력하세요.");
+                alert("회사 이름을 입력하세요.");
                 company_name.focus();
                 return;
             }
             if(regex_name.test(company_name.value) != true){
-                alert("이름 형식이 틀렸습니다. (영문 / 한글 - 2~8글자)");
+                alert("회사 이름 형식이 틀렸습니다. (영문 / 한글 - 2~8글자)");
                 company_name.value="";
                 company_name.focus();
                 return;
@@ -168,28 +168,80 @@
             });
         }
 
-        function toLoginPage(){
-            location.href = "http://localhost:8100/Badac/login_page";
-        	//location.href="LoginPage.jsp";
+        function returnStartPage(){
+            location.href = "http://localhost:8100/Badac/start_page";
         }
     </script>
 </head>
 <body>
-	대표자 명 : <input name="company_onwername" id="company_ownername" type="text" placeholder="Enter your Name"><br />
-	대표자 이메일 : <input name="company_email" id="company_email" type="email" placeholder="Enter your E-mail"><br />
-	비밀번호 : <input name="company_password" id="company_password" type="password" placeholder="Enter your Password"><br />
-	비밀번호 확인 : <input name="company_password_confirm" id="company_password_confirm" type="password" placeholder="Confirm Password"><br />
-	상호 명 : <input name="company_name" id="company_name" type="text" placeholder="Enter your CompanyName"><br />
-	회사 위치 : <input name="company_region" id="company_region" type="text" placeholder="지역을 입력하세요"><br />
-	전화번호 : <input name="company_telephone" id="company_telephone" type="text" placeholder="가게번호입력"><br />
-	핸드폰 번호 : <input name="company_phone" id="company_phone" type="text" placeholder="폰번호입력"><br />
-	이메일 착신 여부 : <form name="company_emailpush">
-					<input type="radio" name="email_push" value=1>착신
-					<input type="radio" name="email_push" value=0>미착신
-				</form><br />
-	<div>
-        <button onclick="toLoginPage()">Cancel</button>
-        <button onclick="signUp()">Sign up</button>
+    <!-- Page Content -->
+    <div class="container">
+    	<div class="row" style="text-align:center;">
+    		<h1>Sign in to BADAC</h1>
+    	</div>
+
+        <div class="row">
+        	<div class="col-lg-4">
+            </div>
+            <div class="col-lg-4" style="border-radius:5px; border:1px solid rgb(231,231,231); padding-bottom:15px; padding-right:25px; padding-left:25px; padding-top:15px;">
+  				<div class="form-group">
+      				<label for="company_ownername">Owner Name:</label>
+      				<input type="text" class="form-control input-sm" id="company_ownername">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_email">Email:</label>
+      				<input type="text" class="form-control input-sm" id="company_email">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_password">Password:</label>
+      				<input type="password" class="form-control input-sm" id="company_password">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_password_confirm">Password Confirm:</label>
+      				<input type="password" class="form-control input-sm" id="company_password_confirm">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_name">Company Name:</label>
+      				<input type="text" class="form-control input-sm" id="company_name">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_region">Company Region:</label>
+      				<input type="text" class="form-control input-sm" id="company_region">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_telephone">TelePhone:</label>
+      				<input type="text" class="form-control input-sm" id="company_telephone">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_phone">Phone:</label>
+      				<input type="text" class="form-control input-sm" id="company_phone">
+    			</div>
+    			<div class="form-group">
+    			<form role="form" name="company_emailpush">
+            		<div class="radio">
+      					<label><input type="radio" name="email_push" value=1>착신</label>
+      					<label><input type="radio" name="email_push" value=0>거부</label>
+    				</div>
+  				</form>
+    			</div>
+    			<div class="btn-group btn-group-justified">
+    				<div class="btn-group">
+      					<button type="button" class="btn btn-primary" onclick="signUp()">Sign Up</button>
+    				</div>
+    				<div class="btn-group">
+      					<button type="button" class="btn btn-primary" onclick="returnStartPage()">Cancel</button>
+    				</div>
+  				</div>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <!-- /.row -->
+
     </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
 </body>
 </html>

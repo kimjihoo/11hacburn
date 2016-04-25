@@ -67,7 +67,7 @@ public class MemberInfoServlet extends HttpServlet {
 				}
 			}
 
-			response.sendRedirect("login_page");
+			response.sendRedirect("start_page");
 		} else if( action.equals("member_sign_up_page") ){
 			dispatchUrl = "MemberSignUp.jsp";
 		} else if( action.equals("login_page") ){

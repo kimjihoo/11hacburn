@@ -109,11 +109,6 @@
 			});
 	}
 </script>
-<script>
-	function approvalCompany(){
-		alert("click");
-	}
-</script>
 </head>
 <body>
 <div style="width:100%; height:100%;">

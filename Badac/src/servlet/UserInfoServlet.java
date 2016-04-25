@@ -73,14 +73,16 @@ public class UserInfoServlet extends HttpServlet {
 					response.sendRedirect("member_main_page");
 				}
 				else {
-					response.sendRedirect("login_page");
+					response.sendRedirect("start_page");
 				}
 			}
 			else{
-				response.sendRedirect("login_page");
+				response.sendRedirect("start_page");
 			}
 		}else if(action.equals("signup_type")){
 			dispatchUrl = "SignUpConfirm.jsp";
+		}else if(action.equals("start_page")){
+			dispatchUrl = "StartPage.jsp";
 		}
 		else if (action.equals("user_logout")) {
 			Cookie[] cookie = request.getCookies();
@@ -99,7 +101,7 @@ public class UserInfoServlet extends HttpServlet {
 					}
 				}
 			}
-			response.sendRedirect("login_page");
+			response.sendRedirect("start_page");
 		} else if( action.equals("user_sign_up_page") ){
 			dispatchUrl = "UserSignUp.jsp";
 		} else if( action.equals("login_page") ){

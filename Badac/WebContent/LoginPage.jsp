@@ -15,6 +15,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
+            
+    <style>
+    body {
+        padding-top: 100px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
     <script type="text/javascript">
     	function Login(){
     		var regix_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
@@ -87,23 +94,44 @@
                 }
     		}
     	}
-    	
-    	function gotoSignUp(){
-    		location.href = "http://localhost:8100/Badac/signup_type";
-    	}
-    
     </script>
 </head>
 <body>
-	<form name="login_form">
-		<input id="user" name="user" type="radio" value="normal" />일반 회원
-		<input id="member" name="user" type="radio" value="company"/>가맹 업체<br />
-	</form>
-		이메일 <input id="login_id" type="text" placehold="input email"/><br />
-		비밀번호 <input id="login_pw" type="password" placehold="input password"/><br />
+		<!-- Page Content -->
+    <div class="container">
+    	<div class="row" style="text-align:center;">
+    		<h1>Sign in to BADAC</h1>
+    	</div>
 
-		<button onclick="gotoSignUp()">SignUp</button>
-		<button onclick="Login()">SignIn</button>
-	
+        <div class="row">
+        	<div class="col-lg-4">
+            </div>
+            <div class="col-lg-4" style="border-radius:5px; border:1px solid rgb(231,231,231); padding-bottom:15px; padding-right:25px; padding-left:25px; padding-top:15px;">
+            	<form role="form" name="login_form">
+            		<div class="radio">
+      					<label><input type="radio" name="user" id="user" value="normal">일반</label>
+      					<label><input type="radio" name="user" id="member" value="company">가맹</label>
+    				</div>
+  				</form>
+  				<div class="form-group">
+      				<label for="login_id">Email:</label>
+      				<input type="text" class="form-control" id="login_id">
+    			</div>
+    			<div class="form-group">
+      				<label for="login_pw">Password:</label>
+      				<input type="password" class="form-control" id="login_pw">
+    			</div>
+    			<button type="button" class="btn btn-success" onclick="Login()" style="width:100%;">Sign In</button>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
 </body>
 </html>

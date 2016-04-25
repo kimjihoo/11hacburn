@@ -5,6 +5,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+<style>
+    body {
+        padding-top: 100px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
 <script type="text/javascript">
 	function signUp(){
 		var agree = document.getElementsByName('agree');
@@ -41,28 +58,67 @@
 		}
 	}
 	
-	function returnLoginPage(){
-		//location.href = "http://localhost:8100/Badac/user_login_page";
-		location.href="LoginPage.jsp";
+	function returnStartPage(){
+		location.href = "http://localhost:8100/Badac/start_page";
 	}
 </script>
 </head>
 <body>
-	약관 동의<br>
-	<div style="width:200px; height:200px; border:solid 1px black;">
-		약관 내용
-	</div>
-	<input type="checkbox" name="agree">동의<br>
-	<br>
-	<div style="width:200px; height:200px; border:solid 1px black;">
-		약관 내용2
-	</div>
-	<input type="checkbox" name="agree">동의<br>
-	<form name="signup_type">
-		<input type="radio" name="confirm" value="normal">일반 회원
-		<input type="radio" name="confirm" value="company">가맹 회원
-	</form>
-	<button onclick="signUp()">가입하기</button>
-	<button onclick="returnLoginPage()">돌아가기</button>
+		<!-- Page Content -->
+    <div class="container">
+    	<div class="row" style="text-align:center;">
+    		<h1>약관 동의</h1>
+    	</div>
+
+    
+        <div class="row">
+        	<div class="col-lg-4">
+            </div>
+            <div class="col-lg-4" style="border-radius:5px; border:1px solid rgb(231,231,231); padding-bottom:15px; padding-right:25px; padding-left:25px; padding-top:15px;">
+            <form>
+            	<div style="width:100%; height:200px; border-radius:5px; border:1px solid rgb(231,231,231);">
+					약관 내용
+				</div>
+				<div class="checkbox">
+      				<label><input type="checkbox" name="agree">동의</label>
+    			</div>
+				<div style="width:100%; height:200px; border-radius:5px; border:1px solid rgb(231,231,231);">
+					약관 내용2
+				</div>
+				<div class="checkbox">
+      				<label><input type="checkbox" name="agree">동의</label>
+    			</div>
+    			</form>
+            	<form role="form" name="signup_type">
+            		<div class="radio">
+      					<label><input type="radio" name="confirm" value="normal">일반</label>
+      					<label><input type="radio" name="confirm" value="company">가맹</label>
+    				</div>
+  				</form>
+    			<div class="btn-group btn-group-justified">
+    				<div class="btn-group">
+      					<button type="button" class="btn btn-primary" onclick="signUp()">Continue</button>
+    				</div>
+    				<div class="btn-group">
+      					<button type="button" class="btn btn-primary" onclick="returnStartPage()">Cancel</button>
+    				</div>
+  				</div>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
+	
+	
+	
+	
+	
+	
 </body>
 </html>

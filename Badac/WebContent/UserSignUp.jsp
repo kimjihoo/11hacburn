@@ -16,19 +16,11 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
 <style>
-		html{
-		width:100%;
-		height:100%;
-		}
-		body{
-		width:100%;
-		height:100%;
-		background-size:cover;
-		background-repeat:no-repeat;
-		background:url('image/main_background.jpg');
-		}
-		
-	</style>
+    body {
+        padding-top: 100px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
     <script type="text/javascript">
         function signUp(){
         	var regex_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
@@ -139,7 +131,7 @@
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원가입이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/";
+            			location.href = "http://localhost:8100/Badac/login_page";
             		}
             		else{
             			alert(data.msg);
@@ -147,33 +139,83 @@
             });
         }
 
-        function toLoginPage(){
-            location.href = "http://localhost:8100/Badac/login_page";
+        function returnStartPage(){
+            location.href = "http://localhost:8100/Badac/start_page";
         	//location.href="LoginPage.jsp";
         }
     </script>
 </head>
 <body>
-	이름 : <input name="user_name" id="user_name" type="text" placeholder="Enter your Name"><br />
-	이메일 : <input name="user_email" id="user_email" type="email" placeholder="Enter your E-mail"><br />
-	비밀번호 : <input name="user_password" id="user_password" type="password" placeholder="Enter your Password"><br />
-	비밀번호 확인 : <input name="user_password_confirm" id="user_password_confirm" type="password" placeholder="Confirm Password"><br />
-	지역 : <input name="user_region" id="user_region" type="text" placeholder="지역을 입력하세요"><br />
-	핸드폰 번호 : <input name="user_phone" id="user_phone" type="text" placeholder="폰번호입력"><br />
-	자전거 타입 : <select id="user_bicycletype">
-            <option value="픽시">픽시</option>
-            <option value="로드">로드</option>
-            <option value="알톤">알톤</option>
-            <option value="삼천리">알톤</option>
-            <option value="etc">기타</option>
-        </select><br />
-	이메일 착신 여부 : <form name="user_emailpush">
-					<input type="radio" name="email_push" value=1>착신
-					<input type="radio" name="email_push" value=0>미착신
-				</form><br />
-	<div>
-		<button onclick="toLoginPage()">Cancel</button>
-        <button onclick="signUp()">Sign up</button>
+    	<!-- Page Content -->
+    <div class="container">
+    	<div class="row" style="text-align:center;">
+    		<h1>Sign in to BADAC</h1>
+    	</div>
+
+        <div class="row">
+        	<div class="col-lg-4">
+            </div>
+            <div class="col-lg-4" style="border-radius:5px; border:1px solid rgb(231,231,231); padding-bottom:15px; padding-right:25px; padding-left:25px; padding-top:15px;">
+  				<div class="form-group">
+      				<label for="user_name">Name:</label>
+      				<input type="text" class="form-control input-sm" id="user_name">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_email">Email:</label>
+      				<input type="text" class="form-control input-sm" id="user_email">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_password">Password:</label>
+      				<input type="password" class="form-control input-sm" id="user_password">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_password_confirm">Password Confirm:</label>
+      				<input type="password" class="form-control input-sm" id="user_password_confirm">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_region">Region:</label>
+      				<input type="text" class="form-control input-sm" id="user_region">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_phone">Phone:</label>
+      				<input type="text" class="form-control input-sm" id="user_phone">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_bicycletype">Bicycle Type:</label>
+      				<select class="form-control" id="user_bicycletype">
+        				<option value="픽시">픽시</option>
+        				<option value="로드">로드</option>
+        				<option value="알톤">알톤</option>
+        				<option value="삼천리">삼천리</option>
+        				<option value="etc">etc</option>
+      				</select>
+    			</div>
+    			<div class="form-group">
+    			<form role="form" name="user_emailpush">
+            		<div class="radio">
+      					<label><input type="radio" name="email_push" value=1>착신</label>
+      					<label><input type="radio" name="email_push" value=0>거부</label>
+    				</div>
+  				</form>
+    			</div>
+    			<div class="btn-group btn-group-justified">
+    				<div class="btn-group">
+      					<button type="button" class="btn btn-primary" onclick="signUp()">Sign Up</button>
+    				</div>
+    				<div class="btn-group">
+      					<button type="button" class="btn btn-primary" onclick="returnStartPage()">Cancel</button>
+    				</div>
+  				</div>
+            </div>
+            <div class="col-lg-4">
+            </div>
+        </div>
+        <!-- /.row -->
+
     </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="js/jquery.js"></script>
 </body>
 </html>

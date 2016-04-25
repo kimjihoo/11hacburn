@@ -74,6 +74,14 @@
     <url-pattern>/login_page</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>StartPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StartPage</servlet-name>
+    <url-pattern>/start_page</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UserSignUpPage</servlet-name>
     <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
