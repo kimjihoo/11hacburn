@@ -246,5 +246,47 @@ public class UserInfoDAO extends BaseDAO {
 		
 		return result_cnt;
 	}
-
+	
+	public String updateUserInfo(int user_id, String password, String region_1, String region_2, String region_3, String phone, String bicycletype, int emailpush){
+		PreparedStatement ps = null;
+		
+		try{
+			String sql = "UPDATE normal_user SET user_password=?,user_region_1=?,user_region_2=?,user_region_3=?,user_phone=?,user_bicycletype=?,user_emailpush=? WHERE user_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setString(1, password);
+			ps.setString(2, region_1);
+			ps.setString(3, region_2);
+			ps.setString(4, region_3);
+			ps.setString(5, phone);
+			ps.setString(6, bicycletype);
+			ps.setInt(7, emailpush);
+			ps.setInt(8, user_id);
+			ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+			return "fail";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return "fail";
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		return "Success";
+	}
 }

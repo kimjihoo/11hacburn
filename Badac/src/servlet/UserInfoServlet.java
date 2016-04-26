@@ -473,7 +473,77 @@ public class UserInfoServlet extends HttpServlet {
 			response.getWriter().write(json.toString());
 			
 		}else if(action.equals("user_update_information")){
+			int id = Integer.parseInt(request.getParameter("id"));
+			String password = request.getParameter("password");
+			String region_1 = request.getParameter("region_1");
+			String region_2 = request.getParameter("region_2");
+			String region_3 = request.getParameter("region_3");
+			String phone = request.getParameter("phone");
+			String bicycletype = request.getParameter("bicycletype");
+			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
 			
+			String msg = "Success";
+
+			
+			if (password == null || password.trim().equals("")) {
+				msg = "NoInputPassword";
+			} 
+			else if (region_1 == null || region_1.trim().equals("")) {
+				msg = "NoInputRegion_1";
+			}
+			else if (region_2 == null || region_2.trim().equals("")) {
+				msg = "NoInputRegion_2";
+			}
+			else if (region_3 == null || region_3.trim().equals("")) {
+				msg = "NoInputRegion_3";
+			}
+			else if (phone == null) {
+				msg = "NoInputPhone";
+			} 
+			else if (bicycletype == null || bicycletype.trim().equals("")) {
+				msg = "NoInputBicycletype";
+			} 
+			else if (emailpush==-1) {
+				msg = "NoInputEmailpush";
+			} 
+			else {
+				int flag = 1;
+
+
+				// 있는 회원인지 검사
+				UserInfoDAO uid = new UserInfoDAO();
+				UserInfo temp = uid.selectUserInfoByUserId(id);
+				uid.disconnect();
+
+				if (temp == null) {
+					msg = "NotExistentUserError";
+					flag = -1;
+				}
+
+				// 비밀번호 유효성 검사 (영문 숫자 조합 8~12글자)
+				if (!(Pattern.matches(passwordRegex, password))) {
+					msg = "PasswordRegixError";
+					flag = -1;
+				}
+
+				if (flag == 1) {
+					uid = new UserInfoDAO();
+					msg = uid.updateUserInfo(id, password, region_1, region_2, region_3, phone, bicycletype,emailpush);
+					uid.disconnect();
+				}
+			}
+			
+			JSONObject json = new JSONObject();
+
+			try {
+				json.put("msg", msg);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 			
 		}
 	}

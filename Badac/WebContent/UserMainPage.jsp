@@ -123,7 +123,7 @@ body { padding-top: 70px; }
                     	<li><a id="name"></a></li>
                     	<li><a id="email"></a></li>
                     	<li class="divider"></li>
-                    	<li><a href="#">개인정보 수정</a></li>
+                    	<li><a href="http://localhost:8100/Badac/go_user_update_information">개인정보 수정</a></li>
                     	<li><a href="#">견적 요청 내역 보기</a></li>
                   	</ul>
                 	</li>

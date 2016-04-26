@@ -136,7 +136,7 @@
 			}
 			
 		}
-        function signUp(){
+        function updateInfo(){
         	var regex_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
         	var regex_pw = /^[a-z0-9]{4,12}$/;
         	var regex_name = /^[a-zA-Z0-9가-힣]{2,8}$/;
@@ -237,6 +237,7 @@
             }
             
             $.post("http://localhost:8100/Badac/user_update_information", {
+            	id : userId,
             	password : user_pw.value,
             	region_1 : user_region_1.value,
             	region_2 : user_address.value,
