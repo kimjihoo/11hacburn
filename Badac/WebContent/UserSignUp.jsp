@@ -15,6 +15,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
+            
+            
+    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음 주소 api -->
 <style>
     body {
         padding-top: 100px;
@@ -33,8 +36,13 @@
 			var user_pw = document.getElementById("user_password");
 			var user_chk_pw = document.getElementById("user_password_confirm");
 			var user_region_1 = document.getElementById("user_region_1");
-			var user_region_2 = document.getElementById("user_region_2");
-			var user_phone = document.getElementById("user_phone");
+			var user_address = document.getElementById("user_address");
+			var user_address2 = document.getElementById("user_address2");
+			
+			var user_phone1 = document.getElementById("user_phone1");
+			var user_phone2 = document.getElementById("user_phone2");
+			var user_phone3 = document.getElementById("user_phone3");
+			
 			var x = document.getElementById("user_bicycletype").selectedIndex;
 			var user_bicycletype = document.getElementsByTagName("option")[x];
 			
@@ -100,25 +108,39 @@
                 user_chk_pw.focus();
                 return;
             }
-            if(user_phone.value==""){
+            if(user_phone1.value==""){
             	alert("핸드폰 번호를 입력하세요.");
-            	user_phone.focus();
+            	user_phone1.focus();
             	return;
             }
-            if(regex_phone.test(user_phone.value)!=true){
+            if(user_phone2.value==""){
+            	alert("핸드폰 번호를 입력하세요.");
+            	user_phone2.focus();
+            	return;
+            }
+            if(user_phone3.value==""){
+            	alert("핸드폰 번호를 입력하세요.");
+            	user_phone3.focus();
+            	return;
+            }
+            
+            if(regex_phone.test(user_phone1.value)!=true||regex_phone.test(user_phone2.value)!=true||regex_phone.test(user_phone3.value)!=true){
             	alert("핸드폰 번호 형식이 틀렸습니다. 숫자만 입력해 주세요.");
-            	user_phone.value="";
-            	user_phone.focus();
+            	user_phone1.value="";
+            	user_phone2.value="";
+            	user_phone3.value="";
+            	user_phone1.focus();
             	return;
             }
+            
             if(user_region_1.value ==""){
             	alert("우편번호를 입력해주세요.");
             	user_region_1.focus();
             	return;
             }
-            if(user_region_2.value ==""){
+            if(user_address2.value ==""){
             	alert("상세주소를 입력해주세요.");
-            	user_region_2.focus();
+            	user_address2.focus();
             	return;
             }
             if(chk==0){
@@ -131,8 +153,8 @@
             	email : user_email.value,
             	password : user_pw.value,
             	region_1 : user_region_1.value,
-            	region_2 : user_region_2.value,
-            	phone : user_phone.value,
+            	region_2 : user_address.value + " " + user_address2.value,
+            	phone : user_phone1.value+"-"+user_phone2.value+"-"+user_phone3.value,
             	bicycletype : user_bicycletype.value,
             	emailpush : user_emailpush.value,
             }, function(data){
@@ -179,17 +201,28 @@
       				<label for="user_password_confirm">Password Confirm:</label>
       				<input type="password" class="form-control input-sm" id="user_password_confirm">
     			</div>
+    		
     			<div class="form-group">
-      				<label for="user_region_1">Region_1:</label>
-      				<input type="text" class="form-control input-sm" id="user_region_1">
-    			</div>
-    			<div class="form-group">
-      				<label for="user_region_2">Region_2:</label>
-      				<input type="text" class="form-control input-sm" id="user_region_2">
-    			</div>
+    			<label for="user_region_1">Region:</label>
+    			<div class = "form-inline">
+    				<input type="text" class="form-control input-sm" id="user_region_1" placeholder="우편번호">
+					<input type="button" class="btn btn-primary btn-sm" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				</div>
+				<span id="helpBlock" class="help-block">우편번호 찾기 버튼을 눌러 우편번호를 검색하세요.</span>
+				</div>				
+				<div class="form-group">
+					<input type="text" class="form-control input-sm" id="user_address" placeholder="주소">
+					<input type="text" class="form-control input-sm" id="user_address2" placeholder="상세주소">
+				</div>
     			<div class="form-group">
       				<label for="user_phone">Phone:</label>
-      				<input type="text" class="form-control input-sm" id="user_phone">
+      				<div class="row">
+      				<div class="col-sm-3"><input type="text" class="form-control input-sm"id="user_phone1"></div>
+      				<div class="col-sm-1">-</div>
+      				<div class="col-sm-3"><input type="text" class="form-control input-sm" id="user_phone2"></div>
+      				<div class="col-sm-1">-</div>
+      				<div class="col-sm-3"><input type="text" class="form-control input-sm" id="user_phone3"></div>
+      				</div>
     			</div>
     			<div class="form-group">
       				<label for="user_bicycletype">Bicycle Type:</label>
@@ -228,5 +261,50 @@
 
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
+    
+    <!-- 다음 주소 api -->
+    <script> 
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('user_region_1').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('user_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('user_address2').focus();
+            }
+        }).open();
+    }
+</script>
 </body>
 </html>
