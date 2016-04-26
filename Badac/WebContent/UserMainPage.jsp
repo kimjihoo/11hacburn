@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+ <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
 <script>    
     ////////////////////////////////////////////////////////
     <% // 쿠키값 가져오기
@@ -39,6 +41,9 @@
     
 	///////////////////////////////////////////////////////////////////
 </script>
+
+
+
 <script type="text/javascript">
 	onload = function on_load(){
 		var temp1 = document.getElementById("userIdDiv");
@@ -60,10 +65,26 @@
 </head>
 <body>
 유저 페이지
+
+ <div id="map" style="width:100%;height:350px;"></div>
 <button onclick="userLogout()">로그아웃</button>
 <button onclick="writeApplication()">제안서 작성</button>
 <div id="userIdDiv"></div>
 <div id="userNameDiv"></div>
 <div id="userEmailDiv"></div>
+
+
+
+
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new daum.maps.Map(container, options);
+	</script>
+
 </body>
 </html>
