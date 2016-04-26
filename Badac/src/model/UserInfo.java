@@ -6,7 +6,8 @@ public class UserInfo {
 	private String user_name;
 	private String user_email;
 	private String user_password;
-	private String user_region;
+	private String user_region_1;
+	private String user_region_2;
 	private String user_phone;
 	private String user_bicycletype;
 	private int user_emailpush;
@@ -16,18 +17,20 @@ public class UserInfo {
 		this.user_name="";
 		this.user_email="";
 		this.user_password="";
-		this.user_region="";
+		this.user_region_1="";
+		this.user_region_2="";
 		this.user_phone="";
 		this.user_bicycletype="";
 		this.user_emailpush=0;
 	}
 	
-	public UserInfo(int user_id, String user_name, String user_email, String user_password, String user_region, String user_phone, String user_bicycletype, int user_emailpush){
+	public UserInfo(int user_id, String user_name, String user_email, String user_password, String user_region_1, String user_region_2, String user_phone, String user_bicycletype, int user_emailpush){
 		this.user_id = user_id;
 		this.user_name=user_name;
 		this.user_email=user_email;
 		this.user_password=user_password;
-		this.user_region=user_region;
+		this.user_region_1 = user_region_1;
+		this.user_region_2=user_region_2;
 		this.user_phone=user_phone;
 		this.user_bicycletype=user_bicycletype;
 		this.user_emailpush=user_emailpush;
@@ -64,13 +67,21 @@ public class UserInfo {
 	public void setUser_password(String user_password) {
 		this.user_password = user_password;
 	}
-
-	public String getUser_region() {
-		return user_region;
+	
+	public String getUser_region_1() {
+		return user_region_1;
 	}
 
-	public void setUser_region(String user_region) {
-		this.user_region = user_region;
+	public void setUser_region_1(String user_region_1) {
+		this.user_region_2 = user_region_1;
+	}
+
+	public String getUser_region_2() {
+		return user_region_2;
+	}
+
+	public void setUser_region_2(String user_region_2) {
+		this.user_region_2 = user_region_2;
 	}
 
 	public String getUser_phone() {

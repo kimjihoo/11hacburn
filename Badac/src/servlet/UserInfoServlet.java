@@ -93,7 +93,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password") || cookieName.equals("user_region") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush")){
+						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password") || cookieName.equals("user_region_2") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -228,7 +228,8 @@ public class UserInfoServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
-			String region = request.getParameter("region");
+			String region_1 = request.getParameter("region_1");
+			String region_2 = request.getParameter("region_2");
 			String phone = request.getParameter("phone");
 			String bicycletype = request.getParameter("bicycletype");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
@@ -243,9 +244,12 @@ public class UserInfoServlet extends HttpServlet {
 			} 
 			else if (name == null || name.trim().equals("")) {
 				msg = "NoInputName";
-			} 
-			else if (region == null || region.trim().equals("")) {
-				msg = "NoInputRegion";
+			}
+			else if (region_1 == null || region_1.trim().equals("")) {
+				msg = "NoInputRegion_1";
+			}
+			else if (region_2 == null || region_2.trim().equals("")) {
+				msg = "NoInputRegion_2";
 			} 
 			else if (phone == null) {
 				msg = "NoInputPhone";
@@ -293,7 +297,7 @@ public class UserInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					uid = new UserInfoDAO();
-					uid.insertUserInfo(name, email, password, region, phone, bicycletype,emailpush);
+					uid.insertUserInfo(name, email, password, region_1, region_2, phone, bicycletype,emailpush);
 					uid.disconnect();
 
 					uid = new UserInfoDAO();
@@ -376,7 +380,13 @@ public class UserInfoServlet extends HttpServlet {
 						
 						response.addCookie(cookie);
 						
-						cookie = new Cookie("user_region", URLEncoder.encode(temp.getUser_region(), "UTF-8"));
+						cookie = new Cookie("user_region_1", temp.getUser_region_1());
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_region_2", URLEncoder.encode(temp.getUser_region_2(), "UTF-8"));
 						
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						

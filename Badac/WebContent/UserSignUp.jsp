@@ -32,7 +32,8 @@
 			var user_email = document.getElementById("user_email");
 			var user_pw = document.getElementById("user_password");
 			var user_chk_pw = document.getElementById("user_password_confirm");
-			var user_region = document.getElementById("user_region");
+			var user_region_1 = document.getElementById("user_region_1");
+			var user_region_2 = document.getElementById("user_region_2");
 			var user_phone = document.getElementById("user_phone");
 			var x = document.getElementById("user_bicycletype").selectedIndex;
 			var user_bicycletype = document.getElementsByTagName("option")[x];
@@ -110,9 +111,14 @@
             	user_phone.focus();
             	return;
             }
-            if(user_region.value ==""){
-            	alert("지역을 입력해 주세요.");
-            	user_region.focus();
+            if(user_region_1.value ==""){
+            	alert("우편번호를 입력해주세요.");
+            	user_region_1.focus();
+            	return;
+            }
+            if(user_region_2.value ==""){
+            	alert("상세주소를 입력해주세요.");
+            	user_region_2.focus();
             	return;
             }
             if(chk==0){
@@ -124,7 +130,8 @@
             	name : user_name.value,
             	email : user_email.value,
             	password : user_pw.value,
-            	region : user_region.value,
+            	region_1 : user_region_1.value,
+            	region_2 : user_region_2.value,
             	phone : user_phone.value,
             	bicycletype : user_bicycletype.value,
             	emailpush : user_emailpush.value,
@@ -173,8 +180,12 @@
       				<input type="password" class="form-control input-sm" id="user_password_confirm">
     			</div>
     			<div class="form-group">
-      				<label for="user_region">Region:</label>
-      				<input type="text" class="form-control input-sm" id="user_region">
+      				<label for="user_region_1">Region_1:</label>
+      				<input type="text" class="form-control input-sm" id="user_region_1">
+    			</div>
+    			<div class="form-group">
+      				<label for="user_region_2">Region_2:</label>
+      				<input type="text" class="form-control input-sm" id="user_region_2">
     			</div>
     			<div class="form-group">
       				<label for="user_phone">Phone:</label>

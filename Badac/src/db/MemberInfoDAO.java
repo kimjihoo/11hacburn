@@ -9,26 +9,27 @@ import java.util.ArrayList;
 import model.MemberInfo;
 
 public class MemberInfoDAO extends BaseDAO {
-	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region, String company_telephone, String company_phone, int company_emailpush){
+	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_telephone, String company_phone, int company_emailpush){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
 		PreparedStatement ps=null;
 		try
 		{
-			String sql="INSERT INTO company_user VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO company_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps=super.getConn().prepareStatement(sql);
 			
 			ps.setString(2,company_ownername);
 			ps.setString(3,company_email);
 			ps.setString(4,company_password);
 			ps.setString(5,company_name);
-			ps.setString(6,company_region);
-			ps.setString(7,company_telephone);
-			ps.setString(8,company_phone);
-			ps.setInt(9,0);
-			ps.setDate(10,null);
-			ps.setInt(11,company_emailpush);
+			ps.setString(6,company_region_1);
+			ps.setString(7,company_region_2);
+			ps.setString(8,company_telephone);
+			ps.setString(9,company_phone);
+			ps.setInt(10,0);
+			ps.setDate(11,null);
+			ps.setInt(12,company_emailpush);
 			
 			while(true){
 				randomNum = (int)(Math.random() * 100000000);
@@ -124,14 +125,15 @@ public class MemberInfoDAO extends BaseDAO {
 				String companyEmail = rs.getString("company_email");
 				String companyPw = rs.getString("company_password");
 				String companyName = rs.getString("company_name");
-				String companyRegion = rs.getString("company_region");
+				String companyRegion_1 = rs.getString("company_region_1");
+				String companyRegion_2 = rs.getString("company_region_2");
 				String companyTelephone = rs.getString("company_telephone");
 				String companyPhone = rs.getString("company_phone");
 				int companyApproval = rs.getInt("company_approval");
 				Date companyApprovaldate = rs.getDate("company_approvaldate");
 				int companyEmailpush = rs.getInt("company_emailpush");
 				
-				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush);
+				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion_1, companyRegion_2, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush);
 				memberInfo.setCompany_name(companyName);
 			}
 		}
@@ -177,14 +179,15 @@ public class MemberInfoDAO extends BaseDAO {
 				String companyEmail = rs.getString("company_email");
 				String companyPw = rs.getString("company_password");
 				String companyName = rs.getString("company_name");
-				String companyRegion = rs.getString("company_region");
+				String companyRegion_1 = rs.getString("company_region_1");
+				String companyRegion_2 = rs.getString("company_region_2");
 				String companyTelephone = rs.getString("company_telephone");
 				String companyPhone = rs.getString("company_phone");
 				int companyApproval = rs.getInt("company_approval");
 				Date companyApprovaldate = rs.getDate("company_approvaldate");
 				int companyEmailpush = rs.getInt("company_emailpush");
 				
-				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush);
+				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion_1, companyRegion_2, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush);
 				memberInfo.setCompany_name(companyName);
 			}
 		}

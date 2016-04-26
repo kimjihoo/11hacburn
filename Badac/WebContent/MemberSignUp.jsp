@@ -41,7 +41,8 @@
 			var company_pw = document.getElementById("company_password");
 			var company_chk_pw = document.getElementById("company_password_confirm");
 			var company_name = document.getElementById("company_name");
-			var company_region = document.getElementById("company_region");
+			var company_region_1 = document.getElementById("company_region_1");
+			var company_region_2 = document.getElementById("company_region_2");
 			var company_telephone = document.getElementById("company_telephone");
 			var company_phone = document.getElementById("company_phone");
 			
@@ -138,9 +139,14 @@
             	company_telephone.focus();
             	return;
             }
-            if(company_region.value ==""){
-            	alert("지역을 입력해 주세요.");
-            	company_region.focus();
+            if(company_region_1.value ==""){
+            	alert("우편번호를 입력해 주세요.");
+            	company_region_1.focus();
+            	return;
+            }
+            if(company_region_2.value ==""){
+            	alert("상세주소를 입력해 주세요.");
+            	company_region_2.focus();
             	return;
             }
             if(chk==0){
@@ -153,7 +159,8 @@
             	email : company_email.value,
             	password : company_pw.value,
             	name : company_name.value,
-            	region : company_region.value,
+            	region_1 : company_region_1.value,
+            	region_2 : company_region_2.value,
             	telephone : company_telephone.value,
             	phone : company_phone.value,
             	emailpush : company_emailpush.value,
@@ -205,8 +212,12 @@
       				<input type="text" class="form-control input-sm" id="company_name">
     			</div>
     			<div class="form-group">
-      				<label for="company_region">Company Region:</label>
-      				<input type="text" class="form-control input-sm" id="company_region">
+      				<label for="company_region_1">Company Region_1:</label>
+      				<input type="text" class="form-control input-sm" id="company_region_1">
+    			</div>
+    			<div class="form-group">
+      				<label for="company_region_2">Company Region_2:</label>
+      				<input type="text" class="form-control input-sm" id="company_region_2">
     			</div>
     			<div class="form-group">
       				<label for="company_telephone">TelePhone:</label>
