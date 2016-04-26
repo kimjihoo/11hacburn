@@ -47,6 +47,8 @@ public class ApplicationInfoServlet extends HttpServlet {
 		
 		if(action.equals("write_application")){
 			dispatchUrl = "ApplicationWritePage.jsp";
+		}else if(action.equals("my_application")){
+			dispatchUrl = "MyApplicationPage.jsp";
 		}
 		
 		if (dispatchUrl != null) {

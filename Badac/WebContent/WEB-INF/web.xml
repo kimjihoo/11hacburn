@@ -98,6 +98,22 @@
     <url-pattern>/user_main_page</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GoUserUpdateInformation</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoUserUpdateInformation</servlet-name>
+    <url-pattern>/go_user_update_information</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UserUpdateInformation</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpdateInformation</servlet-name>
+    <url-pattern>/user_update_information</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UserCnt</servlet-name>
     <servlet-class>servlet.UserInfoServlet</servlet-class>
   </servlet>
@@ -200,6 +216,14 @@
   <servlet-mapping>
     <servlet-name>WriteApplication</servlet-name>
     <url-pattern>/write_application</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GotoMyApplicationPage</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GotoMyApplicationPage</servlet-name>
+    <url-pattern>/my_application</url-pattern>
   </servlet-mapping>
   
   

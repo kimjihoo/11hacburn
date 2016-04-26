@@ -178,6 +178,9 @@ public class UserInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 		}
+		else if(action.equals("go_user_update_information")){
+			dispatchUrl="UserInformationPage.jsp";
+		}
 
 		if (dispatchUrl != null) {
 			RequestDispatcher view = request.getRequestDispatcher(dispatchUrl);
@@ -435,6 +438,9 @@ public class UserInfoServlet extends HttpServlet {
 			
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
+			
+		}else if(action.equals("user_update_information")){
+			
 			
 		}
 	}
