@@ -88,11 +88,6 @@ body { padding-top: 70px; }
 	function writeApplication(){
 		location.href = "http://localhost:8100/Badac/write_application";
 	}
-	
-	
-	$('.sidebar-toggle').click(function(){
-	     $('#sidebar').removeClass('hidden-xs');            
-	});
 </script>
 </head>
 <body>
@@ -123,8 +118,11 @@ body { padding-top: 70px; }
                     	<li><a id="name"></a></li>
                     	<li><a id="email"></a></li>
                     	<li class="divider"></li>
+                    	<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
                     	<li><a href="http://localhost:8100/Badac/go_user_update_information">개인정보 수정</a></li>
                     	<li><a href="#">견적 요청 내역 보기</a></li>
+                    	<li><a href="http://localhost:8100/Badac/write_application">견적 제안서 작성</a></li>
+                    	
                   	</ul>
                 	</li>
          
@@ -136,26 +134,30 @@ body { padding-top: 70px; }
         <!-- /.container -->
     </nav>
 
-유저 페이지
+<div class="container-fluid">
 
- 
-<button onclick="userLogout()">로그아웃</button>
-<button onclick="writeApplication()">제안서 작성</button>
-<div id="userIdDiv"></div>
-<div id="userNameDiv"></div>
-<div id="userEmailDiv"></div>
-<div class="container">
-	<div class="col-lg-3">
-
+	<div class="col-lg-2 col-sm-2">
+					
 	</div>
-	<div class="col-lg-6" id="map" style="width:100%;height:500px;"></div>
-	<div class="col-lg-3"></div>
-	
-	
-
-	
+	<div class="col-lg-6 col-sm-6" id="map" style="height:500px;"></div>
+	<div class="col-lg-4 col-sm-4">
+		<table class="table table-hover">
+		<tr>
+			<td rowspan="4" ><img src="http://placehold.it/140x140"/></td>
+			<td>삼천리sdfsdgsdfsdfsdf자전거</td>
+		</tr>
+		<tr>
+			<td>경기도sdfsdgsdfsdgsdfsdfsdf고양시</td>
+		</tr>
+		<tr>
+			<td>0319658sdfsdgsdfsd00</td>
+		</tr>
+		<tr>
+			<td>맞은편</td>
+		</tr>			
+		</table>
 </div>
-
+</div>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
