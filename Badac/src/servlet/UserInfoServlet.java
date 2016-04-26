@@ -20,6 +20,7 @@ import org.json.JSONObject;
 
 import db.MemberInfoDAO;
 import db.UserInfoDAO;
+import model.MemberInfo;
 import model.UserInfo;
 
 /**
@@ -203,6 +204,35 @@ public class UserInfoServlet extends HttpServlet {
 			else{
 				response.sendRedirect("login_page");
 			}
+		} else if(action.equals("get_user_info")){
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			UserInfoDAO uid = new UserInfoDAO();
+			UserInfo userInfo = uid.selectUserInfoByUserId(id);
+			uid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("userName", userInfo.getUser_name());
+				json.put("userEmail", userInfo.getUser_email());
+				json.put("userPassword", userInfo.getUser_password());
+				json.put("userRegion_1", userInfo.getUser_region_1());
+				json.put("userRegion_2", userInfo.getUser_region_2());
+				json.put("userRegion_3", userInfo.getUser_region_3());
+				json.put("userPhone", userInfo.getUser_phone());
+				json.put("userBicycletype", userInfo.getUser_bicycletype());
+				json.put("userEmailpush", userInfo.getUser_emailpush());
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 		}
 
 		if (dispatchUrl != null) {
@@ -224,8 +254,6 @@ public class UserInfoServlet extends HttpServlet {
 
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex + 1);
-
-		String dispatchUrl = null;
 		
 		if (action.equals("user_email_check")) {
 			String errorMsg = "Success";

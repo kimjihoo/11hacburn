@@ -187,6 +187,61 @@ public class MemberInfoServlet extends HttpServlet {
 			}
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
+		} else if(action.equals("go_member_update_information")){
+			String userId = null;
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("company_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userId = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userId != null && !(userId.equals("") && Pattern.matches("^[0-9]+$", userId))){
+				dispatchUrl="MemberInformationPage.jsp";
+			}
+			else{
+				response.sendRedirect("login_page");
+			}
+		} else if(action.equals("get_member_info")){
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			MemberInfo memberInfo = mid.selectMemberInfoByCompanyId(id);
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("companyOwnerName", memberInfo.getCompany_ownername());
+				json.put("companyEmail", memberInfo.getCompany_email());
+				json.put("companyPassword", memberInfo.getCompany_password());
+				json.put("companyName", memberInfo.getCompany_name());
+				json.put("companyRegion_1", memberInfo.getCompany_region_1());
+				json.put("companyRegion_2", memberInfo.getCompany_region_2());
+				json.put("companyRegion_3", memberInfo.getCompany_region_3());
+				json.put("companyTelephone", memberInfo.getCompany_telephone());
+				json.put("companyPhone", memberInfo.getCompany_phone());
+				json.put("companyEmailpush", memberInfo.getCompany_emailpush());
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 		}
 		
 
@@ -208,8 +263,6 @@ public class MemberInfoServlet extends HttpServlet {
 
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex + 1);
-
-		String dispatchUrl = null;
 		
 		if (action.equals("member_email_check")) {
 			String errorMsg = "Success";
@@ -311,10 +364,6 @@ public class MemberInfoServlet extends HttpServlet {
 				if (flag == 1) {
 					mid = new MemberInfoDAO();
 					mid.insertMemberInfo(ownername, email, password, name, region_1, region_2, region_3, telephone, phone, emailpush);
-					mid.disconnect();
-
-					mid = new MemberInfoDAO();
-					MemberInfo memberInfo = mid.selectMemberInfoByCompanyEmail(email);
 					mid.disconnect();
 				}
 			}
@@ -474,8 +523,6 @@ public class MemberInfoServlet extends HttpServlet {
 			
 			JSONObject json = new JSONObject();
 			
-			//System.out.println(msg);
-			
 			try{
 				json.put("msg", msg);
 			}
@@ -487,8 +534,84 @@ public class MemberInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
+		}else if(action.equals("member_update_information")){
+			int id = Integer.parseInt(request.getParameter("id"));
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String region_1 = request.getParameter("region_1");
+			String region_2 = request.getParameter("region_2");
+			String region_3 = request.getParameter("region_3");
+			String telephone = request.getParameter("telephone");
+			String phone = request.getParameter("phone");
+			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
+			
+			String msg = "Success";
+
+			
+			if (password == null || password.trim().equals("")) {
+				msg = "NoInputPassword";
+			}
+			else if (name == null || name.trim().equals("")) {
+				msg = "NoInputName";
+			} 
+			else if (region_1 == null || region_1.trim().equals("")) {
+				msg = "NoInputRegion_1";
+			}
+			else if (region_2 == null || region_2.trim().equals("")) {
+				msg = "NoInputRegion_2";
+			}
+			else if (region_3 == null || region_3.trim().equals("")) {
+				msg = "NoInputRegion_3";
+			}
+			else if (telephone == null) {
+				msg = "NoInputTelePhone";
+			}
+			else if (phone == null) {
+				msg = "NoInputPhone";
+			}
+			else if (emailpush==-1) {
+				msg = "NoInputEmailpush";
+			} 
+			else {
+				int flag = 1;
+
+
+				// 있는 회원인지 검사
+				MemberInfoDAO mid = new MemberInfoDAO();
+				MemberInfo temp = mid.selectMemberInfoByCompanyId(id);
+				mid.disconnect();
+
+				if (temp == null) {
+					msg = "NotExistentMemberError";
+					flag = -1;
+				}
+
+				// 비밀번호 유효성 검사 (영문 숫자 조합 8~12글자)
+				if (!(Pattern.matches(passwordRegex, password))) {
+					msg = "PasswordRegixError";
+					flag = -1;
+				}
+
+				if (flag == 1) {
+					mid = new MemberInfoDAO();
+					msg = mid.updateMemberInfo(id, password, name, region_1, region_2, region_3, telephone, phone, emailpush);
+					mid.disconnect();
+				}
+			}
+			
+			JSONObject json = new JSONObject();
+
+			try {
+				json.put("msg", msg);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
 		}
-		doGet(request, response);
 	}
 
 }

@@ -128,7 +128,7 @@ public class MemberInfoDAO extends BaseDAO {
 				String companyName = rs.getString("company_name");
 				String companyRegion_1 = rs.getString("company_region_1");
 				String companyRegion_2 = rs.getString("company_region_2");
-				String companyRegion_3 = rs.getString("compnay_region_3");
+				String companyRegion_3 = rs.getString("company_region_3");
 				String companyTelephone = rs.getString("company_telephone");
 				String companyPhone = rs.getString("company_phone");
 				int companyApproval = rs.getInt("company_approval");
@@ -342,26 +342,47 @@ public class MemberInfoDAO extends BaseDAO {
 		return result_cnt;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String updateMemberInfo(int company_id, String password, String name, String region_1, String region_2, String region_3, String telephone, String phone, int emailpush){
+		PreparedStatement ps = null;
+		
+		try{
+			String sql = "UPDATE company_user SET company_password=?,company_name=?, company_region_1=?,company_region_2=?,company_region_3=?,company_telephone=?,company_phone=?,company_emailpush=? WHERE company_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setString(1, password);
+			ps.setString(2, name);
+			ps.setString(3, region_1);
+			ps.setString(4, region_2);
+			ps.setString(5, region_3);
+			ps.setString(6, telephone);
+			ps.setString(7, phone);
+			ps.setInt(8, emailpush);
+			ps.setInt(9, company_id);
+			ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+			return "fail";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return "fail";
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		return "Success";
+		}
 }

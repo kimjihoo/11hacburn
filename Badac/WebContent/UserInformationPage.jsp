@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -102,39 +102,47 @@
 			var user_phone2 = document.getElementById("user_phone2");
 			var user_phone3 = document.getElementById("user_phone3");
 			
-			user_name.value = userName;
-			user_email.value = userEmail;
-			user_region_1.value = userRegion_1;
-			user_address.value = userRegion_2;
-			user_address2.value = userRegion_3;
-			
-			var p_idx=0;
-			for(var i=0; i<userPhone.length; i++){
-				if(userPhone[i]=="-"){
-					p_idx++;
-					continue;
-				}
-				if(p_idx==0){
-					user_phone1.value+=userPhone[i];
-				}else if(p_idx==1){
-					user_phone2.value+=userPhone[i];
-				}else if(p_idx==2){
-					user_phone3.value+=userPhone[i];
-				}
-			}
-			for(var i=0; i<5; i++){
-				if(userBicycletype==document.getElementsByTagName("option")[i]){
-					document.getElementById("user_bicycletype").selectedIndex = ""+i;
-					break;
-				}
-			}
-			
-			if(userEmailpush=="0"){
-				document.getElementById("email_push_2").checked = true;
-			}else if(userEmailpush=="1"){
-				document.getElementById("email_push_1").checked = true;
-			}
-			
+			$.get("http://localhost:8100/Badac/get_user_info",{
+				id:userId,
+				},function(data){
+					if(data.msg=="Success"){
+						user_name.value = data.userName;
+						user_email.value = data.userEmail;
+						user_region_1.value = data.userRegion_1;
+						user_address.value = data.userRegion_2;
+						user_address2.value = data.userRegion_3;
+						
+						var p_idx=0;
+						for(var i=0; i<data.userPhone.length; i++){
+							var temp = data.userPhone[i];
+							if(temp=="-"){
+								p_idx++;
+								continue;
+							}
+							if(p_idx==0){
+								user_phone1.value+=temp;
+							}else if(p_idx==1){
+								user_phone2.value+=temp;
+							}else if(p_idx==2){
+								user_phone3.value+=temp;
+							}
+						}
+						for(var i=0; i<5; i++){
+							if(data.userBicycletype==document.getElementsByTagName("option")[i].value){
+								document.getElementById("user_bicycletype").selectedIndex = ""+i;
+								break;
+							}
+						}
+						
+						if(data.userEmailpush=="0"){
+							document.getElementById("email_push_2").checked = true;
+						}else if(data.userEmailpush=="1"){
+							document.getElementById("email_push_1").checked = true;
+						}
+					}else{
+						alert(data.msg);
+					}
+			});
 		}
         function updateInfo(){
         	var regex_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;

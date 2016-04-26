@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>signup</title>
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -15,20 +15,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
-<style>
-		html{
-		width:100%;
-		height:100%;
-		}
-		body{
-		width:100%;
-		height:100%;
-		background-size:cover;
-		background-repeat:no-repeat;
-		background:url('image/main_background.jpg');
-		}
-		
-	</style>
+
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음 주소 api -->
 	
     <script type="text/javascript">
@@ -46,7 +33,7 @@
 			var company_region_1 = document.getElementById("company_region_1");
 			
 			
-			var company_address = document.getElementById("company_region_1");
+			var company_address = document.getElementById("company_address");
 			
 			var company_address2 = document.getElementById("company_address2");
 			

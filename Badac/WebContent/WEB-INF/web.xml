@@ -130,20 +130,20 @@
     <url-pattern>/member_sign_up</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>MemberLogin</servlet-name>
-    <servlet-class>servlet.MemberInfoServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemberLogin</servlet-name>
-    <url-pattern>/member_login</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>MemberLogout</servlet-name>
     <servlet-class>servlet.MemberInfoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MemberLogout</servlet-name>
     <url-pattern>/member_logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberLogin</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberLogin</servlet-name>
+    <url-pattern>/member_login</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MemberSignUpPage</servlet-name>
@@ -216,6 +216,38 @@
   <servlet-mapping>
     <servlet-name>UserInfoUpdate</servlet-name>
     <url-pattern>/user_update_information</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GoMemberInformation</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoMemberInformation</servlet-name>
+    <url-pattern>/go_member_update_information</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MemberInfoUpdate</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberInfoUpdate</servlet-name>
+    <url-pattern>/member_update_information</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetMemberInfo</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMemberInfo</servlet-name>
+    <url-pattern>/get_member_info</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetUserInfo</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUserInfo</servlet-name>
+    <url-pattern>/get_user_info</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GoMyApplication</servlet-name>
