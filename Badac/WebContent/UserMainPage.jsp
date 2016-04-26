@@ -19,6 +19,17 @@
             crossorigin="anonymous"></script>
 
  <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
+<style>
+.listimage{
+
+     width:114px;
+     height:114px;
+     list-style-position:inside;
+     list-style-image:url(/pororo.jpg);
+     list-style-type:disc;
+}
+</style>
+
 <script>    
     ////////////////////////////////////////////////////////
     <% // 쿠키값 가져오기
@@ -50,10 +61,15 @@
     var userName = '<%= username %>';
     var userEmail = '<%= useremail %>';
     
+    
+    
+
 	///////////////////////////////////////////////////////////////////
 </script>
 
-
+<style>
+body { padding-top: 70px; }
+</style>
 
 <script type="text/javascript">
 	onload = function on_load(){
@@ -72,9 +88,54 @@
 	function writeApplication(){
 		location.href = "http://localhost:8100/Badac/write_application";
 	}
+	
+	
+	$('.sidebar-toggle').click(function(){
+	     $('#sidebar').removeClass('hidden-xs');            
+	});
 </script>
 </head>
 <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BADOC</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" >
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                  	<li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span></a>
+                  	<ul class="dropdown-menu" role="menu">
+                    	<li><a href=""><img src="http://placehold.it/130x100" alt=".."/></a></li>
+                    	<li><a id="name"></a></li>
+                    	<li><a id="email"></a></li>
+                    	<li class="divider"></li>
+                    	<li><a href="#">개인정보 수정</a></li>
+                    	<li><a href="#">견적 요청 내역 보기</a></li>
+                  	</ul>
+                	</li>
+         
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
 유저 페이지
 
  
@@ -84,11 +145,16 @@
 <div id="userNameDiv"></div>
 <div id="userEmailDiv"></div>
 <div class="container">
-	<div class="col-lg-3"></div>
+	<div class="col-lg-3">
+
+	</div>
 	<div class="col-lg-6" id="map" style="width:100%;height:500px;"></div>
 	<div class="col-lg-3"></div>
-</div>
+	
+	
 
+	
+</div>
 
 	<script>
 		var container = document.getElementById('map');
@@ -97,6 +163,10 @@
 			level: 3
 		};
 		var map = new daum.maps.Map(container, options);
+		
+		
+		document.getElementById("name").innerHTML = userName;
+		document.getElementById("email").innerHTML = userEmail;
 	</script>
 
 </body>
