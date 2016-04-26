@@ -31,7 +31,6 @@ public class MemberInfoServlet extends HttpServlet {
 	private static final String emailRegex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
 	private static final String passwordRegex = "^[a-z0-9]{4,12}$";
 	private static final String nameRegex = "^[°¡-ÆRa-z]{2,8}$";
-	private static final String phoneRegex = "^[0-9]*$";
     
 
 	/**
@@ -302,16 +301,6 @@ public class MemberInfoServlet extends HttpServlet {
 
 				if (!(Pattern.matches(nameRegex, name))) {
 					msg = "NameRegixError";
-					flag = -1;
-				}
-				
-				if(!(Pattern.matches(phoneRegex, phone))){
-					msg = "PhoneRegixError";
-					flag = -1;
-				}
-				
-				if(!(Pattern.matches(phoneRegex, telephone))){
-					msg = "TelePhoneRegixError";
 					flag = -1;
 				}
 
