@@ -57,7 +57,7 @@ public class MemberInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("company_id") || cookieName.equals("company_ownername") || cookieName.equals("company_email") || cookieName.equals("company_password") || cookieName.equals("company_name") || cookieName.equals("company_region_1") || cookieName.equals("company_region_2") || cookieName.equals("company_telephone") || cookieName.equals("company_phone") || cookieName.equals("company_emailpush")){
+						if( cookieName.equals("company_id") || cookieName.equals("company_ownername") || cookieName.equals("company_email") || cookieName.equals("company_password") || cookieName.equals("company_name") || cookieName.equals("company_region_1") || cookieName.equals("company_region_2") || cookieName.equals("company_region_3") || cookieName.equals("company_telephone") || cookieName.equals("company_phone") || cookieName.equals("company_emailpush")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -240,6 +240,7 @@ public class MemberInfoServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String region_1 = request.getParameter("region_1");
 			String region_2 = request.getParameter("region_2");
+			String region_3 = request.getParameter("region_3");
 			String telephone = request.getParameter("telephone");
 			String phone = request.getParameter("phone");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
@@ -264,6 +265,9 @@ public class MemberInfoServlet extends HttpServlet {
 			} 
 			else if (region_2 == null || region_2.trim().equals("")) {
 				msg = "NoInputRegion_2";
+			} 
+			else if (region_3 == null || region_3.trim().equals("")) {
+				msg = "NoInputRegion_3";
 			} 
 			else if (telephone == null) {
 				msg = "NoInputTelePhone";
@@ -306,7 +310,7 @@ public class MemberInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					mid = new MemberInfoDAO();
-					mid.insertMemberInfo(ownername, email, password, name, region_1, region_2, telephone, phone, emailpush);
+					mid.insertMemberInfo(ownername, email, password, name, region_1, region_2, region_3, telephone, phone, emailpush);
 					mid.disconnect();
 
 					mid = new MemberInfoDAO();
@@ -432,6 +436,12 @@ public class MemberInfoServlet extends HttpServlet {
 						response.addCookie(cookie);
 						
 						cookie = new Cookie("company_region_2", URLEncoder.encode(temp.getCompany_region_2(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_region_3", URLEncoder.encode(temp.getCompany_region_3(), "UTF-8"));
 						
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						

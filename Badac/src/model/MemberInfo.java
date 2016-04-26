@@ -10,6 +10,7 @@ public class MemberInfo {
 	private String company_name;
 	private String company_region_1;
 	private String company_region_2;
+	private String company_region_3;
 	private String company_telephone;
 	private String company_phone;
 	private	int company_approval;
@@ -24,6 +25,7 @@ public class MemberInfo {
 		this.company_name="";
 		this.company_region_1="";
 		this.company_region_2="";
+		this.company_region_3="";
 		this.company_telephone="";
 		this.company_phone="";
 		this.company_approval=-1;
@@ -31,7 +33,7 @@ public class MemberInfo {
 		this.company_emailpush=-1;
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_telephone, String company_phone, int company_approval, Date company_approvaldate, int company_emailpush){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_region_3, String company_telephone, String company_phone, int company_approval, Date company_approvaldate, int company_emailpush){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -39,6 +41,7 @@ public class MemberInfo {
 		this.company_name=company_name;
 		this.company_region_1 = company_region_1;
 		this.company_region_2=company_region_2;
+		this.company_region_3=company_region_3;
 		this.company_telephone=company_telephone;
 		this.company_phone=company_phone;
 		this.company_approval=company_approval;
@@ -46,7 +49,7 @@ public class MemberInfo {
 		this.company_emailpush = company_emailpush;
 	}
 	
-	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_telephone, String company_phone, int company_approval, int company_emailpush){
+	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_region_3, String company_telephone, String company_phone, int company_approval, int company_emailpush){
 		this.company_id=company_id;
 		this.company_ownername=company_ownername;
 		this.company_email=company_email;
@@ -54,6 +57,7 @@ public class MemberInfo {
 		this.company_name=company_name;
 		this.company_region_1=company_region_1;
 		this.company_region_2=company_region_2;
+		this.company_region_3=company_region_3;
 		this.company_telephone=company_telephone;
 		this.company_phone=company_phone;
 		this.company_approval=company_approval;
@@ -121,6 +125,14 @@ public class MemberInfo {
 
 	public void setCompany_region_2(String company_region_2) {
 		this.company_region_2 = company_region_2;
+	}
+	
+	public String getCompany_region_3() {
+		return company_region_3;
+	}
+
+	public void setCompany_region_3(String company_region_3) {
+		this.company_region_3 = company_region_3;
 	}
 
 	public String getCompany_telephone() {

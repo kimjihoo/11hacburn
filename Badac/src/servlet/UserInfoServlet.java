@@ -92,7 +92,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password") || cookieName.equals("user_region_2") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush")){
+						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password")|| cookieName.equals("user_region_1") || cookieName.equals("user_region_2")|| cookieName.equals("user_region_3") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -179,7 +179,30 @@ public class UserInfoServlet extends HttpServlet {
 			response.getWriter().write(json.toString());
 		}
 		else if(action.equals("go_user_update_information")){
-			dispatchUrl="UserInformationPage.jsp";
+			String userId = null;
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userId = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userId != null && !(userId.equals("") && Pattern.matches("^[0-9]+$", userId))){
+				dispatchUrl="UserInformationPage.jsp";
+			}
+			else{
+				response.sendRedirect("login_page");
+			}
 		}
 
 		if (dispatchUrl != null) {
@@ -232,6 +255,7 @@ public class UserInfoServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			String region_1 = request.getParameter("region_1");
 			String region_2 = request.getParameter("region_2");
+			String region_3 = request.getParameter("region_3");
 			String phone = request.getParameter("phone");
 			String bicycletype = request.getParameter("bicycletype");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
@@ -252,7 +276,10 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			else if (region_2 == null || region_2.trim().equals("")) {
 				msg = "NoInputRegion_2";
-			} 
+			}
+			else if (region_3 == null || region_3.trim().equals("")) {
+				msg = "NoInputRegion_3";
+			}
 			else if (phone == null) {
 				msg = "NoInputPhone";
 			} 
@@ -294,7 +321,7 @@ public class UserInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					uid = new UserInfoDAO();
-					uid.insertUserInfo(name, email, password, region_1, region_2, phone, bicycletype,emailpush);
+					uid.insertUserInfo(name, email, password, region_1, region_2, region_3, phone, bicycletype,emailpush);
 					uid.disconnect();
 
 					uid = new UserInfoDAO();
@@ -384,6 +411,12 @@ public class UserInfoServlet extends HttpServlet {
 						response.addCookie(cookie);
 						
 						cookie = new Cookie("user_region_2", URLEncoder.encode(temp.getUser_region_2(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_region_3", URLEncoder.encode(temp.getUser_region_3(), "UTF-8"));
 						
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						

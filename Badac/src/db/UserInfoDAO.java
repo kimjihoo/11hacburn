@@ -7,14 +7,14 @@ import model.UserInfo;
 
 public class UserInfoDAO extends BaseDAO {
 	
-	public int insertUserInfo(String user_name, String user_email, String user_password, String user_region_1, String user_region_2, String user_phone, String user_bicycletype, int user_emailpush){
+	public int insertUserInfo(String user_name, String user_email, String user_password, String user_region_1, String user_region_2, String user_region_3, String user_phone, String user_bicycletype, int user_emailpush){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
 		PreparedStatement ps=null;
 		try
 		{
-			String sql="INSERT INTO normal_user VALUES(?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO normal_user VALUES(?,?,?,?,?,?,?,?,?,?)";
 			ps=super.getConn().prepareStatement(sql);
 			
 			ps.setString(2,user_name);
@@ -22,9 +22,10 @@ public class UserInfoDAO extends BaseDAO {
 			ps.setString(4,user_password);
 			ps.setString(5, user_region_1);
 			ps.setString(6,user_region_2);
-			ps.setString(7,user_phone);
-			ps.setString(8,user_bicycletype);
-			ps.setInt(9,user_emailpush);
+			ps.setString(7, user_region_3);
+			ps.setString(8,user_phone);
+			ps.setString(9,user_bicycletype);
+			ps.setInt(10,user_emailpush);
 			
 			while(true){
 				randomNum = (int)(Math.random() * 100000000);
@@ -119,11 +120,12 @@ public class UserInfoDAO extends BaseDAO {
 				String userPw = rs.getString("user_password");
 				String userRegion_1 = rs.getString("user_region_1");
 				String userRegion_2 = rs.getString("user_region_2");
+				String userRegion_3 = rs.getString("user_region_3");
 				String userPhone = rs.getString("user_phone");
 				String userBicycletype = rs.getString("user_bicycletype");
 				int userEmailpush = rs.getInt("user_emailpush");
 				
-				userInfo = new UserInfo(userId, userName, user_email, userPw, userRegion_1, userRegion_2, userPhone, userBicycletype, userEmailpush);
+				userInfo = new UserInfo(userId, userName, user_email, userPw, userRegion_1, userRegion_2, userRegion_3, userPhone, userBicycletype, userEmailpush);
 				userInfo.setUser_name(userName);
 			}
 			
@@ -170,11 +172,12 @@ public class UserInfoDAO extends BaseDAO {
 				String userPw = rs.getString("user_password");
 				String userRegion_1 = rs.getString("user_region_1");
 				String userRegion_2 = rs.getString("user_region_2");
+				String userRegion_3 = rs.getString("user_region_3");
 				String userPhone = rs.getString("user_phone");
 				String userBicycletype = rs.getString("user_bicycletype");
 				int userEmailpush = rs.getInt("user_emailpush");
 				
-				userInfo = new UserInfo(user_id, userName, userEmail, userPw, userRegion_1, userRegion_2, userPhone, userBicycletype, userEmailpush);
+				userInfo = new UserInfo(user_id, userName, userEmail, userPw, userRegion_1, userRegion_2, userRegion_3, userPhone, userBicycletype, userEmailpush);
 				userInfo.setUser_name(userName);
 			}
 		}
