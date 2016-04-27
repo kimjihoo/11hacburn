@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	<%@page import="java.net.URLDecoder"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +30,74 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+	<script>    
+    ////////////////////////////////////////////////////////
+    <% // 쿠키값 가져오기
+    Cookie[] cookies = request.getCookies() ;
+    
+    int userid = 0;
+    String username=null;
+    String useremail=null;
+    
+    if(cookies != null){
+         
+        for(int i=0; i < cookies.length; i++){
+            Cookie c = cookies[i] ;
+             
+            if( c.getName().equals("user_id") ){
+            	userid = Integer.parseInt(c.getValue());
+            }
+            if( c.getName().equals("user_name") ){
+            	username = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+            if( c.getName().equals("user_email") ){
+            	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+        }
+    } 
+    %>
+ 
+    var userId = '<%= userid %>';
+    var userName = '<%= username %>';
+    var userEmail = '<%= useremail %>';
+
+	///////////////////////////////////////////////////////////////////
+	</script>
+    <script type="text/javascript">
+        function insertApplication(){
+
+			var title = document.getElementById("tunning_title");
+			var explain = document.getElementById("tunning_explanation");
+			
+            if(title.value == ""){
+                alert("제목을 입력하세요.");
+                title.focus();
+                return;
+            }
+            if(explain.value == ""){
+                alert("설명을 입력하세요.");
+                explain.focus();
+                return;
+            }
+            $.post("http://localhost:8100/Badac/insert_application", {
+            	id : userId,
+            	title : title.value,
+            	explanation : explain.value,
+            }, function(data){
+            		if( data.msg == "Success" ){
+            			alert("등록이 완료되었습니다.");
+            			location.href = "http://localhost:8100/Badac/user_main_page";
+            		}
+            		else{
+            			alert(data.msg);
+            		}
+            });
+        }
+
+        function toMainPage(){
+            location.href = "http://localhost:8100/Badac/user_main_page";
+        }
+    </script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -92,11 +161,10 @@ body {
 			<tr>
 				<td><b>이미지</b></td>
 				<td><div class="form-group">
-    <label for="exampleInputFile">이미지 업로드</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">자전거 사진 첨부</p>
-  </div>
-<br /></td>
+						<label for="exampleInputFile">이미지 업로드</label> <input type="file"
+							id="exampleInputFile">
+						<p class="help-block">자전거 사진 첨부</p>
+					</div> <br /></td>
 			</tr>
 			<tr>
 				<td><b>내용</b></td>
@@ -108,7 +176,8 @@ body {
 		<table width=700 border=1 cellspacing=0 cellpadding=0>
 			<tr>
 				<button type="button" class="btn btn-primary"
-					OnClick="window.location='board_write_insert.jsp'">등록</button>
+					OnClick="insertApplication()">등록</button>
+				<button type="button" class="btn btn-primary" OnClick="toMainPage()">취소</button>
 			</tr>
 		</table>
 	</div>
