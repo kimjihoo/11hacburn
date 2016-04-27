@@ -5,8 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+
+<script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
+
+
 <title>Insert title here</title>
-<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -80,5 +84,63 @@
 <div id="companyOwnerNameDiv"></div>
 <div id="companyNameDiv"></div>
 <div id="companyEmailDiv"></div>
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BADOC</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" >
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                  	<li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span></a>
+                  	<ul class="dropdown-menu" role="menu">
+                    	<li><a href=""><img src="http://placehold.it/130x100" alt=".."/></a></li>
+                    	<li><a id="name"></a></li>
+                    	<li><a id="email"></a></li>
+                    	<li class="divider"></li>
+                    	<li><a href="http://localhost:8100/Badac/member_logout">로그아웃</a></li>
+                    	<li><a href="http://localhost:8100/Badac/go_member_update_information">개인정보 수정</a></li>
+                    	<li><a href="#">견적 요청 내역 보기</a></li><!-- 요청 지역에 대한 견적요청내역 보기 -->
+                    	<li><a href="#">견적 제안서 작성</a></li>
+                  	</ul>
+                	</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+<div class="container-fluid" >
+<div class="col-lg-2 col-sm-2"></div>
+	<div class="col-lg-6 col-sm-6" id="map" style="height:500px;"></div>
+</div>
+<script>
+var container = document.getElementById('map');
+var options = {
+	center: new daum.maps.LatLng(37.657418, 127.0463547),
+	level: 3
+};
+var map = new daum.maps.Map(container, options);
+
+
+
+						document.getElementById("name").innerHTML = companyName;
+						document.getElementById("email").innerHTML = companyEmail;
+</script>
+
+
+
 </body>
 </html>
