@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.net.URLDecoder"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,9 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
  <script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -23,7 +24,35 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
              <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
-<script type="text/javascript">
+<script>
+<%  
+Cookie[] cookies = request.getCookies() ;
+
+int userid = 0;
+String username=null;
+String useremail=null;
+
+if(cookies != null){
+     
+    for(int i=0; i < cookies.length; i++){
+        Cookie c = cookies[i] ;
+         
+        if( c.getName().equals("user_id") ){
+        	userid = Integer.parseInt(c.getValue());
+        }
+        if( c.getName().equals("user_name") ){
+        	username = URLDecoder.decode(c.getValue(), "UTF-8");
+        }
+        if( c.getName().equals("user_email") ){
+        	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
+        }
+    }
+} 
+%>
+
+var userId = '<%= userid %>';
+var userName = '<%= username %>';
+var userEmail = '<%= useremail %>';
 
 onload = function on_load(){
 	var temp1 = document.getElementById("userIdDiv");
@@ -41,9 +70,6 @@ function userLogout(){
 function writeApplication(){
 	location.href = "http://localhost:8100/Badac/write_application";
 }
-
-
-
 </script>
 <style>
 body {
@@ -90,7 +116,7 @@ body {
     padding: 9px;
     color: #333;
 }
-
+ 
 footer {
     margin: 30px 0;
 }
@@ -98,18 +124,6 @@ footer {
 </head>
 
 <body>
-<%
-	Cookie[] cookies = request.getCookies();
-	String id = null;
-	boolean loginFlag = false;
-	
-	for(Cookie cookie : cookies){
-		if("loginInfo".equals(cookie.getName())){
-			loginFlag = true;
-			id = cookie.getValue();
-		}
-	}
-%>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -135,6 +149,20 @@ footer {
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    <li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span></a>
+                  	<ul class="dropdown-menu" role="menu">
+                    	<li><a href=""><img src="http://placehold.it/130x100" alt=".."/></a></li>
+                    	<li><a id="name"></a></li>
+                    	<li><a id="email"></a></li>
+                    	<li class="divider"></li>
+                    	<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
+                    	<li><a href="http://localhost:8100/Badac/go_user_update_information">개인정보 수정</a></li>
+                    	<li><a href="#">견적 요청 내역 보기</a></li>
+                    	<li><a href="http://localhost:8100/Badac/write_application">견적 제안서 작성</a></li>
+                    	
+                  	</ul>
+                	</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -270,11 +298,35 @@ footer {
                     </div>
 
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <h4><a href="#">More Information?</a>
-                        </h4>
-                         <p>If you want more information, then click the button below to get information that you want to know about your offline store!</p>
-                        <a class="btn btn-default" target="_blank" href="#">더보기</a>
+                        <div class="thumbnail">
+                            <img src="http://placehold.it/320x150" alt="">
+                            <div class="caption">
+                                <h4><a href="#">sixth Company</a></h4>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">18 reviews</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <nav>
+                    <ul class="pagination">
+                    	<li><a href="#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+					    <li><a href="#">1</a></li>
+				    	<li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+	    				<li><a href="#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+                    </ul>
+                    </nav>
 
                 </div>
 
@@ -299,14 +351,7 @@ footer {
         </footer>
 
     </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    
+ 
     
     <script>
 		var container = document.getElementById('map');
