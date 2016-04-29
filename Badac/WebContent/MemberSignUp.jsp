@@ -184,7 +184,7 @@
             	return;
             }
             
-            $.post("http://localhost:8100/Badac/member_sign_up", {
+            $.post("http://210.118.74.159:8100/Badac/member_sign_up", {
             	ownername : company_ownername.value,
             	email : company_email.value,
             	password : company_pw.value,
@@ -198,7 +198,7 @@
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원가입이 완료되었습니다. 승인까지 1~2일 소모되며 승인 후 로그인이 가능합니다.");
-            			location.href = "http://localhost:8100/Badac/";
+            			location.href = "http://210.118.74.159:8100/Badac/";
             		}
             		else{
             			alert(data.msg);
@@ -207,7 +207,7 @@
         }
 
         function returnStartPage(){
-            location.href = "http://localhost:8100/Badac/start_page";
+            location.href = "http://210.118.74.159:8100/Badac/start_page";
         }
     </script>
 </head>

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import model.ApplicationInfo;
 
 public class ApplicationInfoDAO extends BaseDAO {
-	public int insertApplicationInfo(int user_id, String tunning_title, String tunning_explanation){
+	public int insertApplicationInfo(int application_id, int user_id, String tunning_title, String tunning_explanation){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
@@ -20,21 +20,12 @@ public class ApplicationInfoDAO extends BaseDAO {
 			ps=super.getConn().prepareStatement(sql);
 			java.util.Date date = new java.util.Date();
 			java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			ps.setInt(1, application_id);
 			ps.setInt(2,user_id);
 			ps.setString(3,tunning_title);
 			ps.setString(4,tunning_explanation);
 			ps.setInt(5,0);
 			ps.setDate(6,sqlDate);
-			
-			while(true){
-				randomNum = (int)(Math.random() * 100000000);
-				if(this.selectTunningTitleByTunningId(randomNum).equals("")){
-					//System.out.println(randomNum);
-					break;
-				}
-			}
-			
-			ps.setInt(1, randomNum);
 			
 			insertRowCnt = ps.executeUpdate();
 		}

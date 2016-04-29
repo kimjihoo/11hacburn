@@ -3,35 +3,35 @@ package model;
 public class PictureInfo {
 	@Override
 	public String toString() {
-		return "PictureInfo [pictureId=" + pictureId + ", picturePath=" + picturePath + "]";
+		return "PictureInfo [pictureId=" + picture_id + ", picturePath=" + picture_path + "]";
 	}
 
-	private int pictureId;
-	private String picturePath;
+	private int picture_id;
+	private String picture_path;
 	
 	public PictureInfo(){
-		this.pictureId = -1;
-		this.picturePath = "";
+		this.picture_id = -1;
+		this.picture_path = "";
 	}
 	
 	public PictureInfo(int pictureId, String picturePath){
-		this.pictureId = pictureId;
-		this.picturePath = picturePath;
+		this.picture_id = pictureId;
+		this.picture_path = picturePath;
 	}
 	
 	public int getPictureId() {
-		return pictureId;
+		return picture_id;
 	}
 
 	public void setPictureId(int pictureId) {
-		this.pictureId = pictureId;
+		this.picture_id = pictureId;
 	}
 
 	public String getPicturePath() {
-		return picturePath;
+		return picture_path;
 	}
 
 	public void setPicturePath(String picturePath) {
-		this.picturePath = picturePath;
+		this.picture_path = picturePath;
 	}
 }

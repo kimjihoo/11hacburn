@@ -102,7 +102,7 @@
 			var user_phone2 = document.getElementById("user_phone2");
 			var user_phone3 = document.getElementById("user_phone3");
 			
-			$.get("http://localhost:8100/Badac/get_user_info",{
+			$.get("http://210.118.74.159:8100/Badac/get_user_info",{
 				id:userId,
 				},function(data){
 					if(data.msg=="Success"){
@@ -244,7 +244,7 @@
             	return;
             }
             
-            $.post("http://localhost:8100/Badac/user_update_information", {
+            $.post("http://210.118.74.159:8100/Badac/user_update_information", {
             	id : userId,
             	password : user_pw.value,
             	region_1 : user_region_1.value,
@@ -256,7 +256,7 @@
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원정보 수정이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/user_main_page";
+            			location.href = "http://210.118.74.159:8100/Badac/user_main_page";
             		}
             		else{
             			alert(data.msg);
@@ -265,7 +265,7 @@
         }
 
         function returnMainPage(){
-            location.href = "http://localhost:8100/Badac/user_main_page";
+            location.href = "http://210.118.74.159:8100/Badac/user_main_page";
         }
     </script>
 </head>

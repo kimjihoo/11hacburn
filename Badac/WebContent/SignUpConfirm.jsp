@@ -52,14 +52,14 @@
         	return;
         }
 		if(choice_type.value=="normal"){
-			location.href = "http://localhost:8100/Badac/user_sign_up_page";
+			location.href = "http://210.118.74.159:8100/Badac/user_sign_up_page";
 		}else if(choice_type.value=="company"){
-			location.href = "http://localhost:8100/Badac/member_sign_up_page";
+			location.href = "http://210.118.74.159:8100/Badac/member_sign_up_page";
 		}
 	}
 	
 	function returnStartPage(){
-		location.href = "http://localhost:8100/Badac/start_page";
+		location.href = "http://210.118.74.159:8100/Badac/start_page";
 	}
 </script>
 </head>

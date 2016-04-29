@@ -22,7 +22,7 @@
 	</style>
 <script>
 	onload = function on_load(){
-		$.get("http://localhost:8100/Badac/member_not_approval_list",
+		$.get("http://210.118.74.159:8100/Badac/member_not_approval_list",
 			function(data){
 				if(data.msg=="Success"){
 					var na_memberData = {};
@@ -62,7 +62,7 @@
 								button.value="½ÂÀÎ";
 								button.onclick = function () {
 									var tempBtn_id = $(this).attr('id');
-			                        $.post("http://localhost:8100/Badac/member_approval",{
+			                        $.post("http://210.118.74.159:8100/Badac/member_approval",{
 			                        	company_id : $(this).attr('id'),
 			                        },function(data){
 			                        	if(data.msg=="Success"){
@@ -88,7 +88,7 @@
 				}
 		});
 		
-		$.get("http://localhost:8100/Badac/return_user_cnt",
+		$.get("http://210.118.74.159:8100/Badac/return_user_cnt",
 			function(data){
 				if(data.msg=="Success"){
 					document.getElementById("normalUserCnt").appendChild(document.createTextNode(data.userCnt));
@@ -98,7 +98,7 @@
 			
 		});
 		
-		$.get("http://localhost:8100/Badac/return_member_cnt",
+		$.get("http://210.118.74.159:8100/Badac/return_member_cnt",
 				function(data){
 					if(data.msg=="Success"){
 						document.getElementById("memberUserCnt").appendChild(document.createTextNode(data.memberCnt));

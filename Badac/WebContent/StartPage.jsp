@@ -29,10 +29,10 @@
     
     <script type="text/javascript">
     function gotoSignIn(){
-		location.href = "http://localhost:8100/Badac/login_page";
+		location.href = "http://210.118.74.159:8100/Badac/login_page";
 	}
     function gotoSignUp(){
-		location.href = "http://localhost:8100/Badac/signup_type";
+		location.href = "http://210.118.74.159:8100/Badac/signup_type";
 	}
     </script>
 </head>

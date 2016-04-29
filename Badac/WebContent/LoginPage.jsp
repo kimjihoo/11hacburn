@@ -66,26 +66,26 @@
                 	return;
                 }
                 if(user_type.value=="normal"){
-                	$.post("http://localhost:8100/Badac/user_login", {
+                	$.post("http://210.118.74.159:8100/Badac/user_login", {
                     	email : email.value,
                     	password : pw.value,
                     }, function(data){
                     		if( data.msg == "Success" ){
                     			alert("로그인 성공");
-                    			location.href = "http://localhost:8100/Badac/user_main_page";
+                    			location.href = "http://210.118.74.159:8100/Badac/user_main_page";
                     		}
                     		else{
                     			alert(data.msg);
                     		}
                     });
                 }else if(user_type.value=="company"){
-                	$.post("http://localhost:8100/Badac/member_login", {
+                	$.post("http://210.118.74.159:8100/Badac/member_login", {
                 		email : email.value,
                     	password : pw.value,
                     }, function(data){
                     		if( data.msg == "Success" ){
                     			alert("로그인 성공");
-                    			location.href = "http://localhost:8100/Badac/member_main_page";
+                    			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
                     		}
                     		else{
                     			alert(data.msg);

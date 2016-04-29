@@ -30,7 +30,7 @@ import model.UserInfo;
 /**
  * Servlet implementation class PictureInfoServlet
  */
-@WebServlet("/PictureInfoServlet")
+@MultipartConfig
 public class PictureInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -62,7 +62,7 @@ public class PictureInfoServlet extends HttpServlet {
 			//String userCode = "1";
 			
 			String userCode = null;
-			int appId = Integer.parseInt(request.getParameter("appId"));
+			
 			Cookie[] cookie = request.getCookies();
 			
 			if( cookie != null ){
@@ -85,10 +85,10 @@ public class PictureInfoServlet extends HttpServlet {
 				}
 				
 				if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))) {
+					int appId = Integer.parseInt(request.getParameter("appId"));
 					PictureInfoDAO pid = new PictureInfoDAO();
 					ArrayList<PictureInfo> pictureList=null;
 					pictureList = pid.selectPictureInfoByUserId(Integer.parseInt(userCode), appId);
-					
 					pid.disconnect();
 					
 					String msg = "Success";
@@ -107,7 +107,7 @@ public class PictureInfoServlet extends HttpServlet {
 								pictureInfo = new JSONObject();
 								
 								pictureInfo.put("id", temp.getPictureId());
-								pictureInfo.put("path", temp.getPicturePath());
+								pictureInfo.put("path", "/"+temp.getPicturePath());
 								
 								pictureListJson.put(pictureInfo);
 							}
@@ -156,9 +156,8 @@ public class PictureInfoServlet extends HttpServlet {
 		if(action.equals("upload_picture")){
 			//HttpSession session = request.getSession();
 			//String userCode = (String)session.getAttribute("user_code");
-			
 			//String userCode = "1"; // 임시 유저코드
-			int appId = Integer.parseInt(request.getParameter("appId"));
+			
 			String userId = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -181,23 +180,22 @@ public class PictureInfoServlet extends HttpServlet {
 				
 				if (userId != null && !(userId.equals("") && Pattern.matches("^[0-9]+$", userId))) {
 					//System.out.println("Upload File Directory="+getServletContext().getRealPath("/").toString());
-					
+					int appId = Integer.parseInt(request.getParameter("appId"));
 					String applicationPath = request.getServletContext().getRealPath("");
 					String uploadFilePath=null;
-					if(appId==0){
-						uploadFilePath = applicationPath + "picture/" + userId + "/";
-					}else if(appId!=0){
-						uploadFilePath = applicationPath + "picture/" + userId + "/"+appId+"/";
+					if(appId==-1){
+						uploadFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "picture/" + userId + "/";
+					}else if(appId!=-1){
+						uploadFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "picture/" + userId + "/"+appId+"/";
 					}
 			        //String uploadFilePath = "C:\\PIE\\picture\\" + userCode + "\\";
-			          
+			       
 			        java.io.File fileSaveDir = new java.io.File(uploadFilePath);
 			        if (!fileSaveDir.exists()) {
 			            fileSaveDir.mkdirs();
 			        }
 			         
 			        String msg = "Success";
-			        
 			        if( request.getPart("file").getContentType().equals("application/octet-stream") ){
 			        	msg = "NoFile";
 			        }
@@ -206,17 +204,13 @@ public class PictureInfoServlet extends HttpServlet {
 			        	
 			        	ArrayList<PictureInfo> pictureList=null;
 			        	
-			        	if(appId==0){
-			        		pictureList = pid.selectPictureInfoByUserId(Integer.parseInt(userId));
-						}else if(appId!=0){
-							pictureList = pid.selectPictureInfoByUserId(Integer.parseInt(userId), appId);
-						}
+			        	
+						pictureList = pid.selectPictureInfoByUserId(Integer.parseInt(userId), appId);
 			        	pid.disconnect();
 			        	
 			        	//System.out.println(uploadFilePath);
 			        	//System.out.println("업로드 파일 갯수 : " + request.getParts().size());
 			        	//System.out.println("DB에 있는 파일 갯수 : " + pictureList.size());
-			        	
 			        	if (((request.getParts().size()) + (pictureList.size())) > 10 ){
 			        		msg = "TooMuchFile";
 			        	}
@@ -229,11 +223,14 @@ public class PictureInfoServlet extends HttpServlet {
 					       
 					        //System.out.println(request.getParts().size());
 					        
-					        int uploadFileCnt = 0;
+					        int uploadFileCnt = 1;
 					        
 					        for (Part part : request.getParts()) {
 					            fileName = getFilename(part);
-					            
+					            if(part.getName().equals("appId")){
+					            	continue;
+					            }
+					            	
 					            if( fileName != null ){
 					            	int fileTypeIndex = fileName.lastIndexOf(".");
 						    		String fileType = fileName.substring(fileTypeIndex+1);
@@ -258,7 +255,12 @@ public class PictureInfoServlet extends HttpServlet {
 						            	//String widgetCode = request.getParameter("w_code");
 						            	
 						            	pid = new PictureInfoDAO();
-						            	pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "picture/"+userId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            	if(appId==-1){
+						            		pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "picture/"+userId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            	}else if(appId!=-1){
+						            		pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "picture/"+userId+"/"+appId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            	}
+						            	
 						            	pid.disconnect();
 						            	
 						            	uploadFileCnt++;
@@ -279,7 +281,6 @@ public class PictureInfoServlet extends HttpServlet {
 			        }
 					
 			        JSONObject json = new JSONObject();
-			        
 			        try{
 						json.put("msg", msg);
 					}
@@ -352,7 +353,7 @@ public class PictureInfoServlet extends HttpServlet {
 								//System.out.println(applicationPath + pictureInfo.getPicturePath());
 								
 								try{
-									Files.delete(Paths.get(applicationPath + pictureInfo.getPicturePath()));
+									Files.delete(Paths.get("C:/Users/Taekyun/git/11hacburn/Badac/" + pictureInfo.getPicturePath()));
 								}
 								catch(Exception e){
 									msg = "DeleteFail";

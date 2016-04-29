@@ -79,23 +79,58 @@ body {
                 explain.focus();
                 return;
             }
-            $.post("http://localhost:8100/Badac/insert_application", {
+            
+            var app_id;
+            var formData;
+            $.post("http://210.118.74.159:8100/Badac/insert_application", {
             	id : userId,
             	title : title.value,
             	explanation : explain.value,
             }, function(data){
             		if( data.msg == "Success" ){
-            			alert("등록이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/user_main_page";
-            		}
+            			app_id = data.appId;
+            			var fileSelect = document.getElementById("file");
+                        var files = fileSelect.files;
+                        formData = new FormData();
+                        for (var i = 0; i < files.length; i++) {
+                       	     var file = files[i];
+                             formData.append('file', file, file.name);
+                        }
+                        formData.append('appId',app_id);
+                        if(files.length==0){
+                        	alert('업로드를 완료했습니다.');
+                            location.href = "http://210.118.74.159:8100/Badac/user_main_page";
+                        }else if(files.length!=0){
+                        	$.ajax({
+                                url: 'http://210.118.74.159:8100/Badac/upload_picture',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                async: false,
+                                success: function (data) {
+                                    if (data.msg == 'Success') {
+                                        alert('업로드를 완료했습니다.');
+                                        location.href = "http://210.118.74.159:8100/Badac/user_main_page";
+                                    }else{
+                                    	alert(data.msg);
+                                    }
+                                },
+                                error: function(data){
+                                    alert(data.msg);
+                                }
+                            });
+                        }
+                    }
             		else{
             			alert(data.msg);
             		}
             });
+            
         }
 
         function toMainPage(){
-            location.href = "http://localhost:8100/Badac/user_main_page";
+            location.href = "http://210.118.74.159:8100/Badac/user_main_page";
         }
     </script>
 </head>
@@ -124,12 +159,12 @@ body {
 						<li><a id="name"></a></li>
 						<li><a id="email"></a></li>
 						<li class="divider"></li>
-						<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
 						<li><a
-							href="http://localhost:8100/Badac/go_user_update_information">개인정보
+							href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보
 								수정</a></li>
 						<li><a href="#">견적 요청 내역 보기</a></li>
-						<li><a href="http://localhost:8100/Badac/write_application">견적
+						<li><a href="http://210.118.74.159:8100/Badac/write_application">견적
 								제안서 작성</a></li>
 
 					</ul></li>
@@ -146,30 +181,27 @@ body {
 
 			<tr>
 				<td><b>제목</b></td>
-				<td><input type=text class="form-control input-sm" name=dbemail
+				<td><input id="tunning_title" type=text class="form-control input-sm" name=dbemail
 					size=50 maxlength=50></td>
 			</tr>
 			<tr>
 				<td><b>이미지</b></td>
 				<td><div class="form-group">
-						<label for="exampleInputFile">이미지 업로드</label> <input type="file"
-							id="exampleInputFile">
+						<label for="file">이미지 업로드</label> <input type="file" id="file" multiple="multiple">
 						<p class="help-block">자전거 사진 첨부</p>
 					</div> <br /></td>
 			</tr>
 			<tr>
 				<td><b>내용</b></td>
-				<td><textarea name=dbmemo class="form-control input-sm" cols=50
+				<td><textarea id="tunning_explanation" name=dbmemo class="form-control input-sm" cols=50
 						rows=10></textarea></td>
 			</tr>
 		</table>
 
 		<table cellspacing=0 cellpadding=0 border=0 width=500>
 			<tr>
-				<button type="button" class="btn btn-default"
-					OnClick="insertApplication()">등록</button>
-				<a class="btn btn-default" href="UserMyApplicationPage.jsp"
-					role="button">취소</a>
+				<button type="button" class="btn btn-default" onclick="insertApplication()">등록</button>
+				<a class="btn btn-default" onclick="toMainPage()">취소</a>
 			</tr>
 		</table>
 	</div>

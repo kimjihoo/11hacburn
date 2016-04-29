@@ -46,7 +46,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 		String dispatchUrl = null;
 		
 		if(action.equals("write_application")){
-			dispatchUrl = "ApplicationWritePage.jsp";
+			dispatchUrl = "UserApplicationRegistPage.jsp";
 		}else if(action.equals("my_application")){
 			dispatchUrl = "MyApplicationPage.jsp";
 		}
@@ -78,7 +78,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 			String tunning_explanation = request.getParameter("explanation");
 			
 			String msg = "Success";
-			
+			JSONObject json = new JSONObject();
 			if(tunning_title==null || tunning_title.trim().equals("")){
 				msg="NoTitleError";
 			}else if(tunning_explanation==null || tunning_explanation.trim().equals("")){
@@ -98,11 +98,25 @@ public class ApplicationInfoServlet extends HttpServlet {
 				
 				if(flag==1){
 					ApplicationInfoDAO aid = new ApplicationInfoDAO();
-					aid.insertApplicationInfo(user_id, tunning_title, tunning_explanation);
+					int randomNum=0;
+					while(true){
+						randomNum = (int)(Math.random() * 100000000);
+						if(aid.selectTunningTitleByTunningId(randomNum).equals("")){
+							//System.out.println(randomNum);
+							break;
+						}
+					}
+					try {
+						json.put("appId",randomNum);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					aid.insertApplicationInfo(randomNum,user_id, tunning_title, tunning_explanation);
 					aid.disconnect();
 				}
 			}
-			JSONObject json = new JSONObject();
+			
 
 			try {
 				json.put("msg", msg);

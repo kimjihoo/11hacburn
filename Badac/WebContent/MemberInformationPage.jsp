@@ -110,7 +110,7 @@ onload = function on_load(){
 	var company_phone2 = document.getElementById("company_phone2");
 	var company_phone3 = document.getElementById("company_phone3");
 	
-	$.get("http://localhost:8100/Badac/get_member_info",{
+	$.get("http://210.118.74.159:8100/Badac/get_member_info",{
 		id : companyId,
 		},function(data){
 			if(data.msg=="Success"){
@@ -291,7 +291,7 @@ onload = function on_load(){
             	return;
             }
             
-            $.post("http://localhost:8100/Badac/member_update_information", {
+            $.post("http://210.118.74.159:8100/Badac/member_update_information", {
             	id : companyId,
             	password : company_pw.value,
             	name : company_name.value,
@@ -304,7 +304,7 @@ onload = function on_load(){
             }, function(data){
             		if( data.msg == "Success" ){
             			alert("회원정보 수정이 완료되었습니다.");
-            			location.href = "http://localhost:8100/Badac/member_main_page";
+            			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
             		}
             		else{
             			alert(data.msg);
@@ -313,7 +313,7 @@ onload = function on_load(){
         }
 
         function returnMainPage(){
-            location.href = "http://localhost:8100/Badac/member_main_page";
+            location.href = "http://210.118.74.159:8100/Badac/member_main_page";
         }
     </script>
 </head>
