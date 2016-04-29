@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>나의 견적 요청서 목록</title>
-
+<title>견적 요청서 목록 보기</title>
 <style>
 body {
 	padding-top: 70px;
@@ -70,47 +69,10 @@ body {
 	</div>
 	<!-- /.container --> </nav>
 
-	<style type="text/css">
-/* boardcss_list 에서 사용되는 글 등록 버튼 테이블 크기 */
-#boardcss_list_add_button_table {
-	width: 100%;
-	margin: 0 auto 15px;
-	/*position: relative; background: #bddcff; font-weight: bold;*/
-}
-
-/* 화면에 보여지는 글 등록 버튼 */
-#boardcss_list_add_button_table .add_button {
-	cursor: pointer;
-	border: 1px solid #bebebe;
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	width: 85px;
-	padding: 6px 0 6px;
-	text-align: center;
-	font-weight: bold;
-}
-
-#boardcss_list_add_button_table .add_button a {
-	color: #ffffff;
-}
-
-/* 글 등록 버튼과 글 목록이 겹치지 않게 만들어준 아무것도 아닌것 */
-#boardcss_list_add_button_table .boardcss_list_add_button ul {
-	width: 100%;
-	overflow: hidden;
-	height: 10px;
-}
-
-/* boardcss_list 에서 사용하는 글 목록 테이블 크기*/
-.boardcss_list_table {
-	width: 100%;
-}
-</style>
 	<div class="container">
 		<!-- 테이블 시작 -->
 		<table class="table table-hover">
-			<caption>나의 견적 요청서 목록</caption>
+			<caption>견적 요청서 목록</caption>
 			<colgroup>
 				<col width="15%" />
 				<col width="45%" />
@@ -159,16 +121,6 @@ body {
 			</tbody>
 		</table>
 		<!-- 테이블 종료 -->
-
-		<!-- 등록버튼 시작 -->
-		<table class="table table-hover" cellspacing=0 cellpadding=0 border=0 width=500>
-			<thead>
-					<a class="btn btn-default" href="UserApplicationRegistPage.jsp"
-						role="button">등록</a>
-			</thead>
-		</table>
-		<!-- 등록버튼 종료 -->
 	</div>
 </body>
 </html>
-
