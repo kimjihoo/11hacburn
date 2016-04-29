@@ -18,9 +18,7 @@ import javax.servlet.http.Part;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import db.MemberInfoDAO;
 import db.UserInfoDAO;
-import model.MemberInfo;
 import model.UserInfo;
 
 /**

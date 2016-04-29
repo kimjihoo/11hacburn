@@ -16,16 +16,15 @@ public class ApplicationInfoDAO extends BaseDAO {
 		PreparedStatement ps=null;
 		try
 		{
-			String sql="INSERT INTO tunning_application VALUES(?,?,?,?,?,?,?)";
+			String sql="INSERT INTO tunning_application VALUES(?,?,?,?,?,?)";
 			ps=super.getConn().prepareStatement(sql);
 			java.util.Date date = new java.util.Date();
 			java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 			ps.setInt(2,user_id);
 			ps.setString(3,tunning_title);
-			ps.setString(4,null);
-			ps.setString(5,tunning_explanation);
-			ps.setInt(6,0);
-			ps.setDate(7,sqlDate);
+			ps.setString(4,tunning_explanation);
+			ps.setInt(5,0);
+			ps.setDate(6,sqlDate);
 			
 			while(true){
 				randomNum = (int)(Math.random() * 100000000);

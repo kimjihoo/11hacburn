@@ -257,6 +257,28 @@
     <servlet-name>GoMyApplication</servlet-name>
     <url-pattern>/my_application</url-pattern>
   </servlet-mapping>
-  
-  
+  <servlet>
+    <servlet-name>UploadPicture</servlet-name>
+    <servlet-class>servlet.PictureInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadPicture</servlet-name>
+    <url-pattern>/upload_picture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeletePicture</servlet-name>
+    <servlet-class>servlet.PictureInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePicture</servlet-name>
+    <url-pattern>/delete_picture</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetPictureList</servlet-name>
+    <servlet-class>servlet.PictureInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetPictureList</servlet-name>
+    <url-pattern>/get_picture_list</url-pattern>
+  </servlet-mapping>
 </web-app>
