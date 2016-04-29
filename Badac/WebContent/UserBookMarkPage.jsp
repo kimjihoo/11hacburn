@@ -120,7 +120,7 @@ body {
 				<div class="row">
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
-							<img src="../images/samchuly.png" width="320" height="150" alt="" />
+							<img src="images/samchuly.png" width="320" height="150" alt="" />
 							<div class="caption">
 								<h4 class="pull-right"></h4>
 								<h4>
@@ -148,7 +148,7 @@ body {
 
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
-							<img src="../images/altonsports.png" width="320" height="150"
+							<img src="/Badac/WebContent/images/altonsports.png" width="320" height="150"
 								alt="" />
 							<div class="caption">
 								<h4>
@@ -176,7 +176,7 @@ body {
 
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
-							<img src="/Badac/WebContent/images/alexbicycle.png" width="320"
+							<img src="/Badac/WebContent/images/alrexbicycle.png" width="320"
 								height="150" alt="" />
 							<div class="caption">
 								<h4>
