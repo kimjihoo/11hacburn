@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>견적 요청서 목록 보기</title>
+<title>견적 요청서 답변</title>
 <style>
 body {
 	padding-top: 70px;
@@ -70,57 +70,46 @@ body {
 	<!-- /.container --> </nav>
 
 	<div class="container">
-		<!-- 테이블 시작 -->
-		<table class="table table-hover">
-			<caption>견적 요청서 목록</caption>
-			<colgroup>
-				<col width="15%" />
-				<col width="45%" />
-				<col width="20%" />
-				<col width="20%" />
-			</colgroup>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>이름</th>
-					<th>등록일자</th>
-				</tr>
-			</thead>
-			<tbody .table-hover>
-				<tr>
-					<td>5</td>
-					<td><a href="MemberApplicationReplyPage.jsp">화이팅 바닥!!!</a></td>
-					<td>바닥</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="MemberApplicationReplyPage.jsp">안장 요청합니다!!!</a></td>
-					<td>최현우</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="MemberApplicationReplyPage.jsp">후방 센서 요청합니다!!!</a></td>
-					<td>김지후</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="MemberApplicationReplyPage.jsp">패달 요청합니다!!!</a></td>
-					<td>김태균</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="MemberApplicationReplyPage.jsp">라이트 요청합니다!!!</a></td>
-					<td>송주석</td>
-					<td>2016-04-27</td>
-				</tr>
-			</tbody>
+		<table class="table table-hover" width=700>
+			<tr>
+				<td><b>조회수</b></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><b>이름</b></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><b>제목</b></td>
+				<td><input class="form-control" type="text"
+					placeholder="Readonly input here…" readonly></td>
+			</tr>
+			<tr>
+				<td><b>이미지</b></td>
+				<td><div class="form-group">
+						<img src="http://placehold.it/340x180" class="img-responsive"
+							alt="Responsive image">
+						<p class="help-block">첨부된 자전거 사진</p>
+					</div> <br /></td>
+			</tr>
+			<tr>
+				<td><b>내용</b></td>
+				<td width=350><input class="form-control" type="text"
+					placeholder="Readonly input here…" readonly> </textarea></td>
+			</tr>
 		</table>
-		<!-- 테이블 종료 -->
+		<br> <br> <br>
+
+		<table class="table table-hover" width=700>
+			<tr>
+				<td><b>답변</b></td>
+				<td><textarea class="form-control" rows="10"></textarea></td>
+			</tr>
+		</table>
+		<span style="float: right"><button class="btn btn-default"
+				type="submit">등록</button> <a class="btn btn-default"
+			href="MemberApplicationViewPage.jsp" role="button">목록</a></span>
 	</div>
+
 </body>
 </html>
