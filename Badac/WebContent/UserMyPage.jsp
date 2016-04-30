@@ -55,8 +55,7 @@
     var userName = '<%= username %>';
     var userEmail = '<%= useremail %>';
     
-    
-    
+    s
 
 	///////////////////////////////////////////////////////////////////
 </script>
