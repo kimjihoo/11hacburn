@@ -289,6 +289,7 @@ ul.alert-dropdown {
 
             <div class="container-fluid">
             <p>마이페이지</p>
+            <p>마이페이지</p>
        
        
 
