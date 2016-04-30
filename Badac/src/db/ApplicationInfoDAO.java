@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.ApplicationInfo;
+import model.MemberInfo;
 
 public class ApplicationInfoDAO extends BaseDAO {
 	public int insertApplicationInfo(int application_id, int user_id, String tunning_title, String tunning_explanation){
@@ -93,5 +94,90 @@ public class ApplicationInfoDAO extends BaseDAO {
 		}
 		
 		return tunning_title;
+	}
+	
+	public ArrayList<ApplicationInfo> getMyApplicationList(int userId){
+		ArrayList<ApplicationInfo> applicationList = new ArrayList<ApplicationInfo>();
+		PreparedStatement ps = null;
+		
+		try{
+			String sql = "SELECT * FROM tunning_application WHERE user_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				applicationList.add(new ApplicationInfo(rs.getInt("tunning_id"), rs.getString("tunning_title"), rs.getDate("upload_date")));
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return applicationList;
+	}
+	
+	public ApplicationInfo selectApplicationInfoByTunningId(int tunningId){
+		ApplicationInfo applicationInfo = null;
+		PreparedStatement ps=null;
+		
+		try
+		{
+			String sql="SELECT * FROM tunning_application WHERE tunning_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, tunningId);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				int tunningId1 = rs.getInt("tunning_id");
+				String tunningTitle = rs.getString("tunning_title");
+				String tunningExplanation = rs.getString("tunning_explanation");
+				Date tunningUploadDate = rs.getDate("upload_date");
+				
+				applicationInfo = new ApplicationInfo(tunningId1, tunningTitle, tunningExplanation, tunningUploadDate);
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return applicationInfo;
 	}
 }

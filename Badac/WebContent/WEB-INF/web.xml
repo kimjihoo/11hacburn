@@ -281,4 +281,28 @@
     <servlet-name>GetPictureList</servlet-name>
     <url-pattern>/get_picture_list</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MyApplicationList</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyApplicationList</servlet-name>
+    <url-pattern>/my_application_list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetApplicationInfo</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetApplicationInfo</servlet-name>
+    <url-pattern>/get_application_info</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SaveTunningId</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveTunningId</servlet-name>
+    <url-pattern>/save_tunning_id</url-pattern>
+  </servlet-mapping>
 </web-app>

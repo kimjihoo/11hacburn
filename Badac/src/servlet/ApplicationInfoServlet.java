@@ -19,8 +19,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import db.ApplicationInfoDAO;
+import db.MemberInfoDAO;
 import db.UserInfoDAO;
 import model.ApplicationInfo;
+import model.MemberInfo;
 import model.UserInfo;
 
 /**
@@ -44,11 +46,144 @@ public class ApplicationInfoServlet extends HttpServlet {
 		String action = uri.substring(lastIndex + 1);
 
 		String dispatchUrl = null;
+		int tunningId=0;
 		
 		if(action.equals("write_application")){
-			dispatchUrl = "UserApplicationRegistPage.jsp";
+			String userCode = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userCode = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
+				dispatchUrl = "UserApplicationRegistPage.jsp";
+			}
+			else{
+				dispatchUrl = "LoginPage.jsp";
+			}
 		}else if(action.equals("my_application")){
-			dispatchUrl = "MyApplicationPage.jsp";
+			String userCode = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userCode = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
+				dispatchUrl = "MyApplicationPage.jsp";
+			}
+			else{
+				dispatchUrl = "LoginPage.jsp";
+			}
+		}else if(action.equals("my_application_list")){
+			int user_id = Integer.parseInt("userId");
+			
+			ApplicationInfoDAO aid = new ApplicationInfoDAO();
+			
+			ArrayList<ApplicationInfo> applicationList = aid.getMyApplicationList(user_id);
+			aid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			
+			if(applicationList.size()==0){
+				msg = "Not Exist Application";
+			}else{
+				JSONArray applicationListJson = new JSONArray();
+				JSONObject applicationInfo;
+				
+				try{
+					for(ApplicationInfo temp : applicationList){
+						applicationInfo = new JSONObject();
+						
+						applicationInfo.put("id", temp.getTunning_id());
+						applicationInfo.put("title", temp.getTunning_title());
+						applicationInfo.put("date", temp.getUpload_date());
+						
+						applicationListJson.put(applicationInfo);
+					}
+					json.put("applicationList", applicationListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		} else if(action.equals("get_application_info")){
+			int id = Integer.parseInt(request.getParameter("tunningId"));
+			
+			ApplicationInfoDAO aid = new ApplicationInfoDAO();
+			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId(id);
+			aid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("id", applicationInfo.getTunning_id());
+				json.put("title", applicationInfo.getTunning_title());
+				json.put("explanation", applicationInfo.getTunning_explanation());
+				json.put("date", applicationInfo.getUpload_date());
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}else if(action.equals("save_tunning_id")){
+			tunningId = Integer.parseInt(request.getParameter("tunningId"));
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 		}
 		
 		if (dispatchUrl != null) {
