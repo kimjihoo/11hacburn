@@ -17,30 +17,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
+    <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"   integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="   crossorigin="anonymous"></script>
 
  <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
-<script>
-$.get("http://210.118.74.159:8100/Badac/asdf",{}, function(data){
-	if(data.msg=="Success"){
-		//코딩
-	}
-	else{
-		alert(data.msg);
-	}
-});
-</script>
 
-
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>    
     ////////////////////////////////////////////////////////
-    <% // 
+    <% // 쿠키값 가져오기
     Cookie[] cookies = request.getCookies() ;
     
     int userid = 0;
     String username=null;
     String useremail=null;
-    String useraddress=null;
+    
     if(cookies != null){
          
         for(int i=0; i < cookies.length; i++){
@@ -55,9 +47,6 @@ $.get("http://210.118.74.159:8100/Badac/asdf",{}, function(data){
             if( c.getName().equals("user_email") ){
             	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
             }
-            if( c.getName().equals("user_region_2") ){
-            	useraddress = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
         }
     } 
     %>
@@ -65,52 +54,89 @@ $.get("http://210.118.74.159:8100/Badac/asdf",{}, function(data){
     var userId = '<%= userid %>';
     var userName = '<%= username %>';
     var userEmail = '<%= useremail %>';
-    var userAddress = '<%= useraddress %>'
+    
     
     
 
 	///////////////////////////////////////////////////////////////////
 </script>
-
-
 <script>
-$(document).ready(function(){
-   
-     var url ="https://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+encodeURI('제주 특별자치도 제주시 첨단로 242')+"&output=json"; 
+function change_img_dialog() {
+    var dialog;
 
-     $.getJSON(url, function(data) {
-    	 
-    	 var lat = data.channel.item.point_y;
-      var lng = data.channel.item.point_x;
-    	 alert(lat + " " + lng);
-       $.each(data.channel.item, function(i,item) {
-         alert(state.newAddress);
-         
-
-     });
+    dialog = $("#changeimg-dialog-form").dialog({
+        /*position: ,*/
+        autoOpen: false,
+        width: 400,
+        height: 400,
+        modal: true,
+        buttons: {
+            "선택": function () {
+                    var fileSelect = document.getElementById("choice_main_img");
+                    var files = fileSelect.files;
+                    formData = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                   	     var file = files[i];
+                         formData.append('file', file, file.name);
+                    }
+                    formData.append('appId',-1);
+                    if(files.length==0){
+                    	alert('파일을 선택해주세요.');
+                    }else if(files.length!=0){
+                    	$.ajax({
+                            url: 'http://210.118.74.159:8100/Badac/upload_picture',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            async: false,
+                            success: function (data) {
+                                if (data.msg == 'Success') {
+                                    $.get("http://210.118.74.159:8100/Badac/get_picture_list",{
+                                    	appId:-1,
+                                    }, function(data){
+                                    	if(data.msg=="Success"){
+                                    		//메인 이미지 가져온 걸로 바꿈.
+                                    		$("#user_main_img").attr("backgroundImage", "url(../"+data.pictureList[0].path+")");
+                                    		alert(data.pictureList[0].path);
+                                            $("#user_main_img").attr("name", data.pictureList[0].id);
+                                    		alert('업로드를 완료했습니다.');
+                                            dialog.dialog("close");
+                                    	}
+                                    });
+                                }else{
+                                	alert(data.msg);
+                                }
+                            },
+                            error: function(data){
+                                alert(data.msg);
+                            }
+                        });     
+                }
+                
+                //alert(path);
+                
+            },
+            "취소": function () {
+                dialog.dialog("close");
+            }
+        },
+        close: function () {
+            dialog.dialog("close");
+        }
     });
-   }); 
-
+    dialog.dialog('open');
+}
 </script>
-
-
 <style>
 body { padding-top: 70px; }
 </style>
 
 <script type="text/javascript">
-
-	
-	function userLogout(){
-		location.href = "http://210.118.74.159:8100/Badac/user_logout";
-	}
-	function writeApplication(){
-		location.href = "http://210.118.74.159:8100/Badac/write_application";
-	}
 </script>
 </head>
 <body>
-				<!--  -->
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
         <div class="container">
@@ -131,38 +157,21 @@ body { padding-top: 70px; }
                         <a href="#">Contact</a>
                     </li>
                   	<li class="dropdown">
-                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">����� ���� <span class="caret"></span></a>
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span></a>
                   	<ul class="dropdown-menu" role="menu">
-                    	<li>
-                    	<table>
-                    	<tr>
-                    	<td rowspan=2 ><a href="#"><img src="http://placehold.it/100x100" alt=".."/></a></td>
-                    	<td style="padding-left : 20px;"><%= username %></td>
-                    	</tr>
-                    	<tr>
-                    	<td style="padding-left : 20px;"><%= useremail %></td>
-                    	</tr>
-                    	</table>
-                    	</li>
-                    	<li>
-                    	<table>
-                    	<tr>
-                    	<td style="text-align = center;">
-                    	<a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a>
-                    	</td>
-                    	<td style="text-align = center;">
-                    	<a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a>
-                    	</td>
-                    	</tr>
-                    	</table>
-                    	</li>
+                    	<li onclick="change_img_dialog()"><div id="user_main_img" style="width:130px; height:130px;"></div></li>
+                    	<li><a id="name"></a></li>
+                    	<li><a id="email"></a></li>
                     	<li class="divider"></li>
-
+                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>
+                    	<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a></li>
+                    	<li><a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a></li>
                     	<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>                    	
-
-																				</ul>
+                    	
+                  	</ul>
                 	</li>
+         
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -180,35 +189,36 @@ body { padding-top: 70px; }
 		<table class="table table-hover">
 		<tr>
 			<td rowspan="4" ><img src="http://placehold.it/140x140"/></td>
-			<td>경겨딩기ㅗdfsdgsdfsdfsdf</td>
+			<td>삼천리sdfsdgsdfsdfsdf자전거</td>
 		</tr>
 		<tr>
-			<td>sdfsdgsdfsdgsdfsdfsdf</td>
+			<td>경기도sdfsdgsdfsdgsdfsdfsdf고양시</td>
 		</tr>
 		<tr>
 			<td>0319658sdfsdgsdfsd00</td>
 		</tr>
 		<tr>
-			<td>삼천리자전거</td>
+			<td>맞은편</td>
 		</tr>			
 		</table>
 </div>
 </div>
-
-
-
-
-
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center : new daum.maps.LatLng(lat, lng),
-			level : 3
+			center: new daum.maps.LatLng(37.657418, 127.0463547),
+			level: 3
 		};
 		var map = new daum.maps.Map(container, options);
-
-
+		
+		
+		document.getElementById("name").innerHTML = userName;
+		document.getElementById("email").innerHTML = userEmail;
 	</script>
-
+<div id="changeimg-dialog-form" title="이미지 선택" style="display:none; z-index:101;">
+    <div style="width:100%;">
+        <input type="file" id="choice_main_img" style="float:right;">
+    </div>
+</div>
 </body>
 </html>

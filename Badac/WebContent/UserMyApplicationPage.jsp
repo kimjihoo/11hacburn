@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	<%@page import="java.net.URLDecoder"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,6 +30,104 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+<script>    
+    ////////////////////////////////////////////////////////
+    <% // 쿠키값 가져오기
+    Cookie[] cookies = request.getCookies() ;
+    
+    int userid = 0;
+    String username=null;
+    String useremail=null;
+    
+    if(cookies != null){
+         
+        for(int i=0; i < cookies.length; i++){
+            Cookie c = cookies[i] ;
+             
+            if( c.getName().equals("user_id") ){
+            	userid = Integer.parseInt(c.getValue());
+            }
+            if( c.getName().equals("user_name") ){
+            	username = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+            if( c.getName().equals("user_email") ){
+            	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+        }
+    } 
+    %>
+ 
+    var userId = '<%= userid %>';
+    var userName = '<%= username %>';
+    var userEmail = '<%= useremail %>';
+    
+    
+
+	///////////////////////////////////////////////////////////////////
+</script>
+<script>
+	onload = function on_load(){
+		$.get("http://localhost:8100/Badac/my_application_list",{
+			userId:userId,
+		},
+			function(data){
+				if(data.msg=="Success"){
+					var applicationData = {};
+					var tempData = data.applicationList;
+					var table_c = document.getElementById('my_applicationListTable');
+					var tr;
+					var td;
+					var title_var;
+					
+					for(var i = 0; i<tempData.length; i++){
+						applicationData[tempData[i].id] = {
+							"tunning_id": tempData[i].id,
+							"tunning_title": tempData[i].title,
+							"tunning_date": tempData[i].date
+						}
+						tr = document.createElement('tr');
+						for(var j = 0; j<3; j++){
+							td = document.createElement('td');
+							switch(j){
+							case 0:
+								td.appendChild(document.createTextNode(i+1));
+								break;
+							case 1:
+								title_var = document.createElement('p');
+								title_var.style.cursor="pointer";
+								title_var.id = applicationData[tempData[i].id].tunning_id;
+								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
+								title_var.onclick = function () {
+									var tempP_id = $(this).attr('id');
+			                        $.get("http://localhost:8100/Badac/save_tunning_id",{
+			                        	tunningId : tempP_id,
+			                        },function(data){
+			                        	if(data.msg=="Success"){
+			                        		location.href="http://210.118.74.159:8100/Badac/go_my_application"
+			                        	}else{
+			                        		alert(data.msg);
+			                        	}
+			                        });
+			                    };
+								td.appendChild(title_var);
+								break;
+							case 2:
+								var tunningDate = applicationData[tempData[i].id].tunning_date;
+								td.appendChild(document.createTextNode(tunningDate));
+								break;
+								default:
+									break;
+							}
+							tr.appendChild(td);
+						}
+						table_c.appendChild(tr);
+					}
+				}else{
+					alert(data.msg);
+				}
+		});
+	}
+</script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -62,100 +161,26 @@ body {
 						<li><a href="#">견적 요청 내역 보기</a></li>
 						<li><a href="http://localhost:8100/Badac/write_application">견적
 								제안서 작성</a></li>
-
 					</ul></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container --> </nav>
-
-	<style type="text/css">
-/* boardcss_list 에서 사용되는 글 등록 버튼 테이블 크기 */
-#boardcss_list_add_button_table {
-	width: 100%;
-	margin: 0 auto 15px;
-	/*position: relative; background: #bddcff; font-weight: bold;*/
-}
-
-/* 화면에 보여지는 글 등록 버튼 */
-#boardcss_list_add_button_table .add_button {
-	cursor: pointer;
-	border: 1px solid #bebebe;
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	width: 85px;
-	padding: 6px 0 6px;
-	text-align: center;
-	font-weight: bold;
-}
-
-#boardcss_list_add_button_table .add_button a {
-	color: #ffffff;
-}
-
-/* 글 등록 버튼과 글 목록이 겹치지 않게 만들어준 아무것도 아닌것 */
-#boardcss_list_add_button_table .boardcss_list_add_button ul {
-	width: 100%;
-	overflow: hidden;
-	height: 10px;
-}
-
-/* boardcss_list 에서 사용하는 글 목록 테이블 크기*/
-.boardcss_list_table {
-	width: 100%;
-}
-</style>
+	
 	<div class="container">
 		<!-- 테이블 시작 -->
-		<table class="table table-hover">
+		<table class="table table-hover" style="width:100%; text-align:center;">
 			<caption>나의 견적 요청서 목록</caption>
-			<colgroup>
-				<col width="15%" />
-				<col width="45%" />
-				<col width="20%" />
-				<col width="20%" />
-			</colgroup>
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>이름</th>
-					<th>등록일자</th>
+					<td style="width:15%;">번호</td>
+					<td style="width:45%;">제목</td>
+					<td style="width:20%;">등록일자</td>
 				</tr>
 			</thead>
-			<tbody .table-hover>
-				<tr>
-					<td>5</td>
-					<td><a href="UserMyApplicationView.jsp">Badac의 견적 요청서 5</a></td>
-					<td>Badac</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="UserMyApplicationView.jsp">Badac의 견적 요청서 4</a></td>
-					<td>Badac</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="UserMyApplicationView.jsp">Badac의 견적 요청서 3</a></td>
-					<td>Badac</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="UserMyApplicationView.jsp">Badac의 견적 요청서 2</a></td>
-					<td>Badac</td>
-					<td>2016-04-27</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="UserMyApplicationView.jsp">Badac의 견적 요청서 1</a></td>
-					<td>Badac</td>
-					<td>2016-04-27</td>
-				</tr>
+			<tbody id="my_applicationListTable" style="width:100%; text-align:center;">
+				
 			</tbody>
 		</table>
 		<!-- 테이블 종료 -->

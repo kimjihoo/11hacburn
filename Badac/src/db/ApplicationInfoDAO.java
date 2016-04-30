@@ -99,7 +99,7 @@ public class ApplicationInfoDAO extends BaseDAO {
 	public ArrayList<ApplicationInfo> getMyApplicationList(int userId){
 		ArrayList<ApplicationInfo> applicationList = new ArrayList<ApplicationInfo>();
 		PreparedStatement ps = null;
-		
+		System.out.println(userId);
 		try{
 			String sql = "SELECT * FROM tunning_application WHERE user_id=?";
 			ps=super.getConn().prepareStatement(sql);
