@@ -6,7 +6,6 @@ public class ApplicationInfo {
 	private int tunning_id;
 	private int user_id;
 	private String tunning_title;
-	private String tunning_photo;
 	private String tunning_explanation;
 	private int tunning_firm;
 	private Date upload_date;
@@ -14,17 +13,15 @@ public class ApplicationInfo {
 	public ApplicationInfo(){
 		tunning_id=-1;
 		user_id=-1;
-		tunning_photo="";
 		tunning_explanation="";
 		tunning_firm=-1;
 		upload_date=new Date(0000-00-00);
 	}
 	
-	public ApplicationInfo(int tunning_id, int user_id, String tunning_title, String tunning_photo, String tunning_explanation, int tunning_firm, Date upload_date){
+	public ApplicationInfo(int tunning_id, int user_id, String tunning_title, String tunning_explanation, int tunning_firm, Date upload_date){
 		this.tunning_id = tunning_id;
 		this.user_id = user_id;
 		this.tunning_title = tunning_title;
-		this.tunning_photo = tunning_photo;
 		this.tunning_explanation = tunning_explanation;
 		this.tunning_firm = tunning_firm;
 		this.upload_date = upload_date;
@@ -70,14 +67,6 @@ public class ApplicationInfo {
 	
 	public void setTunning_title(String tunning_title){
 		this.tunning_title = tunning_title;
-	}
-
-	public String getTunning_photo() {
-		return tunning_photo;
-	}
-
-	public void setTunning_photo(String tunning_photo) {
-		this.tunning_photo = tunning_photo;
 	}
 
 	public String getTunning_explanation() {

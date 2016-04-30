@@ -46,7 +46,6 @@ public class ApplicationInfoServlet extends HttpServlet {
 		String action = uri.substring(lastIndex + 1);
 
 		String dispatchUrl = null;
-		int tunningId=0;
 		
 		if(action.equals("write_application")){
 			String userCode = null;
@@ -148,6 +147,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 		} else if(action.equals("get_application_info")){
 			int id = Integer.parseInt(request.getParameter("tunningId"));
 			
+			
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
 			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId(id);
 			aid.disconnect();
@@ -170,9 +170,15 @@ public class ApplicationInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 		}else if(action.equals("save_tunning_id")){
-			tunningId = Integer.parseInt(request.getParameter("tunningId"));
-			String msg = "Success";
+			int tunningId = Integer.parseInt(request.getParameter("tunningId"));
+			System.out.println(tunningId);
+			Cookie cookie = new Cookie("tunning_id", Integer.toString(tunningId));
 			
+			cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+			
+			response.addCookie(cookie);
+			
+			String msg = "Success";
 			JSONObject json = new JSONObject();
 			
 			try{

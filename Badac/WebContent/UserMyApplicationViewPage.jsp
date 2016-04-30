@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	<%@page import="java.net.URLDecoder"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,6 +29,31 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+	<script>    
+    ////////////////////////////////////////////////////////
+    <% // 쿠키값 가져오기
+    Cookie[] cookies = request.getCookies() ;
+    
+    int tunningid = 0;
+    
+    if(cookies != null){
+         
+        for(int i=0; i < cookies.length; i++){
+            Cookie c = cookies[i] ;
+             
+            if( c.getName().equals("tunning_id") ){
+            	tunningid = Integer.parseInt(c.getValue());
+            }
+        }
+    } 
+    %>
+ 
+    var tunningId = '<%= tunningid %>';
+    alert(tunningId);
+    
+
+	///////////////////////////////////////////////////////////////////
+</script>
 <script type="text/javascript">
 onload = function on_load(){
 	var tunning_date = document.getElementById("tunning_date");
@@ -36,7 +62,9 @@ onload = function on_load(){
 	var tunning_image = document.getElementById("tunning_image");
 	var tunning_explanation = document.getElementById("tunning_explanation");
 	
-	$.get("http://210.118.74.159:8100/Badac/get_application_info"
+	$.get("http://210.118.74.159:8100/Badac/get_application_info",{
+		tunningId:tunningId,
+	}
 		,function(data){
 			if(data.msg=="Success"){
 				tunning_date.value = data.date;
