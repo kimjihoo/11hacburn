@@ -47,7 +47,8 @@ if(cookies != null){
         	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
         }
     }
-} 
+}
+ 
 %>
 
 var userId = '<%= userid %>';
@@ -75,16 +76,13 @@ function writeApplication(){
 body {
     padding-top: 70px;  
 }
-
-.slide-image {
-    width: 100%;
-}
+ 
 
 .col-md-12{
 	margin-bottom:20px;
 }
 
-.carousel-control,
+ 
 .item {
     border-radius: 4px;
 }
@@ -124,6 +122,19 @@ footer {
 </head>
 
 <body>
+<%
+
+//request.setCharacterEncoding("utf-8"); 
+	//MemberInfoDAO mdao = new MemberInfoDAO();
+	//MemberInfo minfo = new MemberInfo();
+	
+	//List<MemberInfo> list = mdao.selectMemberInfoByCompanyEmail();
+	
+	//for(int i=0; i<list.size(); i++){
+	//	MemberInfo info = list.get(i);
+	%>
+	
+	
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -198,6 +209,9 @@ footer {
             	<div class="col-md-12">
             	   	<div id="map" style="height:500px;"></div>
                	</div>
+               	
+               	
+               	
                 	
                 <div class="row">
 
@@ -205,7 +219,7 @@ footer {
                         <div class="thumbnail">
                             <img src="http://placehold.it/320x150" alt="">
                             <div class="caption">
-                                <h4><a href="#">First Company</a></h4>
+                                <h4><a href="#">first</a></h4>
                                 <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">http://bootsnipp.com</a>.</p>
                             </div>
                             <div class="ratings">
