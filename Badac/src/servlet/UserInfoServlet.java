@@ -81,58 +81,6 @@ public class UserInfoServlet extends HttpServlet {
 			dispatchUrl = "SignUpConfirm.jsp";
 		}else if(action.equals("start_page")){
 			dispatchUrl = "StartPage.jsp";
-		}else if(action.equals("go_my_application_page")){
-			String userCode = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					String cookieName = cookie[i].getName();
-					
-					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // 여러대 확인해
-							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
-						}
-					}
-				}
-			}
-			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "UserMyApplicationPage.jsp";
-			}
-			else{
-				dispatchUrl = "LoginPage.jsp";
-			}
-		}else if(action.equals("go_my_application")){
-			String userCode = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					String cookieName = cookie[i].getName();
-					
-					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // 여러대 확인해
-							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
-						}
-					}
-				}
-			}
-			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "UserMyApplicationViewPage.jsp";
-			}
-			else{
-				dispatchUrl = "LoginPage.jsp";
-			}
 		}
 		else if (action.equals("user_logout")) {
 			Cookie[] cookie = request.getCookies();

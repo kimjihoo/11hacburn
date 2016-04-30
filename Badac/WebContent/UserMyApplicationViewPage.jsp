@@ -29,6 +29,7 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+<<<<<<< HEAD
 	<script>    
     ////////////////////////////////////////////////////////
     <% // 쿠키값 가져오기
@@ -79,6 +80,8 @@ onload = function on_load(){
 	});
 }
 </script>
+=======
+>>>>>>> branch 'master' of https://github.com/kimjihoo/11hacburn.git
 </head>
 <body>
 	<!-- Navigation -->
@@ -123,41 +126,35 @@ onload = function on_load(){
 	<div class="container">
 		<table class="table table-hover" width=700>
 			<tr>
-				<td><b>날짜</b></td>
-				<td><input class="form-control" type="date" id="tunning_date"
-					readonly></td>
-			</tr>
-			<tr>
-				<td><b>코드</b></td>
-				<td><input class="form-control" type="text" id="tunning_id"
-					readonly></td>
+				<td><b>조회수</b></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td><b>제목</b></td>
-				<td><input class="form-control" type="text" id="tunning_title"
-					readonly></td>
+				<td><input class="form-control" type="text"
+					placeholder="Readonly input here…" readonly></td>
 			</tr>
 			<tr>
 				<td><b>이미지</b></td>
 				<td><div class="form-group">
 						<img src="http://placehold.it/340x180" class="img-responsive"
-							id="tunning_image" alt="Responsive image">
+							alt="Responsive image">
 						<p class="help-block">첨부된 자전거 사진</p>
 					</div> <br /></td>
 			</tr>
 			<tr>
 				<td><b>내용</b></td>
 				<td width=350><input class="form-control" type="text"
-					id="tunning_explanation" readonly></td>
+					placeholder="Readonly input here…" readonly> </textarea></td>
 			</tr>
 		</table>
 
 		<table cellspacing=0 cellpadding=0 border=0 width=500>
 			<tr>
-				<td><a class="btn btn-default"
-					href="UserMyApplicationModifyPage.jsp" role="button">수정</a>
-					<button class="btn btn-default" type="submit">삭제</button> <a
-					class="btn btn-default" href="UserMyApplicationPage.jsp"
+				<td><a class="btn btn-default" href="UserMyApplicationModifyPage.jsp"
+					role="button">수정</a>
+					<button class="btn btn-default" type="submit">삭제</button>
+					<a class="btn btn-default" href="UserMyApplicationPage.jsp"
 					role="button">목록</a></td>
 			</tr>
 		</table>
