@@ -313,4 +313,12 @@
     <servlet-name>SaveTunningId</servlet-name>
     <url-pattern>/save_tunning_id</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GetMemberList</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMemberList</servlet-name>
+    <url-pattern>/member_list</url-pattern>
+  </servlet-mapping>
 </web-app>

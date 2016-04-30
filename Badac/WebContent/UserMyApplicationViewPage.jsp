@@ -32,23 +32,10 @@ body {
 	<script>    
     ////////////////////////////////////////////////////////
     <% // 쿠키값 가져오기
-    Cookie[] cookies = request.getCookies() ;
-    
-    int tunningid = 0;
-    
-    if(cookies != null){
-         
-        for(int i=0; i < cookies.length; i++){
-            Cookie c = cookies[i] ;
-             
-            if( c.getName().equals("tunning_id") ){
-            	tunningid = Integer.parseInt(c.getValue());
-            }
-        }
-    } 
+    	int tunningid = Integer.parseInt(request.getParameter("tunningID"));
     %>
  
-    var tunningId = '<%= tunningid %>';
+    var tunningId = '<%=tunningid%>';
     alert(tunningId);
     
 

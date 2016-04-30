@@ -261,6 +261,46 @@ public class MemberInfoDAO extends BaseDAO {
 		return na_memberList;
 	}
 	
+	public ArrayList<MemberInfo> memberList(){
+		
+		ArrayList<MemberInfo> memberList = new ArrayList<MemberInfo>();
+		PreparedStatement ps = null;
+		
+		try{
+			String sql = "SELECT * FROM company_user";
+			ps=super.getConn().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				memberList.add(new MemberInfo(rs.getInt("company_id"), rs.getString("company_name"), rs.getString("company_telephone"), rs.getString("company_region_2"),rs.getString("company_region_3")));
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return memberList;
+	}
+	
 	public String memberApproval(int company_id){
 		PreparedStatement ps = null;
 		
