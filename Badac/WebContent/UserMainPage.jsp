@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@page import="java.net.URLDecoder"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -22,7 +22,7 @@
 <script>
 $.get("http://210.118.74.159:8100/Badac/asdf",{}, function(data){
 	if(data.msg=="Success"){
-		//ÄÚµù
+		//ì½”ë”©
 	}
 	else{
 		alert(data.msg);
@@ -34,7 +34,7 @@ $.get("http://210.118.74.159:8100/Badac/asdf",{}, function(data){
 
 <script>    
     ////////////////////////////////////////////////////////
-    <% // ÄíÅ°°ª °¡Á®¿À±â
+    <% // 
     Cookie[] cookies = request.getCookies() ;
     
     int userid = 0;
@@ -75,8 +75,8 @@ $.get("http://210.118.74.159:8100/Badac/asdf",{}, function(data){
 
 <script>
 $(document).ready(function(){
-    var add = '°æ±âµµ °í¾ç½Ã ´ö¾ç±¸';
-     var url ="https://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+encodeURI('Á¦ÁÖ Æ¯º°ÀÚÄ¡µµ Á¦ÁÖ½Ã Ã·´Ü·Î 242')+"&output=json"; 
+   
+     var url ="https://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+encodeURI('ì œì£¼ íŠ¹ë³„ìì¹˜ë„ ì œì£¼ì‹œ ì²¨ë‹¨ë¡œ 242')+"&output=json"; 
 
      $.getJSON(url, function(data) {
     	 
@@ -110,7 +110,7 @@ body { padding-top: 70px; }
 </script>
 </head>
 <body>
-				<!-- Áö¿ª±¸ ±â¹İ ¾÷Ã¼°Ë»ö, °ßÀû³»¿ª -->
+				<!--  -->
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
         <div class="container">
@@ -131,7 +131,7 @@ body { padding-top: 70px; }
                         <a href="#">Contact</a>
                     </li>
                   	<li class="dropdown">
-                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">»ç¿ëÀÚ Á¤º¸ <span class="caret"></span></a>
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ <span class="caret"></span></a>
                   	<ul class="dropdown-menu" role="menu">
                     	<li>
                     	<table>
@@ -148,18 +148,20 @@ body { padding-top: 70px; }
                     	<table>
                     	<tr>
                     	<td style="text-align = center;">
-                    	<a href="http://210.118.74.159:8100/Badac/go_my_application_page">°ßÀû ¿äÃ» ³»¿ª º¸±â</a>
+                    	<a href="http://210.118.74.159:8100/Badac/go_my_application_page">ê²¬ì  ìš”ì²­ ë‚´ì—­ ë³´ê¸°</a>
                     	</td>
                     	<td style="text-align = center;">
-                    	<a href="http://210.118.74.159:8100/Badac/write_application">°ßÀû Á¦¾È¼­ ÀÛ¼º</a>
+                    	<a href="http://210.118.74.159:8100/Badac/write_application">ê²¬ì  ì œì•ˆì„œ ì‘ì„±</a>
                     	</td>
                     	</tr>
                     	</table>
                     	</li>
                     	<li class="divider"></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/user_logout">·Î±×¾Æ¿ô</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">°³ÀÎÁ¤º¸ ¼öÁ¤</a></li>                    	
-                  	</ul>
+
+                    	<li><a href="http://210.118.74.159:8100/Badac/user_logout">ë¡œê·¸ì•„ì›ƒ</a></li>
+                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">ê°œì¸ì •ë³´ ìˆ˜ì •</a></li>                    	
+
+																				</ul>
                 	</li>
                 </ul>
             </div>
@@ -178,16 +180,16 @@ body { padding-top: 70px; }
 		<table class="table table-hover">
 		<tr>
 			<td rowspan="4" ><img src="http://placehold.it/140x140"/></td>
-			<td>»ïÃµ¸®sdfsdgsdfsdfsdfÀÚÀü°Å</td>
+			<td>ê²½ê²¨ë”©ê¸°ã…—dfsdgsdfsdfsdf</td>
 		</tr>
 		<tr>
-			<td>°æ±âµµsdfsdgsdfsdgsdfsdfsdf°í¾ç½Ã</td>
+			<td>sdfsdgsdfsdgsdfsdfsdf</td>
 		</tr>
 		<tr>
 			<td>0319658sdfsdgsdfsd00</td>
 		</tr>
 		<tr>
-			<td>¸ÂÀºÆí</td>
+			<td>ì‚¼ì²œë¦¬ìì „ê±°</td>
 		</tr>			
 		</table>
 </div>
