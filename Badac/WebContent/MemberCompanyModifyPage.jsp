@@ -34,11 +34,17 @@ body{
     ////////////////////////////////////////////////////////
     <% // 쿠키값 가져오기
     Cookie[] cookies = request.getCookies() ;
-    
+     
     int companyid = 0;
     String companyownername=null;
+    String companyemail=null; 
     String companyname=null;
-    String companyemail=null;
+    String companyregion_1=null;
+    String companyregion_2=null;
+    String companyregion_3=null;
+    String companytelephone=null;
+    String companyphone=null;
+    
     
     if(cookies != null){
          
@@ -197,16 +203,14 @@ body{
     <div class="form-group">
     <label for="companyname" class="col-sm-2 control-label">업체명</label>
     <div class="col-sm-6">
-    <input type="text" class="form-control" id="companyname" placeholder="업체명">
-    <p><%out.print(companyname); %>
+    <p class="form-control" id="companyname"><%out.print(companyname); %></p>
     </div>
     </div>
      
     <div class="form-group">
     <label for="ownername" class="col-sm-2 control-label">대표자명</label>
     <div class="col-sm-6"> 	
-    <input type="text" class="form-control" id="ownername">
-    <p><%out.print(companyownername);%></p>
+    <p class="form-control" id="ownername"><%out.print(companyownername);%></p>
     </div>
     </div> 
   
