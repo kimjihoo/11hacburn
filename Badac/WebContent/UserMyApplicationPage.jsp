@@ -62,7 +62,6 @@ body {
     var userEmail = '<%= useremail %>';
     
     
-    
 
 	///////////////////////////////////////////////////////////////////
 </script>
@@ -95,15 +94,16 @@ body {
 								break;
 							case 1:
 								title_var = document.createElement('p');
+								title_var.style.cursor="pointer";
 								title_var.id = applicationData[tempData[i].id].tunning_id;
-								title_var.id.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
+								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
 								title_var.onclick = function () {
 									var tempP_id = $(this).attr('id');
-			                        $.post("http://localhost:8100/Badac/save_tunning_id",{
-			                        	tunningId : $(this).attr('id'),
+			                        $.get("http://localhost:8100/Badac/save_tunning_id",{
+			                        	tunningId : tempP_id,
 			                        },function(data){
 			                        	if(data.msg=="Success"){
-			                        		location.href="http://210.118.74.159:8100/Badac/go_MyApplication"
+			                        		location.href="http://210.118.74.159:8100/Badac/go_my_application"
 			                        	}else{
 			                        		alert(data.msg);
 			                        	}
@@ -112,7 +112,8 @@ body {
 								td.appendChild(title_var);
 								break;
 							case 2:
-								td.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_date));
+								var tunningDate = applicationData[tempData[i].id].tunning_date;
+								td.appendChild(document.createTextNode(tunningDate));
 								break;
 								default:
 									break;
@@ -173,10 +174,9 @@ body {
 			<caption>나의 견적 요청서 목록</caption>
 			<thead>
 				<tr>
-					<th style="width:15%; padding-top:10px; padding-bottom:10px;">번호</th>
-					<th style="width:45%; padding-top:10px; padding-bottom:10px;">제목</th>
-					<th style="width:20%; padding-top:10px; padding-bottom:10px;">이름</th>
-					<th style="width:20%; padding-top:10px; padding-bottom:10px;">등록일자</th>
+					<td style="width:15%;">번호</td>
+					<td style="width:45%;">제목</td>
+					<td style="width:20%;">등록일자</td>
 				</tr>
 			</thead>
 			<tbody id="my_applicationListTable" style="width:100%; text-align:center;">

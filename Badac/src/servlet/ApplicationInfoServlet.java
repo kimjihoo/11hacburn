@@ -74,7 +74,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		}else if(action.equals("my_application")){
+		}else if(action.equals("go_my_application_page")){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -95,13 +95,13 @@ public class ApplicationInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "MyApplicationPage.jsp";
+				dispatchUrl = "UserMyApplicationPage.jsp";
 			}
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
 		}else if(action.equals("my_application_list")){
-			int user_id = Integer.parseInt("userId");
+			int user_id = Integer.parseInt(request.getParameter("userId"));
 			
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
 			
