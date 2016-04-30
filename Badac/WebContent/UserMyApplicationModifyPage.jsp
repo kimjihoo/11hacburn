@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@page import="java.net.URLDecoder"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,6 +29,109 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+<script>    
+    ////////////////////////////////////////////////////////
+    <% // 쿠키값 가져오기
+    Cookie[] cookies = request.getCookies() ;
+    
+    int userid = 0;
+    String username=null;
+    String useremail=null;
+    
+    if(cookies != null){
+         
+        for(int i=0; i < cookies.length; i++){
+            Cookie c = cookies[i] ;
+             
+            if( c.getName().equals("user_id") ){
+            	userid = Integer.parseInt(c.getValue());
+            }
+            if( c.getName().equals("user_name") ){
+            	username = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+            if( c.getName().equals("user_email") ){
+            	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+        }
+    } 
+    %>
+ 
+    var userId = '<%= userid %>';
+    var userName = '<%= username %>';
+    var userEmail = '<%= useremail %>';
+
+	///////////////////////////////////////////////////////////////////
+</script>
+<script type="text/javascript">
+        function modifyApplication(){
+
+			var title = document.getElementById("tunning_title");
+			var explain = document.getElementById("tunning_explanation");
+			
+            if(title.value == ""){
+                alert("제목을 입력하세요.");
+                title.focus();
+                return;
+            }
+            if(explain.value == ""){
+                alert("설명을 입력하세요.");
+                explain.focus();
+                return;
+            }
+            
+            var app_id;
+            var formData;
+            $.post("http://210.118.74.159:8100/Badac/insert_application", {
+            	id : userId,
+            	title : title.value,
+            	explanation : explain.value,
+            }, function(data){
+            		if( data.msg == "Success" ){
+            			app_id = data.appId;
+            			var fileSelect = document.getElementById("file");
+                        var files = fileSelect.files;
+                        formData = new FormData();
+                        for (var i = 0; i < files.length; i++) {
+                       	     var file = files[i];
+                             formData.append('file', file, file.name);
+                        }
+                        formData.append('appId',app_id);
+                        if(files.length==0){
+                        	alert('업로드를 완료했습니다.');
+                            location.href = "http://210.118.74.159:8100/Badac/user_main_page";
+                        }else if(files.length!=0){
+                        	$.ajax({
+                                url: 'http://210.118.74.159:8100/Badac/upload_picture',
+                                type: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                async: false,
+                                success: function (data) {
+                                    if (data.msg == 'Success') {
+                                        alert('업로드를 완료했습니다.');
+                                        location.href = "http://210.118.74.159:8100/Badac/user_main_page";
+                                    }else{
+                                    	alert(data.msg);
+                                    }
+                                },
+                                error: function(data){
+                                    alert(data.msg);
+                                }
+                            });
+                        }
+                    }
+            		else{
+            			alert(data.msg);
+            		}
+            });
+            
+        }
+
+        function toMainPage(){
+            location.href = "http://210.118.74.159:8100/Badac/user_main_page";
+        }
+</script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -69,36 +173,46 @@ body {
 	</div>
 	<!-- /.container --> </nav>
 
-	<div class="container">
-		<table class="table table-hover" width=700>
-			
-			<tr>
-				<td><b>제목</b></td>
-				<td><input type=text class="form-control input-sm" name=dbemail
-					size=50 maxlength=50></td>
-			</tr>
-			<tr>
-				<td><b>이미지</b></td>
-				<td><div class="form-group">
-						<label for="exampleInputFile">이미지 업로드</label> <input type="file"
-							id="exampleInputFile">
-						<p class="help-block">자전거 사진 첨부</p>
-					</div> <br /></td>
-			</tr>
-			<tr>
-				<td><b>내용</b></td>
-				<td><textarea name=dbmemo class="form-control input-sm" cols=50
-						rows=10></textarea></td>
-			</tr>
-		</table>
+	<div class="contentwrap">
+		<article class="container">
+		<div class="page-header">
+			<h1>
+				견적 요청서 <small>수정</small>
+			</h1>
+		</div>
 
-		<table cellspacing=0 cellpadding=0 border=0 width=500>
-			<tr>
-				<td><button class="btn btn-default" type="submit">재등록</button>
-					<a class="btn btn-default" href="UserMyApplicationPage.jsp"
-					role="button">목록</a></td>
-			</tr>
-		</table>
+		<div class="container">
+			<table class="table table-hover" width=700>
+
+				<tr>
+					<td><b>제목</b></td>
+					<td><input type=text class="form-control input-sm"
+						name=dbemail size=50 maxlength=50></td>
+				</tr>
+				<tr>
+					<td><b>이미지</b></td>
+					<td><div class="form-group">
+							<label for="exampleInputFile">이미지 업로드</label> <input type="file"
+								id="exampleInputFile">
+							<p class="help-block">자전거 사진 첨부</p>
+						</div> <br /></td>
+				</tr>
+				<tr>
+					<td><b>내용</b></td>
+					<td><textarea name=dbmemo class="form-control input-sm"
+							cols=50 rows=10></textarea></td>
+				</tr>
+			</table>
+
+			<table cellspacing=0 cellpadding=0 border=0 width=500>
+				<tr>
+					<td><button class="btn btn-default" type="submit">재등록</button>
+						<a class="btn btn-default" href="UserMyApplicationPage.jsp"
+						role="button">목록</a></td>
+				</tr>
+			</table>
+		</div>
+		</article>
 	</div>
 </body>
 </html>

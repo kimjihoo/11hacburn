@@ -99,7 +99,15 @@ body {
 								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
 								title_var.onclick = function () {
 									var tempP_id = $(this).attr('id');
-			                        //눌렀을 때 동적으로 아래로 생기게 해
+			                        $.get("http://localhost:8100/Badac/save_tunning_id",{
+			                        	tunningId : tempP_id,
+			                        },function(data){
+			                        	if(data.msg=="Success"){
+			                        		location.href="http://210.118.74.159:8100/Badac/go_my_application"
+			                        	}else{
+			                        		alert(data.msg);
+			                        	}
+			                        });
 			                    };
 								td.appendChild(title_var);
 								break;
@@ -160,10 +168,15 @@ body {
 	</div>
 	<!-- /.container --> </nav>
 	
+	<div class="contentwrap">
+		<article class="container">
+    <div class="page-header">
+	  <h1> 견적 요청서 <small>목록</small></h1>
+    </div>
+    
 	<div class="container">
 		<!-- 테이블 시작 -->
 		<table class="table table-hover" style="width:100%; text-align:center;">
-			<caption>나의 견적 요청서 목록</caption>
 			<thead>
 				<tr>
 					<td style="width:15%;">번호</td>
@@ -185,6 +198,63 @@ body {
 			</thead>
 		</table>
 		<!-- 등록버튼 종료 -->
+	</div>
+	
+	<div class="contentwrap">
+		<article class="container">
+		<div class="page-header">
+			<h1>
+				견적 요청서 <small>보기</small>
+			</h1>
+		</div>
+
+		<div class="container">
+			<table class="table table-hover" width=700
+				style="text-align: center;">
+				<tr>
+					<td style="width: 35%;"><b>날짜</b></td>
+					<td><input class="form-control" type="date" id="tunning_date"
+						readonly></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>코드</b></td>
+					<td><input class="form-control" type="text" id="tunning_id"
+						readonly></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>제목</b></td>
+					<td><input class="form-control" type="text" id="tunning_title"
+						readonly></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>이미지</b></td>
+					<td><div class="form-group">
+							<div class="vCeneter">
+								<span> <img src="http://placehold.it/340x180"
+									class="img-responsive" id="tunning_image"
+									alt="Responsive image"></span>
+							</div>
+						</div>
+						<p class="help-block">첨부된 자전거 사진</p> <br /></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>내용</b></td>
+					<td width=350><input class="form-control" type="text"
+						id="tunning_explanation" readonly></td>
+				</tr>
+			</table>
+
+			<table cellspacing=0 cellpadding=0 border=0 width=500>
+				<tr>
+					<td><a class="btn btn-default"
+						href="UserMyApplicationModifyPage.jsp" role="button">수정</a>
+						<button class="btn btn-default" type="submit">삭제</button> <a
+						class="btn btn-default" href="UserMyApplicationPage.jsp"
+						role="button">목록</a></td>
+				</tr>
+			</table>
+		</div>
+		</article>
 	</div>
 </body>
 </html>

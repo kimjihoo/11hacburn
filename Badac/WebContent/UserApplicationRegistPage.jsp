@@ -175,6 +175,14 @@ body {
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container --> </nav>
+	
+	<div class="contentwrap">
+		<article class="container">
+		<div class="page-header">
+			<h1>
+				견적 요청서 <small>등록</small>
+			</h1>
+		</div>
 
 	<div class="container">
 		<table class="table table-hover" width=700>
