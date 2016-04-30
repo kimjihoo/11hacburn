@@ -28,6 +28,29 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
+<script type="text/javascript">
+onload = function on_load(){
+	var tunning_date = document.getElementById("tunning_date");
+	var tunning_id = document.getElementById("tunning_id");
+	var tunning_title = document.getElementById("tunning_title");
+	var tunning_image = document.getElementById("tunning_image");
+	var tunning_explanation = document.getElementById("tunning_explanation");
+	
+	$.get("http://210.118.74.159:8100/Badac/get_application_info"
+		,function(data){
+			if(data.msg=="Success"){
+				tunning_date.value = data.date;
+				tunning_id.value = data.id;
+				tunning_title.value = data.title;
+				tunning_image.value = data.image;
+				tunning_explanation.value = data.explanation;
+							
+			}else{
+				alert(data.msg);
+			}
+	});
+}
+</script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -72,35 +95,41 @@ body {
 	<div class="container">
 		<table class="table table-hover" width=700>
 			<tr>
-				<td><b>조회수</b></td>
-				<td></td>
+				<td><b>날짜</b></td>
+				<td><input class="form-control" type="date" id="tunning_date"
+					readonly></td>
+			</tr>
+			<tr>
+				<td><b>코드</b></td>
+				<td><input class="form-control" type="text" id="tunning_id"
+					readonly></td>
 			</tr>
 			<tr>
 				<td><b>제목</b></td>
-				<td><input class="form-control" type="text"
-					placeholder="Readonly input here…" readonly></td>
+				<td><input class="form-control" type="text" id="tunning_title"
+					readonly></td>
 			</tr>
 			<tr>
 				<td><b>이미지</b></td>
 				<td><div class="form-group">
 						<img src="http://placehold.it/340x180" class="img-responsive"
-							alt="Responsive image">
+							id="tunning_image" alt="Responsive image">
 						<p class="help-block">첨부된 자전거 사진</p>
 					</div> <br /></td>
 			</tr>
 			<tr>
 				<td><b>내용</b></td>
 				<td width=350><input class="form-control" type="text"
-					placeholder="Readonly input here…" readonly> </textarea></td>
+					id="tunning_explanation" readonly></td>
 			</tr>
 		</table>
 
 		<table cellspacing=0 cellpadding=0 border=0 width=500>
 			<tr>
-				<td><a class="btn btn-default" href="UserMyApplicationModifyPage.jsp"
-					role="button">수정</a>
-					<button class="btn btn-default" type="submit">삭제</button>
-					<a class="btn btn-default" href="UserMyApplicationPage.jsp"
+				<td><a class="btn btn-default"
+					href="UserMyApplicationModifyPage.jsp" role="button">수정</a>
+					<button class="btn btn-default" type="submit">삭제</button> <a
+					class="btn btn-default" href="UserMyApplicationPage.jsp"
 					role="button">목록</a></td>
 			</tr>
 		</table>
