@@ -171,13 +171,8 @@ public class ApplicationInfoServlet extends HttpServlet {
 			response.getWriter().write(json.toString());
 		}else if(action.equals("save_tunning_id")){
 			int tunningId = Integer.parseInt(request.getParameter("tunningId"));
-			System.out.println(tunningId);
-			Cookie cookie = new Cookie("tunning_id", Integer.toString(tunningId));
-			
-			cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
-			
-			response.addCookie(cookie);
-			
+			request.getSession().setAttribute("tunningID", Integer.toString(tunningId));
+			request.getRequestDispatcher("UserMyApplicationViewPage.jsp").forward(request, response);
 			String msg = "Success";
 			JSONObject json = new JSONObject();
 			

@@ -70,6 +70,13 @@ public class MemberInfo {
 		this.company_name = company_name;
 		this.company_telephone = company_telephone;
 	}
+	public MemberInfo(int company_id, String company_name, String company_telephone, String company_region_2, String company_region_3){
+		this.company_id = company_id;
+		this.company_name = company_name;
+		this.company_telephone = company_telephone;
+		this.company_region_2 = company_region_2;
+		this.company_region_3 = company_region_3;
+	}
 	
 	public int getCompany_id() {
 		return company_id;

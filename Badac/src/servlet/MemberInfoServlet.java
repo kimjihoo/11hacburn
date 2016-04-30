@@ -141,6 +141,53 @@ public class MemberInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
+		}else if(action.equals("member_list")){
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			
+			ArrayList<MemberInfo> memberList = mid.memberList();
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			
+			if(memberList.size()==0){
+				msg = "MemberList is none";
+			}else{
+				JSONArray memberListJson = new JSONArray();
+				JSONObject memberInfo;
+				
+				try{
+					for(MemberInfo temp : memberList){
+						memberInfo = new JSONObject();
+						
+						memberInfo.put("id", temp.getCompany_id());
+						memberInfo.put("name", temp.getCompany_name());
+						memberInfo.put("telephone", temp.getCompany_telephone());
+						memberInfo.put("region2", temp.getCompany_region_2());
+						memberInfo.put("region3", temp.getCompany_region_3());
+						
+						memberListJson.put(memberInfo);
+					}
+					json.put("memberList", memberListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
 		}else if( action.equals("member_main_page") ){
 			String userCode = null;
 			
