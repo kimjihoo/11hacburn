@@ -73,32 +73,6 @@ public class ApplicationInfoServlet extends HttpServlet {
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		}else if(action.equals("go_my_application_page")){
-			String userCode = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					String cookieName = cookie[i].getName();
-					
-					if( cookieName != null ){
-						if( cookieName.equals("user_id")){ // 여러대 확인해
-							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
-						}
-					}
-				}
-			}
-			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "UserMyApplicationPage.jsp";
-			}
-			else{
-				dispatchUrl = "LoginPage.jsp";
-			}
 		}else if(action.equals("my_application_list")){
 			int user_id = Integer.parseInt(request.getParameter("userId"));
 			
@@ -147,7 +121,6 @@ public class ApplicationInfoServlet extends HttpServlet {
 		} else if(action.equals("get_application_info")){
 			int id = Integer.parseInt(request.getParameter("tunningId"));
 			
-			
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
 			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId(id);
 			aid.disconnect();
@@ -162,22 +135,6 @@ public class ApplicationInfoServlet extends HttpServlet {
 				json.put("title", applicationInfo.getTunning_title());
 				json.put("explanation", applicationInfo.getTunning_explanation());
 				json.put("date", applicationInfo.getUpload_date());
-			}
-			catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			response.setContentType("application/json");
-			response.getWriter().write(json.toString());
-		}else if(action.equals("save_tunning_id")){
-			int tunningId = Integer.parseInt(request.getParameter("tunningId"));
-			request.getSession().setAttribute("tunningID", Integer.toString(tunningId));
-			request.getRequestDispatcher("UserMyApplicationViewPage.jsp").forward(request, response);
-			String msg = "Success";
-			JSONObject json = new JSONObject();
-			
-			try{
-				json.put("msg", msg);
 			}
 			catch (JSONException e) {
 				// TODO Auto-generated catch block

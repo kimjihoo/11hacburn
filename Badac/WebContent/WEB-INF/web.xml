@@ -306,14 +306,6 @@
     <url-pattern>/get_application_info</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>SaveTunningId</servlet-name>
-    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SaveTunningId</servlet-name>
-    <url-pattern>/save_tunning_id</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>GetMemberList</servlet-name>
     <servlet-class>servlet.MemberInfoServlet</servlet-class>
   </servlet>
@@ -321,4 +313,13 @@
     <servlet-name>GetMemberList</servlet-name>
     <url-pattern>/member_list</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GoApplicationPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoApplicationPage</servlet-name>
+    <url-pattern>/go_my_application_page</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

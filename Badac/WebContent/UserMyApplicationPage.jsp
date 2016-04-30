@@ -99,15 +99,7 @@ body {
 								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
 								title_var.onclick = function () {
 									var tempP_id = $(this).attr('id');
-			                        $.get("http://localhost:8100/Badac/save_tunning_id",{
-			                        	tunningId : tempP_id,
-			                        },function(data){
-			                        	if(data.msg=="Success"){
-			                        		location.href="http://210.118.74.159:8100/Badac/go_my_application"
-			                        	}else{
-			                        		alert(data.msg);
-			                        	}
-			                        });
+			                        //눌렀을 때 동적으로 아래로 생기게 해
 			                    };
 								td.appendChild(title_var);
 								break;
