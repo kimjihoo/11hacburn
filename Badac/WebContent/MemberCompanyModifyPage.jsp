@@ -256,7 +256,7 @@ body{
 	</div>
 	
 	<div class="form-group">
-		<label class="col-sm-2 control-label">서브이미지1</label>
+		<label class="col-sm-2 control-label">서브이미지</label>
 		<div class="col-sm-4">
 			<input type="file"  id="inputSubImage1"> 
 		</div>
