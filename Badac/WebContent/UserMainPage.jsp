@@ -81,8 +81,7 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 						"company_address": tempData[i].region2 + " " + tempData[i].region3,
 						"company_telephone" : tempData[i].telephone
 						}
-			alert(memberData[tempData[i].id].company_id + " " + memberData[tempData[i].id].company_name + " " + memberData[tempData[i].id].company_address + " " + memberData[tempData[i].id].company_telephone);
-	
+		
 			}
 		for (var j = 0; j <5; j++)
 			{				// 이미지 경로 확인!
@@ -187,9 +186,13 @@ body { padding-top: 70px; }
 </div>
 </div>
 
-
-
-
+<script>
+windows.onload = function(){
+		$.get("http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json", function(data){
+					alert(data);
+		});
+};
+</script>
 
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -223,6 +226,8 @@ geocoder.addr2coord(userAddress, function(status, result) {
             content: '<div style="padding:5px;">우리집</div>'
         });
         infowindow.open(map, marker);
+        
+        map.setCenter(new daum.maps.LatLng(37.537183, 127.005454));
     } 
 });    
 	</script>
