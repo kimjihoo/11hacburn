@@ -19,18 +19,7 @@
             crossorigin="anonymous"></script>
 
  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services"></script>
-<script>
-onload = function on_load(){
-$.get("http://210.118.74.159:8100/Badac/member_list", function(data){
-	if(data.msg=="Success"){
-			
-	}
-	else{
-		alert(data.msg);
-	}
-});
-}
-</script>
+
 
 
 
@@ -77,10 +66,39 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 
 	///////////////////////////////////////////////////////////////////
 </script>
+<script>
+onload = function on_load(){
+$.get("http://210.118.74.159:8100/Badac/member_list", function(data){
+	if(data.msg=="Success"){
+		var applicationData = {};
+		var tempData = data.applicationList;
 
-
-
-
+		for(var i = 0; i<tempData.length; i++){
+	
+				applicationData[tempData[i].id] = {
+						"company_id": data.id,
+						"company_name": data.name,
+						"company_address": data.region_2 + " " + data.region_3,
+						"company_phone" : data.phone,
+						"company_telephone" : data.telephone
+						}
+			alert(data.id + " " + data.name + " " + data.region_2 + " " + data.region_3 + " " + data.phone + " " + data.telephone);
+	
+			}
+		for (var j = 0; j <5; j++)
+			{				// 이미지 경로 확인!
+								$('#region_member_list').append('<tr><td rowspan="4" ><img src="http://placehold.it/140x140"/></td><td>'+ applicationData[j].company_name +'</td></tr>');
+								$('#region_member_list').append("<tr><td>"+ applicationData[j].company_address +"</td></tr>");
+								$('#region_member_list').append("<tr><td>"+ applicationData[j].company_telephone +"</td></tr>");
+								$('#region_member_list').append("<tr><td>"+ applicationData[j].company_phone +"</td></tr>");
+			}
+	}
+	else{
+		alert(data.msg);
+	}
+});
+}
+</script>
 
 <style>
 body { padding-top: 70px; }
@@ -128,7 +146,7 @@ body { padding-top: 70px; }
                     	<td style="padding-left : 20px;"><%= username %></td>
                     	</tr>
                     	<tr>
-                    	<td style="padding-left : 20px;"><%= useremail %></td>
+                    	<td style='padding-left : 20px;'><%= useremail %></td>
                     	</tr>
                     	</table>
                     	</li>
@@ -165,7 +183,7 @@ body { padding-top: 70px; }
 	</div>
 	<div class="col-lg-6 col-sm-6" id="map" style="height:500px;"></div>
 	<div class="col-lg-4 col-sm-4">
-		<table class="table table-hover">
+		<table class="table table-hover" id="region_member_list">
 		<tr>
 			<td rowspan="4" ><img src="http://placehold.it/140x140"/></td>
 			<td>경겨딩기ㅗdfsdgsdfsdfsdf</td>
@@ -216,12 +234,9 @@ geocoder.addr2coord(userAddress, function(status, result) {
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="padding:5px;">우리회사</div>'
+            content: '<div style="padding:5px;">우리집</div>'
         });
         infowindow.open(map, marker);
-        
-
-
     } 
 });    
 	</script>
