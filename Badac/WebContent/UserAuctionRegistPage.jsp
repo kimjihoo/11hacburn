@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>견적 요청서 등록</title>
+<title>거래 등록</title>
 
 <style>
 body {
@@ -258,7 +258,7 @@ body {
 		<article class="container">
 		<div class="page-header">
 			<h1>
-				거래  <small>등록</small>
+				거래 <small>등록</small>
 			</h1>
 		</div>
 
