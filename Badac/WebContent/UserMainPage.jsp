@@ -70,27 +70,25 @@
 onload = function on_load(){
 $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 	if(data.msg=="Success"){
-		var applicationData = {};
-		var tempData = data.applicationList;
+		var memberData = {};
+		var tempData = data.memberList;
 
 		for(var i = 0; i<tempData.length; i++){
 	
-				applicationData[tempData[i].id] = {
-						"company_id": data.id,
-						"company_name": data.name,
-						"company_address": data.region_2 + " " + data.region_3,
-						"company_phone" : data.phone,
-						"company_telephone" : data.telephone
+				memberData[tempData[i].id] = {
+						"company_id": tempData[i].id,
+						"company_name": tempData[i].name,
+						"company_address": tempData[i].region2 + " " + tempData[i].region3,
+						"company_telephone" : tempData[i].telephone
 						}
-			alert(data.id + " " + data.name + " " + data.region_2 + " " + data.region_3 + " " + data.phone + " " + data.telephone);
+			alert(memberData[tempData[i].id].company_id + " " + memberData[tempData[i].id].company_name + " " + memberData[tempData[i].id].company_address + " " + memberData[tempData[i].id].company_telephone);
 	
 			}
 		for (var j = 0; j <5; j++)
 			{				// 이미지 경로 확인!
-								$('#region_member_list').append('<tr><td rowspan="4" ><img src="http://placehold.it/140x140"/></td><td>'+ applicationData[j].company_name +'</td></tr>');
-								$('#region_member_list').append("<tr><td>"+ applicationData[j].company_address +"</td></tr>");
-								$('#region_member_list').append("<tr><td>"+ applicationData[j].company_telephone +"</td></tr>");
-								$('#region_member_list').append("<tr><td>"+ applicationData[j].company_phone +"</td></tr>");
+				$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
+				$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
+				$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
 			}
 	}
 	else{
@@ -184,19 +182,7 @@ body { padding-top: 70px; }
 	<div class="col-lg-6 col-sm-6" id="map" style="height:500px;"></div>
 	<div class="col-lg-4 col-sm-4">
 		<table class="table table-hover" id="region_member_list">
-		<tr>
-			<td rowspan="4" ><img src="http://placehold.it/140x140"/></td>
-			<td>경겨딩기ㅗdfsdgsdfsdfsdf</td>
-		</tr>
-		<tr>
-			<td>sdfsdgsdfsdgsdfsdfsdf</td>
-		</tr>
-		<tr>
-			<td>0319658sdfsdgsdfsd00</td>
-		</tr>
-		<tr>
-			<td>삼천리자전거</td>
-		</tr>			
+			
 		</table>
 </div>
 </div>
