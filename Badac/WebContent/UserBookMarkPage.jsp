@@ -1,10 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	<%@page import="java.net.URLDecoder"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>즐겨찾기</title>
+	<script>
+<%  
+Cookie[] cookies = request.getCookies() ;
+
+int userid = 0;
+String username=null;
+String useremail=null;
+
+if(cookies != null){
+     
+    for(int i=0; i < cookies.length; i++){
+        Cookie c = cookies[i] ;
+         
+        if( c.getName().equals("user_id") ){
+        	userid = Integer.parseInt(c.getValue());
+        }
+        if( c.getName().equals("user_name") ){
+        	username = URLDecoder.decode(c.getValue(), "UTF-8");
+        }
+        if( c.getName().equals("user_email") ){
+        	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
+        }
+    }
+} 
+%>
+
+var userId = '<%= userid %>';
+var userName = '<%= username %>';
+var userEmail = '<%= useremail %>';
+
+onload = function on_load(){
+	var temp1 = document.getElementById("userIdDiv");
+    var temp2 = document.getElementById('userNameDiv');
+    var temp3 = document.getElementById('userEmailDiv');
+    
+    temp1.appendChild(document.createTextNode(userId));
+    temp2.appendChild(document.createTextNode(userName));
+    temp3.appendChild(document.createTextNode(userEmail));
+}
+
+function userLogout(){
+	location.href = "http://localhost:8100/Badac/user_logout";
+}
+function writeApplication(){
+	location.href = "http://localhost:8100/Badac/write_application";
+}
+</script>
 <style>
 body {
 	padding-top: 70px;
@@ -31,43 +79,63 @@ body {
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">BADOC</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">About</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Contact</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">사용자
-						정보 <span class="caret"></span>
-				</a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href=""><img src="http://placehold.it/130x100"
-								alt=".." /></a></li>
-						<li><a id="name"></a></li>
-						<li><a id="email"></a></li>
-						<li class="divider"></li>
-						<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
-						<li><a
-							href="http://localhost:8100/Badac/go_user_update_information">개인정보
-								수정</a></li>
-						<li><a href="#">견적 요청 내역 보기</a></li>
-						<li><a href="http://localhost:8100/Badac/write_application">견적
-								제안서 작성</a></li>
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BADOC</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" >
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                  	<li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">개인정보 내역 <span class="caret"></span></a>
+                  	<ul class="dropdown-menu" role="menu">
+                    	<li>
+                    	<table>
+                    	<tr>
+                    	<td rowspan=2 ><a href="#"><img src="http://placehold.it/100x100" alt=".."/></a></td>
+                    	<td style="padding-left : 20px;"><%= username %></td>
+                    	</tr>
+                    	<tr>
+                    	<td style='padding-left : 20px;'><%= useremail %></td>
+                    	</tr>
+                    	</table>
+                    	</li>
+                    	<li>
+                    	<table>
+                    	<tr>
+                    	<td style="text-align = center;">
+                    	<a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a>
+                    	</td>
+                    	<td style="text-align = center;">
+                    	<a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a>
+                    	</td>
+                    	</tr>
+                    	</table>
+                    	</li>
+                    	<li class="divider"></li>
 
-					</ul></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav>
+                    	<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
+                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>                    	
+
+																				</ul>
+                	</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
 	<!-- Page Content -->
 	<div class="container">
@@ -120,7 +188,7 @@ body {
 				<div class="row">
 					<div class="col-sm-4 col-lg-4 col-md-4">
 						<div class="thumbnail">
-							<img src="images/samchuly.png" width="320" height="150" alt="" />
+							<img src="./Badac/WebContent/images/samchuly.png" width="320" height="150" alt="" />
 							<div class="caption">
 								<h4 class="pull-right"></h4>
 								<h4>

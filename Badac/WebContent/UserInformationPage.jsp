@@ -283,42 +283,63 @@ body {
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">BADOC</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">About</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Contact</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">사용자
-						정보 <span class="caret"></span>
-				</a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href=""><img src="http://placehold.it/130x100"
-								alt=".." /></a></li>
-						<li><a id="name"></a></li>
-						<li><a id="email"></a></li>
-						<li class="divider"></li>
-						<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
-						<li><a
-							href="http://localhost:8100/Badac/go_user_update_information">개인정보
-								수정</a></li>
-						<li><a href="#">견적 요청 내역 보기</a></li>
-						<li><a href="http://localhost:8100/Badac/write_application">견적
-								제안서 작성</a></li>
-					</ul></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav>
+    <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BADOC</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right" >
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                  	<li class="dropdown">
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">개인정보 내역 <span class="caret"></span></a>
+                  	<ul class="dropdown-menu" role="menu">
+                    	<li>
+                    	<table>
+                    	<tr>
+                    	<td rowspan=2 ><a href="#"><img src="http://placehold.it/100x100" alt=".."/></a></td>
+                    	<td style="padding-left : 20px;"><%= username %></td>
+                    	</tr>
+                    	<tr>
+                    	<td style='padding-left : 20px;'><%= useremail %></td>
+                    	</tr>
+                    	</table>
+                    	</li>
+                    	<li>
+                    	<table>
+                    	<tr>
+                    	<td style="text-align = center;">
+                    	<a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a>
+                    	</td>
+                    	<td style="text-align = center;">
+                    	<a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a>
+                    	</td>
+                    	</tr>
+                    	</table>
+                    	</li>
+                    	<li class="divider"></li>
+
+                    	<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
+                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>                    	
+
+																				</ul>
+                	</li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
 	<!-- Page Content -->
 	<div class="container">
