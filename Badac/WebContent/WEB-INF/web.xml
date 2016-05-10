@@ -321,5 +321,13 @@
     <servlet-name>GoApplicationPage</servlet-name>
     <url-pattern>/go_my_application_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowApplicationPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowApplicationPage</servlet-name>
+    <url-pattern>/show_application</url-pattern>
+  </servlet-mapping>
   
 </web-app>

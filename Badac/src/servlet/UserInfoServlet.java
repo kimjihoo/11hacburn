@@ -107,7 +107,7 @@ public class UserInfoServlet extends HttpServlet {
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		}else if(action.equals("go_my_application")){
+		}else if(action.equals("show_application")){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
@@ -128,7 +128,7 @@ public class UserInfoServlet extends HttpServlet {
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				dispatchUrl = "UserMyApplicationViewPage.jsp";
+				dispatchUrl = "ShowApplicationPage.jsp";
 			}
 			else{
 				dispatchUrl = "LoginPage.jsp";
@@ -517,18 +517,6 @@ public class UserInfoServlet extends HttpServlet {
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						
 						response.addCookie(cookie);
-						
-						//if( checkBox != null ){ // 세션
-							//cookie = new Cookie("user_check", "true");
-							
-							//cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
-							
-							//response.addCookie(cookie);
-						//}
-						
-						//response.sendRedirect("");
-						
-						//dispatchUrl = "MainPage.jsp";
 					} 
 					else {
 						msg = "PasswordError";
