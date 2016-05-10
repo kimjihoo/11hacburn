@@ -17,22 +17,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
-    <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"   integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="   crossorigin="anonymous"></script>
 
- <script type="text/javascript" src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
+ <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services"></script>
+<script>
+onload = function on_load(){
+$.get("http://210.118.74.159:8100/Badac/member_list", function(data){
+	if(data.msg=="Success"){
+			
+	}
+	else{
+		alert(data.msg);
+	}
+});
+}
+</script>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
 <script>    
     ////////////////////////////////////////////////////////
-    <% // 쿠키값 가져오기
+    <% // 
     Cookie[] cookies = request.getCookies() ;
     
     int userid = 0;
     String username=null;
     String useremail=null;
-    
+    String useraddress1=null;
+    String useraddress2=null;
     if(cookies != null){
          
         for(int i=0; i < cookies.length; i++){
@@ -47,6 +58,12 @@
             if( c.getName().equals("user_email") ){
             	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
             }
+            if( c.getName().equals("user_region_2") ){
+            	useraddress1 = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
+            if( c.getName().equals("user_region_3") ){
+            	useraddress2 = URLDecoder.decode(c.getValue(), "UTF-8");
+            }
         }
     } 
     %>
@@ -54,89 +71,34 @@
     var userId = '<%= userid %>';
     var userName = '<%= username %>';
     var userEmail = '<%= useremail %>';
-    
+    var userAddress = '<%= useraddress1 %> + " " + <%= useraddress2 %>'
     
     
 
 	///////////////////////////////////////////////////////////////////
 </script>
-<script>
-function change_img_dialog() {
-    var dialog;
 
-    dialog = $("#changeimg-dialog-form").dialog({
-        /*position: ,*/
-        autoOpen: false,
-        width: 400,
-        height: 400,
-        modal: true,
-        buttons: {
-            "선택": function () {
-                    var fileSelect = document.getElementById("choice_main_img");
-                    var files = fileSelect.files;
-                    formData = new FormData();
-                    for (var i = 0; i < files.length; i++) {
-                   	     var file = files[i];
-                         formData.append('file', file, file.name);
-                    }
-                    formData.append('appId',-1);
-                    if(files.length==0){
-                    	alert('파일을 선택해주세요.');
-                    }else if(files.length!=0){
-                    	$.ajax({
-                            url: 'http://210.118.74.159:8100/Badac/upload_picture',
-                            type: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            async: false,
-                            success: function (data) {
-                                if (data.msg == 'Success') {
-                                    $.get("http://210.118.74.159:8100/Badac/get_picture_list",{
-                                    	appId:-1,
-                                    }, function(data){
-                                    	if(data.msg=="Success"){
-                                    		//메인 이미지 가져온 걸로 바꿈.
-                                    		$("#user_main_img").attr("backgroundImage", "url(../"+data.pictureList[0].path+")");
-                                    		alert(data.pictureList[0].path);
-                                            $("#user_main_img").attr("name", data.pictureList[0].id);
-                                    		alert('업로드를 완료했습니다.');
-                                            dialog.dialog("close");
-                                    	}
-                                    });
-                                }else{
-                                	alert(data.msg);
-                                }
-                            },
-                            error: function(data){
-                                alert(data.msg);
-                            }
-                        });     
-                }
-                
-                //alert(path);
-                
-            },
-            "취소": function () {
-                dialog.dialog("close");
-            }
-        },
-        close: function () {
-            dialog.dialog("close");
-        }
-    });
-    dialog.dialog('open');
-}
-</script>
+
+
+
+
 <style>
 body { padding-top: 70px; }
 </style>
 
 <script type="text/javascript">
+
+	
+	function userLogout(){
+		location.href = "http://210.118.74.159:8100/Badac/user_logout";
+	}
+	function writeApplication(){
+		location.href = "http://210.118.74.159:8100/Badac/write_application";
+	}
 </script>
 </head>
 <body>
-
+				<!--  -->
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
         <div class="container">
@@ -157,21 +119,38 @@ body { padding-top: 70px; }
                         <a href="#">Contact</a>
                     </li>
                   	<li class="dropdown">
-                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span></a>
+                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">개인정보 내역 <span class="caret"></span></a>
                   	<ul class="dropdown-menu" role="menu">
-                    	<li onclick="change_img_dialog()"><div id="user_main_img" style="width:130px; height:130px;"></div></li>
-                    	<li><a id="name"></a></li>
-                    	<li><a id="email"></a></li>
+                    	<li>
+                    	<table>
+                    	<tr>
+                    	<td rowspan=2 ><a href="#"><img src="http://placehold.it/100x100" alt=".."/></a></td>
+                    	<td style="padding-left : 20px;"><%= username %></td>
+                    	</tr>
+                    	<tr>
+                    	<td style="padding-left : 20px;"><%= useremail %></td>
+                    	</tr>
+                    	</table>
+                    	</li>
+                    	<li>
+                    	<table>
+                    	<tr>
+                    	<td style="text-align = center;">
+                    	<a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a>
+                    	</td>
+                    	<td style="text-align = center;">
+                    	<a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a>
+                    	</td>
+                    	</tr>
+                    	</table>
+                    	</li>
                     	<li class="divider"></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a></li>
+
                     	<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
-                    	
-                  	</ul>
+                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>                    	
+
+																				</ul>
                 	</li>
-         
-                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -189,36 +168,63 @@ body { padding-top: 70px; }
 		<table class="table table-hover">
 		<tr>
 			<td rowspan="4" ><img src="http://placehold.it/140x140"/></td>
-			<td>삼천리sdfsdgsdfsdfsdf자전거</td>
+			<td>경겨딩기ㅗdfsdgsdfsdfsdf</td>
 		</tr>
 		<tr>
-			<td>경기도sdfsdgsdfsdgsdfsdfsdf고양시</td>
+			<td>sdfsdgsdfsdgsdfsdfsdf</td>
 		</tr>
 		<tr>
 			<td>0319658sdfsdgsdfsd00</td>
 		</tr>
 		<tr>
-			<td>맞은편</td>
+			<td>삼천리자전거</td>
 		</tr>			
 		</table>
 </div>
 </div>
+
+
+
+
+
 	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new daum.maps.LatLng(37.657418, 127.0463547),
-			level: 3
-		};
-		var map = new daum.maps.Map(container, options);
-		
-		
-		document.getElementById("name").innerHTML = userName;
-		document.getElementById("email").innerHTML = userEmail;
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+// 지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addr2coord(userAddress, function(status, result) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+            content: '<div style="padding:5px;">우리회사</div>'
+        });
+        infowindow.open(map, marker);
+        
+
+
+    } 
+});    
 	</script>
-<div id="changeimg-dialog-form" title="이미지 선택" style="display:none; z-index:101;">
-    <div style="width:100%;">
-        <input type="file" id="choice_main_img" style="float:right;">
-    </div>
-</div>
+
 </body>
 </html>
