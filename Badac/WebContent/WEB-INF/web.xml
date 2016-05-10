@@ -329,5 +329,12 @@
     <servlet-name>ShowApplicationPage</servlet-name>
     <url-pattern>/show_application</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>DeleteApplication</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteApplication</servlet-name>
+    <url-pattern>/delete_application</url-pattern>
+  </servlet-mapping>
 </web-app>

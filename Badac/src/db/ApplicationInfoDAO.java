@@ -180,4 +180,43 @@ public class ApplicationInfoDAO extends BaseDAO {
 		
 		return applicationInfo;
 	}
+	
+	public int deleteApplicationInfoByTunningId(int tunningId){
+		int lowCnt = -1;
+		PreparedStatement ps=null;
+		
+		try
+		{	
+			String sql="";
+			sql="DELETE FROM tunning_application WHERE tunning_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, tunningId);
+			
+			lowCnt = ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return lowCnt;
+	}
 }

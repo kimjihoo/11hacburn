@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -20,9 +22,11 @@ import org.json.JSONObject;
 
 import db.ApplicationInfoDAO;
 import db.MemberInfoDAO;
+import db.PictureInfoDAO;
 import db.UserInfoDAO;
 import model.ApplicationInfo;
 import model.MemberInfo;
+import model.PictureInfo;
 import model.UserInfo;
 
 /**
@@ -220,6 +224,62 @@ public class ApplicationInfoServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
+		}else if(action.equals("delete_application")){
+			String userCode = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){
+							userCode = cookie[i].getValue();
+						}
+						else if( cookieName.equals("company_id")){
+							userCode = cookie[i].getValue();
+						}
+					}
+				}
+				
+				if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))) {
+					String msg = "Success";
+					
+					if( userCode == null || userCode.equals("") ){
+						msg = "Fail";
+					}
+					else{
+						int tunningId = Integer.parseInt(request.getParameter("tunningId"));
+						if( tunningId == 0 ){
+							msg = "ParameterError";
+						}
+						else{
+							ApplicationInfoDAO pid = new ApplicationInfoDAO();
+							pid.deleteApplicationInfoByTunningId(tunningId);
+							pid.disconnect();
+						}			
+					}
+					
+					JSONObject json = new JSONObject();
+			        
+			        try{
+						json.put("msg", msg);
+					}
+					catch(JSONException e){
+						e.printStackTrace();
+					}
+					
+					response.setContentType("application/json");
+					response.getWriter().write(json.toString());
+				} else {
+					response.sendRedirect("");
+				}
+			}
+			else{
+				response.sendRedirect("");
+			}
 		}
 	}
 

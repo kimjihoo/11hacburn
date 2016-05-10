@@ -71,7 +71,7 @@ body {
 </script>
 <script>
 	onload = function on_load(){
-		$.get("http://localhost:8100/Badac/get_application_info",{
+		$.get("http://210.118.74.159:8100/Badac/get_application_info",{
 			tunningId:tunningId,
 		},
 			function(data){
@@ -80,6 +80,20 @@ body {
 					document.getElementById("tunning_id").value=data.id;
 					document.getElementById("tunning_title").value=data.title;
 					document.getElementById("tunning_explanation").value=data.explanation;
+				}else{
+					alert(data.msg);
+				}
+		});
+	}
+	
+	function delApplication(){
+		$.post("http://210.118.74.159:8100/Badac/delete_application",{
+			tunningId:tunningId,
+		},
+			function(data){
+				if(data.msg=="Success"){
+					alert("제안서를 삭제했습니다.");
+					location.href="http://210.118.74.159:8100/Badac/go_my_application_page";
 				}else{
 					alert(data.msg);
 				}
@@ -171,9 +185,8 @@ body {
 
 			<table cellspacing=0 cellpadding=0 border=0 width=500>
 				<tr>
-					<td><a class="btn btn-default"
-						href="UserMyApplicationModifyPage.jsp" role="button">수정</a>
-						<button class="btn btn-default" type="submit">삭제</button>
+					<td>
+						<button class="btn btn-default" type="submit" onclick="delApplication()">삭제</button></td>
 				</tr>
 			</table>
 		</div>
