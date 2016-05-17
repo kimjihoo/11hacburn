@@ -27,7 +27,7 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 						}
 		
 			}
-		for (var j = 0; j <5; j++)
+		for (var j = 0; j <tempData.length; j++)
 			{				// 이미지 경로 확인!
 				$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
 				$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
@@ -63,7 +63,7 @@ body {
 
 		<div class="col-lg-2 col-sm-2"></div>
 		<div class="col-lg-6 col-sm-6" id="map" style="height: 500px;"></div>
-		<div class="col-lg-4 col-sm-4">
+		<div class="col-lg-4 col-sm-4" style="overflow-y:scroll; height:800px;">
 			<table class="table table-hover" id="region_member_list">
 
 			</table>
