@@ -165,7 +165,7 @@ body {
 		<div class="row">
 			<div class="col-sm-4">
 				<img class="img-circle img-responsive img-center"
-					src="handshake.png" alt="">
+					src="images/handshake.png" alt="">
 				<h2>고객-업체 연계 서비스</h2>
 				<p class="text-muted">
 				

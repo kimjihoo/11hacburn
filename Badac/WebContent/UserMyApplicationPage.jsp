@@ -147,9 +147,9 @@ body {
 						<li><a id="name"></a></li>
 						<li><a id="email"></a></li>
 						<li class="divider"></li>
-						<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
 						<li><a
-							href="http://localhost:8100/Badac/go_user_update_information">개인정보
+							href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보
 								수정</a></li>
 						<li><a href="#">견적 요청 내역 보기</a></li>
 						<li><a href="http://localhost:8100/Badac/write_application">견적
