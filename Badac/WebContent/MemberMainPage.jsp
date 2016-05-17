@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="java.net.URLDecoder"%>
@@ -148,6 +147,25 @@ body { padding-top: 70px; }
 	    dialog.dialog('open');
 	}
 </script>
+				<script>
+				onload = function on_load(){
+					$.get("http://210.118.74.159:8100/Badac/get_application_info",{
+						tunningId:tunningId,
+					},
+						function(data){
+							if(data.msg=="Success"){
+								document.getElementById("tunning_date").value=data.date;
+								document.getElementById("tunning_id").value=data.id;
+								document.getElementById("tunning_title").value=data.title;
+								document.getElementById("tunning_explanation").value=data.explanation;
+							}else{
+								alert(data.msg);
+							}
+					});
+				}
+				</script>
+
+
 </head>
 <body>
 회사 페이지
@@ -194,5 +212,14 @@ body { padding-top: 70px; }
         <input type="file" id="choice_main_img" style="float:right;">
     </div>
 </div>
+
+<!-- 견적요청서 받아오는 테이블 -->
+<div class="col-lg-4 col-sm-4">
+		<table class="table table-hover" id="region_application_list">
+				
+		</table>
+</div>
+
+
 </body>
 </html>

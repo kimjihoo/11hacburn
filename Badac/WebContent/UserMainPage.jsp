@@ -70,15 +70,23 @@ body {
 		</div>
 	</div>
 
-	<script>
-windows.onload = function(){
-		$.get("http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json", function(data){
-					alert(data);
-		});
-};
-</script>
+
 
 	<script>
+	// 수정!(지도 좌표받아오기)
+	var point_x;
+	var point_y;
+	$.ajax({
+		  dataType: "jsonp",
+		  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json",
+				async : false,
+		  success : function( data ) {
+			  point_x = data.channel.item[0].point_x;
+			  point_y = data.channel.item[0].point_y;
+										
+		  }
+		});
+	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
