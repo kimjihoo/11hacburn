@@ -11,10 +11,12 @@
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services"></script>
 
 <script>
+var memberData = {};
+
 onload = function on_load(){
 $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 	if(data.msg=="Success"){
-		var memberData = {};
+		
 		var tempData = data.memberList;
 
 		for(var i = 0; i<tempData.length; i++){
@@ -23,13 +25,15 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 			$.ajax({
 				  dataType: "jsonp",
 				  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+tempData[i].region2 + " " + tempData[i].region3+"&output=json",
-						async : false,
+				  async : false,
 				  success : function( data ) {
+					  alert(data.channel.item[0].point_x);
 					  lng_x = data.channel.item[0].point_x;
 					  lat_y = data.channel.item[0].point_y;
 												
 				  }
 				});
+			//alert(lng_x+", "+lat_y);
 				memberData[tempData[i].id] = {
 						"company_id": tempData[i].id,
 						"company_name": tempData[i].name,
@@ -38,14 +42,16 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 						"lng_x" : lng_x,
 						"lat_y" : lat_y
 						}
+				//alert(memberData[tempData[i].id].company_id);
 		
 			}
-		for (var j = 0; j <tempData.length; j++)
-			{				// 이미지 경로 확인!
-				$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
-				$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
-				$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
-			}
+		
+		
+		for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
+			$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
+			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
+			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
+		}
 	}
 	else{
 		alert(data.msg);
@@ -94,8 +100,8 @@ body {
 		  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json",
 				async : false,
 		  success : function( data ) {
-			  point_x = data.channel.item[0].point_x;
-			  point_y = data.channel.item[0].point_y;
+			  point_x : data.channel.item[0].point_x;
+			  point_y : data.channel.item[0].point_y;
 										
 		  }
 		});
@@ -138,14 +144,16 @@ geocoder.addr2coord(userAddress, function(status, result) {
 
     } 
 });   
-for(var t = 0; t<tempData.length; t++){
+alert(JSON.stringify(memberData));
+for(var t = 0; t<memberData.length; t++){
+	alert(t);
 	geocoder.addr2coord(userAddress, function(status, result) {
 
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === daum.maps.services.Status.OK) {
 
 	        var coords = new daum.maps.LatLng(memberData[tempData[t].id].lat_y, memberData[tempData[t].id].lng_x);
-									
+			alert(memberData[tempData[t].id].lat_y);						
 
 	        // 결과값으로 받은 위치를 마커로 표시합니다
 	        var marker = new daum.maps.Marker({
@@ -164,7 +172,6 @@ for(var t = 0; t<tempData.length; t++){
 	    } 
 	});
 }
-  
 	</script>
 
 </body>
