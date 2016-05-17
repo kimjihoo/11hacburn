@@ -18,12 +18,25 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 		var tempData = data.memberList;
 
 		for(var i = 0; i<tempData.length; i++){
-	
+			var lng_x;
+			var lat_y;
+			$.ajax({
+				  dataType: "jsonp",
+				  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+tempData[i].region2 + " " + tempData[i].region3+"&output=json",
+						async : false,
+				  success : function( data ) {
+					  lng_x = data.channel.item[0].point_x;
+					  lat_y = data.channel.item[0].point_y;
+												
+				  }
+				});
 				memberData[tempData[i].id] = {
 						"company_id": tempData[i].id,
 						"company_name": tempData[i].name,
 						"company_address": tempData[i].region2 + " " + tempData[i].region3,
-						"company_telephone" : tempData[i].telephone
+						"company_telephone" : tempData[i].telephone,
+						"lng_x" : lng_x,
+						"lat_y" : lat_y
 						}
 		
 			}
@@ -124,7 +137,34 @@ geocoder.addr2coord(userAddress, function(status, result) {
         map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
 
     } 
-});    
+});   
+for(var t = 0; t<tempData.length; t++){
+	geocoder.addr2coord(userAddress, function(status, result) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+
+	        var coords = new daum.maps.LatLng(memberData[tempData[t].id].lat_y, memberData[tempData[t].id].lng_x);
+									
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	            content: '<div style="padding:5px;">'+memberData[tempData[t].id].company_name +'</div>'
+	        });
+	        infowindow.open(map, marker);
+	        
+	        map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
+
+	    } 
+	});
+}
+  
 	</script>
 
 </body>
