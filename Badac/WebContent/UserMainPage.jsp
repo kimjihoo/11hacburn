@@ -105,8 +105,12 @@ geocoder.addr2coord(userAddress, function(status, result) {
     // 정상적으로 검색이 완료됐으면 
      if (status === daum.maps.services.Status.OK) {
 
-        var coords = new daum.maps.LatLng(point_x, point_y);
-
+        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+								
+        alert(result.addr[0].lat+" "+result.addr[0].lng);
+        alert(point_x+" "+point_y);
+        
+        
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new daum.maps.Marker({
             map: map,
