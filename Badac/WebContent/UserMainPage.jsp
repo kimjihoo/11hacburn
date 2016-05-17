@@ -91,7 +91,8 @@ body {
     mapOption = {
         center: new daum.maps.LatLng(point_x, point_x), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
-    };  
+    };
+
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -107,10 +108,7 @@ geocoder.addr2coord(userAddress, function(status, result) {
 
         var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
 								
-        alert(result.addr[0].lat+" "+result.addr[0].lng);
-        alert(point_x+" "+point_y);
-        
-        
+
         // 결과값으로 받은 위치를 마커로 표시합니다
         var marker = new daum.maps.Marker({
             map: map,
@@ -123,6 +121,7 @@ geocoder.addr2coord(userAddress, function(status, result) {
         });
         infowindow.open(map, marker);
         
+        map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
 
     } 
 });    
