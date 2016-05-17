@@ -115,7 +115,7 @@
 										href="http://210.118.74.159:8100/Badac/go_my_application_page">견적
 											요청 내역 보기</a></td>
 									<td style=""><a
-										href="http://210.118.74.159:8100/Badac/UserApplicationRegistPage">견적
+										href="http://210.118.74.159:8100/Badac/write_application">견적
 											제안서 작성</a></td>
 								</tr>
 							</table>

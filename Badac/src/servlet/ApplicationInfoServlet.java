@@ -166,8 +166,6 @@ public class ApplicationInfoServlet extends HttpServlet {
 
 		int lastIndex = uri.lastIndexOf("/");
 		String action = uri.substring(lastIndex + 1);
-
-		String dispatchUrl = null;
 		
 		if(action.equals("insert_application")){
 			int user_id = Integer.parseInt(request.getParameter("id"));
