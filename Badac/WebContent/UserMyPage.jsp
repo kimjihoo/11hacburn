@@ -55,252 +55,120 @@
     var userName = '<%= username %>';
     var userEmail = '<%= useremail %>';
     
-    s
 
 	///////////////////////////////////////////////////////////////////
 </script>
 
 <style>
 body {
-    margin-top: 70px;
-    background-color: #222;
+    margin-top: 70px; 
+}
+.lead{
+	padding-left: 5px;
 }
 
-@media(min-width:768px) {
-    body {
-        margin-top: 50px;
-    }
-}
-
-#wrapper {
-    padding-left: 0;
-}
-
-#page-wrapper {
-    width: 100%;
-    padding: 0;
-    background-color: #fff;
-}
-
-.huge {
-    font-size: 50px;
-    line-height: normal;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 225px;
-    }
-
-    #page-wrapper {
-        padding: 10px;
-    }
-}
-
-/* Top Navigation */
-
-.top-nav {
-    padding: 0 15px;
-}
-
-.top-nav>li {
-    display: inline-block;
-    float: left;
-}
-
-.top-nav>li>a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    line-height: 20px;
-    color: #999;
-}
-
-.top-nav>li>a:hover,
-.top-nav>li>a:focus,
-.top-nav>.open>a,
-.top-nav>.open>a:hover,
-.top-nav>.open>a:focus {
-    color: #fff;
-    background-color: #000;
-}
-
-.top-nav>.open>.dropdown-menu {
-    float: left;
-    position: absolute;
-    margin-top: 0;
-    border: 1px solid rgba(0,0,0,.15);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    background-color: #fff;
-    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-
-.top-nav>.open>.dropdown-menu>li>a {
-    white-space: normal;
-}
-
-ul.message-dropdown {
-    padding: 0;
-    max-height: 250px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-li.message-preview {
-    width: 275px;
-    border-bottom: 1px solid rgba(0,0,0,.15);
-}
-
-li.message-preview>a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-li.message-footer {
-    margin: 5px 0;
-}
-
-ul.alert-dropdown {
-    width: 200px;
-}
-
-/* Side Navigation */
-
-@media(min-width:768px) {
-    .side-nav {
-        position: fixed;
-        top: 51px;
-        left: 225px;
-        width: 225px;
-        margin-left: -225px;
-        border: none;
-        border-radius: 0;
-        overflow-y: auto;
-        background-color: #222;
-        bottom: 0;
-        overflow-x: hidden;
-        padding-bottom: 40px;
-    }
-
-    .side-nav>li>a {
-        width: 225px;
-    }
-
-    .side-nav li a:hover,
-    .side-nav li a:focus {
-        outline: none;
-        background-color: #000 !important;
-    }
-}
-
-.side-nav>li>ul {
-    padding: 0;
-}
-
-.side-nav>li>ul>li>a {
-    display: block;
-    padding: 10px 15px 10px 38px;
-    text-decoration: none;
-    color: #999;
-}
-
-.side-nav>li>ul>li>a:hover {
-    color: #fff;
-}
-  
- 
 </style>
 </head>
 <body>
  <div id="wrapper">
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">BADAC</a>
-            </div>
-             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right" >
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                  	<li class="dropdown">
-                  		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span></a>
-                  	<ul class="dropdown-menu" role="menu">
-                    	<li onclick="change_img_dialog()"><div id="user_main_img" style="width:130px; height:130px;"></div></li>
-                    	<li><a id="name"></a></li>
-                    	<li><a id="email"></a></li>
-                    	<li class="divider"></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보 수정</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/write_application">견적 제안서 작성</a></li>
-                    	<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
-                    	
-                  	</ul>
-                	</li>
-         
-                    
-                </ul>
-            </div>
-            
-            
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-right top-nav">
-         
-    
-   
-            </ul>
-            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-dashboard"></i>마이페이지</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i>334</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                    </li>
-             
-                </ul>
-            </div>
+       <!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">BADOC</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">About</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Contact</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">사용자 정보 <span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href=""><img src="http://placehold.it/130x100" alt=".." /></a></li>
+						<li><a id="name"></a></li>
+						<li><a id="email"></a></li>
+						<li class="divider"></li>
+						<li><a href="http://localhost:8100/Badac/user_logout">로그아웃</a></li>
+						<li><a href="http://localhost:8100/Badac/go_user_update_information">개인정보 수정</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">견적 요청 내역 보기</a></li>
+						<li><a href="http://localhost:8100/Badac/write_application">견적제안서 작성</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container -->        
             <!-- /.navbar-collapse -->
         </nav>
+ 
 
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
-            <p>마이페이지</p>
-            <p>마이페이지2</p>
-       
-       
-
-            
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- /#page-wrapper -->
-
+				<div class="container">
+                <!-- Page Heading -->
+                <div class="row"> 
+                <!-- Sidebar Menu Items  -->
+            <div class="col-md-3">
+				<p class="lead">마이페이지</p>
+				<div class="list-group">
+					<a href="http://210.118.74.159:8100/Badac/go_user_update_information" class="list-group-item">개인정보수정</a> 
+					<a href="http://210.118.74.159:8100/Badac/go_my_application_page"	class="list-group-item">견적요청서조회</a> 
+					<a href="#" class="list-group-item">즐겨찾는매장</a>
+					<a href="#" class="list-group-item">탈퇴신청</a>
+				</div>
+			</div>
+                
+                
+                <div class="col-md-9">
+                     
+                        <h1 class="page-header">
+                            마이페이지
+                            <small>My Page</small>
+                        </h1>
+                         
+                        <div class=" col-lg-4 text-center">
+                        	<div class="panel panel-default">
+                        		<div class="panel-body">
+                        		<img id="panel-img1" alt="image" src="http://placehold.it/100x100">
+                        		<a href="http://210.118.74.159:8100/Badac/go_user_update_information"><h3>개인정보수정</h3></a><hr>
+                        		<p>개인정보를 수정 및 관리할 수 있습니다.</p>
+                        		</div>
+                        	</div> 
+                        </div>
+                        
+                        
+                        <div class=" col-lg-4 text-center">
+                        	<div class="panel panel-default">
+                        		<div class="panel-body">
+                        		<img id="panel-img2" alt="image" src="http://placehold.it/100x100">
+                        		<a href="http://210.118.74.159:8100/Badac/go_my_application_page"><h3>견적요청서조회</h3></a><hr>
+                        		<p>견적요청서를 신규작성하거나 작성한 견적요청서를 조회 및 수정할 수 있습니다.</p>
+                        		</div>
+                        	</div>
+                        
+                       
+                        </div>
+                        <div class="col-lg-4 text-center">
+                        	<div class="panel panel-default">
+                        		<div class="panel-body">
+                        		<img id="panel-img3" alt="image" src="http://placehold.it/100x100">
+                        		<a href="#"><h3>즐겨찾는매장</h3></a><hr>
+                        		<p>즐겨찾는 가맹업체의 매장 목록을 확인할 수 있습니다.</p>
+                        		</div>
+                        	</div> 
+                        </div>
+                    
+                    </div>
+                </div> 
+                <!-- /#row -->
+                </div>
+                <!-- /#container -->
+ 
+   
     </div>
     <!-- /#wrapper -->
 
