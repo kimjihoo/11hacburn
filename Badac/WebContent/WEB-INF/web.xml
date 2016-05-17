@@ -337,4 +337,12 @@
     <servlet-name>DeleteApplication</servlet-name>
     <url-pattern>/delete_application</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GoAboutUs</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoAboutUs</servlet-name>
+    <url-pattern>/go_aboutus</url-pattern>
+  </servlet-mapping>
 </web-app>

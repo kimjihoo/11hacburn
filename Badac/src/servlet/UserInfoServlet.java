@@ -81,6 +81,8 @@ public class UserInfoServlet extends HttpServlet {
 			dispatchUrl = "SignUpConfirm.jsp";
 		}else if(action.equals("start_page")){
 			dispatchUrl = "StartPage.jsp";
+		}else if(action.equals("go_aboutus")){
+			dispatchUrl = "AboutUs.jsp";
 		}else if(action.equals("go_my_application_page")){
 			String userCode = null;
 			

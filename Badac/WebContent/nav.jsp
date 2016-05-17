@@ -88,7 +88,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">About</a></li>
+				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">About</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
