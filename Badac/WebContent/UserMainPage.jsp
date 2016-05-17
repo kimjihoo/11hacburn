@@ -119,7 +119,7 @@ geocoder.addr2coord(userAddress, function(status, result) {
         });
         infowindow.open(map, marker);
         
-        map.setCenter(new daum.maps.LatLng(37.537183, 127.005454));
+
     } 
 });    
 	</script>
