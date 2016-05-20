@@ -157,6 +157,9 @@ body {
 			var x = document.getElementById("user_bicycletype").selectedIndex;
 			var user_bicycletype = document.getElementsByTagName("option")[x];
 			
+			var user_x;
+			var user_y;
+			
 			var chk=0;
 			var temp = document.user_emailpush.elements['email_push'];
 			var user_emailpush;
@@ -238,24 +241,44 @@ body {
             	return;
             }
             
-            $.post("http://210.118.74.159:8100/Badac/user_update_information", {
-            	id : userId,
-            	password : user_pw.value,
-            	region_1 : user_region_1.value,
-            	region_2 : user_address.value,
-            	region_3 : user_address2.value,
-            	phone : user_phone1.value+"-"+user_phone2.value+"-"+user_phone3.value,
-            	bicycletype : user_bicycletype.value,
-            	emailpush : user_emailpush.value,
-            }, function(data){
-            		if( data.msg == "Success" ){
-            			alert("회원정보 수정이 완료되었습니다.");
-            			location.href = "http://210.118.74.159:8100/Badac/user_main_page";
-            		}
-            		else{
-            			alert(data.msg);
-            		}
-            });
+        	$.ajax({
+									  dataType: "jsonp",
+									  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+user_address1.value + " " + user_address2.value+"&output=json",
+									  async : false,
+									  success : function( data ) {
+										  
+										  alert(data.channel.item[0].point_x);
+										  user_x = data.channel.item[0].point_x;
+										  user_y = data.channel.item[0].point_y;
+												
+										  
+           $.post("http://210.118.74.159:8100/Badac/user_update_information", {
+           	id : userId,
+           	password : user_pw.value,
+           	region_1 : user_region_1.value,
+           	region_2 : user_address.value,
+           	region_3 : user_address2.value,
+           	phone : user_phone1.value+"-"+user_phone2.value+"-"+user_phone3.value,
+           	bicycletype : user_bicycletype.value,
+           	emailpush : user_emailpush.value,
+           	lat : user_x,
+           	lng : user_y,
+           	
+           }, function(data){
+           		if( data.msg == "Success" ){
+           			alert("회원정보 수정이 완료되었습니다.");
+           			location.href = "http://210.118.74.159:8100/Badac/user_main_page";
+           		}
+           		else{
+           			alert(data.msg);
+           		}
+           });
+										  
+									  }
+									});
+					            
+            
+
         }
 
         function returnMainPage(){

@@ -183,6 +183,8 @@ onload = function on_load(){
 			
 			var temp = document.company_emailpush.elements['email_push'];
 			var company_emailpush;
+			var company_x;
+			var company_y;
 	    	var size = temp.length;
 	        for(var i = 0; i < size; i++) {
 	          if(temp[i].checked) {
@@ -290,26 +292,42 @@ onload = function on_load(){
             	company_address2.focus();
             	return;
             }
+            $.ajax({
+																  dataType: "jsonp",
+																  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+company_address1.value + " " + company_address2.value+"&output=json",
+																  async : false,
+																  success : function( data ) {
+																	  alert(data.channel.item[0].point_x);
+																	 company_x = data.channel.item[0].point_x;
+																	 company_y = data.channel.item[0].point_y;
+																	 
+							            $.post("http://210.118.74.159:8100/Badac/member_update_information", {
+							            	id : companyId,
+							            	password : company_pw.value,
+							            	name : company_name.value,
+							            	region_1 : company_region_1.value,
+							            	region_2 : company_address.value,
+							            	region_3 : company_address2.value,
+							            	telephone : company_telephone1.value+"-"+company_telephone2.value+"-"+company_telephone3.value,
+							            	phone : company_phone1.value+"-"+company_phone2.value+"-"+ company_phone3.value,
+							            	emailpush : company_emailpush.value,
+							            	lat : company_x,
+							            	lng : company_y,
+							            	
+							            }, function(data){
+							            		if( data.msg == "Success" ){
+							            			alert("회원정보 수정이 완료되었습니다.");
+							            			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
+							            		}
+							            		else{
+							            			alert(data.msg);
+							            		}
+							            });
+																								
+																  }
+																});
             
-            $.post("http://210.118.74.159:8100/Badac/member_update_information", {
-            	id : companyId,
-            	password : company_pw.value,
-            	name : company_name.value,
-            	region_1 : company_region_1.value,
-            	region_2 : company_address.value,
-            	region_3 : company_address2.value,
-            	telephone : company_telephone1.value+"-"+company_telephone2.value+"-"+company_telephone3.value,
-            	phone : company_phone1.value+"-"+company_phone2.value+"-"+ company_phone3.value,
-            	emailpush : company_emailpush.value,
-            }, function(data){
-            		if( data.msg == "Success" ){
-            			alert("회원정보 수정이 완료되었습니다.");
-            			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
-            		}
-            		else{
-            			alert(data.msg);
-            		}
-            });
+
         }
 
         function returnMainPage(){

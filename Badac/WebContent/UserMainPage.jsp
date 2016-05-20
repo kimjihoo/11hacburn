@@ -66,19 +66,19 @@ body {
 }
 </style>
 
-<script type="text/javascript">
-	
-	function userLogout(){
-		location.href = "http://210.118.74.159:8100/Badac/user_logout";
-	}
-	function writeApplication(){
-		location.href = "http://210.118.74.159:8100/Badac/write_application";
-	}
-</script>
+						<script type="text/javascript">
+							
+							function userLogout(){
+								location.href = "http://210.118.74.159:8100/Badac/user_logout";
+							}
+							function writeApplication(){
+								location.href = "http://210.118.74.159:8100/Badac/write_application";
+							}
+						</script>
 </head>
 <body>
 
-	<div class="container-fluid">
+		<div class="container-fluid">
 
 		<div class="col-lg-2 col-sm-2"></div>
 		<div class="col-lg-6 col-sm-6" id="map" style="height: 500px;"></div>
@@ -153,7 +153,7 @@ for(var t = 0; t<memberData.length; t++){
 	     if (status === daum.maps.services.Status.OK) {
 
 	        var coords = new daum.maps.LatLng(memberData[tempData[t].id].lat_y, memberData[tempData[t].id].lng_x);
-			alert(memberData[tempData[t].id].lat_y);						
+									alert(memberData[tempData[t].id].lat_y);						
 
 	        // 결과값으로 받은 위치를 마커로 표시합니다
 	        var marker = new daum.maps.Marker({

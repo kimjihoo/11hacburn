@@ -49,6 +49,9 @@
 			var chk=0;
 			var temp = document.user_emailpush.elements['email_push'];
 			var user_emailpush;
+			var user_x;
+			var user_y;
+			
 	    	var size = temp.length;
 	        for(var i = 0; i < size; i++) {
 	          if(temp[i].checked) {
@@ -147,27 +150,44 @@
             	alert("이메일 착신 여부를 설정해주세요");
             	return;
             }
-            
-            $.post("http://210.118.74.159:8100/Badac/user_sign_up", {
-            	name : user_name.value,
-            	email : user_email.value,
-            	password : user_pw.value,
-            	region_1 : user_region_1.value,
-            	region_2 : user_address.value,
-            	region_3 : user_address2.value,
-            	phone : user_phone1.value+"-"+user_phone2.value+"-"+user_phone3.value,
-            	bicycletype : user_bicycletype.value,
-            	emailpush : user_emailpush.value,
-            }, function(data){
-            		if( data.msg == "Success" ){
-            			alert("회원가입이 완료되었습니다.");
-            			location.href = "http://210.118.74.159:8100/Badac/login_page";
-            		}
-            		else{
-            			alert(data.msg);
-            		}
-            });
-        }
+												
+												$.ajax({
+													  dataType: "jsonp",
+													  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+user_address1.value + " " + user_address2.value+"&output=json",
+													  async : false,
+													  success : function( data ) {
+														  
+														  alert(data.channel.item[0].point_x);
+														  user_x = data.channel.item[0].point_x;
+														  user_y = data.channel.item[0].point_y;
+														  
+														  $.post("http://210.118.74.159:8100/Badac/user_sign_up", {
+							            	name : user_name.value,
+							            	email : user_email.value,
+							            	password : user_pw.value,
+							            	region_1 : user_region_1.value,
+							            	region_2 : user_address.value,
+							            	region_3 : user_address2.value,
+							            	phone : user_phone1.value+"-"+user_phone2.value+"-"+user_phone3.value,
+							            	bicycletype : user_bicycletype.value,
+							            	emailpush : user_emailpush.value,
+							            	lat : user_x,
+							            	lng : user_y,
+												            	
+						            }, function(data){
+						            		if( data.msg == "Success" ){
+						            			alert("회원가입이 완료되었습니다.");
+						            			location.href = "http://210.118.74.159:8100/Badac/login_page";
+						            		}
+						            		else{
+						            			alert(data.msg);
+						            		}
+						            });
+
+																					
+													  }
+													});
+                   }
 
         function returnStartPage(){
             location.href = "http://210.118.74.159:8100/Badac/start_page";
