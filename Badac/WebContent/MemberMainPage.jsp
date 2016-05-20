@@ -166,14 +166,13 @@ body {
 </script>
 <script>
 	onload = function on_load(){
-		$.get("http://210.118.74.159:8100/Badac/my_application_list",{
-			userId:userId,
+		$.get("http://210.118.74.159:8100/Badac/application_list",{
 		},
 			function(data){
 				if(data.msg=="Success"){
 					var applicationData = {};
 					var tempData = data.applicationList;
-					var table_c = document.getElementById('my_applicationListTable');
+					var table_c = document.getElementById('applicationListTable');
 					var tr;
 					var td;
 					var title_var;
@@ -351,7 +350,7 @@ function menuClick(divname) {
 											<td style="width: 20%;">등록일자</td>
 										</tr>
 									</thead>
-									<tbody id="my_applicationListTable"
+									<tbody id="applicationListTable"
 										style="width: 75%; text-align: center;">
 
 									</tbody>
