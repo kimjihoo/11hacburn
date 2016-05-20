@@ -27,7 +27,29 @@ body {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous">
+</script>	
+<script>
+	onload = function on_load() {
+		$
+				.get(
+						"http://210.118.74.159:8100/Badac/get_application_info_2",
+						{
+							tunningId : tunningId,
+						},
+						function(data) {
+							if (data.msg == "Success") {
+								document.getElementById("tunning_date").value = data.date;
+								document.getElementById("tunning_id").value = data.id;
+								document.getElementById("tunning_name").value = data.name;
+								document.getElementById("tunning_title").value = data.title;
+								document.getElementById("tunning_explanation").value = data.explanation;
+							} else {
+								alert(data.msg);
+							}
+						});
+	}
+</script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -70,46 +92,58 @@ body {
 	<!-- /.container --> </nav>
 
 	<div class="container">
-		<table class="table table-hover" width=700>
-			<tr>
-				<td><b>조회수</b></td>
-				<td></td>
+		<table class="table table-hover" width=700
+				style="text-align: center;">
+				<tr>
+					<td style="width: 35%;"><b>날짜</b></td>
+					<td><input class="form-control" type="text" id="tunning_date"
+						readonly></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>코드</b></td>
+					<td><input class="form-control" type="text" id="tunning_id"
+						readonly></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>이름</b></td>
+					<td><input class="form-control" type="text" id="tunning_name"
+						readonly></td>
 			</tr>
-			<tr>
-				<td><b>이름</b></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><b>제목</b></td>
-				<td><input class="form-control" type="text"
-					placeholder="Readonly input here…" readonly></td>
-			</tr>
-			<tr>
-				<td><b>이미지</b></td>
-				<td><div class="form-group">
-						<img src="http://placehold.it/340x180" class="img-responsive"
-							alt="Responsive image">
-						<p class="help-block">첨부된 자전거 사진</p>
-					</div> <br /></td>
-			</tr>
-			<tr>
-				<td><b>내용</b></td>
-				<td width=350><input class="form-control" type="text"
-					placeholder="Readonly input here…" readonly> </textarea></td>
-			</tr>
-		</table>
+				<tr>
+					<td style="width: 35%;"><b>제목</b></td>
+					<td><input class="form-control" type="text" id="tunning_title"
+						readonly></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>이미지</b></td>
+					<td><div class="form-group">
+							<div class="vCeneter">
+								<span> <img src="http://placehold.it/340x180"
+									class="img-responsive" id="tunning_image"
+									alt="Responsive image"></span>
+							</div>
+						</div>
+						<p class="help-block">첨부된 자전거 사진</p> <br /></td>
+				</tr>
+				<tr>
+					<td style="width: 35%;"><b>내용</b></td>
+					<td width=350><input class="form-control" type="text"
+						id="tunning_explanation" readonly></td>
+				</tr>
+			</table>
 		<br> <br> <br>
 
-		<table class="table table-hover" width=700>
+		<table class="table table-hover" width=700 style="text-align: center;">
 			<tr>
-				<td><b>답변</b></td>
+				<td style="width: 35%;"><b>답변</b></td>
 				<td><textarea class="form-control" rows="10"></textarea></td>
 			</tr>
 		</table>
 		<span style="float: right"><button class="btn btn-default"
 				type="submit">등록</button> <a class="btn btn-default"
-			href="MemberApplicationViewPage.jsp" role="button">목록</a></span>
+			href="MemberMainPage.jsp" role="button">목록</a></span>
 	</div>
-
+	
+	
 </body>
 </html>
