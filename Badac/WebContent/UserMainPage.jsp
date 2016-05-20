@@ -10,43 +10,6 @@
 <script type="text/javascript"
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services"></script>
 
-<script>
-var memberData = {};
-var memberDataSize = 0;
-onload = function on_load(){
-$.get("http://210.118.74.159:8100/Badac/member_list", function(data){
-	if(data.msg=="Success"){
-		
-		var tempData = data.memberList;
-
-		for(var i = 0; i<tempData.length; i++){
-
-			//alert(lng_x+", "+lat_y);
-				memberData[tempData[i].id] = {
-						"company_id": tempData[i].id,
-						"company_name": tempData[i].name,
-						"company_address": tempData[i].region2 + " " + tempData[i].region3,
-						"company_telephone" : tempData[i].telephone,
-						"company_lng" : tempData[i].lng,
-						"company_lat" : tempData[i].lat
-						}
-				//alert(memberData[tempData[i].id].company_id);
-					memberDataSize++;
-			}
-		
-		
-		for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
-			$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
-			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
-			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
-		} 
-	}
-	else{
-		alert(data.msg);
-	}
-});
-}
-</script>
 
 <style>
 body {
@@ -96,7 +59,7 @@ body {
 						  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json",
 						  async : false,
 						  success : function( data ) {
-							  alert(data.channel.item[0].point_x);
+							  /* alert(data.channel.item[0].point_x); */
 							  point_x = data.channel.item[0].point_x;
 							  point_y = data.channel.item[0].point_y;
 						  }
@@ -139,46 +102,65 @@ body {
 								        map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
 								
 								    } 
-								});   
-/* 							alert(JSON.stringify(memberData)); */
+								});
 							
 							var positions = [];
-							
-											for (var t = 0; t < memberDataSize; t++){
-															positions = [
-											                 {
-											                	 			id : memberData[t].company_id,
-											                     latlng: new daum.maps.LatLng(memberData[t].company_lat, memberData[t].company_lng)
-											                 },
-											                
-											             ];
-																			}		
-		      for (var i = 0; i < positions.length; i ++) {
-                 // 마커를 생성합니다
-                 var marker = new daum.maps.Marker({
-                     map: map, // 마커를 표시할 지도
-                     position: positions[i].latlng, // 마커의 위치
-                     clickable : true
-                 });
+							$.get("http://210.118.74.159:8100/Badac/member_list", function(data){
+								if(data.msg=="Success"){
+									var memberData = {};
+									var tempData = data.memberList;
 
-                 // 마커에 표시할 인포윈도우를 생성합니다 
-                 var infowindow = new daum.maps.InfoWindow({
-                     content: positions[i].content // 인포윈도우에 표시할 내용
-                 });
+									for(var i = 0; i<tempData.length; i++){
 
-                 // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-                 // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-                 // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-                 daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-                 daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-                 
-                 //마커 클릭리스너
-                 daum.maps.event.addListener(marker, 'click', function() {
-									       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
-									      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
-									      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
-               		});  
-           				}
+										//alert(lng_x+", "+lat_y);
+											memberData[tempData[i].id] = {
+													"company_id": tempData[i].id,
+													"company_name": tempData[i].name,
+													"company_address": tempData[i].region2 + " " + tempData[i].region3,
+													"company_telephone" : tempData[i].telephone,
+													"company_lng" : tempData[i].lng,
+													"company_lat" : tempData[i].lat
+													}
+											positions[i] = {id : memberData[tempData[i].id].company_id,
+										                 latlng: new daum.maps.LatLng(memberData[tempData[i].id].company_lat, memberData[tempData[i].id].company_lng)
+										                 };
+											alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
+											alert(positions.length);
+											var marker = new daum.maps.Marker({
+							                     map: map, // 마커를 표시할 지도
+							                     position: positions[i].latlng, // 마커의 위치
+							                     clickable : true
+							                 });
+											alert(positions[i].latlng);
+											var infowindow = new daum.maps.InfoWindow({
+							                     content: positions[i].content // 인포윈도우에 표시할 내용
+							                 });
+
+							                 // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+							                 // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+							                 // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+							                 daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+							                 daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							                 
+							                 //마커 클릭리스너
+							                 daum.maps.event.addListener(marker, 'click', function() {
+																       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
+																      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
+																      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
+							               		});  
+										}
+									
+									
+									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
+										$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
+										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
+										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
+									} 
+								}
+								else{
+									alert(data.msg);
+								}
+							});
 
              // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
              function makeOverListener(map, marker, infowindow) {
