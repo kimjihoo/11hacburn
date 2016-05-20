@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import model.MemberInfo;
 
 public class MemberInfoDAO extends BaseDAO {
-	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_region_3, String company_telephone, String company_phone, int company_emailpush){
+	public int insertMemberInfo(String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_region_3, String company_telephone, String company_phone, int company_emailpush, String company_lat, String company_lng){
 		int insertRowCnt = 0;
 		int randomNum = -1;
 		
 		PreparedStatement ps=null;
 		try
 		{
-			String sql="INSERT INTO company_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql="INSERT INTO company_user VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			ps=super.getConn().prepareStatement(sql);
 			
 			ps.setString(2,company_ownername);
@@ -31,6 +31,8 @@ public class MemberInfoDAO extends BaseDAO {
 			ps.setInt(11,0);
 			ps.setDate(12,null);
 			ps.setInt(13,company_emailpush);
+			ps.setString(14, company_lat);
+			ps.setString(15, company_lng);
 			
 			while(true){
 				randomNum = (int)(Math.random() * 100000000);
@@ -134,8 +136,10 @@ public class MemberInfoDAO extends BaseDAO {
 				int companyApproval = rs.getInt("company_approval");
 				Date companyApprovaldate = rs.getDate("company_approvaldate");
 				int companyEmailpush = rs.getInt("company_emailpush");
+				String companyLat = rs.getString("company_lat");
+				String companyLng = rs.getString("company_lng");
 				
-				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion_1, companyRegion_2, companyRegion_3, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush);
+				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion_1, companyRegion_2, companyRegion_3, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush, companyLat, companyLng);
 				memberInfo.setCompany_name(companyName);
 			}
 		}
@@ -189,8 +193,10 @@ public class MemberInfoDAO extends BaseDAO {
 				int companyApproval = rs.getInt("company_approval");
 				Date companyApprovaldate = rs.getDate("company_approvaldate");
 				int companyEmailpush = rs.getInt("company_emailpush");
+				String companyLat = rs.getString("company_lat");
+				String companyLng = rs.getString("company_lng");
 				
-				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion_1, companyRegion_2, companyRegion_3, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush);
+				memberInfo = new MemberInfo(companyId, companyOwnerName, companyEmail, companyPw, companyName, companyRegion_1, companyRegion_2, companyRegion_3, companyTelephone, companyPhone, companyApproval, companyApprovaldate, companyEmailpush, companyLat, companyLng);
 				memberInfo.setCompany_name(companyName);
 			}
 		}
@@ -272,7 +278,7 @@ public class MemberInfoDAO extends BaseDAO {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				memberList.add(new MemberInfo(rs.getInt("company_id"), rs.getString("company_name"), rs.getString("company_telephone"), rs.getString("company_region_2"),rs.getString("company_region_3")));
+				memberList.add(new MemberInfo(rs.getInt("company_id"), rs.getString("company_name"), rs.getString("company_telephone"), rs.getString("company_region_2"),rs.getString("company_region_3"), rs.getString("company_lat"),rs.getString("company_lng")));
 			}
 		}
 		catch (SQLException se)
@@ -382,11 +388,11 @@ public class MemberInfoDAO extends BaseDAO {
 		return result_cnt;
 	}
 	
-	public String updateMemberInfo(int company_id, String password, String name, String region_1, String region_2, String region_3, String telephone, String phone, int emailpush){
+	public String updateMemberInfo(int company_id, String password, String name, String region_1, String region_2, String region_3, String telephone, String phone, int emailpush, String lat, String lng){
 		PreparedStatement ps = null;
 		
 		try{
-			String sql = "UPDATE company_user SET company_password=?,company_name=?, company_region_1=?,company_region_2=?,company_region_3=?,company_telephone=?,company_phone=?,company_emailpush=? WHERE company_id=?";
+			String sql = "UPDATE company_user SET company_password=?,company_name=?, company_region_1=?,company_region_2=?,company_region_3=?,company_telephone=?,company_phone=?,company_emailpush=?,company_lat=?,company_lng=? WHERE company_id=?";
 			ps=super.getConn().prepareStatement(sql);
 			ps.setString(1, password);
 			ps.setString(2, name);
@@ -396,7 +402,9 @@ public class MemberInfoDAO extends BaseDAO {
 			ps.setString(6, telephone);
 			ps.setString(7, phone);
 			ps.setInt(8, emailpush);
-			ps.setInt(9, company_id);
+			ps.setString(9, lat);
+			ps.setString(10, lng);
+			ps.setInt(11, company_id);
 			ps.executeUpdate();
 		}
 		catch (SQLException se)

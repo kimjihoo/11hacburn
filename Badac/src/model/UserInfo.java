@@ -12,6 +12,8 @@ public class UserInfo {
 	private String user_phone;
 	private String user_bicycletype;
 	private int user_emailpush;
+	private String user_lat;
+	private String user_lng;
 	
 	public UserInfo(){
 		this.user_id = -1;
@@ -24,9 +26,11 @@ public class UserInfo {
 		this.user_phone="";
 		this.user_bicycletype="";
 		this.user_emailpush=0;
+		this.user_lat = "";
+		this.user_lng = "";
 	}
 	
-	public UserInfo(int user_id, String user_name, String user_email, String user_password, String user_region_1, String user_region_2, String user_region_3, String user_phone, String user_bicycletype, int user_emailpush){
+	public UserInfo(int user_id, String user_name, String user_email, String user_password, String user_region_1, String user_region_2, String user_region_3, String user_phone, String user_bicycletype, int user_emailpush, String user_lat, String user_lng){
 		this.user_id = user_id;
 		this.user_name=user_name;
 		this.user_email=user_email;
@@ -37,6 +41,8 @@ public class UserInfo {
 		this.user_phone=user_phone;
 		this.user_bicycletype=user_bicycletype;
 		this.user_emailpush=user_emailpush;
+		this.user_lat = user_lat;
+		this.user_lng = user_lng;
 	}
 	
 	public int getUser_id() {
@@ -119,6 +125,20 @@ public class UserInfo {
 		this.user_emailpush = user_emailpush;
 	}
 
+	public String getUser_lat() {
+		return user_lat;
+	}
+
+	public void setUser_lat(String user_lat) {
+		this.user_lat = user_lat;
+	}
 	
+	public String getUser_lng() {
+		return user_lng;
+	}
+
+	public void setUser_lng(String user_lng) {
+		this.user_lng = user_lng;
+	}
 
 }

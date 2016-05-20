@@ -145,7 +145,7 @@ public class UserInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password")|| cookieName.equals("user_region_1") || cookieName.equals("user_region_2")|| cookieName.equals("user_region_3") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush")){
+						if( cookieName.equals("user_id") || cookieName.equals("user_name") || cookieName.equals("user_email") || cookieName.equals("user_password")|| cookieName.equals("user_region_1") || cookieName.equals("user_region_2")|| cookieName.equals("user_region_3") || cookieName.equals("user_phone") || cookieName.equals("user_bicycletype") ||cookieName.equals("user_emailpush") ||cookieName.equals("user_lat") ||cookieName.equals("user_lng")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -278,6 +278,8 @@ public class UserInfoServlet extends HttpServlet {
 				json.put("userPhone", userInfo.getUser_phone());
 				json.put("userBicycletype", userInfo.getUser_bicycletype());
 				json.put("userEmailpush", userInfo.getUser_emailpush());
+				json.put("userLat", userInfo.getUser_lat());
+				json.put("userLng", userInfo.getUser_lng());
 			}
 			catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -339,6 +341,8 @@ public class UserInfoServlet extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String bicycletype = request.getParameter("bicycletype");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
+			String lat = request.getParameter("lat");
+			String lng = request.getParameter("lng");
 			
 			String msg = "Success";
 
@@ -368,6 +372,12 @@ public class UserInfoServlet extends HttpServlet {
 			} 
 			else if (emailpush==-1) {
 				msg = "NoInputEmailpush";
+			}
+			else if (lat==null || lat.trim().equals("")) {
+				msg = "NoInputLat";
+			} 
+			else if (lng==null || lng.trim().equals("")) {
+				msg = "NoInputLng";
 			} 
 			else {
 				int flag = 1;
@@ -401,7 +411,7 @@ public class UserInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					uid = new UserInfoDAO();
-					uid.insertUserInfo(name, email, password, region_1, region_2, region_3, phone, bicycletype,emailpush);
+					uid.insertUserInfo(name, email, password, region_1, region_2, region_3, phone, bicycletype,emailpush,lat,lng);
 					uid.disconnect();
 
 					uid = new UserInfoDAO();
@@ -519,6 +529,18 @@ public class UserInfoServlet extends HttpServlet {
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						
 						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_lat", URLEncoder.encode(temp.getUser_lat(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("user_lng", URLEncoder.encode(temp.getUser_lng(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
 					} 
 					else {
 						msg = "PasswordError";
@@ -549,6 +571,8 @@ public class UserInfoServlet extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String bicycletype = request.getParameter("bicycletype");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
+			String lat = request.getParameter("lat");
+			String lng = request.getParameter("lng");
 			
 			String msg = "Success";
 
@@ -573,7 +597,13 @@ public class UserInfoServlet extends HttpServlet {
 			} 
 			else if (emailpush==-1) {
 				msg = "NoInputEmailpush";
-			} 
+			}
+			else if (lat == null || lat.trim().equals("")) {
+				msg = "NoInputlat";
+			}
+			else if (lng == null || lng.trim().equals("")) {
+				msg = "NoInputlng";
+			}
 			else {
 				int flag = 1;
 
@@ -596,7 +626,7 @@ public class UserInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					uid = new UserInfoDAO();
-					msg = uid.updateUserInfo(id, password, region_1, region_2, region_3, phone, bicycletype,emailpush);
+					msg = uid.updateUserInfo(id, password, region_1, region_2, region_3, phone, bicycletype,emailpush, lat, lng);
 					uid.disconnect();
 				}
 			}

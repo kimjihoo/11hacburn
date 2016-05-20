@@ -57,7 +57,7 @@ public class MemberInfoServlet extends HttpServlet {
 					String cookieName = cookie[i].getName();
 					
 					if( cookieName != null ){
-						if( cookieName.equals("company_id") || cookieName.equals("company_ownername") || cookieName.equals("company_email") || cookieName.equals("company_password") || cookieName.equals("company_name") || cookieName.equals("company_region_1") || cookieName.equals("company_region_2") || cookieName.equals("company_region_3") || cookieName.equals("company_telephone") || cookieName.equals("company_phone") || cookieName.equals("company_emailpush")){
+						if( cookieName.equals("company_id") || cookieName.equals("company_ownername") || cookieName.equals("company_email") || cookieName.equals("company_password") || cookieName.equals("company_name") || cookieName.equals("company_region_1") || cookieName.equals("company_region_2") || cookieName.equals("company_region_3") || cookieName.equals("company_telephone") || cookieName.equals("company_phone") || cookieName.equals("company_emailpush") || cookieName.equals("company_lat") || cookieName.equals("company_lng")){
 							cookie[i].setValue(null);
 							cookie[i].setMaxAge(0);
 							response.addCookie(cookie[i]);
@@ -168,6 +168,8 @@ public class MemberInfoServlet extends HttpServlet {
 						memberInfo.put("telephone", temp.getCompany_telephone());
 						memberInfo.put("region2", temp.getCompany_region_2());
 						memberInfo.put("region3", temp.getCompany_region_3());
+						memberInfo.put("lat", temp.getCompany_lat());
+						memberInfo.put("lng", temp.getCompany_lng());
 						
 						memberListJson.put(memberInfo);
 					}
@@ -282,6 +284,8 @@ public class MemberInfoServlet extends HttpServlet {
 				json.put("companyTelephone", memberInfo.getCompany_telephone());
 				json.put("companyPhone", memberInfo.getCompany_phone());
 				json.put("companyEmailpush", memberInfo.getCompany_emailpush());
+				json.put("companyLat", memberInfo.getCompany_lat());
+				json.put("companyLng", memberInfo.getCompany_lng());
 			}
 			catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -344,6 +348,8 @@ public class MemberInfoServlet extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			String phone = request.getParameter("phone");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
+			String lat = request.getParameter("lat");
+			String lng = request.getParameter("lng");
 			
 			
 			String msg = "Success";
@@ -378,6 +384,12 @@ public class MemberInfoServlet extends HttpServlet {
 			else if(emailpush == -1){
 				msg = "NoInputEmailpush";
 			}
+			else if (lat == null || lat.trim().equals("")) {
+				msg = "NoInputlat";
+			} 
+			else if (lng == null || lng.trim().equals("")) {
+				msg = "NoInputlng";
+			} 
 			else {
 				int flag = 1;
 
@@ -410,7 +422,7 @@ public class MemberInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					mid = new MemberInfoDAO();
-					mid.insertMemberInfo(ownername, email, password, name, region_1, region_2, region_3, telephone, phone, emailpush);
+					mid.insertMemberInfo(ownername, email, password, name, region_1, region_2, region_3, telephone, phone, emailpush, lat, lng);
 					mid.disconnect();
 				}
 			}
@@ -560,6 +572,18 @@ public class MemberInfoServlet extends HttpServlet {
 						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
 						
 						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_lat", URLEncoder.encode(temp.getCompany_lat(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
+						
+						cookie = new Cookie("company_lng", URLEncoder.encode(temp.getCompany_lng(), "UTF-8"));
+						
+						cookie.setMaxAge(24*60*60); // 24시간 쿠키 유지
+						
+						response.addCookie(cookie);
 					} 
 					else {
 						msg = "PasswordError";
@@ -591,6 +615,8 @@ public class MemberInfoServlet extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			String phone = request.getParameter("phone");
 			int emailpush = Integer.parseInt(request.getParameter("emailpush"));
+			String lat = request.getParameter("lat");
+			String lng = request.getParameter("lng");
 			
 			String msg = "Success";
 
@@ -619,6 +645,12 @@ public class MemberInfoServlet extends HttpServlet {
 			else if (emailpush==-1) {
 				msg = "NoInputEmailpush";
 			} 
+			else if (lat == null || lat.trim().equals("")) {
+				msg = "NoInputlat";
+			}
+			else if (lng == null || lng.trim().equals("")) {
+				msg = "NoInputlng";
+			}
 			else {
 				int flag = 1;
 
@@ -641,7 +673,7 @@ public class MemberInfoServlet extends HttpServlet {
 
 				if (flag == 1) {
 					mid = new MemberInfoDAO();
-					msg = mid.updateMemberInfo(id, password, name, region_1, region_2, region_3, telephone, phone, emailpush);
+					msg = mid.updateMemberInfo(id, password, name, region_1, region_2, region_3, telephone, phone, emailpush, lat, lng);
 					mid.disconnect();
 				}
 			}
