@@ -143,7 +143,7 @@ body {
 											var infowindow = new daum.maps.InfoWindow({
 							                     content: positions[i].content // 인포윈도우에 표시할 내용
 							                 });
-
+											marker.setMap(map); 
 							                 // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 							                 // 이벤트 리스너로는 클로저를 만들어 등록합니다 
 							                 // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
