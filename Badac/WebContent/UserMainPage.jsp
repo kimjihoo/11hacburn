@@ -131,7 +131,6 @@ body {
 							                     position: positions[i].latlng, // 마커의 위치
 							                     clickable : true
 							                 });
-											alert(positions[i].latlng);
 											var infowindow = new daum.maps.InfoWindow({
 							                     content: positions[i].content // 인포윈도우에 표시할 내용
 							                 });

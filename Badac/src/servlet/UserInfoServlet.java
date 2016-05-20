@@ -187,6 +187,7 @@ public class UserInfoServlet extends HttpServlet {
 			//System.out.println("로그인 페이지");
 			
 			String userCode = null;
+			String companyCode = null;
 			
 			Cookie[] cookie = request.getCookies();
 			
@@ -201,12 +202,18 @@ public class UserInfoServlet extends HttpServlet {
 							//System.out.println("Index : " +cookie[i].getValue());
 							userCode = cookie[i].getValue();
 						}
+						if(cookieName.equals("company_id")){
+							companyCode = cookie[i].getValue();
+						}
 					}
 				}
 			}
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
 				response.sendRedirect("user_main_page");
+			}
+			if (companyCode != null && !(companyCode.equals("") && Pattern.matches("^[0-9]+$", companyCode))){
+				response.sendRedirect("member_main_page");
 			}
 			else{
 				dispatchUrl = "LoginPage.jsp";
