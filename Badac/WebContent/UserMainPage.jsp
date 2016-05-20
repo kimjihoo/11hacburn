@@ -12,7 +12,7 @@
 
 <script>
 var memberData = {};
-
+var memberDataSize = 0;
 onload = function on_load(){
 $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 	if(data.msg=="Success"){
@@ -31,15 +31,15 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 						"company_lat" : tempData[i].lat
 						}
 				//alert(memberData[tempData[i].id].company_id);
-		
+					memberDataSize++;
 			}
 		
 		
-/* 		for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
+		for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
 			$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
 			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
 			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
-		} */
+		} 
 	}
 	else{
 		alert(data.msg);
@@ -68,13 +68,19 @@ body {
 
 		<div class="container-fluid">
 
-		<div class="col-lg-2 col-sm-2"></div>
+
 		<div class="col-lg-6 col-sm-6" id="map" style="height: 500px;"></div>
-		<div class="col-lg-4 col-sm-4" style="overflow-y:scroll; height:800px;">
+		<div class="col-lg-3 col-sm-3" style="overflow-y:scroll; height:800px;">
 			<table class="table table-hover" id="region_member_list">
 
 			</table>
 		</div>
+				<div class="col-lg-3 col-sm-3">
+							<table class="table table-hover" id="click_member_list">
+
+							</table>
+				</div>
+		
 	</div>
 
 
@@ -138,7 +144,7 @@ body {
 							
 							var positions = [];
 							
-											for (var t = 0; t< memberData.size(); t++){
+											for (var t = 0; t < memberDataSize; t++){
 															positions = [
 											                 {
 											                	 			id : memberData[t].company_id,
@@ -168,9 +174,9 @@ body {
                  
                  //마커 클릭리스너
                  daum.maps.event.addListener(marker, 'click', function() {
-									       			$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
-									      				$('#region_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
-									      				$('#region_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
+									       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
+									      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
+									      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
                		});  
            				}
 
