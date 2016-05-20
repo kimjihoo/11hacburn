@@ -198,9 +198,12 @@ public class ApplicationInfoServlet extends HttpServlet {
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
 			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId(id);
 			int user_id = applicationInfo.getUser_id();
+			System.out.println(user_id);
 			UserInfoDAO uid = new UserInfoDAO();
 			String user_name = uid.selectUserNameByUserId(user_id);
+			System.out.println(user_name);
 			aid.disconnect();
+			uid.disconnect();
 			
 			String msg = "Success";
 			
@@ -296,7 +299,56 @@ public class ApplicationInfoServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
-		}else if(action.equals("delete_application")){
+		}
+		else if(action.equals("application_reply_regist")){
+			int tunning_id = Integer.parseInt(request.getParameter("tunningId"));
+			int tunning_company_id = Integer.parseInt(request.getParameter("tunningCompanyId"));
+			String tunning_answer = request.getParameter("reply");
+			
+			String msg = "Success";
+			JSONObject json = new JSONObject();
+			if(tunning_answer==null || tunning_answer.trim().equals("")){
+				msg="NoAnswerError";
+			}else{
+				int flag = 1;
+				
+				//존재하는 사용자 코드인지 확인
+				ApplicationInfoDAO aid = new ApplicationInfoDAO();
+				ApplicationInfo temp = aid.selectApplicationInfoByTunningId(tunning_id);
+				aid.disconnect();
+				
+				if(temp==null){
+					msg="NoApplication Error";
+					flag = -1;
+				}
+				
+				if(flag==1){
+					aid = new ApplicationInfoDAO();
+					int randomNum=0;
+					while(true){
+						randomNum = (int)(Math.random() * 100000000);
+						if(aid.selectTunningTitleByTunningId(randomNum).equals("")){
+							//System.out.println(randomNum);
+							break;
+						}
+					}
+					aid.insertApplicationReplyInfo(randomNum,tunning_id, tunning_company_id, tunning_answer);
+					aid.disconnect();
+				}
+			}
+			
+
+			try {
+				json.put("msg", msg);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
+		else if(action.equals("delete_application")){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();

@@ -28,6 +28,28 @@ body {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous">
+</script>
+<script>    
+    ////////////////////////////////////////////////////////
+    <%// 쿠키값 가져오기
+			Cookie[] cookies = request.getCookies();
+
+			int tunningid = 0;
+
+			if (cookies != null) {
+
+				for (int i = 0; i < cookies.length; i++) {
+					Cookie c = cookies[i];
+
+					if (c.getName().equals("tunningID")) {
+						tunningid = Integer.parseInt(c.getValue());
+					}
+				}
+			}%>
+    
+    var tunningId = '<%=tunningid%>';
+
+	///////////////////////////////////////////////////////////////////
 </script>	
 <script>
 	onload = function on_load() {

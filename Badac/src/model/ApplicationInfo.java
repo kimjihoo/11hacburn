@@ -44,6 +44,13 @@ public class ApplicationInfo {
 		this.tunning_explanation = tunning_explanation;
 		this.upload_date = upload_date;
 	}
+	public ApplicationInfo(int tunning_id,int user_id, String tunning_title, String tunning_explanation, Date upload_date){
+		this.tunning_id = tunning_id;
+		this.user_id = user_id;
+		this.tunning_title = tunning_title;
+		this.tunning_explanation = tunning_explanation;
+		this.upload_date = upload_date;
+	}
 
 	public int getTunning_id() {
 		return tunning_id;

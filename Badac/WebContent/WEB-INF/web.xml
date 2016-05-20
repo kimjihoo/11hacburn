@@ -361,4 +361,22 @@
     <servlet-name>GetApplicationList</servlet-name>
     <url-pattern>/application_list</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GoApplicationReplyPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoApplicationReplyPage</servlet-name>
+    <url-pattern>/application_reply</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegistApplicationAnswer</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistApplicationAnswer</servlet-name>
+    <url-pattern>/application_reply_regist</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

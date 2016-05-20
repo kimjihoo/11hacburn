@@ -12,7 +12,6 @@ import model.MemberInfo;
 public class ApplicationInfoDAO extends BaseDAO {
 	public int insertApplicationInfo(int application_id, int user_id, String tunning_title, String tunning_explanation){
 		int insertRowCnt = 0;
-		int randomNum = -1;
 		
 		PreparedStatement ps=null;
 		try
@@ -27,6 +26,48 @@ public class ApplicationInfoDAO extends BaseDAO {
 			ps.setString(4,tunning_explanation);
 			ps.setInt(5,0);
 			ps.setDate(6,sqlDate);
+			
+			insertRowCnt = ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return insertRowCnt;
+	}
+	
+	public int insertApplicationReplyInfo(int tunning_answer_id, int tunning_id, int tunning_company_id, String tunning_answer){
+		int insertRowCnt = 0;
+		
+		PreparedStatement ps=null;
+		try
+		{
+			String sql="INSERT INTO tunning_answer VALUES(?,?,?,?,?)";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, tunning_answer_id);
+			ps.setInt(2,tunning_id);
+			ps.setInt(3,tunning_company_id);
+			ps.setString(4,tunning_answer);
+			ps.setInt(5,0);
 			
 			insertRowCnt = ps.executeUpdate();
 		}
@@ -185,11 +226,12 @@ public class ApplicationInfoDAO extends BaseDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
 				int tunningId1 = rs.getInt("tunning_id");
+				int userId = rs.getInt("user_id");
 				String tunningTitle = rs.getString("tunning_title");
 				String tunningExplanation = rs.getString("tunning_explanation");
 				Date tunningUploadDate = rs.getDate("upload_date");
 				
-				applicationInfo = new ApplicationInfo(tunningId1, tunningTitle, tunningExplanation, tunningUploadDate);
+				applicationInfo = new ApplicationInfo(tunningId1,userId, tunningTitle, tunningExplanation, tunningUploadDate);
 			}
 		}
 		catch (SQLException se)
