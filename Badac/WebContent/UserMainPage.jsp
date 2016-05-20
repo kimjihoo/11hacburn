@@ -20,27 +20,15 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 		var tempData = data.memberList;
 
 		for(var i = 0; i<tempData.length; i++){
-			var lng_x;
-			var lat_y;
-			$.ajax({
-				  dataType: "jsonp",
-				  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+tempData[i].region2 + " " + tempData[i].region3+"&output=json",
-				  async : false,
-				  success : function( data ) {
-					  alert(data.channel.item[0].point_x);
-					  lng_x = data.channel.item[0].point_x;
-					  lat_y = data.channel.item[0].point_y;
-												
-				  }
-				});
+
 			//alert(lng_x+", "+lat_y);
 				memberData[tempData[i].id] = {
 						"company_id": tempData[i].id,
 						"company_name": tempData[i].name,
 						"company_address": tempData[i].region2 + " " + tempData[i].region3,
 						"company_telephone" : tempData[i].telephone,
-						"lng_x" : lng_x,
-						"lat_y" : lat_y
+						"company_lng" : tempData[i].lng,
+						"company_lat" : tempData[i].lat
 						}
 				//alert(memberData[tempData[i].id].company_id);
 		
@@ -93,18 +81,7 @@ body {
 
 	<script>
 	// 수정!(지도 좌표받아오기)
-	var point_x;
-	var point_y;
-	$.ajax({
-		  dataType: "jsonp",
-		  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json",
-				async : false,
-		  success : function( data ) {
-			  point_x : data.channel.item[0].point_x;
-			  point_y : data.channel.item[0].point_y;
-										
-		  }
-		});
+
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -113,65 +90,92 @@ body {
     };
 
 
-// 지도를 생성합니다    
-var map = new daum.maps.Map(mapContainer, mapOption); 
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new daum.maps.services.Geocoder();
-
-// 주소로 좌표를 검색합니다
-geocoder.addr2coord(userAddress, function(status, result) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
-
-        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+								// 지도를 생성합니다    
+								var map = new daum.maps.Map(mapContainer, mapOption); 
 								
+								// 주소-좌표 변환 객체를 생성합니다
+								var geocoder = new daum.maps.services.Geocoder();
+								
+								// 주소로 좌표를 검색합니다
+								geocoder.addr2coord(userAddress, function(status, result) {
+								
+								    // 정상적으로 검색이 완료됐으면 
+								     if (status === daum.maps.services.Status.OK) {
+								
+								        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+																
+								
+								        // 결과값으로 받은 위치를 마커로 표시합니다
+								        var marker = new daum.maps.Marker({
+								            map: map,
+								            position: coords
+								        });
+								
+								        // 인포윈도우로 장소에 대한 설명을 표시합니다
+								        var infowindow = new daum.maps.InfoWindow({
+								            content: '<div style="padding:5px;">우리집</div>'
+								        });
+								        infowindow.open(map, marker);
+								        
+								        map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
+								
+								    } 
+								});   
+/* 							alert(JSON.stringify(memberData)); */
+							
+											var positions = [];
+							
+											for (var t = 0; t< memberData.size(); t++){
+															positions = [
+											                 {
+											                	 			id : memberData[t].company_id,
+											                     latlng: new daum.maps.LatLng(memberData[t].company_lat, memberData[t].company_lng)
+											                 },
+											                
+											             ];
+																			}		
+		      for (var i = 0; i < positions.length; i ++) {
+                 // 마커를 생성합니다
+                 var marker = new daum.maps.Marker({
+                     map: map, // 마커를 표시할 지도
+                     position: positions[i].latlng, // 마커의 위치
+                     clickable : true
+                 });
 
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
+                 // 마커에 표시할 인포윈도우를 생성합니다 
+                 var infowindow = new daum.maps.InfoWindow({
+                     content: positions[i].content // 인포윈도우에 표시할 내용
+                 });
 
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="padding:5px;">우리집</div>'
-        });
-        infowindow.open(map, marker);
-        
-        map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
+                 // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+                 // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+                 // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+                 daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                 daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                 
+                 //마커 클릭리스너
+                 daum.maps.event.addListener(marker, 'click', function() {
+									       			$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
+									      				$('#region_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
+									      				$('#region_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
+               		});  
+           				}
 
-    } 
-});   
-alert(JSON.stringify(memberData));
-for(var t = 0; t<memberData.length; t++){
-	alert(t);
-	geocoder.addr2coord(userAddress, function(status, result) {
+             // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+             function makeOverListener(map, marker, infowindow) {
+                 return function() {
+                     infowindow.open(map, marker);
+                 };
+             }
 
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === daum.maps.services.Status.OK) {
+             // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+             function makeOutListener(infowindow) {
+                 return function() {
+                     infowindow.close();
+                 };
+             }
 
-	        var coords = new daum.maps.LatLng(memberData[tempData[t].id].lat_y, memberData[tempData[t].id].lng_x);
-									alert(memberData[tempData[t].id].lat_y);						
 
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new daum.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new daum.maps.InfoWindow({
-	            content: '<div style="padding:5px;">'+memberData[tempData[t].id].company_name +'</div>'
-	        });
-	        infowindow.open(map, marker);
-	        
-	        map.setCenter(new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng));
-
-	    } 
-	});
-}
 	</script>
 
 </body>
