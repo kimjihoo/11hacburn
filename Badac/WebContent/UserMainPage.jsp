@@ -81,13 +81,26 @@ body {
 
 	<script>
 	// 수정!(지도 좌표받아오기)
-
-	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new daum.maps.LatLng(point_x, point_x), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
+			
+					var point_x;
+					var point_y;
+					
+						$.ajax({
+						  dataType: "jsonp",
+						  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+company_address.value + " " + company_address2.value+"&output=json",
+						  async : false,
+						  success : function( data ) {
+							  alert(data.channel.item[0].point_x);
+							  point_x = data.channel.item[0].point_x;
+							  point_y = data.channel.item[0].point_y;
+						  }
+						});
+						
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				    mapOption = {
+				        center: new daum.maps.LatLng(point_x, point_x), // 지도의 중심좌표
+				        level: 3 // 지도의 확대 레벨
+				    };
 
 
 								// 지도를 생성합니다    
@@ -123,7 +136,7 @@ body {
 								});   
 /* 							alert(JSON.stringify(memberData)); */
 							
-											var positions = [];
+							var positions = [];
 							
 											for (var t = 0; t< memberData.size(); t++){
 															positions = [
