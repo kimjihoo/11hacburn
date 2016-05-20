@@ -306,6 +306,14 @@
     <url-pattern>/get_application_info</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetApplicationInfo2</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetApplicationInfo2</servlet-name>
+    <url-pattern>/get_application_info_2</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetMemberList</servlet-name>
     <servlet-class>servlet.MemberInfoServlet</servlet-class>
   </servlet>

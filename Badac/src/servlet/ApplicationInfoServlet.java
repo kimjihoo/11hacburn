@@ -192,6 +192,35 @@ public class ApplicationInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 		}
+		else if(action.equals("get_application_info_2")){
+			int id = Integer.parseInt(request.getParameter("tunningId"));
+			
+			ApplicationInfoDAO aid = new ApplicationInfoDAO();
+			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId(id);
+			int user_id = applicationInfo.getUser_id();
+			UserInfoDAO uid = new UserInfoDAO();
+			String user_name = uid.selectUserNameByUserId(user_id);
+			aid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("id", applicationInfo.getTunning_id());
+				json.put("name", user_name);
+				json.put("title", applicationInfo.getTunning_title());
+				json.put("explanation", applicationInfo.getTunning_explanation());
+				json.put("date", applicationInfo.getUpload_date());
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
 		
 		if (dispatchUrl != null) {
 			RequestDispatcher view = request.getRequestDispatcher(dispatchUrl);
