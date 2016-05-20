@@ -91,6 +91,58 @@ body {
 		document.getElementById("ownername").innerHTML = companyOwnerName;
 		document.getElementById("email").innerHTML = companyEmail;
 		document.getElementById("name").innerHTML = companyName;
+		
+		$.get("http://210.118.74.159:8100/Badac/application_list",{
+		},
+			function(data){
+				if(data.msg=="Success"){
+					var applicationData = {};
+					var tempData = data.applicationList;
+					var table_c = document.getElementById('applicationListTable');
+					var tr;
+					var td;
+					var title_var;
+					
+					for(var i = 0; i<tempData.length; i++){
+						applicationData[tempData[i].id] = {
+							"tunning_id": tempData[i].id,
+							"tunning_title": tempData[i].title,
+							"tunning_date": tempData[i].date
+						}
+						tr = document.createElement('tr');
+						for(var j = 0; j<3; j++){
+							td = document.createElement('td');
+							switch(j){
+							case 0:
+								td.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_id));
+								break;
+							case 1:
+								title_var = document.createElement('p');
+								title_var.style.cursor="pointer";
+								title_var.id = applicationData[tempData[i].id].tunning_id;
+								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
+								title_var.onclick = function () {
+									var tempP_id = $(this).attr('id');
+									document.cookie = "tunningID="+tempP_id+";";
+									location.href="http://210.118.74.159:8100/Badac/show_application"
+			                    };
+								td.appendChild(title_var);
+								break;
+							case 2:
+								var tunningDate = applicationData[tempData[i].id].tunning_date;
+								td.appendChild(document.createTextNode(tunningDate));
+								break;
+								default:
+									break;
+							}
+							tr.appendChild(td);
+						}
+						table_c.appendChild(tr);
+					}
+				}else{
+					alert(data.msg);
+				}
+		});
 	}
 	
 	function memberLogout(){
@@ -165,102 +217,13 @@ body {
 	}
 </script>
 <script>
-	onload = function on_load(){
-		$.get("http://210.118.74.159:8100/Badac/application_list",{
-		},
-			function(data){
-				if(data.msg=="Success"){
-					var applicationData = {};
-					var tempData = data.applicationList;
-					var table_c = document.getElementById('applicationListTable');
-					var tr;
-					var td;
-					var title_var;
-					
-					for(var i = 0; i<tempData.length; i++){
-						applicationData[tempData[i].id] = {
-							"tunning_id": tempData[i].id,
-							"tunning_title": tempData[i].title,
-							"tunning_date": tempData[i].date
-						}
-						tr = document.createElement('tr');
-						for(var j = 0; j<3; j++){
-							td = document.createElement('td');
-							switch(j){
-							case 0:
-								td.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_id));
-								break;
-							case 1:
-								title_var = document.createElement('p');
-								title_var.style.cursor="pointer";
-								title_var.id = applicationData[tempData[i].id].tunning_id;
-								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
-								title_var.onclick = function () {
-									var tempP_id = $(this).attr('id');
-									document.cookie = "tunningID="+tempP_id+";";
-									location.href="http://210.118.74.159:8100/Badac/show_application"
-			                    };
-								td.appendChild(title_var);
-								break;
-							case 2:
-								var tunningDate = applicationData[tempData[i].id].tunning_date;
-								td.appendChild(document.createTextNode(tunningDate));
-								break;
-								default:
-									break;
-							}
-							tr.appendChild(td);
-						}
-						table_c.appendChild(tr);
-					}
-				}else{
-					alert(data.msg);
-				}
-		});
-	}
-</script>
-<script>
-				onload = function on_load(){
-					$.get("http://210.118.74.159:8100/Badac/get_application_info",{
-						tunningId:tunningId,
-					},
-						function(data){
-							if(data.msg=="Success"){
-								document.getElementById("tunning_date").value=data.date;
-								document.getElementById("tunning_id").value=data.id;
-								document.getElementById("tunning_title").value=data.title;
-								document.getElementById("tunning_explanation").value=data.explanation;
-							}else{
-								alert(data.msg);
-							}
-					});
-				}
-</script>
-<script>
 function menuClick(divname) {
 	var divset = document.getElementById(divname);
-	var div1 = document.getElementById("userApplication")
-	var div2 = document.getElementById("successApplication")
-	if(divset == div1) {
-		if(div1.style.display=="block") {
-			div1.style.display="none";
-			div2.style.display="none";
-		}
-		else {
-			div1.style.display="block";
-			div2.style.display="none";
-		}
+	var divarr = ["userApplication", "successApplication", "goodMember"];
+	for(var i=0; i<3; i++){
+		document.getElementById(divarr[i]).style.display="none";
 	}
-	else if(divset == div2) {
-		if(div2.style.display=="block") {
-			div2.style.display="none";
-			div1.style.display="none";
-		}
-		else {
-			div2.style.display="block";
-			div1.style.display="none";
-		}
-	}
+	divset.style.display="block";
 }
 </script>
 
@@ -393,6 +356,47 @@ function menuClick(divname) {
 										</tr>
 									</thead>
 									<tbody id="my_applicationListTable"
+										style="width: 75%; text-align: center;">
+
+									</tbody>
+								</table>
+								<!-- 테이블 종료 -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="tab-pane active" id="goodMember" style="display:none;">
+					<div class="col-md-9">
+						<div class="contentwrap">
+							<div class="page-header">
+								<h3>
+									견적 요청서 <small>목록</small>
+								</h3>
+							</div>
+
+							<div id="changeimg-dialog-form" title="이미지 선택"
+								style="display: none; z-index: 101;">
+								<div style="width: 100%;">
+									<input type="file" id="choice_main_img" style="float: right;">
+								</div>
+							</div>
+
+							<!-- 견적요청서 받아오는 테이블 -->
+
+							<div class="container">
+								<!-- 테이블 시작 -->
+								<table class="table table-hover" id="region_application_list"
+									style="width: 75%; text-align: center;">
+									<thead>
+										<tr>
+											<td style="width: 15%;">번호</td>
+											<td style="width: 45%;">제목</td>
+											<td style="width: 20%;">등록일자</td>
+										</tr>
+									</thead>
+									<tbody id="applicationListTable"
 										style="width: 75%; text-align: center;">
 
 									</tbody>

@@ -122,7 +122,52 @@ public class ApplicationInfoServlet extends HttpServlet {
 			}
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
-		} else if(action.equals("get_application_info")){
+		}else if(action.equals("application_list")){
+			
+			ApplicationInfoDAO aid = new ApplicationInfoDAO();
+			
+			ArrayList<ApplicationInfo> applicationList = aid.getApplicationList();
+			aid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			
+			if(applicationList.size()==0){
+				msg = "Not Exist Application";
+			}else{
+				JSONArray applicationListJson = new JSONArray();
+				JSONObject applicationInfo;
+				
+				try{
+					for(ApplicationInfo temp : applicationList){
+						applicationInfo = new JSONObject();
+						
+						applicationInfo.put("id", temp.getTunning_id());
+						applicationInfo.put("title", temp.getTunning_title());
+						applicationInfo.put("date", temp.getUpload_date());
+						
+						applicationListJson.put(applicationInfo);
+					}
+					json.put("applicationList", applicationListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
+		else if(action.equals("get_application_info")){
 			int id = Integer.parseInt(request.getParameter("tunningId"));
 			
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();

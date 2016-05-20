@@ -345,4 +345,12 @@
     <servlet-name>GoAboutUs</servlet-name>
     <url-pattern>/go_aboutus</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GetApplicationList</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetApplicationList</servlet-name>
+    <url-pattern>/application_list</url-pattern>
+  </servlet-mapping>
 </web-app>
