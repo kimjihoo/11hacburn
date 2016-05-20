@@ -53,7 +53,7 @@ body {
 			
 					var point_x;
 					var point_y;
-					
+
 						$.ajax({
 						  dataType: "jsonp",
 						  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json",
@@ -64,6 +64,13 @@ body {
 							  point_y = data.channel.item[0].point_y;
 						  }
 						});
+						var imageSrc = "http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+						 var imageSize = new daum.maps.Size(24, 35); 
+						    
+						    // 마커 이미지를 생성합니다    
+						 var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+						
+						
 						
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
@@ -71,6 +78,7 @@ body {
 				        level: 3 // 지도의 확대 레벨
 				    };
 
+					
 
 								// 지도를 생성합니다    
 								var map = new daum.maps.Map(mapContainer, mapOption); 
@@ -129,7 +137,8 @@ body {
 											var marker = new daum.maps.Marker({
 							                     map: map, // 마커를 표시할 지도
 							                     position: positions[i].latlng, // 마커의 위치
-							                     clickable : true
+							                     clickable : true,
+							                     image : markerImage // 마커 이미지 
 							                 });
 											var infowindow = new daum.maps.InfoWindow({
 							                     content: positions[i].content // 인포윈도우에 표시할 내용
