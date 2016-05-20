@@ -35,6 +35,7 @@ body {
 			Cookie[] cookies = request.getCookies();
 
 			int tunningid = 0;
+			int companyid = 0;
 
 			if (cookies != null) {
 
@@ -44,13 +45,17 @@ body {
 					if (c.getName().equals("tunningID")) {
 						tunningid = Integer.parseInt(c.getValue());
 					}
+					if( c.getName().equals("company_id") ){
+		            	companyid = Integer.parseInt(c.getValue());
+		            }
 				}
 			}%>
     
     var tunningId = '<%=tunningid%>';
+    var companyId = '<%= companyid %>';
 
 	///////////////////////////////////////////////////////////////////
-</script>	
+</script>
 <script>
 	onload = function on_load() {
 		$
@@ -71,6 +76,34 @@ body {
 							}
 						});
 	}
+</script>
+<script>
+function answerReply() {
+	var tunning_reply = document.getElementById("tunning_reply");
+	
+	if (tunning_reply.value == "") {
+		alert("답변을 입력하세요.");
+		title.focus();
+		return;
+	}
+	
+	$
+			.post(
+					"http://210.118.74.159:8100/Badac/application_reply_regist",
+					{
+						tunningId : tunningId,
+						tunningCompanyId : companyId,
+						reply : tunning_reply.value,
+					},
+					function(data) {
+						if (data.msg == "Success") {							
+							alert("등록이 완료되었습니다.");
+							location.href="http://210.118.74.159:8100/Badac/login_page";
+						} else {
+							alert(data.msg);
+						}
+					});
+}
 </script>
 </head>
 <body>
@@ -158,14 +191,13 @@ body {
 		<table class="table table-hover" width=700 style="text-align: center;">
 			<tr>
 				<td style="width: 35%;"><b>답변</b></td>
-				<td><textarea class="form-control" rows="10"></textarea></td>
+				<td><textarea class="form-control" id="tunning_reply" rows="10"></textarea></td>
 			</tr>
 		</table>
 		<span style="float: right"><button class="btn btn-default"
-				type="submit">등록</button> <a class="btn btn-default"
+				type="submit" onclick="answerReply()">등록</button> <a class="btn btn-default"
 			href="MemberMainPage.jsp" role="button">목록</a></span>
 	</div>
-	
 	
 </body>
 </html>
