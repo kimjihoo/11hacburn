@@ -243,7 +243,7 @@ body {
             
         	$.ajax({
 									  dataType: "jsonp",
-									  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+user_address1.value + " " + user_address2.value+"&output=json",
+									  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+user_address_1.value + " " + user_address_2.value+"&output=json",
 									  async : false,
 									  success : function( data ) {
 										  
