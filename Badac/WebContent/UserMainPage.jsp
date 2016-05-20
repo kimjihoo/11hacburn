@@ -35,11 +35,11 @@ $.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 			}
 		
 		
-		for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
+/* 		for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
 			$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
 			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
 			$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
-		}
+		} */
 	}
 	else{
 		alert(data.msg);
@@ -87,7 +87,7 @@ body {
 					
 						$.ajax({
 						  dataType: "jsonp",
-						  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+company_address.value + " " + company_address2.value+"&output=json",
+						  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+userAddress+"&output=json",
 						  async : false,
 						  success : function( data ) {
 							  alert(data.channel.item[0].point_x);
