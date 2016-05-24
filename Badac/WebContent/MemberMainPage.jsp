@@ -284,7 +284,7 @@ function menuClick(divname) {
 			</div>
 
 			<div class="tab-content" id="tabcontent">
-				<div class="tab-pane active" id="userApplication" style="display:none;">
+				<div class="tab-pane active" id="userApplication" style="display:block;">
 					<div class="col-md-9">
 						<div class="contentwrap">
 							<div class="page-header">
