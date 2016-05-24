@@ -19,12 +19,12 @@ body {
 
 						<script type="text/javascript">
 							
-							function userLogout(){
-								location.href = "http://210.118.74.159:8100/Badac/user_logout";
-							}
-							function writeApplication(){
-								location.href = "http://210.118.74.159:8100/Badac/write_application";
-							}
+								function userLogout(){
+									location.href = "http://210.118.74.159:8100/Badac/user_logout";
+								}
+								function writeApplication(){
+									location.href = "http://210.118.74.159:8100/Badac/write_application";
+								}
 						</script>
 </head>
 <body>
@@ -160,9 +160,11 @@ body {
 									
 									
 									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
-										$('#region_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[j].id].company_name +'</td></tr>');
+										$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td onclick = "goMemberPage('+tempData[j].id+');">'+ memberData[tempData[j].id].company_name +'</td></tr>');
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
+									
+									
 									} 
 								}
 								else{
@@ -175,6 +177,10 @@ body {
                  return function() {
                      infowindow.open(map, marker);
                  };
+             }
+             function goMemeberPage(temp_id){
+            	 document.cookie = "tunningID="+_id+";";
+            		location.href = "http://210.118.74.159:8100/Badac/show_member";
              }
 
              // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
