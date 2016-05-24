@@ -385,5 +385,13 @@
     <servlet-name>ShowMemberPage</servlet-name>
     <url-pattern>/show_member</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GetMemberAddress</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMemberAddress</servlet-name>
+    <url-pattern>/get_member_address</url-pattern>
+  </servlet-mapping>
   
 </web-app>

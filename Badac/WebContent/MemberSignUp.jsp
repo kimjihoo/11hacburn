@@ -186,14 +186,13 @@
             	return;
             }
 
-											$.ajax({
-												  dataType: "jsonp",
-												  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+company_address.value + " " + company_address2.value+"&output=json",
-												  async : false,
-												  success : function( data ) {
-													  alert(data.channel.item[0].point_x);
-													  company_x = data.channel.item[0].point_x;
-													  company_y = data.channel.item[0].point_y;
+            $.ajax({
+				  dataType: "jsonp",
+				  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+company_address.value + " " + company_address2.value+"&output=json",
+				  async : false,
+				  success : function( data ) {
+					  company_x = data.channel.item[0].point_x;
+					  company_y = data.channel.item[0].point_y;
 													  
 													  $.post("http://210.118.74.159:8100/Badac/member_sign_up", {
 											            	ownername : company_ownername.value,

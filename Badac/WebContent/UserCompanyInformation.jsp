@@ -39,14 +39,14 @@ onload = function on_load() {
 			.get(
 					"http://210.118.74.159:8100/Badac/get_member_info",
 					{
-						companyId : companyId,
+						id : companyId,
 					},
 					function(data) {
 						if (data.msg == "Success") {
-							document.getElementById("company_name").value = data.companyName;
-							document.getElementById("company_ownername").value = data.companyOwnerName;
-							document.getElementById("company_telephone").value = data.companyTelephone;
-							document.getElementById("company_region_1").value = data.companyRegion_1 + " " + data.companyRegion_2
+							document.getElementById("company_name").innerHTML = data.companyName;
+							document.getElementById("company_ownername").innerHTML = data.companyOwnerName;
+							document.getElementById("company_telephone").innerHTML = data.companyTelephone;
+							document.getElementById("company_region_1").innerHTML = data.companyRegion_1 + " " + data.companyRegion_2
 							+ " " + data.companyRegion_3;
 							lat = data.companyLat;
 							lng = data.companyLng;
@@ -166,13 +166,33 @@ body {
 	<script src="js/bootstrap.min.js"></script>
 
 	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center : new daum.maps.LatLng(lat, lng),
-			level : 3
-		};
+	var point_x;
+	var point_y;
+	var memberAddress;
+	var container;
+	var options;
+	var map;
+	alert(companyId);
+	$.get("http://210.118.74.159:8100/Badac/get_member_address",{
+		id:companyId,
+	},function(data){
+		if(data.msg=="Success"){
+			point_x = data.companyLat;
+			point_y = data.companyLng;
+			container = document.getElementById('map');
+			options = {
+				center : new daum.maps.LatLng(point_x, point_y),
+				level : 3
+			};
 
-		var map = new daum.maps.Map(container, options);
+			map = new daum.maps.Map(container, options);
+
+			alert(point_x+" "+point_y);
+		}else{
+			alert(data.msg);
+		}
+	});
+		
 	</script>
 
 </body>

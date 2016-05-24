@@ -293,6 +293,28 @@ public class MemberInfoServlet extends HttpServlet {
 			}
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
+		}else if(action.equals("get_member_address")){
+			int id = Integer.parseInt(request.getParameter("id"));
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			MemberInfo memberInfo = mid.selectMemberInfoByCompanyId(id);
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+				json.put("companyLat", memberInfo.getCompany_lat());
+				json.put("companyLng", memberInfo.getCompany_lng());
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 		}
 		
 
