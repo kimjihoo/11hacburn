@@ -64,13 +64,7 @@ body {
 							  point_y = data.channel.item[0].point_y;
 						  }
 						});
-						var imageSrc = "http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-						 var imageSize = new daum.maps.Size(24, 35); 
-						    
-						    // 마커 이미지를 생성합니다    
-						 var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
-						
-						
+
 						
 					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 				    mapOption = {
@@ -113,6 +107,13 @@ body {
 								});
 							
 							var positions = [];
+							
+							var imageSrc = "http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+							 var imageSize = new daum.maps.Size(24, 35); 
+							    
+							    // 마커 이미지를 생성합니다    
+							 var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+
 							$.get("http://210.118.74.159:8100/Badac/member_list", function(data){
 								if(data.msg=="Success"){
 									var memberData = {};
@@ -140,22 +141,21 @@ body {
 							                     clickable : true,
 							                     image : markerImage // 마커 이미지 
 							                 });
-											var infowindow = new daum.maps.InfoWindow({
-							                     content: positions[i].content // 인포윈도우에 표시할 내용
-							                 });
-											marker.setMap(map); 
-							                 // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-							                 // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-							                 // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-							                 daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-							                 daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-							                 
-							                 //마커 클릭리스너
-							                 daum.maps.event.addListener(marker, 'click', function() {
-																       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
-																      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
-																      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
-							               		});  
+												marker.setVisible(true);
+												marker.setMap(map); 
+												
+	           // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+	           // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+	           // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+	           daum.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+	           daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+	           
+	           //마커 클릭리스너
+	           daum.maps.event.addListener(marker, 'click', function() {
+				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
+				      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
+				      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
+	         		});  
 										}
 									
 									
