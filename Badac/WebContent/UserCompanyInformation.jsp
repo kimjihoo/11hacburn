@@ -20,7 +20,7 @@
 				for (int i = 0; i < cookies.length; i++) {
 					Cookie c = cookies[i];
 
-					if( c.getName().equals("company_id") ){
+					if( c.getName().equals("companyID") ){
 		            	companyid = Integer.parseInt(c.getValue());
 		            }
 				}

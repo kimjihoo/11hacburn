@@ -133,8 +133,8 @@ body {
 											positions[i] = {id : memberData[tempData[i].id].company_id,
 										                 latlng: new daum.maps.LatLng(memberData[tempData[i].id].company_lat, memberData[tempData[i].id].company_lng)
 										                 };
-											alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
-											alert(positions.length);
+											//alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
+											//alert(positions.length);
 											var markers = new daum.maps.Marker({
 							                     map: map, // 마커를 표시할 지도
 							                     position: positions[i].latlng, // 마커의 위치
@@ -146,7 +146,7 @@ body {
 												
 	
 	           //마커 클릭리스너
-	           daum.maps.event.addListener(marker, 'click', function() {
+	           daum.maps.event.addListener(markers, 'click', function() {
 				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
 				      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
 				      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
@@ -155,7 +155,12 @@ body {
 									
 									
 									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
-										$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td onclick = "goMemberPage('+tempData[j].id+');">'+ memberData[tempData[j].id].company_name +'</td></tr>');
+										$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td id="'+memberData[tempData[j].id].company_id+'">'+ memberData[tempData[j].id].company_name +'</td></tr>');
+										document.getElementById(""+memberData[tempData[j].id].company_id+"").onclick = function(){
+											var tempComId = $(this).attr('id');
+											document.cookie = "companyID="+tempComId;
+											location.href = "http://210.118.74.159:8100/Badac/show_member";
+										};
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
 									
@@ -166,12 +171,6 @@ body {
 									alert(data.msg);
 								}
 							});
-
-        
-             function goMemeberPage(temp_id){
-            	 document.cookie = "companyID="+temp_id+";";
-            		location.href = "http://210.118.74.159:8100/Badac/show_member";
-             }
 
              
 
