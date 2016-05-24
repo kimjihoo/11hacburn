@@ -377,6 +377,13 @@
     <servlet-name>RegistApplicationAnswer</servlet-name>
     <url-pattern>/application_reply_regist</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>ShowMemberPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowMemberPage</servlet-name>
+    <url-pattern>/show_member</url-pattern>
+  </servlet-mapping>
   
 </web-app>
