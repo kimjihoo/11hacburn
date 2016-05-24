@@ -179,7 +179,7 @@ body {
                  };
              }
              function goMemeberPage(temp_id){
-            	 document.cookie = "tunningID="+_id+";";
+            	 document.cookie = "companyID="+temp_id+";";
             		location.href = "http://210.118.74.159:8100/Badac/show_member";
              }
 
