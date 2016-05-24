@@ -8,16 +8,53 @@
 <title>업체 정보</title>
 <script type="text/javascript"
 	src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
-<script>
-	onload = function on_load() {
-		var temp1 = document.getElementById("userIdDiv");
-		var temp2 = document.getElementById('userNameDiv');
-		var temp3 = document.getElementById('userEmailDiv');
+<script>    
+    ////////////////////////////////////////////////////////
+    <%// 쿠키값 가져오기
+			Cookie[] cookies = request.getCookies();
 
-		temp1.appendChild(document.createTextNode(userId));
-		temp2.appendChild(document.createTextNode(userName));
-		temp3.appendChild(document.createTextNode(userEmail));
-	}
+    		int companyid = 0;
+
+			if (cookies != null) {
+
+				for (int i = 0; i < cookies.length; i++) {
+					Cookie c = cookies[i];
+
+					if( c.getName().equals("company_id") ){
+		            	companyid = Integer.parseInt(c.getValue());
+		            }
+				}
+			}%>
+    
+			var companyId = '<%= companyid %>';
+
+	///////////////////////////////////////////////////////////////////
+</script>
+<script>
+onload = function on_load() {
+	var lat = 0;
+	var lng = 0;
+	
+	$
+			.get(
+					"http://210.118.74.159:8100/Badac/get_member_info",
+					{
+						companyId : companyId,
+					},
+					function(data) {
+						if (data.msg == "Success") {
+							document.getElementById("company_name").value = data.companyName;
+							document.getElementById("company_ownername").value = data.companyOwnerName;
+							document.getElementById("company_telephone").value = data.companyTelephone;
+							document.getElementById("company_region_1").value = data.companyRegion_1 + " " + data.companyRegion_2
+							+ " " + data.companyRegion_3;
+							lat = data.companyLat;
+							lng = data.companyLng;
+						} else {
+							alert(data.msg);
+						}
+					});
+}
 </script>
 <style>
 body {
@@ -50,15 +87,13 @@ body {
 
 			<div class="col-md-4">
 				<h3>업체명</h3>
-				<p>first company</p>
+				<p class="form-control" id="company_name"></p>
 				<h3>대표자</h3>
-				<p>first company</p>
+				<p class="form-control" id="company_ownername"></p>
 				<h3>전화번호</h3>
-				<p>first company</p>
-				<h3>사이트</h3>
-				<p>www.www</p>
+				<p class="form-control" id="company_telephone"></p>				
 				<h3>주소</h3>
-				<p>first company</p>
+				<p class="form-control" id="company_region_1"></p>
 
 			</div>
 
@@ -133,7 +168,7 @@ body {
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center : new daum.maps.LatLng(33.450701, 126.570667),
+			center : new daum.maps.LatLng(lat, lng),
 			level : 3
 		};
 

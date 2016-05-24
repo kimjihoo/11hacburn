@@ -88,6 +88,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
+				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">Market</a></li>
 				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">About</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
@@ -117,6 +118,9 @@
 									<td style=""><a
 										href="http://210.118.74.159:8100/Badac/write_application">견적
 											제안서 작성</a></td>
+									<td style=""><a
+										href="http://210.118.74.159:8100/Badac/write_application">즐겨찾기
+											</a></td>
 								</tr>
 							</table>
 						</li>
@@ -126,6 +130,9 @@
 						<li><a
 							href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보
 								수정</a></li>
+						<li><a
+							href="http://210.118.74.159:8100/Badac/go_user_update_information">회원탈퇴
+							</a></li>
 
 					</ul></li>
 			</ul>
