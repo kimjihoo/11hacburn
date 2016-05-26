@@ -417,4 +417,21 @@
     <servlet-name>GoMyBookmarkPage</servlet-name>
     <url-pattern>/go_my_bookmark_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CheckBookMark</servlet-name>
+    <servlet-class>servlet.BookmarkInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckBookMark</servlet-name>
+    <url-pattern>/check_bookmark</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteBookmark</servlet-name>
+    <servlet-class>servlet.BookmarkInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteBookmark</servlet-name>
+    <url-pattern>/delete_bookmark</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

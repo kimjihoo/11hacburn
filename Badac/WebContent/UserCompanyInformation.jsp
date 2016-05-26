@@ -40,39 +40,76 @@ onload = function on_load() {
 	var lat = 0;
 	var lng = 0;
 	
-	$
-			.get(
-					"http://210.118.74.159:8100/Badac/get_member_info",
-					{
-						id : companyId,
-					},
-					function(data) {
-						if (data.msg == "Success") {
-							document.getElementById("company_name").innerHTML = data.companyName;
-							document.getElementById("company_ownername").innerHTML = data.companyOwnerName;
-							document.getElementById("company_telephone").innerHTML = data.companyTelephone;
-							document.getElementById("company_region_1").innerHTML = data.companyRegion_1 + " " + data.companyRegion_2
-							+ " " + data.companyRegion_3;
-							lat = data.companyLat;
-							lng = data.companyLng;
-						} else {
-							alert(data.msg);
-						}
-					});
+	$.get("http://210.118.74.159:8100/Badac/get_member_info",
+		{
+			id : companyId,
+		},function(data) {
+			if (data.msg == "Success") {
+				document.getElementById("company_name").innerHTML = data.companyName;
+				document.getElementById("company_ownername").innerHTML = data.companyOwnerName;
+				document.getElementById("company_telephone").innerHTML = data.companyTelephone;
+				document.getElementById("company_region_1").innerHTML = data.companyRegion_1 + " " + data.companyRegion_2
+				+ " " + data.companyRegion_3;
+				lat = data.companyLat;
+				lng = data.companyLng;
+			} else {
+				alert(data.msg);
+			}
+		});
+	$.get("http://210.118.74.159:8100/Badac/check_bookmark",
+			{
+				user_id : userId,
+				company_id : companyId,
+			},function(data) {
+				if (data.msg == "Success") {
+					if(data.chk==-1){
+						document.getElementById("bookBtn").innerHTML = "즐겨찾기 추가";
+					}else{
+						document.getElementById("bookBtn").innerHTML = "즐겨찾기 삭제";
+					}
+				} else {
+					alert(data.msg);
+				}
+			});
 }
 
 function add_bookmark(){
-	$.post("http://210.118.74.159:8100/Badac/add_bookmark",{
-		user_id : userId,
-		company_id : companyId,
-	}, function(data){
-		if(data.msg=="Success"){
-			alert("Success Add Bookmark");
-			location.href="http://210.118.74.159:8100/Badac/show_member";
-		}else{
-			alert(data.msg);
-		}
-	});
+	$.get("http://210.118.74.159:8100/Badac/check_bookmark",
+			{
+				user_id : userId,
+				company_id : companyId,
+			},function(data) {
+				if (data.msg == "Success") {
+					if(data.chk==-1){
+						$.post("http://210.118.74.159:8100/Badac/add_bookmark",{
+							user_id : userId,
+							company_id : companyId,
+						}, function(data){
+							if(data.msg=="Success"){
+								alert("Success Add Bookmark");
+								location.href="http://210.118.74.159:8100/Badac/show_member";
+							}else{
+								alert(data.msg);
+							}
+						});
+					}else{
+						$.post("http://210.118.74.159:8100/Badac/delete_bookmark",{
+							user_id : userId,
+							company_id : companyId,
+						}, function(data){
+							if(data.msg=="Success"){
+								alert("Success Delete Bookmark");
+								location.href="http://210.118.74.159:8100/Badac/go_my_bookmark_page";
+							}else{
+								alert(data.msg);
+							}
+						});
+					}
+				} else {
+					alert(data.msg);
+				}
+			});
+	
 }
 </script>
 <style>
@@ -168,10 +205,10 @@ body {
 
 		<div class="row">
 			<div class="col-lg-12" id="button-page">
-				<a class="btn btn-default" href="UserSearchCompany.jsp"
+				<a class="btn btn-default" href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"
 					role="button">목록</a> <a class="btn btn-default"
-					href="UserApplicationRegistPage.jsp" role="button">견적서요청</a> <a
-					class="btn btn-default" href="#" role="button" onclick = "add_bookmark();">즐겨찾기추가</a>
+					href="http://210.118.74.159:8100/Badac/write_application" role="button">견적서요청</a> <a
+					class="btn btn-default" href="#" role="button" onclick="add_bookmark();" id="bookBtn"></a>
 			</div>
 		</div>
 
@@ -191,7 +228,6 @@ body {
 	var container;
 	var options;
 	var map;
-	alert(companyId);
 	$.get("http://210.118.74.159:8100/Badac/get_member_address",{
 		id:companyId,
 	},function(data){
@@ -205,8 +241,6 @@ body {
 			};
 
 			map = new daum.maps.Map(container, options);
-
-			alert(point_x+" "+point_y);
 		}else{
 			alert(data.msg);
 		}
