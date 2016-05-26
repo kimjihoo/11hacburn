@@ -433,5 +433,4 @@
     <servlet-name>DeleteBookmark</servlet-name>
     <url-pattern>/delete_bookmark</url-pattern>
   </servlet-mapping>
-  
 </web-app>
