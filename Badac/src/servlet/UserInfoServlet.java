@@ -18,6 +18,7 @@ import javax.servlet.http.Part;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import db.BookmarkInfoDAO;
 import db.UserInfoDAO;
 import model.UserInfo;
 
@@ -131,6 +132,32 @@ public class UserInfoServlet extends HttpServlet {
 			
 			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
 				dispatchUrl = "UserBookMarkPage.jsp";
+			}
+			else{
+				dispatchUrl = "LoginPage.jsp";
+			}
+		}else if(action.equals("go_delete_user_page")){
+			String userCode = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userCode = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
+				dispatchUrl = "DeleteUserPage.jsp";
 			}
 			else{
 				dispatchUrl = "LoginPage.jsp";
@@ -731,6 +758,34 @@ public class UserInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
+		}else if(action.equals("delete_userinfo")){
+			int user_id = Integer.parseInt(request.getParameter("user_id"));
+			String user_pw = request.getParameter("user_pw");
+			
+			String msg = "Success";
+			
+			UserInfoDAO uid = new UserInfoDAO();
+			int temp = uid.checkUserPw(user_id, user_pw);
+			uid.disconnect();
+			if(temp==1){
+				uid = new UserInfoDAO();
+				uid.deleteUserInfo(user_id);
+				uid.disconnect();
+			}else{
+				msg = "Password Error";
+			}
+			
+			JSONObject json = new JSONObject();
+
+			try {
+				json.put("msg", msg);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 		}
 	}
 

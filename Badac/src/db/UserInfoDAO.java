@@ -107,6 +107,52 @@ public class UserInfoDAO extends BaseDAO {
 		return user_name;
 	}
 	
+	public int checkUserPw(int user_id, String user_pw){
+		
+		int chk = 0;
+		String userPw="";
+		PreparedStatement ps=null;
+		
+		try
+		{
+			String sql="SELECT * FROM normal_user WHERE user_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, user_id);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				userPw = rs.getString("user_password");
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		if(userPw.equals(user_pw)){
+			chk = 1;
+		}
+		
+		return chk;
+	}
+	
 	public UserInfo selectUserInfoByUserEmail(String user_email){
 		UserInfo userInfo = null;
 		PreparedStatement ps=null;
@@ -296,5 +342,44 @@ public class UserInfoDAO extends BaseDAO {
 			}
 		}
 		return "Success";
+	}
+	
+	public int deleteUserInfo(int user_id){
+		int insertRowCnt = 0;
+		
+		PreparedStatement ps=null;
+		try
+		{
+			String sql="DELETE FROM normal_user WHERE user_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			
+			ps.setInt(1,user_id);
+			
+			insertRowCnt = ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return insertRowCnt;
 	}
 }

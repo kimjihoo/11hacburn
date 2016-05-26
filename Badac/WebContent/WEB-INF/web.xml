@@ -433,4 +433,22 @@
     <servlet-name>DeleteBookmark</servlet-name>
     <url-pattern>/delete_bookmark</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteUserInfo</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUserInfo</servlet-name>
+    <url-pattern>/delete_userinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GoDeleteUserInfo</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoDeleteUserInfo</servlet-name>
+    <url-pattern>/go_delete_user_page</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

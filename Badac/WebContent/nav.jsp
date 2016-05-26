@@ -131,7 +131,7 @@
 							href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보
 								수정</a></li>
 						<li><a
-							href="http://210.118.74.159:8100/Badac/go_user_update_information">회원탈퇴
+							href="http://210.118.74.159:8100/Badac/go_delete_user_page">회원탈퇴
 							</a></li>
 
 					</ul></li>
