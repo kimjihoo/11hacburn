@@ -14,6 +14,7 @@
 			Cookie[] cookies = request.getCookies();
 
     		int companyid = 0;
+    		int userid = 0;
 
 			if (cookies != null) {
 
@@ -23,10 +24,14 @@
 					if( c.getName().equals("companyID") ){
 		            	companyid = Integer.parseInt(c.getValue());
 		            }
+					if( c.getName().equals("user_id") ){
+		            	userid = Integer.parseInt(c.getValue());
+		            }
 				}
 			}%>
     
 			var companyId = '<%= companyid %>';
+			var userId = '<%= userid %>';
 
 	///////////////////////////////////////////////////////////////////
 </script>
@@ -54,6 +59,20 @@ onload = function on_load() {
 							alert(data.msg);
 						}
 					});
+}
+
+function add_bookmark(){
+	$.post("http://210.118.74.159:8100/Badac/add_bookmark",{
+		user_id : userId,
+		company_id : companyId,
+	}, function(data){
+		if(data.msg=="Success"){
+			alert("Success Add Bookmark");
+			location.href="http://210.118.74.159:8100/Badac/show_member";
+		}else{
+			alert(data.msg);
+		}
+	});
 }
 </script>
 <style>
@@ -152,7 +171,7 @@ body {
 				<a class="btn btn-default" href="UserSearchCompany.jsp"
 					role="button">목록</a> <a class="btn btn-default"
 					href="UserApplicationRegistPage.jsp" role="button">견적서요청</a> <a
-					class="btn btn-default" href="#" role="button">즐겨찾기추가</a>
+					class="btn btn-default" href="#" role="button" onclick = "add_bookmark();">즐겨찾기추가</a>
 			</div>
 		</div>
 

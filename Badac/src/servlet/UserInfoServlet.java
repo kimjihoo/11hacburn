@@ -109,7 +109,34 @@ public class UserInfoServlet extends HttpServlet {
 			else{
 				dispatchUrl = "LoginPage.jsp";
 			}
-		}else if(action.equals("application_reply")){
+		}else if(action.equals("go_my_bookmark_page")){
+			String userCode = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userCode = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
+				dispatchUrl = "UserBookMarkPage.jsp";
+			}
+			else{
+				dispatchUrl = "LoginPage.jsp";
+			}
+		}
+		else if(action.equals("application_reply")){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();

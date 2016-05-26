@@ -119,7 +119,7 @@
 										href="http://210.118.74.159:8100/Badac/write_application">견적
 											제안서 작성</a></td>
 									<td style=""><a
-										href="http://210.118.74.159:8100/Badac/write_application">즐겨찾기
+										href="http://210.118.74.159:8100/Badac/go_my_bookmark_page">즐겨찾기
 											</a></td>
 								</tr>
 							</table>

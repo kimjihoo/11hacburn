@@ -12,11 +12,11 @@
   <filter>
     <filter-name>cors</filter-name>
     <filter-class>filter.SimpleCORSFilter</filter-class>
-</filter>
-<filter-mapping>
+  </filter>
+  <filter-mapping>
     <filter-name>cors</filter-name>
     <url-pattern>/*</url-pattern>
-</filter-mapping>
+  </filter-mapping>
   <servlet>
     <servlet-name>Nulls</servlet-name>
     <servlet-class>servlet.UserInfoServlet</servlet-class>
@@ -393,5 +393,28 @@
     <servlet-name>GetMemberAddress</servlet-name>
     <url-pattern>/get_member_address</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>AddBookmark</servlet-name>
+    <servlet-class>servlet.BookmarkInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBookmark</servlet-name>
+    <url-pattern>/add_bookmark</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ShowMyBookmark</servlet-name>
+    <servlet-class>servlet.BookmarkInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowMyBookmark</servlet-name>
+    <url-pattern>/show_my_bookmark</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GoMyBookmarkPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoMyBookmarkPage</servlet-name>
+    <url-pattern>/go_my_bookmark_page</url-pattern>
+  </servlet-mapping>
 </web-app>
