@@ -121,8 +121,6 @@ body {
 
 									for(var i = 0; i<tempData.length; i++){
 										
-
-
 											memberData[tempData[i].id] = {
 													"company_id": tempData[i].id,
 													"company_name": tempData[i].name,
@@ -149,9 +147,9 @@ body {
 
 	           //마커 클릭리스너
 	           daum.maps.event.addListener(markers, 'click', function() {
-				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[i].id].company_name +'</td></tr>');
-				      				$('#click_member_list').append("<tr><td>"+ memberData[tempData[i].id].company_address +"</td></tr>");
-				      				$('#click_member_list').append("<tr><td>"+ memberData[tempData[i].id].company_telephone +"</td></tr>");   
+				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+  +'</td></tr>');
+				      				$('#click_member_list').append("<tr><td>"+ +"</td></tr>");
+				      				$('#click_member_list').append("<tr><td>"+ +"</td></tr>");   
 	         		});  
 										}
 						
