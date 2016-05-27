@@ -28,51 +28,47 @@
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <script>    
     ////////////////////////////////////////////////////////
-    <% // 
+    <% // 쿠키값 가져오기
     Cookie[] cookies = request.getCookies() ;
     
-    int userid = 0;
-    String username=null;
-    String useremail=null;
-    String useraddress1=null;
-    String useraddress2=null;
+    int companyid = 0;
+    String companyownername=null;
+    String companyname=null;
+    String companyemail=null;
+    
     if(cookies != null){
          
         for(int i=0; i < cookies.length; i++){
             Cookie c = cookies[i] ;
              
-            if( c.getName().equals("user_id") ){
-            	userid = Integer.parseInt(c.getValue());
+            if( c.getName().equals("company_id") ){
+            	companyid = Integer.parseInt(c.getValue());
             }
-            if( c.getName().equals("user_name") ){
-            	username = URLDecoder.decode(c.getValue(), "UTF-8");
+            if(c.getName().equals("company_ownername")){
+            	companyownername = URLDecoder.decode(c.getValue(), "UTF-8");
             }
-            if( c.getName().equals("user_email") ){
-            	useremail = URLDecoder.decode(c.getValue(), "UTF-8");
+            if( c.getName().equals("company_name") ){
+            	companyname = URLDecoder.decode(c.getValue(), "UTF-8");
             }
-            if( c.getName().equals("user_region_2") ){
-            	useraddress1 = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("user_region_3") ){
-            	useraddress2 = URLDecoder.decode(c.getValue(), "UTF-8");
+            if( c.getName().equals("company_email") ){
+            	companyemail = URLDecoder.decode(c.getValue(), "UTF-8");
             }
         }
     } 
     %>
  
-    var userId = '<%= userid %>';
-    var userName = '<%= username %>';
-    var userEmail = '<%= useremail %>';
-    var userAddress = '<%= useraddress1 %> + " " + <%= useraddress2 %>'
-   
-	function userLogout() {
+    var companyId = '<%= companyid %>';
+    var companyOwnerName = '<%= companyownername%>';
+    var companyName = '<%= companyname %>';
+    var companyEmail = '<%= companyemail %>';
+    
+    function userLogout() {
 		location.href = "http://210.118.74.159:8100/Badac/user_logout";
 	}
-	function writeApplication() {
-		location.href = "http://210.118.74.159:8100/Badac/UserApplicationRegistPage";
-	}
+    
 	///////////////////////////////////////////////////////////////////
 </script>
 </head>
@@ -88,36 +84,32 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">Market</a></li>
 				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">About</a></li>
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false"><%=username%>님 <span class="caret"></span>
+					data-toggle="dropdown" role="button" aria-expanded="false"><%=companyname%>님 <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" style="width: 200px; text-align: center;" role="menu">
-						<li>
+						<li>						
 							<table>
 								<tr>
 									<td rowspan=2><a href="#"><img
 											src="http://placehold.it/100x100" alt=".." /></a></td>
-									<td style="padding-left: 20px;"><%=useremail%></td>
+									<td style="padding-left: 20px;">대표 <%=companyownername%></td>
+								</tr>
+								<tr>
+									<td style='padding-left: 20px;'><%=companyemail%></td>
 								</tr>
 							</table>
 						</li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">나의 요청서 보기</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/write_application">견적 요청서 작성</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">메인 메뉴</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/업체페이지">마이 페이지</a></li>
 						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page">즐겨찾기</a></li>
 						<li class="divider"></li>
-
-						<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
-						<li><a
-							href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보
-								수정</a></li>
-						<li><a
-							href="http://210.118.74.159:8100/Badac/go_delete_user_page">회원탈퇴
-							</a></li>
-
+						<li><a href="http://210.118.74.159:8100/Badac/member_logout">로그아웃</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">업체정보수정</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_delete_user_page">회원탈퇴</a></li>
 					</ul></li>
 			</ul>
 		</div>

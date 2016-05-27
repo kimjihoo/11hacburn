@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.net.URLDecoder"%>
+<jsp:include page='memberNav.jsp' />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,44 +49,6 @@ body {
 	list-style-type: disc;
 }
 </style>
-<script>    
-    ////////////////////////////////////////////////////////
-    <% // 쿠키값 가져오기
-    Cookie[] cookies = request.getCookies() ;
-    
-    int companyid = 0;
-    String companyownername=null;
-    String companyname=null;
-    String companyemail=null;
-    
-    if(cookies != null){
-         
-        for(int i=0; i < cookies.length; i++){
-            Cookie c = cookies[i] ;
-             
-            if( c.getName().equals("company_id") ){
-            	companyid = Integer.parseInt(c.getValue());
-            }
-            if(c.getName().equals("company_ownername")){
-            	companyownername = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("company_name") ){
-            	companyname = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("company_email") ){
-            	companyemail = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-        }
-    } 
-    %>
- 
-    var companyId = '<%= companyid %>';
-    var companyOwnerName = '<%= companyownername%>';
-    var companyName = '<%= companyname %>';
-    var companyEmail = '<%= companyemail %>';
-    
-	///////////////////////////////////////////////////////////////////
-</script>
 <script type="text/javascript">
 	onload = function on_load(){
 		document.getElementById("ownername").innerHTML = companyOwnerName;

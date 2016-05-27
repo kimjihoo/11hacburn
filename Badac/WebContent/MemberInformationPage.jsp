@@ -1,98 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@page import="java.net.URLDecoder"%>
+	pageEncoding="UTF-8"%>
+<%@page import="java.net.URLDecoder"%>
+<jsp:include page='memberNav.jsp' />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous"></script>
-            
-            
-    <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> <!-- 다음 주소 api -->
-<script>    
-    ////////////////////////////////////////////////////////
-    <% // 쿠키값 가져오기
-    Cookie[] cookies = request.getCookies() ;
-    
-    int companyid = 0;
-    String companyownername=null;
-    String companyemail=null;
-    String companypassword=null;
-    String companyname=null;
-    String companyregion_1=null;
-    String companyregion_2=null;
-    String companyregion_3=null;
-    String companytelephone=null;
-    String companyphone=null;
-    int companyemailpush=0;
-    
-    if(cookies != null){
-         
-        for(int i=0; i < cookies.length; i++){
-            Cookie c = cookies[i] ;
-             
-            if( c.getName().equals("company_id") ){
-            	companyid = Integer.parseInt(c.getValue());
-            }
-            if( c.getName().equals("company_ownername") ){
-            	companyownername = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("company_email") ){
-            	companyemail = c.getValue();
-            }
-            if( c.getName().equals("company_password") ){
-            	companypassword = c.getValue();
-            }
-            if( c.getName().equals("company_name") ){
-            	companyname = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("company_region_1") ){
-            	companyregion_1 = c.getValue();
-            }
-            if( c.getName().equals("company_region_2") ){
-            	companyregion_2 = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("company_region_3") ){
-            	companyregion_3 = URLDecoder.decode(c.getValue(), "UTF-8");
-            }
-            if( c.getName().equals("company_telephone") ){
-            	companytelephone = c.getValue();
-            }
-            if( c.getName().equals("company_phone") ){
-            	companyphone = c.getValue();
-            }
-            if( c.getName().equals("company_emailpush") ){
-            	companyemailpush = Integer.parseInt(c.getValue());
-            }
-        }
-    } 
-    %>
- 
-    var companyId = '<%= companyid %>';
-    var companyOwnerName = '<%= companyownername %>';
-    var companyEmail = '<%= companyemail %>';
-    var companyPassword = '<%= companypassword %>';
-    var companyName = '<%= companyname %>';
-    var companyRegion_1 = '<%= companyregion_1 %>';
-    var companyRegion_2 = '<%= companyregion_2 %>';
-    var companyRegion_3 = '<%= companyregion_3 %>';
-    var companyTelePhone = '<%= companytelephone %>';
-    var companyPhone = '<%= companyphone %>';
-    var companyEmailpush = '<%= companyemailpush %>';
-    
-	///////////////////////////////////////////////////////////////////
-</script>
+<title>업체 정보 수정</title>
+<style>
+body {
+	padding-top: 70px;
+}
+</style>
 <script type="text/javascript">
 onload = function on_load(){
 	var company_ownername = document.getElementById("company_ownername");
