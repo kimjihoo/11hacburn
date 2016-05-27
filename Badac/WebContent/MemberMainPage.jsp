@@ -187,7 +187,7 @@ body {
 								title_var.onclick = function () {
 									var tempP_id = $(this).attr('id');
 									document.cookie = "tunningID="+tempP_id+";";
-									location.href="http://210.118.74.159:8100/Badac/application_reply"
+									location.href="http://210.118.74.159:8100/Badac/go_company_application_page"
 			                    };
 								td.appendChild(title_var);
 								break;

@@ -10,6 +10,7 @@ public class ApplicationInfo {
 	private int tunning_firm;
 	private Date upload_date;
 	private int chk;
+	private String reply;
 
 	public ApplicationInfo(){
 		tunning_id=-1;
@@ -18,6 +19,7 @@ public class ApplicationInfo {
 		tunning_firm=-1;
 		upload_date=new Date(0000-00-00);
 		chk = -1;
+		reply="";
 	}
 	
 	public ApplicationInfo(int tunning_id, int user_id, String tunning_title, String tunning_explanation, int tunning_firm, Date upload_date){
@@ -59,7 +61,14 @@ public class ApplicationInfo {
 		this.tunning_explanation = tunning_explanation;
 		this.upload_date = upload_date;
 	}
-
+	public ApplicationInfo(int tunning_id,int user_id, String tunning_title, String tunning_explanation, Date upload_date, String reply){
+		this.tunning_id = tunning_id;
+		this.user_id = user_id;
+		this.tunning_title = tunning_title;
+		this.tunning_explanation = tunning_explanation;
+		this.upload_date = upload_date;
+		this.reply = reply;
+	}
 	public int getTunning_id() {
 		return tunning_id;
 	}
@@ -114,5 +123,13 @@ public class ApplicationInfo {
 
 	public void setChk(int chk) {
 		this.chk = chk;
+	}
+	
+	public String getReply() {
+		return reply;
+	}
+
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 }

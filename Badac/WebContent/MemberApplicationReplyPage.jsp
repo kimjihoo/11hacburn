@@ -196,7 +196,7 @@ function answerReply() {
 		</table>
 		<span style="float: right"><button class="btn btn-default"
 				type="submit" onclick="answerReply()">등록</button> <a class="btn btn-default"
-			href="MemberMainPage.jsp" role="button">목록</a></span>
+			href="http://210.118.74.159:8100/Badac/member_main_page" role="button">목록</a></span>
 	</div>
 	
 </body>

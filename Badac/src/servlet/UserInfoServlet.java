@@ -371,7 +371,33 @@ public class UserInfoServlet extends HttpServlet {
 			else{
 				response.sendRedirect("login_page");
 			}
-		} else if(action.equals("get_user_info")){
+		}else if(action.equals("go_company_application_page")){
+			String userId = null;
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("company_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userId = cookie[i].getValue();
+						}
+					}
+				}
+			}
+			
+			if (userId != null && !(userId.equals("") && Pattern.matches("^[0-9]+$", userId))){
+				dispatchUrl="CompanyApplicationPage.jsp";
+			}
+			else{
+				response.sendRedirect("login_page");
+			}
+		}
+		else if(action.equals("get_user_info")){
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			UserInfoDAO uid = new UserInfoDAO();

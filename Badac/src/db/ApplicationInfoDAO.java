@@ -288,6 +288,7 @@ public class ApplicationInfoDAO extends BaseDAO {
 			ps.setInt(1, tunningId);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next()){
+				
 				int tunningId1 = rs.getInt("tunning_id");
 				int userId = rs.getInt("user_id");
 				String tunningTitle = rs.getString("tunning_title");
@@ -295,6 +296,61 @@ public class ApplicationInfoDAO extends BaseDAO {
 				Date tunningUploadDate = rs.getDate("upload_date");
 				
 				applicationInfo = new ApplicationInfo(tunningId1,userId, tunningTitle, tunningExplanation, tunningUploadDate);
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return applicationInfo;
+	}
+	
+	public ApplicationInfo selectApplicationInfoByTunningId2(int tunningId, int companyId){
+		ApplicationInfo applicationInfo = null;
+		PreparedStatement ps=null;
+		
+		try
+		{
+			String sql="SELECT * FROM tunning_application WHERE tunning_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, tunningId);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				String sql2="SELECT * FROM tunning_answer WHERE tunning_id=? AND tunning_company_id=?";
+				ps=super.getConn().prepareStatement(sql2);
+				ps.setInt(1, tunningId);
+				ps.setInt(2, companyId);
+				ResultSet rs2=ps.executeQuery();
+				int tunningId1 = rs.getInt("tunning_id");
+				int userId = rs.getInt("user_id");
+				String tunningTitle = rs.getString("tunning_title");
+				String tunningExplanation = rs.getString("tunning_explanation");
+				Date tunningUploadDate = rs.getDate("upload_date");
+				String tunningAnswer="";
+				while(rs2.next()){
+					tunningAnswer = rs2.getString("tunning_reply");
+				}
+				
+				applicationInfo = new ApplicationInfo(tunningId1,userId, tunningTitle, tunningExplanation, tunningUploadDate, tunningAnswer);
 			}
 		}
 		catch (SQLException se)

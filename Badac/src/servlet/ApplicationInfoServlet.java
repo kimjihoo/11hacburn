@@ -243,9 +243,10 @@ public class ApplicationInfoServlet extends HttpServlet {
 		}
 		else if(action.equals("get_application_info_2")){
 			int id = Integer.parseInt(request.getParameter("tunningId"));
+			int c_id = Integer.parseInt(request.getParameter("companyId"));
 			
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
-			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId(id);
+			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId2(id, c_id);
 			int user_id = applicationInfo.getUser_id();
 			System.out.println(user_id);
 			UserInfoDAO uid = new UserInfoDAO();
@@ -265,6 +266,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 				json.put("title", applicationInfo.getTunning_title());
 				json.put("explanation", applicationInfo.getTunning_explanation());
 				json.put("date", applicationInfo.getUpload_date());
+				json.put("reply", applicationInfo.getReply());
 			}
 			catch (JSONException e) {
 				// TODO Auto-generated catch block

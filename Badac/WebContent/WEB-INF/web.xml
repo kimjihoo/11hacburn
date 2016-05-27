@@ -457,6 +457,14 @@
     <servlet-name>CompanyApplicationList</servlet-name>
     <url-pattern>/company_application_list</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GoCompanyApplicationPage</servlet-name>
+    <servlet-class>servlet.UserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoCompanyApplicationPage</servlet-name>
+    <url-pattern>/go_company_application_page</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>
