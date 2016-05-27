@@ -119,7 +119,7 @@ body {
 								if(data.msg=="Success"){
 									
 									var tempData = data.memberList;
-
+									var marker={};
 									for(var i = 0; i<tempData.length; i++){
 										
 											memberData[tempData[i].id] = {
@@ -147,9 +147,27 @@ body {
 							                     clickable: true,
 							                     title: memberData[tempData[i].id].company_id,
 							                 });
+											marker[i] = markers;
+											
+											(function(i){
+												daum.maps.event.addListener(marker[i], "click", function(){
+													var iwContent = '<div style="padding:5px;"><table class="table table-hover" id="region_member_list"><tr><td rowspan="3"><img src="http://placehold.it/80x80"/></td><td id="'+parseInt(marker[i].getTitle())+'">'+memberData[parseInt(marker[i].getTitle())].company_name+'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_address +'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_telephone +'</td></tr></table></div>',
+													iwRemoveable = true;
+													document.getElementById(""+parseInt(marker[i].getTitle())+"").onclick = function(){
+														var tempComId2 = $(this).attr('id');
+														document.cookie = "companyID="+tempComId2;
+														location.href = "http://210.118.74.159:8100/Badac/show_member";
+													};
+													var infoWindow = new daum.maps.InfoWindow({
+														content : iwContent,
+														removable : iwRemoveable
+													});
+													infoWindow.open(map,marker[i]);
+												});
+											})(i);
 
 	           									//마커 클릭리스너
-	           								daum.maps.event.addListener(markers, 'click', function() {
+	           								/*daum.maps.event.addListener(markers, 'click', function() {
 	        	   								//alert(markers.title);
 	        	  								//alert(memberData[markers.title].company_id);
 	        	  								alert(memberData[parseInt(markers.getTitle())].company_id);
@@ -159,7 +177,7 @@ body {
 	      										$('#click_member_list').append("<tr><td>"+ memberData[parseInt(markers.getTitle())].company_address +"</td></tr>");
 	      										$('#click_member_list').append("<tr><td>"+ memberData[parseInt(markers.getTitle())].company_telephone+"</td></tr>"); 
 	     
-											});
+											});*/
 										}
 					
 									
