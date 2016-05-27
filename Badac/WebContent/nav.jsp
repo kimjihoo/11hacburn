@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>nav bar</title>
+<title></title>
 <script src="https://code.jquery.com/jquery-2.2.3.js"
 	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
 	crossorigin="anonymous"></script>
