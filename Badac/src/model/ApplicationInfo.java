@@ -9,6 +9,7 @@ public class ApplicationInfo {
 	private String tunning_explanation;
 	private int tunning_firm;
 	private Date upload_date;
+	private int chk;
 
 	public ApplicationInfo(){
 		tunning_id=-1;
@@ -16,6 +17,7 @@ public class ApplicationInfo {
 		tunning_explanation="";
 		tunning_firm=-1;
 		upload_date=new Date(0000-00-00);
+		chk = -1;
 	}
 	
 	public ApplicationInfo(int tunning_id, int user_id, String tunning_title, String tunning_explanation, int tunning_firm, Date upload_date){
@@ -37,6 +39,12 @@ public class ApplicationInfo {
 		this.tunning_id = tunning_id;
 		this.tunning_title = tunning_title;
 		this.upload_date = upload_date;
+	}
+	public ApplicationInfo(int tunning_id, String tunning_title, Date upload_date, int chk){
+		this.tunning_id = tunning_id;
+		this.tunning_title = tunning_title;
+		this.upload_date = upload_date;
+		this.chk = chk;
 	}
 	public ApplicationInfo(int tunning_id, String tunning_title, String tunning_explanation, Date upload_date){
 		this.tunning_id = tunning_id;
@@ -98,5 +106,13 @@ public class ApplicationInfo {
 
 	public void setUpload_date(Date upload_date) {
 		this.upload_date = upload_date;
+	}
+	
+	public int getChk() {
+		return chk;
+	}
+
+	public void setChk(int chk) {
+		this.chk = chk;
 	}
 }

@@ -148,6 +148,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 						applicationInfo.put("id", temp.getTunning_id());
 						applicationInfo.put("title", temp.getTunning_title());
 						applicationInfo.put("date", temp.getUpload_date());
+						applicationInfo.put("chk", temp.getChk());
 						
 						applicationListJson.put(applicationInfo);
 					}
@@ -169,10 +170,11 @@ public class ApplicationInfoServlet extends HttpServlet {
 			response.getWriter().write(json.toString());
 		}
 		else if(action.equals("application_list")){
+			int company_id = Integer.parseInt(request.getParameter("id"));
 			
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
 			
-			ArrayList<ApplicationInfo> applicationList = aid.getApplicationList();
+			ArrayList<ApplicationInfo> applicationList = aid.getApplicationList(company_id);
 			aid.disconnect();
 			
 			String msg = "Success";
@@ -193,6 +195,7 @@ public class ApplicationInfoServlet extends HttpServlet {
 						applicationInfo.put("id", temp.getTunning_id());
 						applicationInfo.put("title", temp.getTunning_title());
 						applicationInfo.put("date", temp.getUpload_date());
+						applicationInfo.put("chk", temp.getChk());
 						
 						applicationListJson.put(applicationInfo);
 					}

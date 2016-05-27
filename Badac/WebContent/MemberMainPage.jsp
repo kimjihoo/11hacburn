@@ -93,6 +93,7 @@ body {
 		document.getElementById("name").innerHTML = companyName;
 		
 		$.get("http://210.118.74.159:8100/Badac/application_list",{
+			id : companyId
 		},
 			function(data){
 				if(data.msg=="Success"){
@@ -107,10 +108,11 @@ body {
 						applicationData[tempData[i].id] = {
 							"tunning_id": tempData[i].id,
 							"tunning_title": tempData[i].title,
-							"tunning_date": tempData[i].date
+							"tunning_date": tempData[i].date,
+							"tunning_chk": tempData[i].chk
 						}
 						tr = document.createElement('tr');
-						for(var j = 0; j<3; j++){
+						for(var j = 0; j<4; j++){
 							td = document.createElement('td');
 							switch(j){
 							case 0:
@@ -131,6 +133,13 @@ body {
 							case 2:
 								var tunningDate = applicationData[tempData[i].id].tunning_date;
 								td.appendChild(document.createTextNode(tunningDate));
+								break;
+							case 3:
+								if(applicationData[tempData[i].id].tunning_chk==0){
+									td.appendChild(document.createTextNode("NO"));
+								}else if(applicationData[tempData[i].id].tunning_chk==1){
+									td.appendChild(document.createTextNode("YES"));
+								}
 								break;
 								default:
 									break;
@@ -160,10 +169,11 @@ body {
 						applicationData[tempData[i].id] = {
 							"tunning_id": tempData[i].id,
 							"tunning_title": tempData[i].title,
-							"tunning_date": tempData[i].date
+							"tunning_date": tempData[i].date,
+							"tunning_chk": tempData[i].chk
 						}
 						tr = document.createElement('tr');
-						for(var j = 0; j<3; j++){
+						for(var j = 0; j<4; j++){
 							td = document.createElement('td');
 							switch(j){
 							case 0:
@@ -184,6 +194,13 @@ body {
 							case 2:
 								var tunningDate = applicationData[tempData[i].id].tunning_date;
 								td.appendChild(document.createTextNode(tunningDate));
+								break;
+							case 3:
+								if(applicationData[tempData[i].id].tunning_chk==0){
+									td.appendChild(document.createTextNode("미채택"));
+								}else if(applicationData[tempData[i].id].tunning_chk==1){
+									td.appendChild(document.createTextNode("채택"));
+								}
 								break;
 								default:
 									break;
@@ -366,6 +383,7 @@ function menuClick(divname) {
 											<td style="width: 15%;">번호</td>
 											<td style="width: 45%;">제목</td>
 											<td style="width: 20%;">등록일자</td>
+											<td style="width: 20%;">등록여부</td>
 										</tr>
 									</thead>
 									<tbody id="applicationListTable"
@@ -407,6 +425,7 @@ function menuClick(divname) {
 											<td style="width: 15%;">번호</td>
 											<td style="width: 45%;">제목</td>
 											<td style="width: 20%;">등록일자</td>
+											<td style="width: 20%;">채택여부</td>
 										</tr>
 									</thead>
 									<tbody id="companyApplicationListTable"
