@@ -215,6 +215,53 @@ public class ApplicationInfoServlet extends HttpServlet {
 			}
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
+		}else if(action.equals("my_reply_list")){
+			int tunningId = Integer.parseInt(request.getParameter("id"));
+			
+			ApplicationInfoDAO aid = new ApplicationInfoDAO();
+			
+			ArrayList<ApplicationInfo> replyList = aid.getMyReplyList(tunningId);
+			aid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			
+			if(replyList.size()==0){
+				msg = "Not Exist Reply";
+			}else{
+				JSONArray applicationListJson = new JSONArray();
+				JSONObject applicationInfo;
+				
+				try{
+					for(ApplicationInfo temp : replyList){
+						applicationInfo = new JSONObject();
+						
+						applicationInfo.put("companyId", temp.getTunningCompanyId());
+						MemberInfoDAO mid = new MemberInfoDAO();
+						applicationInfo.put("companyName", mid.selectMemberNameByCompanyId(temp.getTunningCompanyId()));
+						mid.disconnect();
+						applicationInfo.put("reply", temp.getReply());
+						
+						applicationListJson.put(applicationInfo);
+					}
+					json.put("replyList", applicationListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
 		}
 		else if(action.equals("get_application_info")){
 			int id = Integer.parseInt(request.getParameter("tunningId"));
@@ -398,6 +445,29 @@ public class ApplicationInfoServlet extends HttpServlet {
 
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
+		}else if(action.equals("select_answer")){
+			int tunning_id = Integer.parseInt(request.getParameter("tunning_id"));
+			int company_id = Integer.parseInt(request.getParameter("company_id"));
+			String msg = "Success";
+
+			ApplicationInfoDAO aid = new ApplicationInfoDAO();
+			String temp = aid.updateSelectCompany(tunning_id, company_id);
+			if(!temp.equals("Success")){
+				msg = temp;
+			}
+			
+			JSONObject json = new JSONObject();
+
+			try {
+				json.put("msg", msg);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
 		}
 		else if(action.equals("delete_application")){
 			String userCode = null;

@@ -277,6 +277,45 @@ public class ApplicationInfoDAO extends BaseDAO {
 		return applicationList;
 	}
 	
+	public ArrayList<ApplicationInfo> getMyReplyList(int tunning_id){
+		ArrayList<ApplicationInfo> replyList = new ArrayList<ApplicationInfo>();
+		PreparedStatement ps = null;
+		try{
+			String sql = "SELECT * FROM tunning_answer WHERE tunning_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, tunning_id);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				replyList.add(new ApplicationInfo(rs.getString("tunning_reply"), rs.getInt("tunning_company_id")));
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return replyList;
+	}
+	
 	public ApplicationInfo selectApplicationInfoByTunningId(int tunningId){
 		ApplicationInfo applicationInfo = null;
 		PreparedStatement ps=null;
@@ -416,5 +455,57 @@ public class ApplicationInfoDAO extends BaseDAO {
 		}
 		
 		return lowCnt;
+	}
+	
+	public String updateSelectCompany(int tunning_id, int company_id){
+		PreparedStatement ps = null;
+		
+		try{
+			String sql = "SELECT * FROM tunning_answer WHERE tunning_id=? AND tunning_company_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, tunning_id);
+			ps.setInt(2, company_id);
+			ps.executeUpdate();
+			ResultSet rs=ps.executeQuery();
+			
+			int adopt=-1;
+			while(rs.next()){
+				adopt = rs.getInt("tunning_adopt");
+			}
+			
+			if(adopt==0){
+				String sql2 = "UPDATE tunning_answer SET tunning_adopt=?";
+				ps=super.getConn().prepareStatement(sql2);
+				ps.setInt(1, 1);
+				ps.executeUpdate();
+			}else{
+				return "already select";
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+			return "fail";
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return "fail";
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		return "Success";
 	}
 }

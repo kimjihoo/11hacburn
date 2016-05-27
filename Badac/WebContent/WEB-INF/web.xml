@@ -465,6 +465,22 @@
     <servlet-name>GoCompanyApplicationPage</servlet-name>
     <url-pattern>/go_company_application_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MyReplyList</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyReplyList</servlet-name>
+    <url-pattern>/my_reply_list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SelectAnswer</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SelectAnswer</servlet-name>
+    <url-pattern>/select_answer</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>
