@@ -5,17 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>메인 페이지</title>
+<title>즐겨 찾기</title>
 
 <script type="text/javascript"
-	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services"></script>
-
+	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services">	
+</script>
 
 <style>
 body {
 	padding-top: 70px;
 }
 </style>
+
 </head>
 <script>
 onload = function on_load(){
@@ -52,33 +53,73 @@ onload = function on_load(){
 					}
 				});
 			}
-			for(var i = 0; i<tempData.length; i++){
-				$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td id="'+tempData[i].companyId+'">'+ memberData[tempData[i].companyId].company_name +'</td></tr>');
-				document.getElementById(""+tempData[i].companyId+"").onclick = function(){
-					var tempComId = $(this).attr('id');
-					document.cookie = "companyID="+tempComId;
-					location.href = "http://210.118.74.159:8100/Badac/show_member";
-				};
-				$('#region_member_list').append("<tr><td>"+ memberData[tempData[i].companyId].company_address +"</td></tr>");
-				$('#region_member_list').append("<tr><td>"+ memberData[tempData[i].companyId].company_telephone +"</td></tr>");
-			}
-			
-			
-		}
-		else{
-			alert(data.msg);
-		}
-	});
-}
+	for (var i = 0; i < tempData.length; i++) {
+
+									$('#region_member_list')
+											.append(
+													'<div class="row"><div class="col-md-7"><a href="#"><img class="img-responsive" src="http://placehold.it/700x300" alt=""></a></div><div class="col-md-5">'
+													        + '<h3>' + memberData[tempData[i].companyId].company_name + '</h3>'
+															+ '<h4>' + memberData[tempData[i].companyId].company_address	+ '</h4>'
+															+ '<p>' + memberData[tempData[i].companyId].company_telephone + '</p>'
+															+ '<a class="btn btn-primary" id="' + tempData[i].companyId'"> 업체 페이지 <span class="glyphicon glyphicon-chevron-right"></span></a>'
+															+ '</div></div>'
+															+ '<hr>');
+									document.getElementById("" + tempData[i].companyId + "").onclick = function() {
+										var tempComId = $(this).attr('id');
+										document.cookie = "companyID="
+												+ tempComId;
+										location.href = "http://210.118.74.159:8100/Badac/show_member";
+									};
+								}
+
+							} else {
+								alert(data.msg);
+							}
+						});
+	}
 </script>
 <body>
+	<div class="contentwrap">
+		<div class="container">
+			<div class="page-header">
+				<h1>
+					My BookMark <small> List </small>
+				</h1>
+			</div>
+		</div>
 
-	<div class="container">
 
-		<div class="col-lg-12 col-sm-12"">
-			<table class="table table-hover" id="region_member_list">
+		<div class="container">
 
 			</table>
+			<!-- Pagination -->
+			<div class="row text-center">
+				<div class="col-lg-12">
+					<ul class="pagination">
+						<li><a href="#">&laquo;</a></li>
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">&raquo;</a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /.row -->
+
+			<hr>
+
+			<!-- Footer -->
+			<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Badoc Corporation 2016</p>
+				</div>
+			</div>
+			<!-- /.row -->
+			</footer>
+
 		</div>
 	</div>
 
