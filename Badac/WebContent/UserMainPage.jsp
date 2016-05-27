@@ -122,8 +122,7 @@ body {
 									for(var i = 0; i<tempData.length; i++){
 										
 
-										
-										//alert(lng_x+", "+lat_y);
+
 											memberData[tempData[i].id] = {
 													"company_id": tempData[i].id,
 													"company_name": tempData[i].name,
@@ -133,14 +132,11 @@ body {
 													"company_lat" : tempData[i].lat
 													}
 
-											
 											var templng = parseFloat(memberData[tempData[i].id].company_lat);
 											var templat = parseFloat(memberData[tempData[i].id].company_lng);
 											
-											alert(typeof(templng));
-											alert(typeof(templat));
-											
-											positions[i] = {id : memberData[tempData[i].id].company_id,
+											positions[i] = {
+																											id : memberData[tempData[i].id].company_id,
 										                 latlng: new daum.maps.LatLng(templat, templng)
 										                 };
 											//alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
@@ -148,18 +144,14 @@ body {
 											var markers = new daum.maps.Marker({
 							                     map: map, // 마커를 표시할 지도
 							                     position: positions[i].latlng, // 마커의 위치
-							                     clickable : true,
 							                     image : markerImage // 마커 이미지 
 							                 });
-												markers.setVisible(true);
-												markers.setMap(map); 
-												
-	
+
 	           //마커 클릭리스너
 	           daum.maps.event.addListener(markers, 'click', function() {
-				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[position[i].id].company_name +'</td></tr>');
-				      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_address +"</td></tr>");
-				      				$('#click_member_list').append("<tr><td>"+ memberData[position[i].id].company_telephone +"</td></tr>");   
+				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[positions[i].id].company_name +'</td></tr>');
+				      				$('#click_member_list').append("<tr><td>"+ memberData[positions[i].id].company_address +"</td></tr>");
+				      				$('#click_member_list').append("<tr><td>"+ memberData[positions[i].id].company_telephone +"</td></tr>");   
 	         		});  
 										}
 									
@@ -173,8 +165,7 @@ body {
 										};
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
-									
-									
+
 									} 
 								}
 								else{

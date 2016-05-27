@@ -234,9 +234,13 @@ body {
 		if(data.msg=="Success"){
 			point_x = data.companyLat;
 			point_y = data.companyLng;
+			var temp_x = parseFloat(point_x);
+			var temp_y = parseFloat(point_y);
+			
+			
 			container = document.getElementById('map');
 			options = {
-				center : new daum.maps.LatLng(point_x, point_y),
+				center : new daum.maps.LatLng(temp_x, temp_y),
 				level : 3
 			};
 
