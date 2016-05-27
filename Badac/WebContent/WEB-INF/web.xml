@@ -449,6 +449,14 @@
     <servlet-name>GoDeleteUserInfo</servlet-name>
     <url-pattern>/go_delete_user_page</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CompanyApplicationList</servlet-name>
+    <servlet-class>servlet.ApplicationInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompanyApplicationList</servlet-name>
+    <url-pattern>/company_application_list</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>

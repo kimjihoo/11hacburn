@@ -176,6 +176,52 @@ public class ApplicationInfoDAO extends BaseDAO {
 		return applicationList;
 	}
 	
+	public ArrayList<ApplicationInfo> getCompanyApplicationList(int company_id){
+		ArrayList<ApplicationInfo> applicationList = new ArrayList<ApplicationInfo>();
+		PreparedStatement ps = null;
+		try{
+			String sql = "SELECT * FROM tunning_answer WHERE tunning_company_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, company_id);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				String sql2 = "SELECT * FROM tunning_application WHERE tunning_id=?";
+				ps=super.getConn().prepareStatement(sql2);
+				ps.setInt(1, rs.getInt("tunning_id"));
+				ResultSet rs2 = ps.executeQuery();
+				
+				while(rs2.next()){
+					applicationList.add(new ApplicationInfo(rs2.getInt("tunning_id"), rs2.getString("tunning_title"), rs2.getDate("upload_date")));
+				}
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return applicationList;
+	}
+	
 	public ArrayList<ApplicationInfo> getApplicationList(){
 		ArrayList<ApplicationInfo> applicationList = new ArrayList<ApplicationInfo>();
 		PreparedStatement ps = null;

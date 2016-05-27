@@ -190,7 +190,8 @@ public class MemberInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
-		}else if( action.equals("member_main_page") ){
+		}
+		else if( action.equals("member_main_page") ){
 			String userCode = null;
 			
 			Cookie[] cookie = request.getCookies();
