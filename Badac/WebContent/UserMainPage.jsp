@@ -130,6 +130,8 @@ body {
 													"company_lng" : tempData[i].lng * 1,
 													"company_lat" : tempData[i].lat * 1
 													}
+											alert(typeof (tempData[i].lng));
+											alert(typeof (tempData[i].lat));
 											positions[i] = {id : memberData[tempData[i].id].company_id,
 										                 latlng: new daum.maps.LatLng(memberData[tempData[i].id].company_lat, memberData[tempData[i].id].company_lng)
 										                 };
