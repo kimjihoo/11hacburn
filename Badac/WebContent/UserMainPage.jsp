@@ -147,9 +147,21 @@ body {
 
 	           //마커 클릭리스너
 	           daum.maps.event.addListener(markers, 'click', function() {
-				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+  +'</td></tr>');
-				      				$('#click_member_list').append("<tr><td>"+ +"</td></tr>");
-				      				$('#click_member_list').append("<tr><td>"+ +"</td></tr>");   
+	        	   
+	        	  	alert(memberList[tempData[i].id].id);
+	        	  	
+	        	   var table = $('#click_member_list');
+	        	   if (table.html() == ""){
+	        		   $('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+  +'</td></tr>');
+	      							$('#click_member_list').append("<tr><td>"+ +"</td></tr>");
+	      							$('#click_member_list').append("<tr><td>"+ +"</td></tr>"); 
+	        	   }else{
+	        		   	table.html().remove();
+		        		   $('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+  +'</td></tr>');
+ 														$('#click_member_list').append("<tr><td>"+ +"</td></tr>");
+ 														$('#click_member_list').append("<tr><td>"+ +"</td></tr>"); 
+	        	   }
+	  
 	         		});  
 										}
 						
