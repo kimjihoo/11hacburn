@@ -127,8 +127,8 @@ body {
 													"company_name": tempData[i].name,
 													"company_address": tempData[i].region2 + " " + tempData[i].region3,
 													"company_telephone" : tempData[i].telephone,
-													"company_lng" : tempData[i].lng,
-													"company_lat" : tempData[i].lat
+													"company_lng" : tempData[i].lng * 1,
+													"company_lat" : tempData[i].lat * 1
 													}
 											positions[i] = {id : memberData[tempData[i].id].company_id,
 										                 latlng: new daum.maps.LatLng(memberData[tempData[i].id].company_lat, memberData[tempData[i].id].company_lng)
