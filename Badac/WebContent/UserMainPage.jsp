@@ -16,6 +16,38 @@ body {
 	padding-top: 70px;
 }
 </style>
+<style>
+    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap * {padding: 0;margin: 0;}
+    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
+</style>
+<style>
+    .wrap2 {left: 0;bottom: 40px;width: 288px;height: 132px;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap2 * {padding: 0;margin: 0;}
+    .wrap2 .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap2 .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info2 .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info2 .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info2 .close:hover {cursor: pointer;}
+    .info2 .body {position: relative;overflow: hidden;}
+    .info2 .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info2 .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info2:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info2 .link {color: #5085BB;}
+</style>
 
 						<script type="text/javascript">
 							
@@ -25,18 +57,20 @@ body {
 								function writeApplication(){
 									location.href = "http://210.118.74.159:8100/Badac/write_application";
 								}
+								
 						</script>
 </head>
 <body>
 
-		<div class="container-fluid">
+		<div class="container">
 
 
-		<div class="col-lg-6 col-sm-6" id="map" style="height: 500px;"></div>
-		<div class="col-lg-3 col-sm-3" style="overflow-y:scroll; height:800px;">
+		<div class="col-lg-8 col-sm-8" id="map" style="height: 800px;"></div>
+		<div class="col-lg-4 col-sm-4" style="overflow-y:scroll; height:800px;">
 			<table class="table table-hover" id="region_member_list">
 
 			</table>
+			
 		</div>
 				<div class="col-lg-3 col-sm-3">
 							<table class="table table-hover" id="click_member_list">
@@ -126,6 +160,8 @@ body {
 													"company_id": tempData[i].id,
 													"company_name": tempData[i].name,
 													"company_address": tempData[i].region2 + " " + tempData[i].region3,
+													"company_address_1":tempData[i].region2,
+													"company_address_2":tempData[i].region3,
 													"company_telephone" : tempData[i].telephone,
 													"company_lng" : tempData[i].lng,
 													"company_lat" : tempData[i].lat
@@ -151,18 +187,50 @@ body {
 											
 											(function(i){
 												daum.maps.event.addListener(marker[i], "click", function(){
-													var iwContent = '<div style="padding:5px;"><table class="table table-hover" id="region_member_list"><tr><td rowspan="3"><img src="http://placehold.it/80x80"/></td><td id="'+parseInt(marker[i].getTitle())+'">'+memberData[parseInt(marker[i].getTitle())].company_name+'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_address +'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_telephone +'</td></tr></table></div>',
-													iwRemoveable = true;
-													document.getElementById(""+parseInt(marker[i].getTitle())+"").onclick = function(){
-														var tempComId2 = $(this).attr('id');
-														document.cookie = "companyID="+tempComId2;
+													//var iwContent = '<div style="padding:5px;"><table class="table table-hover" id="region_member_list"><tr><td rowspan="3"><img src="http://placehold.it/80x80"/></td><td id="'+parseInt(marker[i].getTitle())+'">'+memberData[parseInt(marker[i].getTitle())].company_name+'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_address +'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_telephone +'</td></tr></table></div>',
+													var content = '<div class="wrap">'+
+																		'<div class="info">'+
+																			'<div class="title">'+
+																			memberData[parseInt(marker[i].getTitle())].company_name+
+																				'<div class="close" onclick="closeOverlay()" title="닫기"></div>'+
+																				'</div>'+
+																				'<div class="body">'+
+																					'<div class="img">'+
+																						'<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">'+
+																					'</div>'+
+																					'<div class="desc">'+
+																						'<div class="ellipsis">'+
+																						memberData[parseInt(marker[i].getTitle())].company_address_1+'</div>'+
+																						'<div class="jibun ellipsis">'+
+																						memberData[parseInt(marker[i].getTitle())].company_address_2+'</div>'+
+																						'<div><input type="button" value="업체 페이지 방문" id="'+memberData[parseInt(marker[i].getTitle())].company_id+'"/></div>'+
+																					'</div>'+
+																					'</div>'+
+																					'</div>'+
+																					'</div>';
+													document.getElementById(""+memberData[parseInt(marker[i].getTitle())].company_id+"").onclick = function(){
+														var tempComId = $(this).attr('id');
+														document.cookie = "companyID="+tempComId;
 														location.href = "http://210.118.74.159:8100/Badac/show_member";
 													};
-													var infoWindow = new daum.maps.InfoWindow({
+																				
+													//iwRemoveable = true;
+													/*var infoWindow = new daum.maps.InfoWindow({
 														content : iwContent,
 														removable : iwRemoveable
 													});
-													infoWindow.open(map,marker[i]);
+													infoWindow.open(map,marker[i]);*/
+													var overlay=new daum.maps.CustomOverlay({
+														content:content,
+														map:map,
+														position:marker[i].getPosition()
+													});
+													
+													overlay.setMap(map);
+													
+													function closeOverlay(){
+														overlay.setMap(null);
+													}
 												});
 											})(i);
 
@@ -181,7 +249,7 @@ body {
 										}
 					
 									
-									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
+									/*for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
 										$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td id="'+memberData[tempData[j].id].company_id+'">'+ memberData[tempData[j].id].company_name +'</td></tr>');
 										document.getElementById(""+memberData[tempData[j].id].company_id+"").onclick = function(){
 											var tempComId = $(this).attr('id');
@@ -191,15 +259,37 @@ body {
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_address +"</td></tr>");
 										$('#region_member_list').append("<tr><td>"+ memberData[tempData[j].id].company_telephone +"</td></tr>");
 
-									} 
-								}
+									} */
+									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
+										$('#region_member_list').append('<tr><td><div class="wrap2">'+
+												'<div class="info2">'+
+												'<div class="title">'+
+												memberData[tempData[j].id].company_name+
+													'</div>'+
+													'<div class="body">'+
+														'<div class="img">'+
+															'<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">'+
+														'</div>'+
+														'<div class="desc">'+
+															'<div class="ellipsis">'+
+															memberData[tempData[j].id].company_address_1+'</div>'+
+															'<div class="jibun ellipsis">'+
+															memberData[tempData[j].id].company_address_2+'</div>'+
+															'<div><input type="button" value="업체 페이지 방문" id="'+memberData[tempData[j].id].company_id+'"/></div>'+
+														'</div>'+
+														'</div>'+
+														'</div>'+
+														'</div></td></tr>');
+										document.getElementById(""+memberData[tempData[j].id].company_id+"").onclick = function(){
+											var tempComId = $(this).attr('id');
+											document.cookie = "companyID="+tempComId;
+											location.href = "http://210.118.74.159:8100/Badac/show_member";
+										};
+								}}
 								else{
 									alert(data.msg);
 								}
 							});
-
-             
-
 
 	</script>
 
