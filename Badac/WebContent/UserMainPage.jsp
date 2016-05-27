@@ -140,11 +140,11 @@ body {
 											//alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
 											//alert(positions.length);
 											var markers = new daum.maps.Marker({
-																												
 							                     map: map, // 마커를 표시할 지도
 							                     position: positions[i].latlng, // 마커의 위치
 							                     image : markerImage, // 마커 이미지 
-							                     title: positions[i].id
+							                     clickable: true,
+							                     title: memberData[tempData[i].id].company_id
 							                 });
 
 	           //마커 클릭리스너
