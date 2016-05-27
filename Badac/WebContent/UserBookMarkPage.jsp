@@ -20,7 +20,7 @@ body {
 </head>
 <script>
 	function toCompany() {
-		var tempComId = $(this).attr('id');
+		var tempComId = $(this).attr(tempData[i].companyId);
 		document.cookie = "companyID=" + tempComId;
 		location.href = "http://210.118.74.159:8100/Badac/show_member";
 	};
@@ -83,16 +83,16 @@ body {
 															+ '<p>'
 															+ memberData[tempData[i].companyId].company_telephone
 															+ '</p>'
-															+ '<button type="button" class="btn btn-default btn-lg" id="' + tempData[i].companyId'"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 업체 페이지 </button>'
+															+ '<button type="button" class="btn btn-default btn-lg" onclick="toCompany()"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 업체 페이지 </button>'
 															+ '</div></div>'
 															+ '<hr>');
-									document.getElementById(""
+									/* document.getElementById(""
 											+ tempData[i].companyId + "").onclick = function() {
 										var tempComId = $(this).attr('id');
 										document.cookie = "companyID="
 												+ tempComId;
 										location.href = "http://210.118.74.159:8100/Badac/show_member";
-									};
+									}; */
 								}
 
 							} else {
@@ -112,7 +112,7 @@ body {
 		</div>
 
 		<div class="container">
-					
+					<button type="button" class="btn btn-default btn-lg" id="' + tempData[i].companyId'"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 업체 페이지 </button>
 			<!-- Pagination -->
 			<div class="row text-center">
 				<div class="col-lg-12">
