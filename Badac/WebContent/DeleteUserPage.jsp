@@ -53,17 +53,21 @@ body {
         		alert("비밀번호가 같지 않습니다");
         	}
         	else if(user_pw.value!=null && user_pw_confirm.value!=null && user_pw.value==user_pw_confirm.value){
-        		$.post("http://210.118.74.159:8100/Badac/delete_userinfo",{
-        			user_id : userId,
-        			user_pw : user_password.value
-        		},function(data){
-        			if(data.msg=="Success"){
-        				alert("탈퇴가 정상적으로 진행되었습니다.");
-        				location.href = "http://210.118.74.159:8100/Badac/user_logout";
-        			}else{
-        				alert(data.msg);
-        			}
-        		});
+        		if(confirm("정말로 탈퇴하시겠습니까?")) {
+        			$.post("http://210.118.74.159:8100/Badac/delete_userinfo",{
+            			user_id : userId,
+            			user_pw : user_password.value
+            		},function(data){
+            			if(data.msg=="Success"){
+            				alert("탈퇴가 정상적으로 진행되었습니다.");
+            				location.href = "http://210.118.74.159:8100/Badac/user_logout";
+            			}else{
+            				alert(data.msg);
+            			}
+            		});
+        		}
+        		
+        		
         	}
         }
 
