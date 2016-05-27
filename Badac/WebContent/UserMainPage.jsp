@@ -121,8 +121,7 @@ body {
 
 									for(var i = 0; i<tempData.length; i++){
 										
-										var templng = parseFloat(tempData[i].lng);
-										var templat = parseFloat(tempData[i].lat);
+
 										
 										//alert(lng_x+", "+lat_y);
 											memberData[tempData[i].id] = {
@@ -130,12 +129,19 @@ body {
 													"company_name": tempData[i].name,
 													"company_address": tempData[i].region2 + " " + tempData[i].region3,
 													"company_telephone" : tempData[i].telephone,
-													"company_lng" : templng,
-													"company_lat" : templat
+													"company_lng" : tempData[i].lng,
+													"company_lat" : tempData[i].lat
 													}
 
+											
+											var templng = parseFloat(memberData[tempData[i].id].company_lat);
+											var templat = parseFloat(memberData[tempData[i].id].company_lng);
+											
+											alert(typeof(templng));
+											alert(typeof(templat));
+											
 											positions[i] = {id : memberData[tempData[i].id].company_id,
-										                 latlng: new daum.maps.LatLng(memberData[tempData[i].id].company_lat, memberData[tempData[i].id].company_lng)
+										                 latlng: new daum.maps.LatLng(templat, templng)
 										                 };
 											//alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
 											//alert(positions.length);
