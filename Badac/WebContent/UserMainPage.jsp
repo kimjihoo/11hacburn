@@ -50,14 +50,12 @@ body {
 </style>
 
 						<script type="text/javascript">
-							
 								function userLogout(){
 									location.href = "http://210.118.74.159:8100/Badac/user_logout";
 								}
 								function writeApplication(){
 									location.href = "http://210.118.74.159:8100/Badac/write_application";
 								}
-								
 						</script>
 </head>
 <body>
@@ -203,16 +201,11 @@ body {
 																						memberData[parseInt(marker[i].getTitle())].company_address_1+'</div>'+
 																						'<div class="jibun ellipsis">'+
 																						memberData[parseInt(marker[i].getTitle())].company_address_2+'</div>'+
-																						'<div><input type="button" value="업체 페이지 방문" id="'+memberData[parseInt(marker[i].getTitle())].company_id+'"/></div>'+
+																						'<div><input type="button" value="업체 페이지 방문" id="'+memberData[parseInt(marker[i].getTitle())].company_id+'" onclick="document.cookie= "companyID="+'+$(this).attr('id')+';location.href="http://210.118.74.159:8100/Badac/show_member";"/></div>'+
 																					'</div>'+
 																					'</div>'+
 																					'</div>'+
 																					'</div>';
-													document.getElementById(""+memberData[parseInt(marker[i].getTitle())].company_id+"").onclick = function(){
-														var tempComId = $(this).attr('id');
-														document.cookie = "companyID="+tempComId;
-														location.href = "http://210.118.74.159:8100/Badac/show_member";
-													};
 																				
 													//iwRemoveable = true;
 													/*var infoWindow = new daum.maps.InfoWindow({
