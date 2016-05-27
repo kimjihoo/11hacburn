@@ -71,6 +71,36 @@ onload = function on_load() {
 					alert(data.msg);
 				}
 			});
+	$.get("http://210.118.74.159:8100/Badac/company_review_list",{
+		company_id : companyId,
+	},function(data){
+		if(data.msg=="Success"){
+			var tempData = data.reviewList;
+			var reviewList = {};
+			for(var i=0; i<tempData.length; i++){
+				reviewList[tempData[i].companyId] = {
+						"username": tempData[i].username,
+						"review":tempData[i].review,
+						}
+			}
+			var reviewtable = document.getElementById("reviewtable");
+			var tr;
+			var td;
+			var btn;
+			for(var i=0; i<tempData.length; i++){
+				tr = document.createElement('tr');
+				td = document.createElement('td');
+				td.appendChild(document.createTextNode(reviewList[tempData[i].companyId].username));
+				tr.appendChild(td);
+				td = document.createElement('td');
+				td.appendChild(document.createTextNode(reviewList[tempData[i].companyId].review));
+				tr.appendChild(td);
+				reviewtable.appendChild(tr);
+			}
+		}else{
+			alert(data.msg);
+		}
+	});
 }
 
 function add_bookmark(){
@@ -110,6 +140,22 @@ function add_bookmark(){
 				}
 			});
 	
+}
+
+function upload_review(){
+	var reviewText = document.getElementById("reviewText");
+	$.post("http://210.118.74.159:8100/Badac/upload_review",{
+		company_id : companyId,
+		user_id : userId,
+		review : reviewText.value
+	},function(data){
+		if(data.msg=="Success"){
+			alert("등록을 완료했습니다.");
+			location.href = "http://210.118.74.159:8100/Badac/show_member"
+		}else{
+			alert(data.msg);
+		}
+	});
 }
 </script>
 <style>
@@ -201,6 +247,16 @@ body {
 			<div class="col-lg-12">
 				<h3 class="page-header">Review</h3>
 			</div>
+			<div style="width:100%; text-align:center;">
+				<textarea id="reviewText" class="col-lg-6"></textarea><input type="button" value="등록" onclick = "upload_review();"/>
+			</div>
+			<table class="table table-hover" width=700
+				style="text-align: center;" id="reviewtable">
+				<tr>
+					<td style="width:20%;">작성자</td>
+					<td style="width:80%;">리뷰</td>
+				</tr>
+			</table>
 		</div>
 
 		<div class="row">

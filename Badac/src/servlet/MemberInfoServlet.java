@@ -18,7 +18,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import db.ApplicationInfoDAO;
 import db.MemberInfoDAO;
+import db.UserInfoDAO;
+import model.ApplicationInfo;
 import model.MemberInfo;
 
 /**
@@ -294,7 +297,55 @@ public class MemberInfoServlet extends HttpServlet {
 			}
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
-		}else if(action.equals("get_member_address")){
+		}else if(action.equals("company_review_list")){
+			int company_id = Integer.parseInt(request.getParameter("company_id"));
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			
+			ArrayList<MemberInfo> reviewList = mid.getMyReviewList(company_id);
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			
+			if(reviewList.size()==0){
+				msg = "Not Exist Review";
+			}else{
+				JSONArray reviewListJson = new JSONArray();
+				JSONObject reviewInfo;
+				
+				try{
+					for(MemberInfo temp : reviewList){
+						reviewInfo = new JSONObject();
+						
+						reviewInfo.put("companyId", temp.getCompany_id());
+						UserInfoDAO uid = new UserInfoDAO();
+						reviewInfo.put("username", uid.selectUserNameByUserId(temp.getUser_id()));
+						uid.disconnect();
+						reviewInfo.put("review", temp.getReview());
+						
+						reviewListJson.put(reviewInfo);
+					}
+					json.put("reviewList", reviewListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
+		else if(action.equals("get_member_address")){
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			MemberInfoDAO mid = new MemberInfoDAO();
@@ -487,7 +538,32 @@ public class MemberInfoServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.getWriter().write(json.toString());
 			
-		}else if(action.equals("member_login")){
+		}else if(action.equals("upload_review")){
+			int company_id = Integer.parseInt(request.getParameter("company_id"));
+			int user_id = Integer.parseInt(request.getParameter("user_id"));
+			String review = request.getParameter("review");
+			
+			MemberInfoDAO mid = new MemberInfoDAO();
+			mid.insertMemberReview(company_id, user_id, review);
+			mid.disconnect();
+			
+			String msg = "Success";
+			
+			JSONObject json = new JSONObject();
+			
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+			
+		}
+		else if(action.equals("member_login")){
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			

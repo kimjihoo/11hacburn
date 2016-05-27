@@ -18,6 +18,8 @@ public class MemberInfo {
 	private int company_emailpush;
 	private String company_lat;
 	private String company_lng;
+	private String review;
+	private int user_id;
 	
 	public MemberInfo(){
 		this.company_id=-1;
@@ -35,6 +37,8 @@ public class MemberInfo {
 		this.company_emailpush=-1;
 		this.company_lat = "";
 		this.company_lng = "";
+		this.review = "";
+		this.user_id = -1;
 	}
 	
 	public MemberInfo(int company_id, String company_ownername, String company_email, String company_password, String company_name, String company_region_1, String company_region_2, String company_region_3, String company_telephone, String company_phone, int company_approval, Date company_approvaldate, int company_emailpush, String company_lat, String company_lng){
@@ -84,6 +88,11 @@ public class MemberInfo {
 		this.company_region_3 = company_region_3;
 		this.company_lat = company_lat;
 		this.company_lng= company_lng;
+	}
+	public MemberInfo(int company_id, int user_id, String review){
+		this.company_id = company_id;
+		this.user_id = user_id;
+		this.review = review;
 	}
 	
 	public int getCompany_id() {
@@ -205,5 +214,19 @@ public class MemberInfo {
 	public void setCompany_lng(String company_lng) {
 		this.company_lng = company_lng;
 	}
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
 	
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 }

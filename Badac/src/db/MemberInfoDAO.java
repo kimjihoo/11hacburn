@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.ApplicationInfo;
 import model.MemberInfo;
 
 public class MemberInfoDAO extends BaseDAO {
@@ -37,6 +38,58 @@ public class MemberInfoDAO extends BaseDAO {
 			while(true){
 				randomNum = (int)(Math.random() * 100000000);
 				if(this.selectMemberNameByCompanyId(randomNum).equals("")){
+					//System.out.println(randomNum);
+					break;
+				}
+			}
+			
+			ps.setInt(1, randomNum);
+			
+			insertRowCnt = ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return insertRowCnt;
+	}
+	
+	public int insertMemberReview(int company_id, int user_id, String review){
+		int insertRowCnt = 0;
+		int randomNum = -1;
+		
+		PreparedStatement ps=null;
+		try
+		{
+			String sql="INSERT INTO company_review VALUES(?,?,?,?)";
+			ps=super.getConn().prepareStatement(sql);
+			
+			ps.setInt(2,company_id);
+			ps.setInt(3,user_id);
+			ps.setString(4,review);
+			
+			while(true){
+				randomNum = (int)(Math.random() * 100000000);
+				if(this.selectCompanyIdByReviewId(randomNum)==-1){
 					//System.out.println(randomNum);
 					break;
 				}
@@ -110,6 +163,46 @@ public class MemberInfoDAO extends BaseDAO {
 		}
 		
 		return company_name;
+	}
+	
+	public int selectCompanyIdByReviewId(int review_id){
+		int company_id = -1;
+		PreparedStatement ps=null;
+		
+		try
+		{
+			String sql="SELECT * FROM company_id WHERE review_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, review_id);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				company_id = rs.getInt("company_id");
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return company_id;
 	}
 	
 	public MemberInfo selectMemberInfoByCompanyEmail(String company_email){
@@ -433,4 +526,43 @@ public class MemberInfoDAO extends BaseDAO {
 		}
 		return "Success";
 		}
+	
+	public ArrayList<MemberInfo> getMyReviewList(int companyId){
+		ArrayList<MemberInfo> reviewList = new ArrayList<MemberInfo>();
+		PreparedStatement ps = null;
+		try{
+			String sql = "SELECT * FROM company_review WHERE company_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, companyId);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				reviewList.add(new MemberInfo(rs.getInt("company_id"),rs.getInt("user_id"), rs.getString("company_review")));
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return reviewList;
+	}
 }

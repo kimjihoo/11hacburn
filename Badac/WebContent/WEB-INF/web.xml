@@ -481,6 +481,22 @@
     <servlet-name>SelectAnswer</servlet-name>
     <url-pattern>/select_answer</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CompanyReviewList</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompanyReviewList</servlet-name>
+    <url-pattern>/company_review_list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UploadReview</servlet-name>
+    <servlet-class>servlet.MemberInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadReview</servlet-name>
+    <url-pattern>/upload_review</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>
