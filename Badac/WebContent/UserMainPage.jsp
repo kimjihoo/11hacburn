@@ -140,31 +140,29 @@ body {
 											//alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
 											//alert(positions.length);
 											var markers = new daum.maps.Marker({
+																												
 							                     map: map, // 마커를 표시할 지도
 							                     position: positions[i].latlng, // 마커의 위치
-							                     image : markerImage // 마커 이미지 
+							                     image : markerImage, // 마커 이미지 
+							                     title: positions[i].id
 							                 });
 
 	           //마커 클릭리스너
 	           daum.maps.event.addListener(markers, 'click', function() {
-	        	   
-	        	  	alert(memberData[tempData[i].id].company_id);
+	        	   alert(markers.title);
+	        	  	alert(memberData[markers.title].company_id);
 	        	  	
 	        	   var table = $('#click_member_list');
-	        	   if (table.html() == ""){
-	        		   $('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[i].id].company_name+'</td></tr>');
-	      							$('#click_member_list').append("<tr><td>"+ memberData[tempData[i].id].company_address +"</td></tr>");
-	      							$('#click_member_list').append("<tr><td>"+ memberData[tempData[i].id].company_telephone+"</td></tr>"); 
-	        	   }else{
-	        		   	table.html().remove();
-		        		   $('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[i].id].company_name +'</td></tr>');
- 														$('#click_member_list').append("<tr><td>"+memberData[tempData[i].id].company_address +"</td></tr>");
- 														$('#click_member_list').append("<tr><td>"+memberData[tempData[i].id].company_telephone +"</td></tr>"); 
-	        	   }
+	 
+	        		   $('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[markers.title].company_name+'</td></tr>');
+	      							$('#click_member_list').append("<tr><td>"+ memberData[markers.title].company_address +"</td></tr>");
+	      							$('#click_member_list').append("<tr><td>"+ memberData[markers.title].company_telephone+"</td></tr>"); 
+	     
+
 	  
 	         		});  
 										}
-						
+					
 									
 									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
 										$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td id="'+memberData[tempData[j].id].company_id+'">'+ memberData[tempData[j].id].company_name +'</td></tr>');
