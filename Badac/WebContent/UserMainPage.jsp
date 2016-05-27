@@ -136,7 +136,7 @@ body {
 											var templat = parseFloat(memberData[tempData[i].id].company_lng);
 											
 											positions[i] = {
-																											id : memberData[tempData[i].id].company_id,
+																											id: memberData[tempData[i].id].company_id,
 										                 latlng: new daum.maps.LatLng(templat, templng)
 										                 };
 											//alert(memberData[tempData[i].id].company_lat+", "+memberData[tempData[i].id].company_lng);
@@ -149,12 +149,12 @@ body {
 
 	           //마커 클릭리스너
 	           daum.maps.event.addListener(markers, 'click', function() {
-				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[positions[i].id].company_name +'</td></tr>');
-				      				$('#click_member_list').append("<tr><td>"+ memberData[positions[i].id].company_address +"</td></tr>");
-				      				$('#click_member_list').append("<tr><td>"+ memberData[positions[i].id].company_telephone +"</td></tr>");   
+				       			$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[tempData[i].id].company_name +'</td></tr>');
+				      				$('#click_member_list').append("<tr><td>"+ memberData[tempData[i].id].company_address +"</td></tr>");
+				      				$('#click_member_list').append("<tr><td>"+ memberData[tempData[i].id].company_telephone +"</td></tr>");   
 	         		});  
 										}
-									
+						
 									
 									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
 										$('#region_member_list').append('<tr><td rowspan="3"  ><img src="http://placehold.it/140x140"/></td><td id="'+memberData[tempData[j].id].company_id+'">'+ memberData[tempData[j].id].company_name +'</td></tr>');
