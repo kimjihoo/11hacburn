@@ -34,58 +34,89 @@ body {
 	///////////////////////////////////////////////////////////////////
 </script>
 <script>
-function addRow(){
-
-	var Table = document.getElementById('table_id'); 
-	var newRow = questTable.insertRow();  //TR추가
-	var newCell1 = newRow.insertCell();       //TD추가
-	var newCell2 = newRow.insertCell();       //TD추가	 
-
-	newCell1.className="aa";                         //TD스타일 설정
-	newCell2.className="bb";                         //TD스타일 설정	 
-
-	newCell1.innerHTML = "<input name='이름' type='text' class='input스타일속성' value='값' >";
-	newCell1.innerHTML = "<input name='이름2' type='text' class='input스타일속성2' value='값2' >"; 
-}
-</script>
-
-<script>
 	onload = function on_load() {
-		$
-				.get(
-						"http://210.118.74.159:8100/Badac/get_application_info",
-						{
-							tunningId : tunningId,
-						},
-						function(data) {
-							if (data.msg == "Success") {
-								document.getElementById("tunning_date").value = data.date;
-								document.getElementById("tunning_id").value = data.id;
-								document.getElementById("tunning_title").value = data.title;
-								document.getElementById("tunning_explanation").value = data.explanation;
-								document.getElementById("company_name").innerHTML = data.companyName;
-								document.getElementById("company_reply").innerHTML = data.companyReply;
-							} else {
-								alert(data.msg);
+		$.get("http://210.118.74.159:8100/Badac/get_application_info",
+			{
+				tunningId : tunningId,
+			},
+			function(data) {
+				if (data.msg == "Success") {
+					document.getElementById("tunning_date").value = data.date;
+					document.getElementById("tunning_id").value = data.id;
+					document.getElementById("tunning_title").value = data.title;
+					document.getElementById("tunning_explanation").value = data.explanation;
+				} else {
+					alert(data.msg);
+				}
+			});
+		$.get("http://210.118.74.159:8100/Badac/my_reply_list",{
+			id : tunningId
+		},function(data){
+			if(data.msg=="Success"){
+				var tempData = data.replyList;
+				var replyList = {};
+				for(var i=0; i<tempData.length; i++){
+					replyList[tempData[i].companyId] = {
+							"company_id": tempData[i].companyId,
+							"company_name": tempData[i].companyName,
+							"reply":tempData[i].reply,
 							}
-						});
+				}
+				var replytable = document.getElementById("replytable");
+				var tr;
+				var td;
+				var btn;
+				for(var i=0; i<tempData.length; i++){
+					tr = document.createElement('tr');
+					td = document.createElement('td');
+					td.appendChild(document.createTextNode(replyList[tempData[i].companyId].company_name));
+					tr.appendChild(td);
+					td = document.createElement('td');
+					td.appendChild(document.createTextNode(replyList[tempData[i].companyId].reply));
+					tr.appendChild(td);
+					td = document.createElement('td');
+					btn = document.createElement('input');
+					btn.id = replyList[tempData[i].companyId].company_id;
+					btn.type="button";
+					btn.value="채택";
+					btn.onclick = function () {
+						var tempBtn_id = $(this).attr('id');
+                        $.post("http://210.118.74.159:8100/Badac/select_answer",{
+                        	tunning_id : tunningId,
+                        	company_id : $(this).attr('id'),
+                        },function(data){
+                        	if(data.msg=="Success"){
+                        		alert("채택 되었습니다.");
+                        		$('#'+tempBtn_id).attr("disabled","disabled");
+                        		document.getElementById(tempBtn_id).style.opacity="0.5";
+                        	}else{
+                        		alert(data.msg);
+                        	}
+                        });
+                    };
+					td.appendChild(btn);
+					tr.appendChild(td);
+					replytable.appendChild(tr);
+				}
+			}else{
+				alert(data.msg);
+			}
+		});
 	}
 
 	function delApplication() {
-		$
-				.post(
-						"http://210.118.74.159:8100/Badac/delete_application",
-						{
-							tunningId : tunningId,
-						},
-						function(data) {
-							if (data.msg == "Success") {
-								alert("제안서를 삭제했습니다.");
-								location.href = "http://210.118.74.159:8100/Badac/go_my_application_page";
-							} else {
-								alert(data.msg);
-							}
-						});
+		$.post("http://210.118.74.159:8100/Badac/delete_application",
+			{
+				tunningId : tunningId,
+			},
+			function(data) {
+				if (data.msg == "Success") {
+					alert("제안서를 삭제했습니다.");
+					location.href = "http://210.118.74.159:8100/Badac/go_my_application_page";
+				} else {
+					alert(data.msg);
+				}
+			});
 	}
 </script>
 </head>
@@ -139,19 +170,12 @@ function addRow(){
 			<br><br><br>
 			
 			<table class="table table-hover" width=700
-				style="text-align: center;">				
+				style="text-align: center;" id="replytable">
 				<tr>
-					<td style="width: 35%;"><b>업체</b></td>
-					<td style="width: 65%;"><b>답변</b></td>
+					<td style="width:20%;">회사 이름</td>
+					<td style="width:70%;">답변 내용</td>
+					<td style="width:10%;"></td>
 				</tr>
-				<tr>
-					<td style="width: 5%; text-align: left;"><button class="btn btn-default" type="submit"
-							onclick="selectCompanys()">채택</button></td>
-					<td style="width: 30%;"><input class="form-control" type="text"
-						id="company_name" readonly></td>
-					<td style="width: 65%;"><input class="form-control" type="text"
-						id="company_reply" readonly></td>
-				</tr>			
 			</table>
 			
 			<table cellspacing=0 cellpadding=0 border=0 width=500>

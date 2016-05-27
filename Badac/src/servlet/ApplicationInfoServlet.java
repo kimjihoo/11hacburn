@@ -295,7 +295,6 @@ public class ApplicationInfoServlet extends HttpServlet {
 			ApplicationInfoDAO aid = new ApplicationInfoDAO();
 			ApplicationInfo applicationInfo = aid.selectApplicationInfoByTunningId2(id, c_id);
 			int user_id = applicationInfo.getUser_id();
-			System.out.println(user_id);
 			UserInfoDAO uid = new UserInfoDAO();
 			String user_name = uid.selectUserNameByUserId(user_id);
 			System.out.println(user_name);

@@ -34,8 +34,8 @@ body {
     <%// 쿠키값 가져오기
 			Cookie[] cookies = request.getCookies();
 
-			int tunningid = 0;
-			int companyid = 0;
+			int tunningid = -1;
+			int companyid = -1;
 
 			if (cookies != null) {
 
@@ -52,8 +52,7 @@ body {
 			}%>
     
     var tunningId = '<%=tunningid%>';
-    var companyId = '<%= companyid %>';
-
+    var companyId = '<%=companyid%>';
 	///////////////////////////////////////////////////////////////////
 </script>
 <script>

@@ -210,7 +210,7 @@ body {
 						table_c.appendChild(tr);
 					}
 				}else{
-					alert(data.msg);
+					//alert(data.msg);
 				}
 		});
 	}

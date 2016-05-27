@@ -63,6 +63,7 @@ body {
 						"http://210.118.74.159:8100/Badac/get_application_info_2",
 						{
 							tunningId : tunningId,
+							companyId : companyId,
 						},
 						function(data) {
 							if (data.msg == "Success") {

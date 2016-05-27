@@ -465,7 +465,7 @@ public class ApplicationInfoDAO extends BaseDAO {
 			ps=super.getConn().prepareStatement(sql);
 			ps.setInt(1, tunning_id);
 			ps.setInt(2, company_id);
-			ps.executeUpdate();
+			ps.executeQuery();
 			ResultSet rs=ps.executeQuery();
 			
 			int adopt=-1;
