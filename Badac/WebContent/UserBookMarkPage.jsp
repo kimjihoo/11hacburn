@@ -19,13 +19,6 @@ body {
 
 </head>
 <script>
-	function toCompany() {
-		var tempComId = $(this).attr(tempData[i].companyId);
-		document.cookie = "companyID=" + tempComId;
-		location.href = "http://210.118.74.159:8100/Badac/show_member";
-	};
-</script>
-<script>
 	onload = function on_load() {
 		var len = 0;
 
@@ -73,7 +66,7 @@ body {
 
 									$('#region_member_list')
 											.append(
-													'<div class="row"><div class="col-md-7"><a href="#"><img class="img-responsive" src="http://placehold.it/700x300" alt=""></a></div><div class="col-md-5">'
+													'<div class="row"><div class="col-md-7"><a href="#"><img class="img-responsive" src="http://placehold.it/350x150" alt=""></a></div><div class="col-md-5">'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
 															+ '</h3>'
@@ -83,16 +76,16 @@ body {
 															+ '<p>'
 															+ memberData[tempData[i].companyId].company_telephone
 															+ '</p>'
-															+ '<button type="button" class="btn btn-default btn-lg" onclick="toCompany()"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 업체 페이지 </button>'
+															+ '<input type="button" class="btn btn-default btn-lg" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
 															+ '</div></div>'
 															+ '<hr>');
-									/* document.getElementById(""
+									document.getElementById(""
 											+ tempData[i].companyId + "").onclick = function() {
 										var tempComId = $(this).attr('id');
 										document.cookie = "companyID="
 												+ tempComId;
 										location.href = "http://210.118.74.159:8100/Badac/show_member";
-									}; */
+									};
 								}
 
 							} else {
@@ -112,22 +105,8 @@ body {
 		</div>
 
 		<div class="container">
-					<button type="button" class="btn btn-default btn-lg" id="' + tempData[i].companyId'"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 업체 페이지 </button>
-			<!-- Pagination -->
-			<div class="row text-center">
-				<div class="col-lg-12">
-					<ul class="pagination">
-						<li><a href="#">&laquo;</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&raquo;</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /.row -->
+			<div id="region_member_list"></div>
+			
 
 			<hr>
 			
