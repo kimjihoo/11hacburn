@@ -120,18 +120,20 @@ body {
 									var tempData = data.memberList;
 
 									for(var i = 0; i<tempData.length; i++){
-
+										
+										var templng = parseFloat(tempData[i].lng);
+										var templat = parseFloat(tempData[i].lat);
+										
 										//alert(lng_x+", "+lat_y);
 											memberData[tempData[i].id] = {
 													"company_id": tempData[i].id,
 													"company_name": tempData[i].name,
 													"company_address": tempData[i].region2 + " " + tempData[i].region3,
 													"company_telephone" : tempData[i].telephone,
-													"company_lng" : tempData[i].lng * 1,
-													"company_lat" : tempData[i].lat * 1
+													"company_lng" : templng,
+													"company_lat" : templat
 													}
-											alert(typeof (tempData[i].lng));
-											alert(typeof (tempData[i].lat));
+
 											positions[i] = {id : memberData[tempData[i].id].company_id,
 										                 latlng: new daum.maps.LatLng(memberData[tempData[i].id].company_lat, memberData[tempData[i].id].company_lng)
 										                 };
