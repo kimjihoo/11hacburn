@@ -19,52 +19,75 @@ body {
 
 </head>
 <script>
-onload = function on_load(){
-	var len = 0;
-	
-	$.get("http://210.118.74.159:8100/Badac/show_my_bookmark",{
-		user_id : userId,
-	}, function(data){
-		if(data.msg=="Success"){
-			var tempData = data.bookmarkList;
-			var memberData = {};
-			
-			for(var i = 0; i<tempData.length; i++){
-				$.ajax({
-					url : 'http://210.118.74.159:8100/Badac/get_member_info',
-					type : 'GET',
-					data : {id : tempData[i].companyId},
-					async : false,
-					success : function(data) {
-						if (data.msg == 'Success') {
-							memberData[tempData[i].companyId] = {
-									"company_name": data.companyName,
-									"company_address": data.companyRegion_2 + " " + data.companyRegion_3,
-									"company_telephone" : data.companyTelephone,
-									"company_lng" : data.companyLat,
-									"company_lat" : data.companyLng
-							}
-						} else {
-							alert(data.msg);
-						}
-					},
-					error : function(data) {
-						alert(data.msg);
-					}
-				});
-			}
-	for (var i = 0; i < tempData.length; i++) {
+	function toCompany() {
+		var tempComId = $(this).attr('id');
+		document.cookie = "companyID=" + tempComId;
+		location.href = "http://210.118.74.159:8100/Badac/show_member";
+	};
+</script>
+<script>
+	onload = function on_load() {
+		var len = 0;
+
+		$
+				.get(
+						"http://210.118.74.159:8100/Badac/show_my_bookmark",
+						{
+							user_id : userId,
+						},
+						function(data) {
+							if (data.msg == "Success") {
+								var tempData = data.bookmarkList;
+								var memberData = {};
+
+								for (var i = 0; i < tempData.length; i++) {
+									$
+											.ajax({
+												url : 'http://210.118.74.159:8100/Badac/get_member_info',
+												type : 'GET',
+												data : {
+													id : tempData[i].companyId
+												},
+												async : false,
+												success : function(data) {
+													if (data.msg == 'Success') {
+														memberData[tempData[i].companyId] = {
+															"company_name" : data.companyName,
+															"company_address" : data.companyRegion_2
+																	+ " "
+																	+ data.companyRegion_3,
+															"company_telephone" : data.companyTelephone,
+															"company_lng" : data.companyLat,
+															"company_lat" : data.companyLng
+														}
+													} else {
+														alert(data.msg);
+													}
+												},
+												error : function(data) {
+													alert(data.msg);
+												}
+											});
+								}
+								for (var i = 0; i < tempData.length; i++) {
 
 									$('#region_member_list')
 											.append(
 													'<div class="row"><div class="col-md-7"><a href="#"><img class="img-responsive" src="http://placehold.it/700x300" alt=""></a></div><div class="col-md-5">'
-													        + '<h3>' + memberData[tempData[i].companyId].company_name + '</h3>'
-															+ '<h4>' + memberData[tempData[i].companyId].company_address	+ '</h4>'
-															+ '<p>' + memberData[tempData[i].companyId].company_telephone + '</p>'
-															+ '<a class="btn btn-primary" id="' + tempData[i].companyId'"> 업체 페이지 <span class="glyphicon glyphicon-chevron-right"></span></a>'
+															+ '<h3>'
+															+ memberData[tempData[i].companyId].company_name
+															+ '</h3>'
+															+ '<h4>'
+															+ memberData[tempData[i].companyId].company_address
+															+ '</h4>'
+															+ '<p>'
+															+ memberData[tempData[i].companyId].company_telephone
+															+ '</p>'
+															+ '<button type="button" class="btn btn-default btn-lg" id="' + tempData[i].companyId'"> <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 업체 페이지 </button>'
 															+ '</div></div>'
 															+ '<hr>');
-									document.getElementById("" + tempData[i].companyId + "").onclick = function() {
+									document.getElementById(""
+											+ tempData[i].companyId + "").onclick = function() {
 										var tempComId = $(this).attr('id');
 										document.cookie = "companyID="
 												+ tempComId;
@@ -88,10 +111,8 @@ onload = function on_load(){
 			</div>
 		</div>
 
-
 		<div class="container">
-
-			</table>
+					
 			<!-- Pagination -->
 			<div class="row text-center">
 				<div class="col-lg-12">
@@ -109,7 +130,7 @@ onload = function on_load(){
 			<!-- /.row -->
 
 			<hr>
-
+			
 			<!-- Footer -->
 			<footer>
 			<div class="row">
