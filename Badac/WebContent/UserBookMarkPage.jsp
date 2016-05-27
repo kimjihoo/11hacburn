@@ -73,7 +73,7 @@ onload = function on_load(){
 </script>
 <body>
 
-		<div class="container">
+	<div class="container">
 
 		<div class="col-lg-12 col-sm-12"">
 			<table class="table table-hover" id="region_member_list">
