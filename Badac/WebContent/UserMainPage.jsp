@@ -188,10 +188,10 @@ body {
 													//var iwContent = '<div style="padding:5px;"><table class="table table-hover" id="region_member_list"><tr><td rowspan="3"><img src="http://placehold.it/80x80"/></td><td id="'+parseInt(marker[i].getTitle())+'">'+memberData[parseInt(marker[i].getTitle())].company_name+'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_address +'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_telephone +'</td></tr></table></div>',
 													var content = '<div class="wrap">'+
 																		'<div class="info">'+
-																			'<div class="title">'+
+																			'<div class="title">'
 																			memberData[parseInt(marker[i].getTitle())].company_name+
 																				'<div class="close" onclick="closeOverlay()" title="닫기"></div>'+
-																				+ '<div class="comID" id ="'+memberData[parseInt(marker[i].getTitle())].company_id+'" style="visibility:hidden"></div>' +
+																				+ '<div class="comID" id ="'+memberData[parseInt(marker[i].getTitle())].company_id+'" style="visibility:hidden;"></div>' +
 																				'</div>'+
 																				'<div class="body">'+
 																					'<div class="img">'+
@@ -215,19 +215,19 @@ body {
 													});
 													infoWindow.open(map,marker[i]);*/
 													
-													document.getElementByClassName("title").onclick = function(){
-														var tempComId = $('comID').attr('id');
-														$('#click_member_list').append('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[parseInt(tempComId)].company_name+'</td></tr>');
-				  										$('#click_member_list').append("<tr><td>"+ memberData[parseInt(tempComId)].company_address +"</td></tr>");
-				  										$('#click_member_list').append("<tr><td>"+ memberData[parseInt(tempComId)].company_telephone+"</td></tr>"); 
-													};
-													
+
 													var overlay=new daum.maps.CustomOverlay({
 														content:content,
 														map:map,
 														position:marker[i].getPosition()
 													});
 
+													document.getElementByClassName("title").onclick = function(){
+														var tempComId = $('.comID').attr('id');
+														$('#click_member_list').html('<tr><td rowspan="3" ><img src="http://placehold.it/140x140"/></td><td>'+ memberData[parseInt(tempComId)].company_name+'</td></tr><tr><td>'+ memberData[parseInt(tempComId)].company_address +'</td></tr><tr><td>'+ memberData[parseInt(tempComId)].company_telephone+'</td></tr>');
+				  			
+													};
+													
 													overlay.setMap(map);
 													
 													function closeOverlay(){
