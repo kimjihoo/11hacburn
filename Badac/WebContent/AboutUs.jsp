@@ -117,7 +117,7 @@ body {
 				</p>
 			</div>
 			<div class="col-sm-4">
-				<img class="img-circle img-responsive img-center" src="tunning.png"
+				<img class="img-circle img-responsive img-center" src="images/tunning.png"
 					alt="">
 				<h2>수리 및 튜닝 서비스</h2>
 				<p class="text-muted">
@@ -131,7 +131,7 @@ body {
 				</p>
 			</div>
 			<div class="col-sm-4">
-				<img class="img-circle img-responsive img-center" src="deal.png"
+				<img class="img-circle img-responsive img-center" src="images/deal.png"
 					alt="">
 				<h2>중고 거래 서비스</h2>
 				<p class="text-muted">
