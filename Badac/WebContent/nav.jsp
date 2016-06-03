@@ -67,13 +67,11 @@
                 function (data) {
                     if (data.msg == 'Success') {
                     	var gall_img = document.createElement('img');
-                    	//gall_img.src=data.pictureList[0].path;
-                    	gall_img.src="images/deal.png";
+                    	gall_img.src=data.pictureList[0].path;
                     	gall_img.style.borderRadius="6px";
                     	gall_img.style.width="100%";
                     	gall_img.style.height="100%";
                     	profile_c.appendChild(gall_img);
-                    	alert(data.pictureList[0].path);
                     	
                         /*for (var g = 0; g < data.pictureList.length; g++) {
                         	var temp_div = document.createElement('div');

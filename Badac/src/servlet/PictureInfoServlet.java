@@ -31,7 +31,7 @@ import model.UserInfo;
  * Servlet implementation class PictureInfoServlet
  */
 @MultipartConfig
-@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture"})
+@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list"})
 public class PictureInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -90,6 +90,88 @@ public class PictureInfoServlet extends HttpServlet {
 					PictureInfoDAO pid = new PictureInfoDAO();
 					ArrayList<PictureInfo> pictureList=null;
 					pictureList = pid.selectPictureInfoByUserId(Integer.parseInt(userCode), appId);
+					pid.disconnect();
+					
+					String msg = "Success";
+					
+					JSONObject json = new JSONObject();
+					
+					if( pictureList.size() == 0 ){
+						msg = "NoPicture";
+					}
+					else{
+						JSONArray pictureListJson = new JSONArray();
+						JSONObject pictureInfo;
+						
+						try{
+							for(PictureInfo temp : pictureList){
+								pictureInfo = new JSONObject();
+								
+								pictureInfo.put("id", temp.getPictureId());
+								pictureInfo.put("path", "/"+temp.getPicturePath());
+								
+								pictureListJson.put(pictureInfo);
+							}
+							
+							json.put("pictureList", pictureListJson);
+						}
+						catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					try{
+						json.put("msg", msg);
+					}
+					catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					response.setContentType("application/json");
+					response.getWriter().write(json.toString());
+				} else {
+					response.sendRedirect("");
+				}
+			}
+			else{
+				response.sendRedirect("");
+			}			
+		}if(action.equals("company_get_picture_list")){
+			//HttpSession session = request.getSession();
+			//String userCode = (String)session.getAttribute("user_code");
+			
+			//String userCode = "1";
+			
+			String userCode = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userCode = cookie[i].getValue();
+						}
+						else if( cookieName.equals("company_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userCode = cookie[i].getValue();
+						}
+					}
+				}
+				
+				if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))) {
+					int appId = Integer.parseInt(request.getParameter("appId"));
+					PictureInfoDAO pid = new PictureInfoDAO();
+					ArrayList<PictureInfo> pictureList=null;
+					pictureList = pid.selectPictureInfoByPictureId2(appId);
 					pid.disconnect();
 					
 					String msg = "Success";
@@ -257,9 +339,9 @@ public class PictureInfoServlet extends HttpServlet {
 						            	
 						            	pid = new PictureInfoDAO();
 						            	if(appId==-1){
-						            		pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "picture/"+userId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            		pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "Badac/picture/"+userId+"/"+Integer.toString(randomNum)+"."+fileType);
 						            	}else if(appId!=-1){
-						            		pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "picture/"+userId+"/"+appId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            		pid.insertPictureInfo(randomNum, Integer.parseInt(userId), appId, "Badac/picture/"+userId+"/"+appId+"/"+Integer.toString(randomNum)+"."+fileType);
 						            	}
 						            	
 						            	pid.disconnect();

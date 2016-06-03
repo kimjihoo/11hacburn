@@ -4,7 +4,7 @@
   <welcome-file-list>
     <welcome-file>index</welcome-file>
   </welcome-file-list>
-  <!--  <filter>
+  <filter>
     <filter-name>cors</filter-name>
     <filter-class>filter.SimpleCORSFilter</filter-class>
 </filter>
@@ -12,8 +12,7 @@
     <filter-name>cors</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
- -->
-<security-constraint>
+<!-- <security-constraint>
 	<display-name>Forbidden JSPs</display-name>
 	<web-resource-collection>
 		<web-resource-name>Forbidden JSPs</web-resource-name>
@@ -22,10 +21,16 @@
 	<auth-constraint>
 		<role-name></role-name>
 	</auth-constraint>
-</security-constraint>
+</security-constraint> -->
  
 	<!-- <session-config>
 		<session-timeout>-1</session-timeout>
 	</session-config> -->
-  
+  <servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>*.css</url-pattern>
+  <url-pattern>*.js</url-pattern>
+  <url-pattern>*.png</url-pattern>
+  <url-pattern>*.jpg</url-pattern>
+ </servlet-mapping>
 </web-app>
