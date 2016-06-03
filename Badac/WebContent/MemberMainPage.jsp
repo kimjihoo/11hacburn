@@ -181,73 +181,6 @@ body {
 	function memberLogout(){
 		location.href = "http://210.118.74.159:8100/Badac/member_logout";
 	}
-	
-	function change_img_dialog() {
-	    var dialog;
-
-	    dialog = $("#changeimg-dialog-form").dialog({
-	        /*position: ,*/
-	        autoOpen: false,
-	        width: 400,
-	        height: 400,
-	        modal: true,
-	        buttons: {
-	            "선택": function () {
-	                    var fileSelect = document.getElementById("choice_main_img");
-	                    var files = fileSelect.files;
-	                    formData = new FormData();
-	                    for (var i = 0; i < files.length; i++) {
-	                   	     var file = files[i];
-	                         formData.append('file', file, file.name);
-	                    }
-	                    formData.append('appId',-1);
-	                    if(files.length==0){
-	                    	alert('파일을 선택해주세요.');
-	                    }else if(files.length!=0){
-	                    	$.ajax({
-	                            url: 'http://210.118.74.159:8100/Badac/upload_picture',
-	                            type: 'POST',
-	                            data: formData,
-	                            processData: false,
-	                            contentType: false,
-	                            async: false,
-	                            success: function (data) {
-	                                if (data.msg == 'Success') {
-	                                    $.get("http://210.118.74.159:8100/Badac/get_picture_list",{
-	                                    	appId:-1,
-	                                    }, function(data){
-	                                    	if(data.msg=="Success"){
-	                                    		//메인 이미지 가져온 걸로 바꿈.
-	                                    		$("#member_main_img").attr("backgroundImage", "url(../"+data.pictureList[0].path+")");
-	                                    		alert(data.pictureList[0].path);
-	                                            $("#member_main_img").attr("name", data.pictureList[0].id);
-	                                    		alert('업로드를 완료했습니다.');
-	                                            dialog.dialog("close");
-	                                    	}
-	                                    });
-	                                }else{
-	                                	alert(data.msg);
-	                                }
-	                            },
-	                            error: function(data){
-	                                alert(data.msg);
-	                            }
-	                        });     
-	                }
-	                
-	                //alert(path);
-	                
-	            },
-	            "취소": function () {
-	                dialog.dialog("close");
-	            }
-	        },
-	        close: function () {
-	            dialog.dialog("close");
-	        }
-	    });
-	    dialog.dialog('open');
-	}
 </script>
 <script>
 function menuClick(divname) {
@@ -264,42 +197,7 @@ function menuClick(divname) {
 </head>
 <body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">BADOC</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">About</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Contact</a></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">사용자
-						정보 <span class="caret"></span>
-				</a>
-					<ul class="dropdown-menu" role="menu">
-						<li onclick="change_img_dialog()"><div id="member_main_img"
-								style="width: 130px; height: 130px;"></div></li>
-						<li><a id="ownername"></a></li>
-						<li><a id="name"></a></li>
-						<li><a id="email"></a></li>
-						<li class="divider"></li>
-						<li><a href="http://210.118.74.159:8100/Badac/member_logout">로그아웃</a></li>
-						<li><a
-							href="http://210.118.74.159:8100/Badac/go_member_update_information">개인정보
-								수정</a></li>
-
-					</ul></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container --> </nav>
+	
 
 	<!-- Page Content -->
 	<div class="container">
