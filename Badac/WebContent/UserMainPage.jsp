@@ -201,7 +201,7 @@ body {
 																						memberData[parseInt(marker[i].getTitle())].company_address_1+'</div>'+
 																						'<div class="jibun ellipsis">'+
 																						memberData[parseInt(marker[i].getTitle())].company_address_2+'</div>'+
-																						'<div><input type="button" value="업체 페이지 방문" id="'+memberData[parseInt(marker[i].getTitle())].company_id+'" onclick="document.cookie= companyID="'+$(this).attr('id')+'";location.href="http://210.118.74.159:8100/Badac/show_member";"/></div>'+
+																						'<div><input type="button" value="업체 페이지 방문" id="'+memberData[parseInt(marker[i].getTitle())].company_id+'" onclick="testfunc(this)"/></div>'+
 																					'</div>'+
 																					'</div>'+
 																					'</div>'+
@@ -213,7 +213,13 @@ body {
 														removable : iwRemoveable
 													});
 													infoWindow.open(map,marker[i]);*/
+
+
+													function testfunc(test) {
+													document.cookie= "companyID="document.getElementById(test.getAttribute('id')).getAttribute('id');
+													location.href="http://210.118.74.159:8100/Badac/show_member";
 													
+													}
 
 													var overlay=new daum.maps.CustomOverlay({
 														content:content,
