@@ -291,23 +291,12 @@ body {
 											document.cookie = "companyID="+tempComId;
 											location.href = "http://210.118.74.159:8100/Badac/show_member";
 										};
-										
-	
-										
-    		   							
+
 								}}
 								else{
 									alert(data.msg);
 								}
 							});
-							
-							
-							function testfunc(test) {
-								document.cookie= "companyID="test.getAttribute('id');
-								location.href="http://210.118.74.159:8100/Badac/show_member";
-								}
-							
-							
 
 	</script>
 
