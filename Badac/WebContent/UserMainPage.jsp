@@ -188,8 +188,8 @@ body {
 													//var iwContent = '<div style="padding:5px;"><table class="table table-hover" id="region_member_list"><tr><td rowspan="3"><img src="http://placehold.it/80x80"/></td><td id="'+parseInt(marker[i].getTitle())+'">'+memberData[parseInt(marker[i].getTitle())].company_name+'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_address +'</td></tr><tr><td>'+ memberData[parseInt(marker[i].getTitle())].company_telephone +'</td></tr></table></div>',
 													var content = '<div class="wrap">'+
 																		'<div class="info">'+
-																			'<div class="title">'
-																			memberData[parseInt(marker[i].getTitle())].company_name+
+																			'<div class="title">'+
+																			memberData[parseInt(marker[i].getTitle())].company_name +
 																				'<div class="close" onclick="closeOverlay()" title="닫기"></div>'+
 																				'</div>'+
 																				'<div class="body">'+
