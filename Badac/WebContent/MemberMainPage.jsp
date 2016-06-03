@@ -7,40 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
-<script src="https://code.jquery.com/jquery-2.2.3.js"
-	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
-	crossorigin="anonymous"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-	crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
-	crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<!-- Bootstrap Core CSS -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Custom CSS -->
-<link href="css/shop-item.css" rel="stylesheet">
-
-
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <style>
 body {
 	padding-top: 70px;
 }
-
 .listimage {
 	width: 114px;
 	height: 114px;
@@ -177,10 +147,6 @@ body {
 				}
 		});
 	}
-	
-	function memberLogout(){
-		location.href = "http://210.118.74.159:8100/Badac/member_logout";
-	}
 </script>
 <script>
 function menuClick(divname) {
@@ -192,17 +158,11 @@ function menuClick(divname) {
 	divset.style.display="block";
 }
 </script>
-
-
 </head>
 <body>
-
-	
-
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
-
 			<div class="col-md-3">
 				<p class="lead">Menu</p>
 				<div class="list-group" id="myList">
@@ -234,7 +194,6 @@ function menuClick(divname) {
 							</div>
 
 							<!-- 견적요청서 받아오는 테이블 -->
-
 							<div class="container">
 								<!-- 테이블 시작 -->
 								<table class="table table-hover" id="region_application_list"
@@ -253,7 +212,6 @@ function menuClick(divname) {
 									</tbody>
 								</table>
 								<!-- 테이블 종료 -->
-
 							</div>
 						</div>
 					</div>
@@ -274,7 +232,6 @@ function menuClick(divname) {
 									<input type="file" id="choice_main_img" style="float: right;">
 								</div>
 							</div>
-
 							<!-- 견적요청서 받아오는 테이블 -->
 
 							<div class="container">
@@ -386,11 +343,5 @@ function menuClick(divname) {
 			</div>
 		</div>
 	</div>
-
-		<!-- jQuery -->
-		<script src="js/jquery.js"></script>
-
-		<!-- Bootstrap Core JavaScript -->
-		<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
