@@ -274,12 +274,25 @@ footer {
 	</div>
 
 	<script>
+	var point_x;
+	var point_y;
+		$.get("http://210.118.74.159:8100/Badac/get_member_address", function(data){
+			if(data.msg=="Success"){
+				point_x= data.companyLat;
+				point_y= data.companyLng;
+			}
+			else{
+				alert(data.msg);
+				}
+	});
+	
 		var container = document.getElementById('map');
 		var options = {
-			center : new daum.maps.LatLng(37.657418, 127.0463547),
+			center : new daum.maps.LatLng(parseFloat(point_x), parseFloat(point_y)),
 			level : 3
 		};
 		var map = new daum.maps.Map(container, options);
+	   map.setCenter(new daum.maps.LatLng(parseFloat(point_x), parseFloat(point_y)));
 	</script>
 </body>
 </html>
