@@ -215,11 +215,6 @@ body {
 													infoWindow.open(map,marker[i]);*/
 
 
-													function testfunc(test) {
-													document.cookie= "companyID="document.getElementById(test.getAttribute('id')).getAttribute('id');
-													location.href="http://210.118.74.159:8100/Badac/show_member";
-													
-													}
 
 													var overlay=new daum.maps.CustomOverlay({
 														content:content,
@@ -233,6 +228,12 @@ body {
 													function closeOverlay(){
 														overlay.setMap(null);
 													}
+													
+													function testfunc(test) {
+														document.cookie= "companyID="test.getAttribute('id');
+														location.href="http://210.118.74.159:8100/Badac/show_member";
+														}
+
 												});
 											})(i);
 
