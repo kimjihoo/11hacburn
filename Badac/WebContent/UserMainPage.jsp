@@ -82,6 +82,12 @@ body {
 
 	<script>
 	// 수정!(지도 좌표받아오기)
+	
+						function testfunc(test) {
+										document.cookie= "companyID="test.getAttribute('id');
+										location.href="http://210.118.74.159:8100/Badac/show_member";
+										}
+																
 			
 					var point_x;
 					var point_y;
@@ -209,11 +215,7 @@ body {
 																				
 																					
 																					
-/*									function testfunc(test) {
-										document.cookie= "companyID="test.getAttribute('id');
-										location.href="http://210.118.74.159:8100/Badac/show_member";
-										}
-																					*/
+
 																					
 													//iwRemoveable = true;
 													/*var infoWindow = new daum.maps.InfoWindow({
