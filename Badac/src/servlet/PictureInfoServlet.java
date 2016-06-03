@@ -185,9 +185,9 @@ public class PictureInfoServlet extends HttpServlet {
 					String applicationPath = request.getServletContext().getRealPath("");
 					String uploadFilePath=null;
 					if(appId==-1){
-						uploadFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "picture/" + userId + "/";
+						uploadFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "WebContent/picture/" + userId + "/";
 					}else if(appId!=-1){
-						uploadFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "picture/" + userId + "/"+appId+"/";
+						uploadFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "WebContent/picture/" + userId + "/"+appId+"/";
 					}
 			        //String uploadFilePath = "C:\\PIE\\picture\\" + userCode + "\\";
 			       

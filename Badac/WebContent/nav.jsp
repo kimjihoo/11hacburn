@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 	<%@ page import="java.net.URLDecoder" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title></title>
 <script src="https://code.jquery.com/jquery-2.2.3.js"
 	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
@@ -61,11 +61,42 @@
         }
     } 
     %>
+    onload = function on_load(){
+    	var profile_c = document.getElementById("profile_c");
+    	$.get("http://210.118.74.159:8100/Badac/get_picture_list",{appId:-1,},
+                function (data) {
+                    if (data.msg == 'Success') {
+                    	var gall_img = document.createElement('img');
+                    	//gall_img.src=data.pictureList[0].path;
+                    	gall_img.src="images/deal.png";
+                    	gall_img.style.borderRadius="6px";
+                    	gall_img.style.width="100%";
+                    	gall_img.style.height="100%";
+                    	profile_c.appendChild(gall_img);
+                    	alert(data.pictureList[0].path);
+                    	
+                        /*for (var g = 0; g < data.pictureList.length; g++) {
+                        	var temp_div = document.createElement('div');
+                        	temp_div.style.width="100%";
+                        	temp_div.style.height="100%";
+                        	//temp_div.style.borderRadius="6px";
+                        	var gall_img = document.createElement('img');
+                        	gall_img.src=data.pictureList[g].path;
+                        	gall_img.style.borderRadius="6px";
+                        	gall_img.style.width="100%";
+                        	gall_img.style.height="100%";
+                        	temp_div.appendChild(gall_img);
+                        	gallery_c.appendChild(temp_div);
+                        }*/
+                    }
+                });
+    	
+    }
  
     var userId = '<%= userid %>';
     var userName = '<%= username %>';
     var userEmail = '<%= useremail %>';
-    var userAddress = '<%= useraddress1 %> + " " + <%= useraddress2 %>'
+    var userAddress = '<%= useraddress1 %> + " " + <%= useraddress2 %>';
    
 	function userLogout() {
 		location.href = "http://210.118.74.159:8100/Badac/user_logout";
@@ -73,6 +104,75 @@
 	function writeApplication() {
 		location.href = "http://210.118.74.159:8100/Badac/UserApplicationRegistPage";
 	}
+	function uploadUserFile(){
+    	var user_img = $("#choice_profile_img").val();
+    	if(user_img==""){
+    		alert("ì‚¬ì§„ì„ ì„ íƒí•˜ì„¸ìš”");
+    	}else{
+    		switch(user_img.substring(user_img.lastIndexOf('.')+1).toLowerCase()){
+    		case 'gif': case 'jpg': case 'png': case 'bmp':
+    			var fileSelect = document.getElementById("choice_profile_img");
+                var files = fileSelect.files;
+
+                if (files.length == 0) {
+                    alert("íŒŒì¼ì„ ì„ íƒí•˜ì„¸ìš”.ÂšÂ”");
+                }
+                else {
+                    var formData = new FormData();
+                    for (var i = 0; i < files.length; i++) {
+                        var file = files[i];
+
+                        formData.append('file', file, file.name);
+                    }
+					formData.append('appId', -1);
+                    $.ajax({
+                        url: 'http://210.118.74.159:8100/Badac/upload_picture',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        success: function (data) {
+                            if (data.msg == 'Success') {
+                                location.reload();
+                            }else{
+                            	alert(data.msg);
+                            }
+                        }
+                    });
+                }
+    			
+    			break;
+    			default:
+    				$("#choice_profile_img").val('');
+    			alert('Not an Image format');
+    			break;
+    		}
+    	}
+    }
+	function change_profile_dialog() {
+        var dialog;
+
+        dialog = $("#profile-dialog-form").dialog({
+            /*position: ,*/
+            autoOpen: false,
+            width: 700,
+            height: 520,
+            modal: true,
+            buttons: {
+                "ì„ íƒÂƒÂ": function () {
+                	location.reload();
+                },
+                "ì·¨ì†ŒÂ†ÂŒ": function () {
+                    dialog.dialog("close");
+                }
+            },
+            close: function () {
+                dialog.dialog("close");
+            }
+        });
+        dialog.dialog('open');
+    }
 	///////////////////////////////////////////////////////////////////
 </script>
 </head>
@@ -93,29 +193,28 @@
 				<li><a href="#">Services</a></li>
 				<li><a href="#">Contact</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false"><%=username%>´Ô <span class="caret"></span>
+					data-toggle="dropdown" role="button" aria-expanded="false"><%=username%>ë‹˜ <span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" style="width: 200px; text-align: center;" role="menu">
 						<li>
 							<table>
 								<tr>
-									<td rowspan=2><a href="#"><img
-											src="http://placehold.it/100x100" alt=".." /></a></td>
+									<td rowspan=2><div style="width:100px; height:100px;" id="profile_c"onclick="change_profile_dialog();"></div></td>
 									<td style="padding-left: 20px;"><%=useremail%></td>
 								</tr>
 							</table>
 						</li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">³ªÀÇ ¿äÃ»¼­ º¸±â</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/write_application">°ßÀû ¿äÃ»¼­ ÀÛ¼º</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page">Áñ°ÜÃ£±â</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">ë‚˜ì˜ ìš”ì²­ì„œ ë³´ê¸°</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/write_application">ê²¬ì  ìš”ì²­ì„œ ì‘ì„±</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page">ì¦ê²¨ì°¾ê¸°</a></li>
 						<li class="divider"></li>
 
-						<li><a href="http://210.118.74.159:8100/Badac/user_logout">·Î±×¾Æ¿ô</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/user_logout">ë¡œê·¸ì•„ì›ƒ</a></li>
 						<li><a
-							href="http://210.118.74.159:8100/Badac/go_user_update_information">°³ÀÎÁ¤º¸
-								¼öÁ¤</a></li>
+							href="http://210.118.74.159:8100/Badac/go_user_update_information">ê°œì¸ì •ë³´
+								ìˆ˜ì •</a></li>
 						<li><a
-							href="http://210.118.74.159:8100/Badac/go_delete_user_page">È¸¿øÅ»Åğ
+							href="http://210.118.74.159:8100/Badac/go_delete_user_page">íšŒì›íƒˆí‡´
 							</a></li>
 
 					</ul></li>
@@ -124,6 +223,11 @@
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container --> </nav>
-
+<div id="profile-dialog-form" title="ì´ë¯¸ì§€ ì„ íƒ" style="display:none;">
+    <div style="width:100%;">
+        <img class="opcity_img" src="image/upload_Btn.png" width="60" height="30" id="upload_btn" style="float:right; margin-top:-3px;margin-left:5px;" onclick="uploadUserFile()">
+        <input type="file" id="choice_profile_img" style="float:right;">
+    </div>
+</div>
 </body>
 </html>

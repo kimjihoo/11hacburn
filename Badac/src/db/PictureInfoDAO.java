@@ -104,13 +104,10 @@ public class PictureInfoDAO extends BaseDAO {
 		
 		try
 		{	
-			String sql="";
+			String sql="DELETE FROM picture_tb WHERE picture_id=? AND user_id=?";
 			if(pictureId==-1){
 				sql="DELETE FROM picture_tb WHERE application_id=? AND user_id=?";
-			}else if(pictureId!=-1){
-				sql="DELETE FROM picture_tb WHERE picture_id=? AND user_id=?";
 			}
-			System.out.println(sql+"aaa : "+pictureId);
 			ps=super.getConn().prepareStatement(sql);
 			ps.setInt(1, pictureId);
 			ps.setInt(2, userId);
