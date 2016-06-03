@@ -52,6 +52,25 @@ body {
 				}
 			});
 		
+		var img_c = document.getElementById("img_c");
+    	$.get("http://210.118.74.159:8100/Badac/company_get_picture_list",{appId:tunningId,},
+                function (data) {
+                    if (data.msg == 'Success') {
+                        for (var g = 0; g < data.pictureList.length; g++) {
+                        	var span_c = document.createElement('span');
+                        	span_c.style.width="150px";
+                        	span_c.style.height="150px";
+                        	var gall_img = document.createElement('img');
+                        	gall_img.src=data.pictureList[g].path;
+                        	gall_img.style.borderRadius="6px";
+                        	gall_img.style.width="150px";
+                        	gall_img.style.height="150px";
+                        	span_c.appendChild(gall_img);
+                        	img_c.appendChild(span_c);
+                        }
+                    }
+                });
+		
 	}
 </script>
 <script>
@@ -86,10 +105,8 @@ function deleteReply() {
 				<tr>
 					<td style="width: 35%;"><b>이미지</b></td>
 					<td><div class="form-group">
-							<div class="vCeneter">
-								<span> <img src="http://placehold.it/340x180"
-									class="img-responsive" id="tunning_image"
-									alt="Responsive image"></span>
+							<div class="vCeneter" id="img_c">
+								
 							</div>
 						</div>
 						<p class="help-block">첨부된 자전거 사진</p> <br /></td>

@@ -223,7 +223,7 @@
 	<!-- /.container --> </nav>
 <div id="profile-dialog-form" title="이미지 선택" style="display:none;">
     <div style="width:100%;">
-        <img class="opcity_img" src="image/upload_Btn.png" width="60" height="30" id="upload_btn" style="float:right; margin-top:-3px;margin-left:5px;" onclick="uploadUserFile()">
+        <img class="opcity_img" src="images/upload_btn.png" width="60" height="30" id="upload_btn" style="float:right; margin-top:-3px;margin-left:5px;" onclick="uploadUserFile()">
         <input type="file" id="choice_profile_img" style="float:right;">
     </div>
 </div>

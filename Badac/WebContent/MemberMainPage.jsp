@@ -21,10 +21,6 @@ body {
 </style>
 <script type="text/javascript">
 	onload = function on_load(){
-		document.getElementById("ownername").innerHTML = companyOwnerName;
-		document.getElementById("email").innerHTML = companyEmail;
-		document.getElementById("name").innerHTML = companyName;
-		
 		$.get("http://210.118.74.159:8100/Badac/application_list",{
 			id : companyId
 		},
