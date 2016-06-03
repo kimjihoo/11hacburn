@@ -281,7 +281,7 @@ body {
 	var point_x;
 	var point_y;
 	var memberAddress;
-	var container;
+	var container = document.getElementById('map');
 	var options;
 	var map;
 	$.get("http://210.118.74.159:8100/Badac/get_member_address",{
@@ -292,8 +292,6 @@ body {
 			point_y = data.companyLng;
 			var temp_x = parseFloat(point_x);
 			var temp_y = parseFloat(point_y);
-			
-			
 			container = document.getElementById('map');
 			options = {
 				center : new daum.maps.LatLng(temp_x, temp_y),

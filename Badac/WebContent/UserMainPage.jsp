@@ -203,27 +203,20 @@ body {
 																					'</div>'+
 																					'</div>'+
 																					'</div>';
-																				
-																					
-																					
-
-																					
+					
 													//iwRemoveable = true;
 													/*var infoWindow = new daum.maps.InfoWindow({
 														content : iwContent,
 														removable : iwRemoveable
 													});
 													infoWindow.open(map,marker[i]);*/
-
-
-
+													
 													var overlay=new daum.maps.CustomOverlay({
 														content:content,
 														map:map,
 														position:marker[i].getPosition()
 													});
 
-													
 													overlay.setMap(map);
 													
 													function closeOverlay(){
