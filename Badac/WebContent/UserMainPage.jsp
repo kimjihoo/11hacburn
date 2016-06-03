@@ -207,6 +207,14 @@ body {
 																					'</div>'+
 																					'</div>';
 																				
+																					
+																					
+/*									function testfunc(test) {
+										document.cookie= "companyID="test.getAttribute('id');
+										location.href="http://210.118.74.159:8100/Badac/show_member";
+										}
+																					*/
+																					
 													//iwRemoveable = true;
 													/*var infoWindow = new daum.maps.InfoWindow({
 														content : iwContent,
@@ -228,11 +236,7 @@ body {
 													function closeOverlay(){
 														overlay.setMap(null);
 													}
-													
-													function testfunc(test) {
-														document.cookie= "companyID="test.getAttribute('id');
-														location.href="http://210.118.74.159:8100/Badac/show_member";
-														}
+
 
 												});
 											})(i);
