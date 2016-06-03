@@ -31,7 +31,8 @@ import model.BookmarkInfo;
 /**
  * Servlet implementation class BookmarkInfoServlet
  */
-@WebServlet("/BookmarkInfoServlet")
+@MultipartConfig
+@WebServlet(urlPatterns = { "/show_my_bookmark", "/check_bookmark", "/add_bookmark", "/delete_bookmark"})
 public class BookmarkInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

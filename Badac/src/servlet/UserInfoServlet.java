@@ -26,7 +26,7 @@ import model.UserInfo;
  * Servlet implementation class UserInfoServlet
  */
 @MultipartConfig
-//@WebServlet(urlPatterns = { "", "/index", "/user_email_check", "/user_sign_up", "/user_login", "/logout", "/login_page", "/user_sign_up_page", "/user_main_page"})
+@WebServlet(urlPatterns = { "/", "/index", "/Badac", "/signup_type", "/start_page", "/go_aboutus", "/go_my_application_page", "/go_my_bookmark_page", "/go_delete_user_page", "/application_reply", "/show_application", "/show_member", "/user_logout", "/user_sign_up_page", "/login_page", "/user_main_page", "/return_user_cnt", "/go_user_update_information", "/go_company_application_page", "/get_user_info", "/user_email_check", "/user_sign_up", "/user_login", "/user_update_information", "/delete_userinfo"})
 public class UserInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +34,8 @@ import model.UserInfo;
 /**
  * Servlet implementation class ApplicationInfoServlet
  */
+@MultipartConfig
+@WebServlet(urlPatterns = { "/write_application", "/my_application_list", "/company_application_list", "/application_list", "/my_reply_list", "/get_application_info", "/get_application_info_2", "/insert_application", "/application_reply_regist", "/select_answer", "/delete_application"})
 public class ApplicationInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

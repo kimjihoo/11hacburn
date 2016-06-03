@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +29,8 @@ import model.MemberInfo;
 /**
  * Servlet implementation class MemberInfoServlet
  */
-
+@MultipartConfig
+@WebServlet(urlPatterns = { "/member_logout", "/member_sign_up_page", "/member_not_approval_list", "/member_list", "/member_main_page", "/return_member_cnt", "/go_member_update_information", "/get_member_info", "/company_review_list", "/get_member_address", "/member_email_check", "/member_sign_up", "/member_approval", "/upload_review", "/member_login", "/member_update_information"})
 public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -72,32 +75,6 @@ public class MemberInfoServlet extends HttpServlet {
 			response.sendRedirect("start_page");
 		} else if( action.equals("member_sign_up_page") ){
 			dispatchUrl = "MemberSignUp.jsp";
-		} else if( action.equals("login_page") ){
-			String userCode = null;
-			
-			Cookie[] cookie = request.getCookies();
-			
-			if( cookie != null ){
-				int cLen = cookie.length;
-				for (int i = 0; i < cLen; i++) {
-					String cookieName = cookie[i].getName();
-					
-					if( cookieName != null ){
-						if( cookieName.equals("company_id")){ // 여러대 확인해
-							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
-							//System.out.println("Index : " +cookie[i].getValue());
-							userCode = cookie[i].getValue();
-						}
-					}
-				}
-			}
-			
-			if (userCode != null && !(userCode.equals("") && Pattern.matches("^[0-9]+$", userCode))){
-				response.sendRedirect("member_main_page");
-			}
-			else{
-				dispatchUrl = "LoginPage.jsp";
-			}
 		} else if(action.equals("member_not_approval_list")){
 			
 			MemberInfoDAO mid = new MemberInfoDAO();

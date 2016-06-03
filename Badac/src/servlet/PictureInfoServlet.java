@@ -31,6 +31,7 @@ import model.UserInfo;
  * Servlet implementation class PictureInfoServlet
  */
 @MultipartConfig
+@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture"})
 public class PictureInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
