@@ -12,6 +12,9 @@
 body {
 	padding-top: 70px;
 }
+.header > h1{
+	font-family: "고딕";
+}
 </style>
 <script>
 	Date registdate = new Date();
@@ -130,6 +133,9 @@ body {
 				거래 <small>등록</small>
 			</h1>
 		</div>
+		</article>
+		</div>
+		
 
 		<div class="container">
 			<table class="table table-hover" width=700>
