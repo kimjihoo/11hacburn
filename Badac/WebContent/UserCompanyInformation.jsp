@@ -281,7 +281,15 @@ body {
 	var point_x;
 	var point_y;
 	var memberAddress;
+	
+	var container = document.getElementById("map"),
+	options = {
+		center: new daum.maps.LatLng(33.450701, 126.570667),
+		level: 3
+	};
 
+	var	map = new daum.maps.Map(container, options);
+	
 
 
 	$.get("http://210.118.74.159:8100/Badac/get_member_address",{
@@ -290,16 +298,9 @@ body {
 		if(data.msg=="Success"){
 			point_x = data.companyLat;
 			point_y = data.companyLng;
-	alert(point_x + " " + point_y);
-	alert(typeof point_x + " " + typeof point_y);
-			var container = document.getElementById("map"),
-			options = {
-				center: new daum.maps.LatLng(parseFloat(point_x), parseFloat(point_y)),
-				level: 3
-			};
+	
+			map.setCenter(new daum.maps.LatLng(parseFloat(point_x), parseFloat(point_y)));
 
-			var	map = new daum.maps.Map(container, options);
-			
 		}else{
 			alert(data.msg);
 		}
