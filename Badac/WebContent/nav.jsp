@@ -66,16 +66,13 @@
     	$.get("http://210.118.74.159:8100/Badac/get_picture_list",{appId:-1,},
                 function (data) {
                     if (data.msg == 'Success') {
-//                     	var gall_img = document.createElement('img');
-//                     	gall_img.src=data.pictureList[0].path;
-//                     	gall_img.style.borderRadius="6px";
-//                     	gall_img.style.width="100%";
-//                     	gall_img.style.height="100%";
-//                     	profile_c.appendChild(gall_img);
-                        profile_c.src = data.pictureList[0].path;
-                        profile_c.style.borderRadius="6px";
-                        profile_c.style.width="110px";
-                        profile_c.style.height="110px";
+                    	var gall_img = document.createElement('img');
+                    	gall_img.src=data.pictureList[0].path;
+                    	gall_img.style.borderRadius="6px";
+                    	gall_img.style.width="100%";
+                    	gall_img.style.height="100%";
+                    	profile_c.appendChild(gall_img);
+
                     	
                         /*for (var g = 0; g < data.pictureList.length; g++) {
                         	var temp_div = document.createElement('div');
@@ -201,7 +198,7 @@
 						<li>
 							<table>
 								<tr>
-									<td rowspan=2><img class="img-thumbnail" style="width:100px; height:100px;" src="img/camera.png" id="profile_c"onclick="change_profile_dialog();"/></td>
+									<td rowspan=2><div class="img-thumbnail" style="width:100px; height:100px;" id="profile_c" onclick="change_profile_dialog();">사진 추가 하시려면 클릭하세요!</div></td>
 									<td style="padding-left: 20px;"><%=username%> 님</td>
 								</tr>
 							</table>
