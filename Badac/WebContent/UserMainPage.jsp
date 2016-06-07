@@ -150,7 +150,6 @@ tr, td { border: 16px ridge(1,10,1) }
 									var tempData = data.memberList;
 									var marker={};
 									for(var i = 0; i<tempData.length; i++){
-										
 											memberData[tempData[i].id] = {
 													"company_id": tempData[i].id,
 													"company_name": tempData[i].name,
@@ -159,7 +158,8 @@ tr, td { border: 16px ridge(1,10,1) }
 													"company_address_2":tempData[i].region3,
 													"company_telephone" : tempData[i].telephone,
 													"company_lng" : tempData[i].lng,
-													"company_lat" : tempData[i].lat
+													"company_lat" : tempData[i].lat,
+													"company_main_picture" : (tempData[i].main_picture).substring(6)
 													}
 
 											var templng = parseFloat(memberData[tempData[i].id].company_lat);
@@ -261,7 +261,7 @@ tr, td { border: 16px ridge(1,10,1) }
 													'</div>'+
 													'<div class="body">'+
 														'<div class="img">'+
-															'<img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">'+
+															'<img src="'+memberData[tempData[j].id].company_main_picture+'" width="73" height="70">'+
 														'</div>'+
 														'<div class="desc">'+
 															'<div class="ellipsis">'+

@@ -141,6 +141,47 @@ public class PictureInfoDAO extends BaseDAO {
 		return pictureList;
 	}
 	
+	public String selectPictureCompanyMain(int company_id){
+		String p_path = "null_path";
+		PreparedStatement ps=null;
+		
+		try
+		{
+			String sql="SELECT * FROM company_picture WHERE company_id=? AND main_chk=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, company_id);
+			ps.setInt(2, 1);
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()){
+				p_path = rs.getString("picture_path");
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		return p_path;
+	}
+	
 	public ArrayList<PictureInfo> selectPictureCompanyInfoByCompanyId(int company_id){
 		ArrayList<PictureInfo> pictureList = new ArrayList<PictureInfo>();
 		PreparedStatement ps=null;

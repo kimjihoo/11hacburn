@@ -25,6 +25,7 @@ import db.MemberInfoDAO;
 import db.UserInfoDAO;
 import model.ApplicationInfo;
 import model.MemberInfo;
+import db.PictureInfoDAO;
 
 /**
  * Servlet implementation class MemberInfoServlet
@@ -142,7 +143,9 @@ public class MemberInfoServlet extends HttpServlet {
 				try{
 					for(MemberInfo temp : memberList){
 						memberInfo = new JSONObject();
-						
+						PictureInfoDAO pid = new PictureInfoDAO();
+						String p_path = pid.selectPictureCompanyMain(temp.getCompany_id());
+						pid.disconnect();
 						memberInfo.put("id", temp.getCompany_id());
 						memberInfo.put("name", temp.getCompany_name());
 						memberInfo.put("telephone", temp.getCompany_telephone());
@@ -150,6 +153,7 @@ public class MemberInfoServlet extends HttpServlet {
 						memberInfo.put("region3", temp.getCompany_region_3());
 						memberInfo.put("lat", temp.getCompany_lat());
 						memberInfo.put("lng", temp.getCompany_lng());
+						memberInfo.put("main_picture", p_path);
 						
 						memberListJson.put(memberInfo);
 					}
@@ -254,7 +258,11 @@ public class MemberInfoServlet extends HttpServlet {
 			JSONObject json = new JSONObject();
 			
 			try{
+				
 				json.put("msg", msg);
+				PictureInfoDAO pid = new PictureInfoDAO();
+				String p_path = pid.selectPictureCompanyMain(memberInfo.getCompany_id());
+				pid.disconnect();
 				json.put("companyOwnerName", memberInfo.getCompany_ownername());
 				json.put("companyEmail", memberInfo.getCompany_email());
 				json.put("companyPassword", memberInfo.getCompany_password());
@@ -267,6 +275,7 @@ public class MemberInfoServlet extends HttpServlet {
 				json.put("companyEmailpush", memberInfo.getCompany_emailpush());
 				json.put("companyLat", memberInfo.getCompany_lat());
 				json.put("companyLng", memberInfo.getCompany_lng());
+				json.put("main_picture", p_path);
 			}
 			catch (JSONException e) {
 				// TODO Auto-generated catch block

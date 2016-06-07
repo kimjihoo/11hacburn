@@ -111,8 +111,8 @@ onload = function on_load() {
                     		var gall_img = document.createElement('img');
                         	gall_img.src=data.pictureList[g].path;
                         	gall_img.style.borderRadius="6px";
-                        	gall_img.style.width="600px";
-                        	gall_img.style.height="550px";
+                        	gall_img.style.width="400px";
+                        	gall_img.style.height="350px";
                         	main_img_c.appendChild(gall_img);
                     	}else{
                     		var span_c = document.createElement('span');

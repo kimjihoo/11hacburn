@@ -31,7 +31,7 @@ import model.UserInfo;
  * Servlet implementation class PictureInfoServlet
  */
 @MultipartConfig
-@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list", "/insert_company_picture", "/get_company_picture_list"})
+@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list", "/insert_company_picture", "/get_company_picture_list", "/get_company_main_picture"})
 public class PictureInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -168,6 +168,42 @@ public class PictureInfoServlet extends HttpServlet {
 					}
 							
 					json.put("pictureList", pictureListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
+		else if(action.equals("get_company_main_picture")){
+			
+			int c_id = Integer.parseInt(request.getParameter("id"));
+			PictureInfoDAO pid = new PictureInfoDAO();
+			String p_path = pid.selectPictureCompanyMain(c_id);
+			
+			pid.disconnect();
+					
+			String msg = "Success";
+					
+			JSONObject json = new JSONObject();
+			
+			if( p_path.equals("null_path")){
+				msg = "NoPicture";
+			}
+			else{
+				try{
+					json.put("p_path", p_path);
 				}
 				catch (JSONException e) {
 					// TODO Auto-generated catch block
