@@ -282,16 +282,14 @@ body {
 	var point_y;
 	var memberAddress;
 	
-	var container = document.getElementById("map"),
-	options = {
-		center: new daum.maps.LatLng(33.450701, 126.570667),
-		level: 3
-	};
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
 
-	var	map = new daum.maps.Map(container, options);
+var map = new daum.maps.Map(mapContainer, mapOption); 
 	
-
-
 	$.get("http://210.118.74.159:8100/Badac/get_member_address",{
 		id: companyId,
 	},function(data){
@@ -299,7 +297,16 @@ body {
 			point_x = data.companyLat;
 			point_y = data.companyLng;
 	
-			map.setCenter(new daum.maps.LatLng(parseFloat(point_x), parseFloat(point_y)));
+			map.setCenter(new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)));
+			var markerPosition  = new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)); 
+
+			// 마커를 생성합니다
+			var marker = new daum.maps.Marker({
+			    position: markerPosition
+			});
+
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
 
 		}else{
 			alert(data.msg);
