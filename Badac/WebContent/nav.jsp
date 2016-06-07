@@ -73,9 +73,9 @@
 //                     	gall_img.style.height="100%";
 //                     	profile_c.appendChild(gall_img);
                         profile_c.src = data.pictureList[0].path;
-                        profile_c.style.width="100%";
-                        profile_c.style.height="100%";
                         profile_c.style.borderRadius="6px";
+                        profile_c.style.width="140px";
+                        profile_c.style.height="140px";
                     	
                         /*for (var g = 0; g < data.pictureList.length; g++) {
                         	var temp_div = document.createElement('div');
