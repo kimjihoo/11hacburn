@@ -497,7 +497,7 @@ public class PictureInfoServlet extends HttpServlet {
 						            	
 						            	while(true){
 						            		randomNum = (int)(Math.random() * 100000000);
-						    				if(pid.selectPictureIdByPictureId(randomNum) == -1){
+						    				if(pid.selectPictureIdByPictureId2(randomNum) == -1){
 						    					//System.out.println(randomNum);
 						    					break;
 						    				}

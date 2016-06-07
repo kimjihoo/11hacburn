@@ -62,9 +62,8 @@ public class PictureInfoDAO extends BaseDAO {
 		PreparedStatement ps=null;
 		try
 		{
-			if(chk==1){
-				deletePictureCompanyInfoByCompanyId(company_id,1);
-			}
+			
+			deletePictureCompanyInfoByCompanyId(company_id,chk);
 			String sql="INSERT INTO company_picture VALUES(?,?,?,?)";
 			ps=super.getConn().prepareStatement(sql);
 			ps.setInt(1, picture_id);
@@ -312,6 +311,46 @@ public class PictureInfoDAO extends BaseDAO {
 		try
 		{
 			String sql="SELECT * FROM picture_tb WHERE picture_id=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, pictureId);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()){
+				tempPictureCode = rs.getInt("picture_id");
+			}
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return tempPictureCode;
+	}
+	
+	public int selectPictureIdByPictureId2(int pictureId){
+		int tempPictureCode = -1;
+		PreparedStatement ps=null;
+		
+		try
+		{
+			String sql="SELECT * FROM company_picture WHERE picture_id=?";
 			ps=super.getConn().prepareStatement(sql);
 			ps.setInt(1, pictureId);
 			ResultSet rs=ps.executeQuery();
