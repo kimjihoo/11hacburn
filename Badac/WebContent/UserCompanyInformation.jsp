@@ -101,6 +101,34 @@ onload = function on_load() {
 			alert(data.msg);
 		}
 	});
+	var img_c = document.getElementById("img_c");
+	var main_img_c = document.getElementById("main_img_c");
+	$.get("http://210.118.74.159:8100/Badac/get_company_picture_list",{id:companyId,},
+            function (data) {
+                if (data.msg == 'Success') {
+                    for (var g = 0; g < data.pictureList.length; g++) {
+                    	if(data.pictureList[g].chk==1){
+                    		var gall_img = document.createElement('img');
+                        	gall_img.src=data.pictureList[g].path;
+                        	gall_img.style.borderRadius="6px";
+                        	gall_img.style.width="600px";
+                        	gall_img.style.height="550px";
+                        	main_img_c.appendChild(gall_img);
+                    	}else{
+                    		var span_c = document.createElement('span');
+                        	span_c.style.width="250px";
+                        	span_c.style.height="200px";
+                        	var gall_img = document.createElement('img');
+                        	gall_img.src=data.pictureList[g].path;
+                        	gall_img.style.borderRadius="6px";
+                        	gall_img.style.width="250px";
+                        	gall_img.style.height="200px";
+                        	span_c.appendChild(gall_img);
+                        	img_c.appendChild(span_c);
+                    	}
+                    }
+                }
+            });
 }
 
 function add_bookmark(){
@@ -183,8 +211,7 @@ body {
 		<!-- Portfolio Item Row -->
 		<div class="row">
 
-			<div class="col-md-8">
-				<img class="img-responsive" src="http://placehold.it/750x500" alt="">
+			<div class="col-md-8" id="main_img_c" style="width:700px; height:600px;">
 			</div>
 
 			<div class="col-md-4">
@@ -209,29 +236,11 @@ body {
 				<h3 class="page-header">Company Photo</h3>
 			</div>
 
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
-
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
-
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
-
-			<div class="col-sm-3 col-xs-6">
-				<a href="#"> <img class="img-responsive portfolio-item"
-					src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
+			<div class="form-group">
+							<div class="vCeneter" id="img_c">
+								
+							</div>
+						</div>
 		</div>
 
 		<div class="row">
@@ -298,7 +307,6 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 			point_y = data.companyLng;
 	
 			map.setCenter(new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)));
-<<<<<<< Upstream, based on branch 'master' of https://github.com/kimjihoo/11hacburn.git
 			var markerPosition  = new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)); 
 
 			// 마커를 생성합니다
@@ -308,7 +316,6 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
-=======
 			
 			var markerPosition  = new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)); 
 
@@ -319,7 +326,6 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 	         // 마커가 지도 위에 표시되도록 설정합니다
 	         marker.setMap(map);
->>>>>>> 7a75922 업체페이지 지도 마커 완료
 
 		}else{
 			alert(data.msg);

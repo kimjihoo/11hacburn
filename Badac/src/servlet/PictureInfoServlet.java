@@ -31,7 +31,7 @@ import model.UserInfo;
  * Servlet implementation class PictureInfoServlet
  */
 @MultipartConfig
-@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list", "/insert_company_picture"})
+@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list", "/insert_company_picture", "/get_company_picture_list"})
 public class PictureInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -138,7 +138,55 @@ public class PictureInfoServlet extends HttpServlet {
 			else{
 				response.sendRedirect("");
 			}			
-		}if(action.equals("company_get_picture_list")){
+		}else if(action.equals("get_company_picture_list")){
+				
+			int c_id = Integer.parseInt(request.getParameter("id"));
+			PictureInfoDAO pid = new PictureInfoDAO();
+			ArrayList<PictureInfo> pictureList=null;
+			pictureList = pid.selectPictureCompanyInfoByCompanyId(c_id);
+			pid.disconnect();
+					
+			String msg = "Success";
+					
+			JSONObject json = new JSONObject();
+					
+			if( pictureList.size() == 0 ){
+				msg = "NoPicture";
+			}
+			else{
+				JSONArray pictureListJson = new JSONArray();
+				JSONObject pictureInfo;
+				
+				try{
+					for(PictureInfo temp : pictureList){
+						pictureInfo = new JSONObject();
+								
+						pictureInfo.put("chk", temp.getPictureId());
+						pictureInfo.put("path", "/"+temp.getPicturePath());
+						
+						pictureListJson.put(pictureInfo);
+					}
+							
+					json.put("pictureList", pictureListJson);
+				}
+				catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			try{
+				json.put("msg", msg);
+			}
+			catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+			response.setContentType("application/json");
+			response.getWriter().write(json.toString());
+		}
+		else if(action.equals("company_get_picture_list")){
 			//HttpSession session = request.getSession();
 			//String userCode = (String)session.getAttribute("user_code");
 			
