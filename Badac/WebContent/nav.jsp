@@ -66,6 +66,7 @@
     	$.get("http://210.118.74.159:8100/Badac/get_picture_list",{appId:-1,},
                 function (data) {
                     if (data.msg == 'Success') {
+                    	profile_c.innerHTML = "";
                     	var gall_img = document.createElement('img');
                     	gall_img.src=data.pictureList[0].path;
                     	gall_img.style.borderRadius="6px";
