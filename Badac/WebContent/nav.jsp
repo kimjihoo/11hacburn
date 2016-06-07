@@ -112,52 +112,6 @@
 	function writeApplication() {
 		location.href = "http://210.118.74.159:8100/Badac/UserApplicationRegistPage";
 	}
-	function uploadUserFile(){
-    	var user_img = $("#choice_profile_img").val();
-    	if(user_img==""){
-    		alert("사진을 선택하세요");
-    	}else{
-    		switch(user_img.substring(user_img.lastIndexOf('.')+1).toLowerCase()){
-    		case 'gif': case 'jpg': case 'png': case 'bmp':
-    			var fileSelect = document.getElementById("choice_profile_img");
-                var files = fileSelect.files;
-
-                if (files.length == 0) {
-                    alert("파일을 선택하세요.");
-                }
-                else {
-                    var formData = new FormData();
-                    for (var i = 0; i < files.length; i++) {
-                        var file = files[i];
-
-                        formData.append('file', file, file.name);
-                    }
-					formData.append('appId', -1);
-                    $.ajax({
-                        url: 'http://210.118.74.159:8100/Badac/upload_picture',
-                        type: 'POST',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        async: false,
-                        success: function (data) {
-                            if (data.msg == 'Success') {
-                                location.reload();
-                            }else{
-                            	alert(data.msg);
-                            }
-                        }
-                    });
-                }
-    			
-    			break;
-    			default:
-    				$("#choice_profile_img").val('');
-    			alert('Not an Image format');
-    			break;
-    		}
-    	}
-    }
 	function change_profile_dialog() {
         var dialog;
 
@@ -169,6 +123,50 @@
             modal: true,
             buttons: {
                 "선택": function () {
+                	var user_img = $("#choice_profile_img").val();
+                	if(user_img==""){
+                		alert("사진을 선택하세요");
+                	}else{
+                		switch(user_img.substring(user_img.lastIndexOf('.')+1).toLowerCase()){
+                		case 'gif': case 'jpg': case 'png': case 'bmp':
+                			var fileSelect = document.getElementById("choice_profile_img");
+                            var files = fileSelect.files;
+
+                            if (files.length == 0) {
+                                alert("파일을 선택하세요.");
+                            }
+                            else {
+                                var formData = new FormData();
+                                for (var i = 0; i < files.length; i++) {
+                                    var file = files[i];
+
+                                    formData.append('file', file, file.name);
+                                }
+            					formData.append('appId', -1);
+                                $.ajax({
+                                    url: 'http://210.118.74.159:8100/Badac/upload_picture',
+                                    type: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    async: false,
+                                    success: function (data) {
+                                        if (data.msg == 'Success') {
+                                            location.reload();
+                                        }else{
+                                        	alert(data.msg);
+                                        }
+                                    }
+                                });
+                            }
+                			
+                			break;
+                			default:
+                				$("#choice_profile_img").val('');
+                			alert('Not an Image format');
+                			break;
+                		}
+                	}
                 	location.reload();
                 },
                 "취소": function () {
@@ -183,6 +181,27 @@
     }
 	///////////////////////////////////////////////////////////////////
 </script>
+<script type="text/javascript">
+        $(function() {
+            $("#choice_profile_img").on('change', function(){
+                readURL(this);
+            });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
 </head>
 <body>
 	<!-- Navigation -->
@@ -234,9 +253,9 @@
 	<!-- /.container --> </nav>
 <div id="profile-dialog-form" title="이미지 선택" style="display:none;">
     <div style="width:100%;">
-        <img class="opcity_img" src="images/upload_btn.png" width="60" height="30" id="upload_btn" style="float:right; margin-top:-3px;margin-left:5px;" onclick="uploadUserFile()">
         <input type="file" id="choice_profile_img" style="float:right;">
     </div>
+    <img id="blah" src="#" alt="your image" width="150" height="150" />
 </div>
 </body>
 </html>

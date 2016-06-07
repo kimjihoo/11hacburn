@@ -11,7 +11,27 @@ body {
 	padding-top: 70px;
 }
 </style>
+<script type="text/javascript">
+        $(function() {
+            $("#file").on('change', function(){
+                readURL(this);
+            });
+        });
 
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+			reader.onload = function (e) {
+                   $('#blah1').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+            document.getElementById("te_p").innerHTML=" 외 "+(input.files.length-1)+"장";
+			}
+        }
+
+
+    </script>
 <script type="text/javascript">
         function modifyApplication(){
 
@@ -104,9 +124,12 @@ body {
 				<tr>
 					<td><b>이미지</b></td>
 					<td><div class="form-group">
-							<label for="exampleInputFile">이미지 업로드</label> <input type="file"
-								id="exampleInputFile">
-							<p class="help-block">자전거 사진 첨부</p>
+							<label for="exampleInputFile">이미지 업로드</label>
+							<form id="form1" runat="server">
+        						<input type='file' id="file" multiple="multiple" />
+        						<span><img id="blah1" src="#" alt="your image" width="150" height="150" /></span>
+        						<span><p id="te_p"></p></span>
+        						<p class="help-block">자전거 사진 첨부</p>
 						</div> <br /></td>
 				</tr>
 				<tr>

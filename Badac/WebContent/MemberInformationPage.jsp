@@ -13,6 +13,45 @@ body {
 }
 </style>
 <script type="text/javascript">
+        $(function() {
+            $("#file1").on('change', function(){
+                readURL(this);
+            });
+        });
+
+        $(function() {
+            $("#file2").on('change', function(){
+                readURL2(this);
+            });
+        });
+        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#main_1').attr('src', e.target.result);
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+        
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#sub_1').attr('src', e.target.result);
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
+<script type="text/javascript">
 onload = function on_load(){
 	var company_ownername = document.getElementById("company_ownername");
 	var company_name = document.getElementById("company_name");
@@ -372,12 +411,20 @@ onload = function on_load(){
     			<div class="form-group">
 					<label for="file">대표 이미지</label>
 					<input type="file" id="file1">
+					<img id="main_1" src="#" alt="your image" width="150" height="150"/>
 				</div>
 	
 				<div class="form-group">
 					<label for="file">서브 이미지</label>
 					<input type="file" id="file2"multiple="multiple">
 					<p class="help-block">4장까지 가능</p>
+					
+					<form id="form1" runat="server">
+        						<input type='file' id="file2" multiple="multiple" />
+        						<span><img id="sub_1" src="#" alt="your image"  width="150" height="150"/></span>
+        						<span><p id="te_p"></p></span>
+        						<p class="help-block">자전거 사진 첨부</p>
+    				</form>
 				</div>
     			</div>
     			<div class="btn-group btn-group-justified">
