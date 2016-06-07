@@ -196,25 +196,24 @@ function change_profile_dialog() {
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"><%=companyname%>님 <span class="caret"></span>
 				</a>
-					<ul class="dropdown-menu" style="width: 200px; text-align: center;" role="menu">
+					<ul class="dropdown-menu" style="width: 200px;" role="menu">
 						<li>						
 							<table>
 								<tr>
 									<td rowspan=2><div style="width:100px; height:100px;" id="profile_c"onclick="change_profile_dialog();"></div></td>
 									<td style="padding-left: 20px;">대표 <%=companyownername%></td>
 								</tr>
-								<tr>
-									<td style='padding-left: 20px;'><%=companyemail%></td>
-								</tr>
+
 							</table>
 						</li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">메인 메뉴</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/member_main_page">마이 페이지</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page">즐겨찾기</a></li>
+					 <li class="divider"></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page"><img src="img/applicationplus.png" style="width:20px;height:20px;">&nbsp&nbsp메인 메뉴</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/member_main_page"><img src="img/applicationview.png" style="width:20px;height:20px;">&nbsp&nbsp마이 페이지</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"><img src="img/star.png" style="width:20px;height:20px;">&nbsp&nbsp즐겨찾기</a></li>
 						<li class="divider"></li>
-						<li><a href="http://210.118.74.159:8100/Badac/member_logout">로그아웃</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information">업체정보수정</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_delete_user_page">회원탈퇴</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/member_logout"><img src="img/logout.png" style="width:20px;height:20px;">&nbsp&nbsp로그아웃</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information"><img src="img/profile.png" style="width:20px;height:20px;">&nbsp&nbsp업체정보수정</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_delete_user_page"><img src="img/x.png" style="width:20px;height:20px;">&nbsp&nbsp회원탈퇴</a></li>
 					</ul></li>
 			</ul>
 		</div>
