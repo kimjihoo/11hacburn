@@ -127,7 +127,7 @@ body {
 							<label for="exampleInputFile">이미지 업로드</label>
 							<form id="form1" runat="server">
         						<input type='file' id="file" multiple="multiple" />
-        						<span><img id="blah1" src="#" alt="your image" width="150" height="150" /></span>
+        						<span><img id="blah1" src="images/no_image.gif" alt="your image" width="150" height="150" /></span>
         						<span><p id="te_p"></p></span>
         						<p class="help-block">자전거 사진 첨부</p>
 						</div> <br /></td>

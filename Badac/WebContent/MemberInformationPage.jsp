@@ -413,7 +413,7 @@ onload = function on_load(){
 					<label for="file">대표 이미지</label>
 					<form id="form1" runat="server">
 						<input type="file" id="file1">
-        				<img id="main_1" src="#" alt="your image" width="150" height="150"/>
+        				<img id="main_1" src="images/no_image.gif" alt="your image" width="150" height="150"/>
     				</form>
 				</div>
 	
@@ -424,7 +424,7 @@ onload = function on_load(){
 					<form id="form1" runat="server">
 					<input type="file" id="file2"multiple="multiple">
 					<p class="help-block">4장까지 가능</p>
-        						<span><img id="sub_1" src="#" alt="your image"  width="150" height="150"/></span>
+        						<span><img id="sub_1" src="images/no_image.gif" alt="your image"  width="150" height="150"/></span>
         						<span><p id="te_p"></p></span>
     				</form>
 				</div>
