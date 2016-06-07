@@ -290,12 +290,12 @@ body {
 		if(data.msg=="Success"){
 			point_x = data.companyLat;
 			point_y = data.companyLng;
-			var temp_x = parseFloat(point_x);
-			var temp_y = parseFloat(point_y);
-			var container = document.getElementById('map'),
+	alert(point_x + " " + point_y);
+	alert(typeof point_x + " " + typeof point_y);
+			var container = document.getElementById("map"),
 			options = {
-				center : new daum.maps.LatLng(temp_x, temp_y),
-				level : 3
+				center: new daum.maps.LatLng(parseFloat(point_x), parseFloat(point_y)),
+				level: 3
 			};
 
 			var	map = new daum.maps.Map(container, options);
