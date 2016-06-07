@@ -241,7 +241,7 @@ body {
 
 	<!-- Page Content -->
 	<div class="container">
-		<div class="brand">Sign in to Badoc</div>
+		<div class="brand">Sign up to Badoc</div>
     	<div class="address-bar">For your better bike life</div>
 
 		<div class="row">
@@ -320,7 +320,7 @@ body {
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary" onclick="signUp()">Sign
-							Up</button>
+							up</button>
 					</div>
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary"
@@ -334,7 +334,7 @@ body {
 
 	</div>
 	<!-- /.container -->
-	<br><br><br>	
+	<br><br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
