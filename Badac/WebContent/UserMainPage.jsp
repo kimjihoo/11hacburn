@@ -254,7 +254,7 @@ body {
 
 									} */
 									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
-										$('#region_member_list').append('<tr><td><div class="wrap2">'+
+										$('#region_member_list').append('<tr style="border-radius:40px;"><td style="border:1px solid black;"><div class="wrap2">'+
 												'<div class="info2">'+
 												'<div class="title">'+
 												memberData[tempData[j].id].company_name+
