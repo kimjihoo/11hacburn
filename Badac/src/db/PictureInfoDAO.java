@@ -56,6 +56,50 @@ public class PictureInfoDAO extends BaseDAO {
 		return insertRowCnt;
 	}
 	
+	public int insertPictureCompanyInfo(int picture_id, int company_id, int chk, String path){
+		int insertRowCnt = 0;
+		
+		PreparedStatement ps=null;
+		try
+		{
+			if(chk==1){
+				deletePictureCompanyInfoByCompanyId(company_id,1);
+			}
+			String sql="INSERT INTO company_picture VALUES(?,?,?,?)";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, picture_id);
+			ps.setInt(2,company_id);
+			ps.setInt(3, chk);
+			ps.setString(4, path);
+			
+			insertRowCnt = ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return insertRowCnt;
+	}
+	
 	public ArrayList<PictureInfo> selectPictureInfoByUserId(int userId, int appId){
 		ArrayList<PictureInfo> pictureList = new ArrayList<PictureInfo>();
 		PreparedStatement ps=null;
@@ -181,6 +225,44 @@ public class PictureInfoDAO extends BaseDAO {
 		return lowCnt;
 	}
 	
+	public int deletePictureCompanyInfoByCompanyId(int company_id, int chk){
+		int lowCnt = -1;
+		PreparedStatement ps=null;
+		
+		try
+		{	
+			String sql="DELETE FROM company_picture WHERE company_id=? AND main_chk=?";
+			ps=super.getConn().prepareStatement(sql);
+			ps.setInt(1, company_id);
+			ps.setInt(2, chk);
+			
+			lowCnt = ps.executeUpdate();
+		}
+		catch (SQLException se)
+		{
+			System.out.println(se.getMessage());
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			if(ps!=null)
+			{
+				try
+				{
+					ps.close();
+				}
+				catch (SQLException se)
+				{
+					System.out.println(se.getMessage());
+				}
+			}
+		}
+		
+		return lowCnt;
+	}
 	
 	public int selectPictureIdByPictureId(int pictureId){
 		int tempPictureCode = -1;

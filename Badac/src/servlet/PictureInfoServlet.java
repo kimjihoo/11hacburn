@@ -31,7 +31,7 @@ import model.UserInfo;
  * Servlet implementation class PictureInfoServlet
  */
 @MultipartConfig
-@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list"})
+@WebServlet(urlPatterns = { "/get_picture_list", "/upload_picture", "/delete_picture", "/company_get_picture_list", "/insert_company_picture"})
 public class PictureInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -310,6 +310,7 @@ public class PictureInfoServlet extends HttpServlet {
 					        
 					        for (Part part : request.getParts()) {
 					            fileName = getFilename(part);
+					            
 					            if(part.getName().equals("appId")){
 					            	continue;
 					            }
@@ -360,6 +361,125 @@ public class PictureInfoServlet extends HttpServlet {
 					        if( uploadFileCnt != request.getParts().size() ){
 					        	msg = "Fail";
 					        }
+			        	}
+			        }
+					
+			        JSONObject json = new JSONObject();
+			        try{
+						json.put("msg", msg);
+					}
+					catch(JSONException e){
+						e.printStackTrace();
+					}
+					
+					response.setContentType("application/json");
+					response.getWriter().write(json.toString());
+				} else {
+					response.sendRedirect("");
+				}
+			}
+			else{
+				response.sendRedirect("");
+			}
+		}
+		else if(action.equals("insert_company_picture")){
+			//HttpSession session = request.getSession();
+			//String userCode = (String)session.getAttribute("user_code");
+			//String userCode = "1"; // 임시 유저코드
+			
+			String userId = null;
+			
+			Cookie[] cookie = request.getCookies();
+			
+			if( cookie != null ){
+				int cLen = cookie.length;
+				for (int i = 0; i < cLen; i++) {
+					String cookieName = cookie[i].getName();
+					
+					if( cookieName != null ){
+						if( cookieName.equals("user_id")){ // 여러대 확인해
+							//System.out.println(cookie[i].getName() + " : " + cookie[i].getValue());
+							//System.out.println("Index : " +cookie[i].getValue());
+							userId = cookie[i].getValue();
+						}else if(cookieName.equals("company_id")){
+							userId = cookie[i].getValue();
+						}
+					}
+				}
+				
+				if (userId != null && !(userId.equals("") && Pattern.matches("^[0-9]+$", userId))) {
+					//System.out.println("Upload File Directory="+getServletContext().getRealPath("/").toString());
+					String pictureFilePath=null;
+					pictureFilePath = "C:/Users/Taekyun/git/11hacburn/Badac/" + "WebContent/picture/" + userId + "/";
+			        //String uploadFilePath = "C:\\PIE\\picture\\" + userCode + "\\";
+			       
+			        java.io.File fileSaveDir = new java.io.File(pictureFilePath);
+			        if (!fileSaveDir.exists()) {
+			            fileSaveDir.mkdirs();
+			        }
+			         
+			        String msg = "Success";
+			        if( request.getPart("file").getContentType().equals("application/octet-stream") ){
+			        	msg = "NoFile";
+			        }
+			        else{
+			        	PictureInfoDAO pid = new PictureInfoDAO();
+			        	
+			        		// To do
+				        	// File name : JPG / JPEG / PNG 만 받기
+				        	// File size : X mb 이하만 받기
+				        	
+				        	String fileName = null;
+					       
+					        //System.out.println(request.getParts().size());
+					        
+					        int uploadFileCnt = 1;
+					        
+					        for (Part part : request.getParts()) {
+					            fileName = getFilename(part);
+					            if( fileName != null ){
+					            	
+					            	int fileTypeIndex = fileName.lastIndexOf(".");
+						    		String fileType = fileName.substring(fileTypeIndex+1);
+						    		
+						    		if( !(fileType.trim().equals("")) && (fileType.equals("png") || fileType.equals("PNG") || fileType.equals("jpg") || fileType.equals("JPG") || fileType.equals("jpeg") || fileType.equals("JPEG"))){
+						    			int randomNum = -1;
+						            	
+						            	pid = new PictureInfoDAO();
+						            	
+						            	while(true){
+						            		randomNum = (int)(Math.random() * 100000000);
+						    				if(pid.selectPictureIdByPictureId(randomNum) == -1){
+						    					//System.out.println(randomNum);
+						    					break;
+						    				}
+						            	}
+						            	
+						            	pid.disconnect();
+						            	
+						            	part.write(pictureFilePath + Integer.toString(randomNum)+"." + fileType);
+						            	
+						            	//String widgetCode = request.getParameter("w_code");
+						            	
+						            	pid = new PictureInfoDAO();
+						            	if(part.getName().equals("mainfile")){
+						            		pid.insertPictureCompanyInfo(randomNum, Integer.parseInt(userId),1, "Badac/picture/"+userId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            	}else{
+						            		pid.insertPictureCompanyInfo(randomNum, Integer.parseInt(userId),0, "Badac/picture/"+userId+"/"+Integer.toString(randomNum)+"."+fileType);
+						            	}
+						            	
+						            	
+						            	pid.disconnect();
+						            	
+						            	uploadFileCnt++;
+						    		}
+						    		else{
+						    			msg = "fileTypeError";
+						    		}
+					            }
+					            else{
+					            	msg = "ParameterError!";
+					            }
 			        	}
 			        }
 					

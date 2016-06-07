@@ -211,6 +211,7 @@ onload = function on_load(){
             	company_address2.focus();
             	return;
             }
+            var formData;
             $.ajax({
 																  dataType: "jsonp",
 																  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+company_address.value + " " + company_address2.value+"&output=json",
@@ -235,8 +236,46 @@ onload = function on_load(){
 							            	
 							            }, function(data){
 							            		if( data.msg == "Success" ){
-							            			alert("회원정보 수정이 완료되었습니다.");
-							            			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
+							            			
+													var fileSelect = document.getElementById("file2");
+													var mainfile = document.getElementById("file1");
+													var files = fileSelect.files;
+													var mainfiles = mainfile.files;
+													formData = new FormData();
+													if(mainfiles.length==1){
+														formData.append('mainfile',mainfiles[0], mainfiles[0].name);
+													}
+													
+													for (var i = 0; i < files.length; i++) {
+														var file = files[i];
+														formData.append('file', file, file.name);
+													}
+													
+													if (files.length == 0 && mainfiles.length==0) {
+														alert("회원정보 수정이 완료되었습니다.");
+														location.href = "http://210.118.74.159:8100/Badac/member_main_page";
+													} else{
+														$
+																.ajax({
+																	url : 'http://210.118.74.159:8100/Badac/insert_company_picture',
+																	type : 'POST',
+																	data : formData,
+																	processData : false,
+																	contentType : false,
+																	async : false,
+																	success : function(data) {
+																		if (data.msg == 'Success') {
+																			alert('수정을 완료했습니다.');
+																			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
+																		} else {
+																			alert(data.msg);
+																		}
+																	},
+																	error : function(data) {
+																		alert(data.msg);
+																	}
+																});
+													}
 							            		}
 							            		else{
 							            			alert(data.msg);
@@ -328,6 +367,18 @@ onload = function on_load(){
       					<label><input type="radio" name="email_push" id="email_push_2" value=0>거부</label>
     				</div>
   				</form>
+    			</div>
+    			<div class="form-group">
+    			<div class="form-group">
+					<label for="file">대표 이미지</label>
+					<input type="file" id="file1">
+				</div>
+	
+				<div class="form-group">
+					<label for="file">서브 이미지</label>
+					<input type="file" id="file2"multiple="multiple">
+					<p class="help-block">4장까지 가능</p>
+				</div>
     			</div>
     			<div class="btn-group btn-group-justified">
     				<div class="btn-group">
