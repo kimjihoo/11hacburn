@@ -298,6 +298,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 			point_y = data.companyLng;
 	
 			map.setCenter(new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)));
+<<<<<<< Upstream, based on branch 'master' of https://github.com/kimjihoo/11hacburn.git
 			var markerPosition  = new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)); 
 
 			// 마커를 생성합니다
@@ -307,6 +308,18 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
+=======
+			
+			var markerPosition  = new daum.maps.LatLng(parseFloat(point_y), parseFloat(point_x)); 
+
+	         // 마커를 생성합니다
+	         var marker = new daum.maps.Marker({
+	             position: markerPosition
+	         });
+
+	         // 마커가 지도 위에 표시되도록 설정합니다
+	         marker.setMap(map);
+>>>>>>> 7a75922 업체페이지 지도 마커 완료
 
 		}else{
 			alert(data.msg);
