@@ -142,7 +142,14 @@ body {
 
 	</div>
 	<!-- /.container -->
-
+	<br><br><br>	
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 text-center">
+				<p style="color: white;">Copyright &copy; Badoc Corporation 2016</p>
+			</div>
+		</div>
+	</div>
 	<!-- jQuery Version 1.11.1 -->
 	<script src="js/jquery.js"></script>
 </body>
