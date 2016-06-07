@@ -74,8 +74,8 @@
 //                     	profile_c.appendChild(gall_img);
                         profile_c.src = data.pictureList[0].path;
                         profile_c.style.borderRadius="6px";
-                        profile_c.style.width="120px";
-                        profile_c.style.height="120px";
+                        profile_c.style.width="110px";
+                        profile_c.style.height="110px";
                     	
                         /*for (var g = 0; g < data.pictureList.length; g++) {
                         	var temp_div = document.createElement('div');
@@ -202,7 +202,7 @@
 							<table>
 								<tr>
 									<td rowspan=2><img class="img-thumbnail" style="width:100px; height:100px;" src="img/camera.png" id="profile_c"onclick="change_profile_dialog();"/></td>
-									<td style="padding-left: 20px;"><%=username%></td>
+									<td style="padding-left: 20px;"><%=username%> 님</td>
 								</tr>
 							</table>
 						</li>
