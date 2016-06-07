@@ -6,15 +6,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
-
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services"></script>
-
 
 <style>
 body {
 	padding-top: 70px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: url('img/bikebg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/bikebg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
 }
+table { border: 16px ridge(5,10,1) }
+tr, td { border: 16px ridge(1,10,1) }
 </style>
 <style>
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -61,21 +70,12 @@ body {
 <body>
 
 		<div class="container">
-
-
-		<div class="col-lg-8 col-sm-8" id="map" style="height: 800px;"></div>
-		<div class="col-lg-4 col-sm-4" style="overflow-y:scroll; height:800px;">
-			<table class="table table-hover" id="region_member_list">
-
-			</table>
-			
-		</div>
-				<div class="col-lg-3 col-sm-3">
-							<table class="table table-hover" id="click_member_list">
-
-							</table>
-				</div>
 		
+		<div class="col-lg-8 col-sm-8" id="map" style="height: 800px;"></div>
+		<div class="col-lg-4 col-sm-4" style="overflow-y:auto; height:800px;">
+			<table class="table" id="region_member_list">
+			</table>
+		</div>		
 	</div>
 
 
@@ -254,7 +254,7 @@ body {
 
 									} */
 									for (var j = 0; j <tempData.length; j++){				// 이미지 경로 확인!
-										$('#region_member_list').append('<tr style="border-radius:40px;"><td style="border:1px solid black;"><div class="wrap2">'+
+										$('#region_member_list').append('<tr><td><div class="wrap2" style="border-radius: 10px; border: 1px solid black; background-color: white;">'+										
 												'<div class="info2">'+
 												'<div class="title">'+
 												memberData[tempData[j].id].company_name+
