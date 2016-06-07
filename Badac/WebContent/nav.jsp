@@ -66,12 +66,16 @@
     	$.get("http://210.118.74.159:8100/Badac/get_picture_list",{appId:-1,},
                 function (data) {
                     if (data.msg == 'Success') {
-                    	var gall_img = document.createElement('img');
-                    	gall_img.src=data.pictureList[0].path;
-                    	gall_img.style.borderRadius="6px";
-                    	gall_img.style.width="100%";
-                    	gall_img.style.height="100%";
-                    	profile_c.appendChild(gall_img);
+//                     	var gall_img = document.createElement('img');
+//                     	gall_img.src=data.pictureList[0].path;
+//                     	gall_img.style.borderRadius="6px";
+//                     	gall_img.style.width="100%";
+//                     	gall_img.style.height="100%";
+//                     	profile_c.appendChild(gall_img);
+                        profile_c.src = data.pictureList[0].path;
+                        profile_c.style.width="100%";
+                        profile_c.style.height="100%";
+                        profile_c.style.borderRadius="6px";
                     	
                         /*for (var g = 0; g < data.pictureList.length; g++) {
                         	var temp_div = document.createElement('div');
@@ -193,26 +197,27 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"><%=username%>님 <span class="caret"></span>
 				</a>
-					<ul class="dropdown-menu" style="width: 200px; text-align: center;" role="menu">
+					<ul class="dropdown-menu" style="width: 200px;" role="menu">
 						<li>
 							<table>
 								<tr>
-									<td rowspan=2><div style="width:100px; height:100px;" id="profile_c"onclick="change_profile_dialog();"></div></td>
-									<td style="padding-left: 20px;"><%=useremail%></td>
+									<td rowspan=2><img class="img-thumbnail" style="width:100px; height:100px;" src="img/camera.png" id="profile_c"onclick="change_profile_dialog();"/></td>
+									<td style="padding-left: 20px;"><%=username%></td>
 								</tr>
 							</table>
 						</li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page">나의 요청서 보기</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/write_application">견적 요청서 작성</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page">즐겨찾기</a></li>
+						<li class="divider"></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page"><img src="img/applicationview.png" style="width:20px;height:20px;">&nbsp&nbsp나의 요청서 보기</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/write_application"><img src="img/applicationplus.png" style="width:20px;height:20px;">&nbsp&nbsp견적 요청서 작성</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"><img src="img/star.png" style="width:30px;height:30px;">&nbsp&nbsp즐겨찾기</a></li>
 						<li class="divider"></li>
 
-						<li><a href="http://210.118.74.159:8100/Badac/user_logout">로그아웃</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/user_logout"><img src="img/logout.png" style="width:20px;height:20px;">&nbsp&nbsp로그아웃</a></li>
 						<li><a
-							href="http://210.118.74.159:8100/Badac/go_user_update_information">개인정보
+							href="http://210.118.74.159:8100/Badac/go_user_update_information"><img src="img/profile.png" style="width:20px;height:20px;">&nbsp&nbsp개인정보
 								수정</a></li>
 						<li><a
-							href="http://210.118.74.159:8100/Badac/go_delete_user_page">회원탈퇴
+							href="http://210.118.74.159:8100/Badac/go_delete_user_page"><img src="img/x.png" style="width:20px;height:20px;">&nbsp&nbsp회원탈퇴
 							</a></li>
 
 					</ul></li>
