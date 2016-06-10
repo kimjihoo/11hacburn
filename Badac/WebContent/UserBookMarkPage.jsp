@@ -114,7 +114,7 @@ body {
 			<h1>My BookMark List</h1>
 			<h3>What your Favorite</h3>
 			</header>
-			<div class="row text-center" style="width:950px; text-align: center; left:0; right:0; margin-left:auto; margin-right:auto;">
+			<div class="row text-center" style="width:924px; text-align: center; left:0; right:0; margin-left:auto; margin-right:auto;">
 				<div id="region_member_list"></div>
 			</div>
 			
