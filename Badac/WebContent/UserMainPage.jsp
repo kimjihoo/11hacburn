@@ -18,7 +18,7 @@ body {
     background: url('img/simplebikebg.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/mainpagebg.png');
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/usermainbg.jpg');
     background-size: cover;
     -o-background-size: cover;
 }

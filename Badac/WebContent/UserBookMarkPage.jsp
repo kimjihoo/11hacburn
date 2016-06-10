@@ -15,6 +15,18 @@
 <script type="text/javascript"
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services">	
 </script>
+<style>
+body {
+	padding-top: 70px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background: url('img/simplebikebg.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/bookmarkbg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
+}
+</style>
 </head>
 <script>
 	onload = function on_load() {
