@@ -34,10 +34,19 @@
 	href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
 	rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <!-- 다음 주소 api -->
-
+<style>
+body {
+	padding-top: 100px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/signupbg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+</style>
 <script type="text/javascript">
         function signUp(){
         	var regex_email = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
@@ -236,9 +245,7 @@
 											            		else{
 											            			alert(data.msg);
 											            		}
-											            });
-
-																				
+											            });																				
 												  }
 												});
                    }
@@ -246,19 +253,18 @@
         function returnStartPage(){
             location.href = "http://210.118.74.159:8100/Badac/start_page";
         }
-    </script>
+</script>
 </head>
 <body>
 	<!-- Page Content -->
 	<div class="container">
-		<div class="row" style="text-align: center;">
-			<h1>Sign in to BADAC</h1>
-		</div>
-
+		<div class="brand">Sign up to Badoc</div>
+    	<div class="address-bar">For your better bike life</div>
+    	
 		<div class="row">
 			<div class="col-lg-4"></div>
 			<div class="col-lg-4"
-				style="border-radius: 5px; border: 1px solid rgb(231, 231, 231); padding-bottom: 15px; padding-right: 25px; padding-left: 25px; padding-top: 15px;">
+				style="border-radius: 5px; color: white; border: 1px solid rgb(231, 231, 231); padding-bottom: 15px; padding-right: 25px; padding-left: 25px; padding-top: 15px;">
 				<div class="form-group">
 					<label for="company_ownername">Owner Name:</label> <input
 						type="text" class="form-control input-sm" id="company_ownername">
@@ -290,7 +296,7 @@
 							type="button" class="btn btn-primary btn-sm"
 							onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 					</div>
-					<span id="helpBlock" class="help-block">우편번호 찾기 버튼을 눌러 우편번호를
+					<span id="helpBlock" class="help-block" style="color: white;">우편번호 찾기 버튼을 눌러 우편번호를
 						검색하세요.</span>
 				</div>
 				<div class="form-group">
@@ -319,8 +325,6 @@
 						</div>
 					</div>
 				</div>
-
-
 				<div class="form-group">
 					<label for="company_phone">Phone:</label>
 					<div class="row" id="company_phone">
@@ -362,10 +366,17 @@
 			<div class="col-lg-4"></div>
 		</div>
 		<!-- /.row -->
-
 	</div>
 	<!-- /.container -->
-	<script> 
+	<br><br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 text-center">
+				<p style="color: white;">Copyright &copy; Badoc Corporation 2016</p>
+			</div>
+		</div>
+	</div>
+<script> 
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -408,7 +419,7 @@
         }).open();
     }
 </script>
-	<!-- jQuery Version 1.11.1 -->
-	<script src="js/jquery.js"></script>
+<!-- jQuery Version 1.11.1 -->
+<script src="js/jquery.js"></script>
 </body>
 </html>

@@ -9,7 +9,6 @@
 <title>회원 정보 수정</title>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
 <!-- Custom CSS -->
 <link href="css/business-casual.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-2.2.3.js"
@@ -42,7 +41,6 @@
 body {
 	padding-top: 100px;
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('img/bikebg.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/bikebg.jpg');
@@ -427,9 +425,6 @@ body {
 			</div>
 		</div>
 	</div>
-
-	<!-- jQuery Version 1.11.1 -->
-	<script src="js/jquery.js"></script>
 
 	<!-- 다음 주소 api -->
 	<script> 

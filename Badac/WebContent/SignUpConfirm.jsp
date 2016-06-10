@@ -43,6 +43,7 @@ body {
     -webkit-background-size: cover;
     background: linear-gradient(-90deg, red, yellow);
     -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/signupbg.jpg');
     background-size: cover;
     -o-background-size: cover;
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */

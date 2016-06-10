@@ -81,24 +81,8 @@
                     	gall_img.style.width="100%";
                     	gall_img.style.height="100%";
                     	profile_c.appendChild(gall_img);
-
-                    	
-                        /*for (var g = 0; g < data.pictureList.length; g++) {
-                        	var temp_div = document.createElement('div');
-                        	temp_div.style.width="100%";
-                        	temp_div.style.height="100%";
-                        	//temp_div.style.borderRadius="6px";
-                        	var gall_img = document.createElement('img');
-                        	gall_img.src=data.pictureList[g].path;
-                        	gall_img.style.borderRadius="6px";
-                        	gall_img.style.width="100%";
-                        	gall_img.style.height="100%";
-                        	temp_div.appendChild(gall_img);
-                        	gallery_c.appendChild(temp_div);
-                        }*/
                     }
-                });
-    	
+                });    	
     }
  
     var userId = '<%= userid %>';
