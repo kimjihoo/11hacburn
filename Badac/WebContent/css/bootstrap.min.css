@@ -224,9 +224,6 @@ td, th {
 	img, tr {
 		page-break-inside: avoid
 	}
-	img {
-		max-width: 100% !important
-	}
 	h2, h3, p {
 		orphans: 3;
 		widows: 3
@@ -1384,7 +1381,6 @@ img {
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive {
 	display: block;
 	max-width: 100%;
-	height: auto
 }
 
 .img-rounded {
