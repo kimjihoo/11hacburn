@@ -114,14 +114,14 @@ body {
 			<h1>My BookMark List</h1>
 			<h3>What your Favorite</h3>
 			</header>
-			<div class="row text-center" style="text-align: center; margin:0 auto;">
-				<div id="region_member_list" style="margin:0 auto;"></div>
+			<div class="row text-center" style="width:950px; text-align: center; left:0; right:0; margin-left:auto; margin-right:auto;">
+				<div id="region_member_list"></div>
 			</div>
 			
 			<hr>
 			
 			<!-- Footer -->
-			<footer style="width: 80%; text-align: center; margin:0 auto;">
+			<footer style="width: 80%; text-align: center; margin:0 auto; border-radius: 5px;">
 			<div class="row">
 				<div class="col-lg-12">
 					<p>Copyright &copy; Badoc Corporation 2016</p>
