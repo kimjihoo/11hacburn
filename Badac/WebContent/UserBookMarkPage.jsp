@@ -65,7 +65,7 @@
 
 									$('#region_member_list')
 											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature" style="margin: auto;"><div class="thumbnail"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width="200" height="200" alt="">'
+													'<div class="col-md-3 col-sm-6 hero-feature"><div class="thumbnail"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width="200" height="200" alt="">'
 															+ '<div class="caption">'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
@@ -102,7 +102,7 @@
 			<h1>My BookMark List</h1>
 			<h3>What your Favorite</h3>
 			</header>
-			<div class="row text-center">
+			<div class="row text-center" style="margin: auto;">
 				<div id="region_member_list"></div>
 			</div>
 			
