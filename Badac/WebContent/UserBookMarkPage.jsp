@@ -65,7 +65,7 @@
 
 									$('#region_member_list')
 											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature" style="border: 1px solid silver"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=200px, height=200px>'
+													'<div class="col-md-3 col-sm-6 hero-feature" style="width: 210px; height: 450px; border: 1px solid silver;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=200px, height=200px>'
 															+ '<div class="caption">'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
