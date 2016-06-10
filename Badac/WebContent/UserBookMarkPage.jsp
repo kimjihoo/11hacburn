@@ -65,15 +65,17 @@
 
 									$('#region_member_list')
 											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature" style="width: 250px; height: 450px; border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=200px, height=200px>'
-															+ '<div class="caption">'
+													'<div class="col-md-3 col-sm-6 hero-feature" style="border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
+															+ '<div class="caption" style="width: 250px; height: 200px;>'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
 															+ '</h3>'
 															+ '<h4>'
 															+ memberData[tempData[i].companyId].company_address
 															+ '</h4>'
+															+ '</div>'
 															+ '<br>'
+															+ '<div style="width: 250px; height: 100px;>'
 															+ '<p>'
 															+ memberData[tempData[i].companyId].company_telephone
 															+ '</p>'
