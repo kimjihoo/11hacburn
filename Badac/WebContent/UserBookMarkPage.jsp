@@ -65,7 +65,7 @@
 
 									$('#region_member_list')
 											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature" style="border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><div class="caption" style="width: 300px; height: 320px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
+													'<div class="col-md-3 col-sm-6 hero-feature" style="width: 305px; height: 405px; border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><div class="caption" style="width: 300px; height: 320px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
 															+ '</h3>'
@@ -96,14 +96,14 @@
 </script>
 <body>
 	<div class="contentwrap">		
-		<div class="container">
+		<div class="container" style="text-align: center; margin:0 auto;">
 			<!-- Jumbotron Header -->
 			<header class="jumbotron hero-spacer" style="text-align: center;">
 			<h1>My BookMark List</h1>
 			<h3>What your Favorite</h3>
 			</header>
 			<div class="row text-center" style="text-align: center; margin:0 auto;">
-				<div id="region_member_list"></div>
+				<div id="region_member_list" style="margin:0 auto;"></div>
 			</div>
 			
 			<hr>
