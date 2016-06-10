@@ -65,7 +65,7 @@
 
 									$('#region_member_list')
 											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=200px, height=200px>'
+													'<div class="col-md-3 col-sm-6 hero-feature" style="border: 1px solid silver"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=200px, height=200px>'
 															+ '<div class="caption">'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
@@ -78,7 +78,7 @@
 															+ memberData[tempData[i].companyId].company_telephone
 															+ '</p>'
 															+ '<input type="button" class="btn btn-primary" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
-															+ '</div></div></div>');
+															+ '</div></div>');
 									document.getElementById(""
 											+ tempData[i].companyId + "").onclick = function() {
 										var tempComId = $(this).attr('id');
