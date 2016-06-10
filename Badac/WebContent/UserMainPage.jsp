@@ -15,10 +15,10 @@
 body {
 	padding-top: 70px;
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('img/bikebg.jpg') no-repeat center center fixed;
+    background: url('img/simplebikebg.png') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/bikebg.jpg');
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/mainpagebg.png');
     background-size: cover;
     -o-background-size: cover;
 }
