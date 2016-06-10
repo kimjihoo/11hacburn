@@ -36,7 +36,6 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
 body {
-	padding-top: 100px;
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -332,7 +331,7 @@ body {
 
 	</div>
 	<!-- /.container -->
-	<br><br><br>
+	<br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">

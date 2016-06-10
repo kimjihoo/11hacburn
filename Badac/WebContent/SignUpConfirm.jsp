@@ -38,7 +38,6 @@
 
 <style>
 body {
-	padding-top: 100px;
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-background-size: cover;
     background: linear-gradient(-90deg, red, yellow);
@@ -142,7 +141,7 @@ body {
 
 	</div>
 	<!-- /.container -->
-	<br><br><br>	
+	<br><br>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
