@@ -1381,8 +1381,7 @@ img {
 	vertical-align: middle
 }
 
-.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive,
-	.thumbnail a>img, .thumbnail>img {
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive {
 	display: block;
 	max-width: 100%;
 	height: auto
@@ -1394,8 +1393,6 @@ img {
 
 .img-thumbnail {
 	display: inline-block;
-	max-width: 100%;
-	height: auto;
 	padding: 4px;
 	line-height: 1.42857143;
 	background-color: #fff;
@@ -5454,11 +5451,6 @@ a.badge:focus, a.badge:hover {
 	-webkit-transition: border .2s ease-in-out;
 	-o-transition: border .2s ease-in-out;
 	transition: border .2s ease-in-out
-}
-
-.thumbnail a>img, .thumbnail>img {
-	margin-right: auto;
-	margin-left: auto
 }
 
 a.thumbnail.active, a.thumbnail:focus, a.thumbnail:hover {
