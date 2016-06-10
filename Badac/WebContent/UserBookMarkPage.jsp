@@ -102,8 +102,8 @@
 			<h1>My BookMark List</h1>
 			<h3>What your Favorite</h3>
 			</header>
-			<div class="row text-center" style="text-align: center;">
-				<div id="region_member_list" style="margin:0 auto;"></div>
+			<div class="row text-center" style="text-align: center; margin:0 auto;">
+				<div id="region_member_list"></div>
 			</div>
 			
 			<hr>
