@@ -77,7 +77,7 @@ body {
 
 									$('#region_member_list')
 											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature" style="background-color: rgba(255, 255, 255, 0.3); width: 305px; height: 405px; border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><div class="caption" style="width: 300px; height: 320px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
+													'<div class="col-md-3 col-sm-6 hero-feature" style="background-color: rgba(255, 255, 255, 0.8); width: 305px; height: 405px; border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><div class="caption" style="width: 300px; height: 320px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
 															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
 															+ '</h3>'
@@ -110,7 +110,7 @@ body {
 	<div class="contentwrap">		
 		<div class="container" style="text-align: center; margin:0 auto;">
 			<!-- Jumbotron Header -->
-			<header class="jumbotron hero-spacer" style="text-align: center;">
+			<header class="jumbotron hero-spacer" style="width: 80%; text-align: center; margin:0 auto;">
 			<h1>My BookMark List</h1>
 			<h3>What your Favorite</h3>
 			</header>
@@ -121,7 +121,7 @@ body {
 			<hr>
 			
 			<!-- Footer -->
-			<footer>
+			<footer style="width: 80%; text-align: center; margin:0 auto;">
 			<div class="row">
 				<div class="col-lg-12">
 					<p>Copyright &copy; Badoc Corporation 2016</p>
