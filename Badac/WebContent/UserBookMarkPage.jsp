@@ -6,17 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>즐겨 찾기</title>
-
+<!-- Custom CSS -->
+<link href="css/one-page-wonder.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services">	
 </script>
-
 <style>
 body {
 	padding-top: 70px;
 }
 </style>
-
 </head>
 <script>
 	onload = function on_load() {
