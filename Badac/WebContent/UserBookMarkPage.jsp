@@ -5,9 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 <title>즐겨 찾기</title>
 <!-- Custom CSS -->
-<link href="css/one-page-wonder.css" rel="stylesheet">
+<link href="css/heroic-features.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services">	
 </script>
@@ -61,19 +65,20 @@
 
 									$('#region_member_list')
 											.append(
-													'<div class="featurette"><img class="featurette-image img-circle img-responsive pull-right" src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width="500" height="500">'
-															+ '<h2 class="featurette-heading">'
+													'<div class="col-md-3 col-sm-6 hero-feature"><div class="thumbnail"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width="200" height="200" alt="">'
+															+ '<div class="caption">'
+															+ '<h3>'
 															+ memberData[tempData[i].companyId].company_name
-															+ '<span class="text-muted">'
-															+ memberData[tempData[i].companyId].company_telephone
-															+ '</span>'
-															+ '</h2>'
-															+ '<p class="lead">'
+															+ '</h3>'
+															+ '<h4>'
 															+ memberData[tempData[i].companyId].company_address
+															+ '</h4>'
+															+ '<br>'
+															+ '<p>'
+															+ memberData[tempData[i].companyId].company_telephone
 															+ '</p>'
-															+ '<input type="button" class="btn btn-default btn-lg" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
-															+ '</div>'
-															+ '<hr class="featurette-divider">');
+															+ '<input type="button" class="btn btn-primary" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
+															+ '</div></div></div>');
 									document.getElementById(""
 											+ tempData[i].companyId + "").onclick = function() {
 										var tempComId = $(this).attr('id');
@@ -90,19 +95,18 @@
 	}
 </script>
 <body>
-	<div class="contentwrap">
-		<!-- Full Width Image Header -->
-		<header class="header-image">
-		<div class="headline">
-			<div class="container">
-				<h1>My BookMark List</h1>
-				<h2>What your Favorite</h2>
-			</div>
-		</div>
-		</header>
+	<div class="contentwrap">		
 		<div class="container">
-			<hr class="featurette-divider">
-			<div id="region_member_list"></div>
+			<!-- Jumbotron Header -->
+			<header class="jumbotron hero-spacer" style="text-align: center;">
+			<h1>My BookMark List</h1>
+			<h3>What your Favorite</h3>
+			</header>
+			<div class="row text-center">
+				<div id="region_member_list"></div>
+			</div>
+			
+			<hr>
 			
 			<!-- Footer -->
 			<footer>
