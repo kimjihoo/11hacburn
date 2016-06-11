@@ -7,11 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>견적 요청서 등록</title>
 
-<style>
-body {
-	padding-top: 70px;
-}
-</style>
+
 <script type="text/javascript">
         $(function() {
             $("#file").on('change', function(){
@@ -108,52 +104,101 @@ body {
 		location.href = "http://210.118.74.159:8100/Badac/user_main_page";
 	}
 </script>
+
+<!-- CSS -->
+<link rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+body {
+	padding-top: 70px;
+	background-image: url('img/usermainbg.jpg');
+}
+.footer{
+padding: 5px;
+
+}
+ 
+</style>
 </head>
 <body>
+	<div class="top-content">
 
-	<div class="contentwrap">
-		<article class="container">
-		<div class="page-header">
-			<h1>
-				견적 요청서 <small>등록</small>
-			</h1>
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 text">
+						<h1>
+							<strong>견적 요청서</strong>| Registration Form
+						</h1> 
+						자전거 가맹업체에게 요청할 견적서를 작성해주세요.
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3 form-box">
+							<div class="form-top">
+								<div class="form-top-left">
+									<h3>Registration Form</h3>
+								</div>
+							</div>
+							<div class="form-bottom">
+								<div class="form-group">
+									<label for="form-title">제목</label> <input id="tunning_title"
+										type=text class="form-control input-sm" name=dbemail size=50
+										maxlength=50>
+								</div>
+								<div class="form-group">
+									<label for="file">자전거 이미지 업로드</label>
+									<form id="form1" runat="server">
+
+										<input type='file' id="file" multiple="multiple" /> <span><img
+											id="blah1" src="images/no_image.gif" alt="your image"
+											width="100" height="100" /></span> <span><p id="te_p"></p></span>
+									</form>
+								</div>
+								<div class="form-gruop">
+									<label>내용</label>
+									<textarea id="tunning_explanation" name=dbmemo
+										class="form-control input-sm textarea" cols=60 rows=10></textarea>
+									<br>
+								</div>
+
+								<div>
+									<center>
+										<button type="button" class="btn"
+											onclick="insertApplication()">등록</button>
+										<button class="btn" onclick="toMainPage()">취소</button>
+									</center>
+								</div>
+								
+								<div class="footer">
+								<center>
+								<hr>
+								Copyright &copy; Badoc Corporation 2016
+								</center>
+							</div>
+							</div>
+							
+						</div>
+					</div>
+
+				</div>
+			</div>
 		</div>
+ 
+			
+			
+	</div>
 
-		<div class="container">
-			<table class="table table-hover" width=700>
 
-				<tr>
-					<td><b>제목</b></td>
-					<td><input id="tunning_title" type=text
-						class="form-control input-sm" name=dbemail size=50 maxlength=50></td>
-				</tr>
-				<tr>
-					<td><b>이미지</b></td>
-					<td><div class="form-group">
-							<label for="file">이미지 업로드</label> 
-							<form id="form1" runat="server">
-        						<input type='file' id="file" multiple="multiple" />
-        						<span><img id="blah1" src="images/no_image.gif" alt="your image"  width="150" height="150"/></span>
-        						<span><p id="te_p"></p></span>
-        						<p class="help-block">자전거 사진 첨부</p>
-    						</form>
-						</div> <br /></td>
-						
-				</tr>
-				<tr>
-					<td><b>내용</b></td>
-					<td><textarea id="tunning_explanation" name=dbmemo
-							class="form-control input-sm" cols=50 rows=10></textarea></td>
-				</tr>
-			</table>
-
-			<table cellspacing=0 cellpadding=0 border=0 width=500>
-				<tr>
-					<button type="button" class="btn btn-default"
-						onclick="insertApplication()">등록</button>
-					<a class="btn btn-default" onclick="toMainPage()">취소</a>
-				</tr>
-			</table>
-		</div>
+	<!-- Javascript -->
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.backstretch.min.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 </html>
