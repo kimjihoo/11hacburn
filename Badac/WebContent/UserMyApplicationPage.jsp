@@ -65,11 +65,10 @@
 </script>
 
 <!-- CSS -->
+
 <link rel="stylesheet" href="css/bootstrap.min.css">
-
-<link rel="stylesheet" href="css/form-elements.css">
-<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css"> 
 <style>
 body {
 	padding-top: 70px;
@@ -153,8 +152,7 @@ body {
 	
 	
 	<!-- Javascript -->
-		<script src="js/jquery-1.11.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-1.11.1.min.js"></script> 
 		<script src="js/jquery.backstretch.min.js"></script>
 		<script src="js/scripts.js"></script>
 </body>

@@ -157,7 +157,7 @@ padding: 5px;
 									<label for="file">자전거 이미지 업로드</label>
 									<form id="form1" runat="server">
 
-										<input type='file' id="file" multiple="multiple" /> <span><img
+										<input type='file' id="file" multiple="multiple" class="btn"/> <span><img
 											id="blah1" src="images/no_image.gif" alt="your image"
 											width="100" height="100" /></span> <span><p id="te_p"></p></span>
 									</form>
@@ -198,8 +198,7 @@ padding: 5px;
 
 
 	<!-- Javascript -->
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script> 
 	<script src="js/jquery.backstretch.min.js"></script>
 	<script src="js/scripts.js"></script>
 </body>
