@@ -6,13 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>나의 견적 요청서 목록</title>
-
-<style>
-body {
-	padding-top: 70px;
-}
-</style>
-
+ 
 <script>
 	onload = function on_load(){
 		$.get("http://210.118.74.159:8100/Badac/my_application_list",{
@@ -69,39 +63,99 @@ body {
 		});
 	}
 </script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+body {
+	padding-top: 70px;
+	background-image: url('img/applicationbg.png');
+}
+
+.button-group {
+	margin: 1px;
+}
+
+.footer {
+	padding: 5px;
+}
+</style>
+
 </head>
 <body>
 		
-	<div class="contentwrap">
-		<article class="container">
-    <div class="page-header">
-	  <h1> 견적 요청서 <small>목록</small></h1>
-    </div>
-    
-	<div class="container">
-		<!-- 테이블 시작 -->
-		<table class="table table-hover" style="width:100%; text-align:center;">
-			<thead>
-				<tr>
-					<td style="width:15%;">번호</td>
-					<td style="width:45%;">제목</td>
-					<td style="width:20%;">등록일자</td>
-				</tr>
-			</thead>
-			<tbody id="my_applicationListTable" style="width:100%; text-align:center;">
-				
-			</tbody>
-		</table>
-		<!-- 테이블 종료 -->
+   <div class="top-content">
 
-		<!-- 등록버튼 시작 -->
-		<table class="table table-hover" cellspacing=0 cellpadding=0 border=0 width=500>
-			<thead>
-					<a class="btn btn-default" href="http://210.118.74.159:8100/Badac/write_application"
-						role="button">등록</a>
-			</thead>
-		</table>
-		<!-- 등록버튼 종료 -->
-	</div>
+        <div class="inner-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 text">
+                        <h1>
+							<strong>견적 요청서 목록</strong>| Estimate List
+						</h1> 등록된 나의 견적 요청서 목록입니다.
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Estimate List</h3>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <div class="form-group">
+                                    <!-- 테이블 시작 -->
+                                    <table class="table table-hover" style="width:100%; text-align:center;">
+                                        <thead>
+                                            <tr>
+                                                <td style="width:15%;">번호</td>
+                                                <td style="width:45%;">제목</td>
+                                                <td style="width:20%;">등록일자</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="my_applicationListTable" style="width:100%; text-align:center;">
+
+                                        </tbody>
+                                    </table>
+                                    <!-- 테이블 종료 -->
+
+
+
+                                </div>
+
+
+                                <div class="button-group">
+
+                                    <a class="btn-link-1" href="http://210.118.74.159:8100/Badac/write_application" role="button">등록</a>
+
+                                </div>
+
+                                <div class="footer">
+                                    <center>
+                                        <hr> Copyright &copy; Badoc Corporation 2016
+                                    </center>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+	
+	
+	<!-- Javascript -->
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery.backstretch.min.js"></script>
+		<script src="js/scripts.js"></script>
 </body>
 </html>

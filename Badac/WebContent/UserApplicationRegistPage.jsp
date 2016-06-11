@@ -4,10 +4,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>견적 요청서 등록</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-
+<title>견적 요청서 등록</title> 
 <script type="text/javascript">
         $(function() {
             $("#file").on('change', function(){
@@ -106,18 +109,17 @@
 </script>
 
 <!-- CSS -->
-<link rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-
-<link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/form-elements.css">
 <link rel="stylesheet" href="css/style.css">
 
 <style>
 body {
 	padding-top: 70px;
-	background-image: url('img/usermainbg.jpg');
+	background-image: url('img/applicationbg.png');
+}
+.button-group{
+margin: 1px;
 }
 .footer{
 padding: 5px;
@@ -127,7 +129,7 @@ padding: 5px;
 </style>
 </head>
 <body>
-	<div class="top-content">
+	<div class="top-content contentwrap">
 
 		<div class="inner-bg">
 			<div class="container">
@@ -167,11 +169,11 @@ padding: 5px;
 									<br>
 								</div>
 
-								<div>
+								<div class="button-group">
 									<center>
 										<button type="button" class="btn"
 											onclick="insertApplication()">등록</button>
-										<button class="btn" onclick="toMainPage()">취소</button>
+										<a class="btn-link-1" onclick="toMainPage()">취소</a>
 									</center>
 								</div>
 								
@@ -196,7 +198,7 @@ padding: 5px;
 
 
 	<!-- Javascript -->
-	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.backstretch.min.js"></script>
 	<script src="js/scripts.js"></script>
