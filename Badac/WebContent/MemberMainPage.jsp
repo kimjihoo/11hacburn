@@ -8,9 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>메인 페이지</title>
 <style>
-body {
-	padding-top: 70px;
-}
 .listimage {
 	width: 114px;
 	height: 114px;
@@ -154,13 +151,38 @@ function menuClick(divname) {
 	divset.style.display="block";
 }
 </script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css"> 
+<style>
+body {
+	padding-top: 150px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/memberbg.jpg');
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.button-group {
+	margin: 1px;
+}
+
+.footer {
+	padding: 5px;
+}
+</style>
+
 </head>
 <body>
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<p class="lead">Menu</p>
+				<p class="lead" style="color: white;">Menu</p>
 				<div class="list-group" id="myList">
 					<a href="#" onClick="menuClick('userApplication')"
 						data-toggle="tab" class="list-group-item">견적 요청서</a><a href="#"
@@ -177,8 +199,8 @@ function menuClick(divname) {
 					<div class="col-md-9">
 						<div class="contentwrap">
 							<div class="page-header">
-								<h3>
-									견적 요청서 <small>목록</small>
+								<h3 style="color: white;">
+									견적 요청서 <small style="color: white;">목록</small>
 								</h3>
 							</div>
 
@@ -193,7 +215,7 @@ function menuClick(divname) {
 							<div class="container">
 								<!-- 테이블 시작 -->
 								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center;">
+									style="width: 75%; text-align: center; color: white;">
 									<thead>
 										<tr>
 											<td style="width: 15%;">번호</td>
@@ -217,8 +239,8 @@ function menuClick(divname) {
 					<div class="col-md-9">
 						<div class="contentwrap">
 							<div class="page-header">
-								<h3>
-									신청한 제안서 <small>목록</small>
+								<h3 style="color: white;">
+									신청한 제안서 <small style="color: white;">목록</small>
 								</h3>
 							</div>
 
@@ -233,7 +255,7 @@ function menuClick(divname) {
 							<div class="container">
 								<!-- 테이블 시작 -->
 								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center;">
+									style="width: 75%; text-align: center; color: white;">
 									<thead>
 										<tr>
 											<td style="width: 15%;">번호</td>
@@ -259,8 +281,8 @@ function menuClick(divname) {
 
 						<div class="contentwrap">
 							<div class="page-header">
-								<h3>
-									완료 요청서 <small>목록</small>
+								<h3 style="color: white;">
+									완료 요청서 <small style="color: white;">목록</small>
 								</h3>
 							</div>
 
@@ -276,7 +298,7 @@ function menuClick(divname) {
 							<div class="container">
 								<!-- 테이블 시작 -->
 								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center;">
+									style="width: 75%; text-align: center; color: white;">
 									<thead>
 										<tr>
 											<td style="width: 15%;">번호</td>
@@ -300,8 +322,8 @@ function menuClick(divname) {
 					<div class="col-md-9">
 						<div class="contentwrap">
 							<div class="page-header">
-								<h3>
-									견적 요청서 <small>목록</small>
+								<h3 style="color: white;">
+									견적 요청서 <small style="color: white;">목록</small>
 								</h3>
 							</div>
 
@@ -317,7 +339,7 @@ function menuClick(divname) {
 							<div class="container">
 								<!-- 테이블 시작 -->
 								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center;">
+									style="width: 75%; text-align: center; color: white;">
 									<thead>
 										<tr>
 											<td style="width: 15%;">번호</td>
