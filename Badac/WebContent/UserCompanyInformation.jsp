@@ -6,6 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>업체 정보</title>
+<style>
+.btn-link-1 {
+	display: inline-block;
+	height: 50px;
+	margin: 5px;
+	padding: 16px 20px 0 20px;
+	background: #de615e;
+	font-size: 16px;
+    font-weight: 300;
+    line-height: 16px;
+    color: #fff;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+}
+.btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #fff; }
+
+.btn-link-1 i {
+	padding-right: 5px;
+	vertical-align: middle;
+	font-size: 20px;
+	line-height: 20px;
+}
+
+</style>
 <script type="text/javascript"
 	src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
 <script>    
@@ -257,7 +280,7 @@ body {
 				<h3 class="page-header">Review</h3>
 			</div>
 			<div style="width:100%; text-align:center;">
-				<textarea id="reviewText" class="col-lg-6"></textarea><input type="button" value="등록" onclick = "upload_review();"/>
+				<textarea id="reviewText" class="col-lg-6"></textarea><input type="button" class="btn-link-1" value="등록" onclick = "upload_review();"/>
 			</div>
 			<table class="table table-hover" width=700
 				style="text-align: center;" id="reviewtable">
