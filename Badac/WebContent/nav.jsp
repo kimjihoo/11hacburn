@@ -199,9 +199,9 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="http://210.118.74.159:8100/Badac/start_page#about">About</a></li>
-				<li><a href="http://210.118.74.159:8100/Badac/start_page#services">Services</a></li>
-				<li><a href="http://210.118.74.159:8100/Badac/start_page#contact">Contact</a></li>
+				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">About</a></li>
+				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">Services</a></li>
+				<li><a href="http://210.118.74.159:8100/Badac/go_aboutus">Contact</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"><%=username%>님 <span class="caret"></span>
 				</a>
