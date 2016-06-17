@@ -31,6 +31,12 @@
 <style>
 body {
 	padding-top: 70px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: url('img/aboutUsbg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
 }
 </style>
 
@@ -104,23 +110,22 @@ body {
 			</div>
 		</div>
 		<!-- /.row -->
+		<br><br>
 
-		<hr>
-
-		<div class="row">
+		<div class="row" style="text-align: center; margin:0 auto;">
 			<div class="col-sm-4">
 				<img class="img-circle img-responsive img-center"
-					src="images/handshake.png" alt="">
+					src="images/handshake.png" alt="" style="width: 200px; height: 200px;">
 				<h2>고객-업체 연계 서비스</h2>
-				<p class="text-muted">
+				<!-- <p class="text-muted">
 				
-				</p>
+				</p> -->
 			</div>
 			<div class="col-sm-4">
-				<img class="img-circle img-responsive img-center" src="images/tunning.png"
-					alt="">
+				<img class="img-circle img-responsive img-center" src="images/tuning.png"
+					alt="" style="width: 200px; height: 200px;">
 				<h2>수리 및 튜닝 서비스</h2>
-				<p class="text-muted">
+				<!-- <p class="text-muted">
 					'바닥' 을 이용하여 수리를 원하는 경우 사용자 위치를 기반으로 가장 가까운 업체의 정보들을 받아 원하는 가맹점에 예약을
 					할 수 있습니다. 또한 실시간으로 수리 서비스를 이용할 수 있습니다. 사용자가 익숙하지 않은 지역에서 라이딩을 하더라도
 					GPS를 통해 수리가 가능한 가맹점을 바로 안내 받을 수 있습니다.
@@ -128,38 +133,30 @@ body {
 					등이 포함된 견적요청서를 업로드합니다. 즉시 사용자가 선호하는 지역의 가맹점 들에게 견적요청서가 제공되며, 제공 받은
 					견적요청서에 대해 사용자와 가맹점이 1:1로 실시간 소통을 하게 되어 방문을 하지 않더라도 원하는 견적 정보를 확인 할
 					수 있습니다. 
-				</p>
+				</p> -->
 			</div>
 			<div class="col-sm-4">
 				<img class="img-circle img-responsive img-center" src="images/deal.png"
-					alt="">
+					alt="" style="width: 200px; height: 200px;">
 				<h2>중고 거래 서비스</h2>
-				<p class="text-muted">
+				<!-- <p class="text-muted">
 				
-				</p>
+				</p> -->
 			</div>
 		</div>
 		<!-- /.row -->
 
-		<hr>
+		<br><br><hr>
 
-		<!-- Footer -->
-		<footer>
-		<div class="row">
+		<div class="row" style="text-align: center; margin:0 auto;">
 			<div class="col-lg-12">
 				<p>Copyright &copy; Badoc Corporation 2016</p>
 			</div>
 		</div>
-		<!-- /.row --> </footer>
+		<!-- /.row -->
 
 	</div>
 	<!-- /.container -->
-
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>
