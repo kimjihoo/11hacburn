@@ -193,7 +193,7 @@
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<a class="navbar-brand" href="http://210.118.74.159:8100/Badac/start_page">BADOC</a>
+			<a class="navbar-brand" href="http://210.118.74.159:8100/Badac/user_main_page">BADOC</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
