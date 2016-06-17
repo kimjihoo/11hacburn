@@ -154,17 +154,18 @@ function menuClick(divname) {
 
 <!-- CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/form-elements.css">
-<link rel="stylesheet" href="css/style.css"> 
+<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
 body {
 	padding-top: 150px;
-	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-	background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/memberbg.jpg');
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%,
+		rgba(0, 0, 0, 0.3) 100%), url('img/memberbg.jpg');
 	-webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
 }
 
 .button-group {
@@ -179,276 +180,105 @@ body {
 </head>
 <body>
 	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
-			<div class="top-content">
-
-				<div class="inner-bg">
-					<div class="container">
+	<div class="top-content">
+		<div class="inner-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="col-sm-8 col-sm-offset-2 text">
+							<h1>
+								<strong>견적 요청서</strong>| Estimate List
+							</h1>
+							등록된 나의 견적 요청서 목록입니다.
+						</div>
 						<div class="row">
-						<div class=".col-md-6">
-							<div class="col-sm-8 col-sm-offset-2 text">
-								<h1>
-									<strong>견적 요청서 목록</strong>| Estimate List
-								</h1>
-								등록된 나의 견적 요청서 목록입니다.
-							</div>
-							<div class="row">
-								<div class="col-sm-8 col-sm-offset-2 form-box">
-									<div class="form-top">
-										<div class="form-top-left">
-											<h3>Estimate List</h3>
-										</div>
+							<div class="col-sm-8 col-sm-offset-2 form-box">
+								<div class="form-top">
+									<div class="form-top-left">
+										<h3>Estimate List</h3>
 									</div>
-									<div class="form-bottom">
-										<div class="form-group">
-											<!-- 테이블 시작 -->
-											<table class="table table-hover"
+								</div>
+								<div class="form-bottom">
+									<div class="form-group">
+										<!-- 테이블 시작 -->
+										<table class="table table-hover"
+											style="width: 100%; text-align: center;">
+											<thead>
+												<tr>
+													<td style="width: 15%;">번호</td>
+													<td style="width: 45%;">제목</td>
+													<td style="width: 20%;">등록일자</td>
+													<td style="width: 20%;">등록여부</td>
+												</tr>
+											</thead>
+											<tbody id="applicationListTable"
 												style="width: 100%; text-align: center;">
-												<thead>
-													<tr>
-														<td style="width: 15%;">번호</td>
-														<td style="width: 45%;">제목</td>
-														<td style="width: 20%;">등록일자</td>
-														<td style="width: 20%;">등록여부</td>
-													</tr>
-												</thead>
-												<tbody id="my_applicationListTable"
-													style="width: 100%; text-align: center;">
 
-												</tbody>
-											</table>
-											<!-- 테이블 종료 -->
-										</div>
-										<div class="button-group">
-											<a class="btn-link-1"
-												href="http://210.118.74.159:8100/Badac/write_application"
-												role="button">등록</a>
-										</div>
-										<div class="footer">
-											<center>
-												<hr>
-												Copyright &copy; Badoc Corporation 2016
-											</center>
-										</div>
+											</tbody>
+										</table>
+										<!-- 테이블 종료 -->
+									</div>
+									<div class="button-group">
+										<a class="btn-link-1"
+											href="http://210.118.74.159:8100/Badac/write_application"
+											role="button">등록</a>
+									</div>
+									<div class="footer">
+										<center>
+											<hr>
+											Copyright &copy; Badoc Corporation 2016
+										</center>
 									</div>
 								</div>
 							</div>
 						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="col-sm-8 col-sm-offset-2 text">
+							<h1>
+								<strong> 신청 제안서</strong>| Application List
+							</h1>
+							신청한 제안서 목록입니다.
 						</div>
-							<div class=".col-md-6">
-							<div class="col-sm-8 col-sm-offset-2 text">
-								<h1>
-									<strong>견적 요청서 목록</strong>| Estimate List
-								</h1>
-								등록된 나의 견적 요청서 목록입니다.
-							</div>
-							<div class="row">
-								<div class="col-sm-8 col-sm-offset-2 form-box">
-									<div class="form-top">
-										<div class="form-top-left">
-											<h3>Estimate List</h3>
-										</div>
+						<div class="row">
+							<div class="col-sm-8 col-sm-offset-2 form-box">
+								<div class="form-top">
+									<div class="form-top-left">
+										<h3>Application List</h3>
 									</div>
-									<div class="form-bottom">
-										<div class="form-group">
-											<!-- 테이블 시작 -->
-											<table class="table table-hover"
+								</div>
+								<div class="form-bottom">
+									<div class="form-group">
+										<!-- 테이블 시작 -->
+										<table class="table table-hover"
+											style="width: 100%; text-align: center;">
+											<thead>
+												<tr>
+													<td style="width: 15%;">번호</td>
+													<td style="width: 45%;">제목</td>
+													<td style="width: 20%;">등록일자</td>
+													<td style="width: 20%;">채택여부</td>
+												</tr>
+											</thead>
+											<tbody id="companyApplicationListTable"
 												style="width: 100%; text-align: center;">
-												<thead>
-													<tr>
-														<td style="width: 15%;">번호</td>
-														<td style="width: 45%;">제목</td>
-														<td style="width: 20%;">등록일자</td>
-														<td style="width: 20%;">등록여부</td>
-													</tr>
-												</thead>
-												<tbody id="my_applicationListTable"
-													style="width: 100%; text-align: center;">
 
-												</tbody>
-											</table>
-											<!-- 테이블 종료 -->
-										</div>
-										<div class="button-group">
-											<a class="btn-link-1"
-												href="http://210.118.74.159:8100/Badac/write_application"
-												role="button">등록</a>
-										</div>
-										<div class="footer">
-											<center>
-												<hr>
-												Copyright &copy; Badoc Corporation 2016
-											</center>
-										</div>
+											</tbody>
+										</table>
+										<!-- 테이블 종료 -->
+									</div>
+									<div class="button-group">
+										<a class="btn-link-1"
+											href="http://210.118.74.159:8100/Badac/write_application"
+											role="button">등록</a>
+									</div>
+									<div class="footer">
+										<center>
+											<hr>
+											Copyright &copy; Badoc Corporation 2016
+										</center>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="tab-content" id="tabcontent">
-				<div class="tab-pane active" id="userApplication" style="display:block;">
-					<div class="col-md-9">
-						<div class="contentwrap">
-							<div class="page-header">
-								<h3 style="color: white;">
-									견적 요청서 <small style="color: white;">목록</small>
-								</h3>
-							</div>
-
-							<div id="changeimg-dialog-form" title="이미지 선택"
-								style="display: none; z-index: 101;">
-								<div style="width: 100%;">
-									<input type="file" id="choice_main_img" style="float: right;">
-								</div>
-							</div>
-
-							<!-- 견적요청서 받아오는 테이블 -->
-							<div class="container">
-								<!-- 테이블 시작 -->
-								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center; color: white;">
-									<thead>
-										<tr>
-											<td style="width: 15%;">번호</td>
-											<td style="width: 45%;">제목</td>
-											<td style="width: 20%;">등록일자</td>
-											<td style="width: 20%;">등록여부</td>
-										</tr>
-									</thead>
-									<tbody id="applicationListTable"
-										style="width: 75%; text-align: center;">
-
-									</tbody>
-								</table>
-								<!-- 테이블 종료 -->
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="tab-pane active" id="myApplication" style="display:none;">
-					<div class="col-md-9">
-						<div class="contentwrap">
-							<div class="page-header">
-								<h3 style="color: white;">
-									신청한 제안서 <small style="color: white;">목록</small>
-								</h3>
-							</div>
-
-							<div id="changeimg-dialog-form" title="이미지 선택"
-								style="display: none; z-index: 101;">
-								<div style="width: 100%;">
-									<input type="file" id="choice_main_img" style="float: right;">
-								</div>
-							</div>
-							<!-- 견적요청서 받아오는 테이블 -->
-
-							<div class="container">
-								<!-- 테이블 시작 -->
-								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center; color: white;">
-									<thead>
-										<tr>
-											<td style="width: 15%;">번호</td>
-											<td style="width: 45%;">제목</td>
-											<td style="width: 20%;">등록일자</td>
-											<td style="width: 20%;">채택여부</td>
-										</tr>
-									</thead>
-									<tbody id="companyApplicationListTable"
-										style="width: 75%; text-align: center;">
-
-									</tbody>
-								</table>
-								<!-- 테이블 종료 -->
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="tab-pane active" id="successApplication" style="display: none;">
-					<div class="col-md-9">
-
-						<div class="contentwrap">
-							<div class="page-header">
-								<h3 style="color: white;">
-									완료 요청서 <small style="color: white;">목록</small>
-								</h3>
-							</div>
-
-							<div id="changeimg-dialog-form" title="이미지 선택"
-								style="display: none; z-index: 101;">
-								<div style="width: 100%;">
-									<input type="file" id="choice_main_img" style="float: right;">
-								</div>
-							</div>
-
-							<!-- 견적요청서 받아오는 테이블 -->
-
-							<div class="container">
-								<!-- 테이블 시작 -->
-								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center; color: white;">
-									<thead>
-										<tr>
-											<td style="width: 15%;">번호</td>
-											<td style="width: 45%;">제목</td>
-											<td style="width: 20%;">등록일자</td>
-										</tr>
-									</thead>
-									<tbody id="my_applicationListTable"
-										style="width: 75%; text-align: center;">
-
-									</tbody>
-								</table>
-								<!-- 테이블 종료 -->
-
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="tab-pane active" id="goodMember" style="display:none;">
-					<div class="col-md-9">
-						<div class="contentwrap">
-							<div class="page-header">
-								<h3 style="color: white;">
-									견적 요청서 <small style="color: white;">목록</small>
-								</h3>
-							</div>
-
-							<div id="changeimg-dialog-form" title="이미지 선택"
-								style="display: none; z-index: 101;">
-								<div style="width: 100%;">
-									<input type="file" id="choice_main_img" style="float: right;">
-								</div>
-							</div>
-
-							<!-- 견적요청서 받아오는 테이블 -->
-
-							<div class="container">
-								<!-- 테이블 시작 -->
-								<table class="table table-hover" id="region_application_list"
-									style="width: 75%; text-align: center; color: white;">
-									<thead>
-										<tr>
-											<td style="width: 15%;">번호</td>
-											<td style="width: 45%;">제목</td>
-											<td style="width: 20%;">등록일자</td>
-										</tr>
-									</thead>
-									<tbody id="applicationListTable"
-										style="width: 75%; text-align: center;">
-
-									</tbody>
-								</table>
-								<!-- 테이블 종료 -->
-
 							</div>
 						</div>
 					</div>
