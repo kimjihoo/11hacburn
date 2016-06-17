@@ -91,7 +91,6 @@ body {
                     	password : pw.value,
                     }, function(data){
                     		if( data.msg == "Success" ){
-                    			alert("로그인 성공");
                     			location.href = "http://210.118.74.159:8100/Badac/user_main_page";
                     		}
                     		else{
@@ -104,7 +103,6 @@ body {
                     	password : pw.value,
                     }, function(data){
                     		if( data.msg == "Success" ){
-                    			alert("로그인 성공");
                     			location.href = "http://210.118.74.159:8100/Badac/member_main_page";
                     		}
                     		else{

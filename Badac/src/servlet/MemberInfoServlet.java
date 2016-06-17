@@ -263,6 +263,7 @@ public class MemberInfoServlet extends HttpServlet {
 				PictureInfoDAO pid = new PictureInfoDAO();
 				String p_path = pid.selectPictureCompanyMain(memberInfo.getCompany_id());
 				pid.disconnect();
+				json.put("companyId", memberInfo.getCompany_id());
 				json.put("companyOwnerName", memberInfo.getCompany_ownername());
 				json.put("companyEmail", memberInfo.getCompany_email());
 				json.put("companyPassword", memberInfo.getCompany_password());

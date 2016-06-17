@@ -90,7 +90,6 @@ body {
                         		$('#'+tempBtn_id).attr("disabled","disabled");
                         		document.getElementById(tempBtn_id).style.opacity="0.5";
                         	}else{
-                        		alert(data.msg);
                         	}
                         });
                     };
@@ -99,7 +98,6 @@ body {
 					replytable.appendChild(tr);
 				}
 			}else{
-				alert(data.msg);
 			}
 		});
 		

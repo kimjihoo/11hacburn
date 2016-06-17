@@ -280,8 +280,6 @@ body {
 									  url: "http://apis.daum.net/local/geo/addr2coord?apikey=3a654d3947433483eca1b853767e0d03&q="+user_address.value + " " + user_address2.value+"&output=json",
 									  async : false,
 									  success : function( data ) {
-										  
-										  alert(data.channel.item[0].point_x);
 										  user_x = data.channel.item[0].point_x;
 										  user_y = data.channel.item[0].point_y;
 												

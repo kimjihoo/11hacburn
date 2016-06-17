@@ -201,7 +201,6 @@ function upload_review(){
 		review : reviewText.value
 	},function(data){
 		if(data.msg=="Success"){
-			alert("등록을 완료했습니다.");
 			location.href = "http://210.118.74.159:8100/Badac/show_member"
 		}else{
 			alert(data.msg);

@@ -58,7 +58,6 @@
 						table_c.appendChild(tr);
 					}
 				}else{
-					alert(data.msg);
 				}
 		});
 	}

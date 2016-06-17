@@ -92,8 +92,7 @@ function answerReply() {
 						reply : tunning_reply.value,
 					},
 					function(data) {
-						if (data.msg == "Success") {							
-							alert("등록이 완료되었습니다.");
+						if (data.msg == "Success") {
 							location.href="http://210.118.74.159:8100/Badac/login_page";
 						} else {
 							alert(data.msg);
