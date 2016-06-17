@@ -7,9 +7,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>업체 정보 수정</title>
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/business-casual.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-2.2.3.js"
+	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
+	crossorigin="anonymous"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+	crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- Fonts -->
+<link
+	href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+	rel="stylesheet" type="text/css">
+<link
+	href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
+	rel="stylesheet" type="text/css">
 <style>
 body {
-	padding-top: 70px;
+	padding-top: 100px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/bikebg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 </style>
 <script type="text/javascript">
@@ -335,14 +368,12 @@ onload = function on_load(){
 <body>
     <!-- Page Content -->
     <div class="container">
-    	<div class="row" style="text-align:center;">
-    		<h1>Sign in to BADAC</h1>
-    	</div>
+    	<div class="brand" style="text-align: center;">Update Information</div>
 
         <div class="row">
         	<div class="col-lg-4">
             </div>
-            <div class="col-lg-4" style="border-radius:5px; border:1px solid rgb(231,231,231); padding-bottom:15px; padding-right:25px; padding-left:25px; padding-top:15px;">
+            <div class="col-lg-4" style="border-radius:5px; color: white; border:1px solid rgb(231,231,231); padding-bottom:15px; padding-right:25px; padding-left:25px; padding-top:15px;">
   				<div class="form-group">
       				<label for="company_ownername">Owner Name:</label>
       				<input type="text" class="form-control input-sm" id="company_ownername" disabled>
@@ -370,7 +401,7 @@ onload = function on_load(){
     				<input type="text" class="form-control input-sm" id="company_region_1" placeholder="우편번호">
 					<input type="button" class="btn btn-primary btn-sm" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 				</div>
-				<span id="helpBlock" class="help-block">우편번호 찾기 버튼을 눌러 우편번호를 검색하세요.</span>
+				<span id="helpBlock" class="help-block" style="color: white;">우편번호 찾기 버튼을 눌러 우편번호를 검색하세요.</span>
 				</div>				
 				<div class="form-group">
 					<input type="text" class="form-control input-sm" id="company_address" placeholder="주소">
@@ -444,6 +475,14 @@ onload = function on_load(){
 
     </div>
     <!-- /.container -->
+    <br><br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 text-center">
+				<p style="color: white;">Copyright &copy; Badoc Corporation 2016</p>
+			</div>
+		</div>
+	</div>
 <!-- 다음 주소 api -->
     <script> 
     function sample6_execDaumPostcode() {
