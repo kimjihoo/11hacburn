@@ -181,16 +181,111 @@ body {
 	<!-- Page Content -->
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
-				<p class="lead" style="color: white;">Menu</p>
-				<div class="list-group" id="myList">
-					<a href="#" onClick="menuClick('userApplication')"
-						data-toggle="tab" class="list-group-item">견적 요청서</a><a href="#"
-						onClick="menuClick('myApplication')" data-toggle="tab"
-						class="list-group-item">신청한 제안서</a><a href="#"
-						onClick="menuClick('successApplication')" data-toggle="tab"
-						class="list-group-item">완료한 요청</a> <a href="#"
-						class="list-group-item">우수 고객</a>
+			<div class="top-content">
+
+				<div class="inner-bg">
+					<div class="container">
+						<div class="row">
+						<div class=".col-md-6">
+							<div class="col-sm-8 col-sm-offset-2 text">
+								<h1>
+									<strong>견적 요청서 목록</strong>| Estimate List
+								</h1>
+								등록된 나의 견적 요청서 목록입니다.
+							</div>
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2 form-box">
+									<div class="form-top">
+										<div class="form-top-left">
+											<h3>Estimate List</h3>
+										</div>
+									</div>
+									<div class="form-bottom">
+										<div class="form-group">
+											<!-- 테이블 시작 -->
+											<table class="table table-hover"
+												style="width: 100%; text-align: center;">
+												<thead>
+													<tr>
+														<td style="width: 15%;">번호</td>
+														<td style="width: 45%;">제목</td>
+														<td style="width: 20%;">등록일자</td>
+														<td style="width: 20%;">등록여부</td>
+													</tr>
+												</thead>
+												<tbody id="my_applicationListTable"
+													style="width: 100%; text-align: center;">
+
+												</tbody>
+											</table>
+											<!-- 테이블 종료 -->
+										</div>
+										<div class="button-group">
+											<a class="btn-link-1"
+												href="http://210.118.74.159:8100/Badac/write_application"
+												role="button">등록</a>
+										</div>
+										<div class="footer">
+											<center>
+												<hr>
+												Copyright &copy; Badoc Corporation 2016
+											</center>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+							<div class=".col-md-6">
+							<div class="col-sm-8 col-sm-offset-2 text">
+								<h1>
+									<strong>견적 요청서 목록</strong>| Estimate List
+								</h1>
+								등록된 나의 견적 요청서 목록입니다.
+							</div>
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-2 form-box">
+									<div class="form-top">
+										<div class="form-top-left">
+											<h3>Estimate List</h3>
+										</div>
+									</div>
+									<div class="form-bottom">
+										<div class="form-group">
+											<!-- 테이블 시작 -->
+											<table class="table table-hover"
+												style="width: 100%; text-align: center;">
+												<thead>
+													<tr>
+														<td style="width: 15%;">번호</td>
+														<td style="width: 45%;">제목</td>
+														<td style="width: 20%;">등록일자</td>
+														<td style="width: 20%;">등록여부</td>
+													</tr>
+												</thead>
+												<tbody id="my_applicationListTable"
+													style="width: 100%; text-align: center;">
+
+												</tbody>
+											</table>
+											<!-- 테이블 종료 -->
+										</div>
+										<div class="button-group">
+											<a class="btn-link-1"
+												href="http://210.118.74.159:8100/Badac/write_application"
+												role="button">등록</a>
+										</div>
+										<div class="footer">
+											<center>
+												<hr>
+												Copyright &copy; Badoc Corporation 2016
+											</center>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
