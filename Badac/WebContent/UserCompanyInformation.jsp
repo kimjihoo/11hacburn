@@ -6,28 +6,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>업체 정보</title>
+
 <style>
-.btn-link-1 {
-	display: inline-block;
-	height: 50px;
-	margin: 5px;
-	padding: 16px 20px 0 20px;
-	background: #de615e;
-	font-size: 16px;
-    font-weight: 300;
-    line-height: 16px;
-    color: #fff;
-    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-}
-.btn-link-1:hover, .btn-link-1:focus, .btn-link-1:active { outline: 0; opacity: 0.6; color: #fff; }
-
-.btn-link-1 i {
-	padding-right: 5px;
-	vertical-align: middle;
-	font-size: 20px;
-	line-height: 20px;
+body {
+	padding-top: 70px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/mainbg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
 }
 
+.button-group {
+	margin: 1px;
+}
+
+.footer {
+	padding: 5px;
+}
+.col-md-4 > h3{
+	font-family:  "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: gray;
+}
 </style>
 <script type="text/javascript"
 	src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
@@ -209,10 +210,6 @@ function upload_review(){
 }
 </script>
 <style>
-body {
-	padding-top: 70px;
-}
-
 .row {
 	padding-top: 10px;
 }
@@ -221,92 +218,91 @@ body {
 <body>
 
 	<div class="container">
-
 		<!-- Portfolio Item Heading -->
 		<div class="row">
-			<div class="col-lg-12">
+		<div class="jumbotron"style="margin:0 auto; background: rgb(200, 54, 54); background: rgba(169, 169, 169, 0.5); ">
+			<div class="row col-lg-12">
 				<h2 class="page-header">Company Information</h2>
 			</div>
-		</div>
-		<!-- /.row -->
 
-		<!-- Portfolio Item Row -->
-		<div class="row">
-
-			<div class="col-md-8" id="main_img_c" style="width:700px; height:600px;">
+			<div class="col-md-8 img-thumbnail" id="main_img_c" style="width:700px; height:600px;">
 			</div>
 
-			<div class="col-md-4">
+			<div class="col-md-4" style='font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;'>
+			
 				<h3>업체명</h3>
-				<p class="form-control" id="company_name"></p>
+				
+				<div class="panel panel-default">
+				  <div class="panel-body" id="company_name">
+
+				  </div>
+				</div>
+
 				<h3>대표자</h3>
-				<p class="form-control" id="company_ownername"></p>
+				<div class="panel panel-default">
+				  <div class="panel-body" id="company_ownername">
+
+				  </div>
+				</div>				
 				<h3>전화번호</h3>
-				<p class="form-control" id="company_telephone"></p>				
+				<div class="panel panel-default">
+				  <div class="panel-body" id="company_telephone">
+
+				  </div>
+				</div>
+		
 				<h3>주소</h3>
-				<p class="form-control" id="company_region_1"></p>
+				<div class="panel panel-default">
+				  <div class="panel-body" id="company_region_1">
 
+				  </div>
+				</div>
 			</div>
-
-		</div>
-		<!-- /.row -->
-
-		<!-- Related Projects Row -->
-		<div class="row">
-
+			
+			<div class="row">
 			<div class="col-lg-12">
 				<h3 class="page-header">Company Photo</h3>
 			</div>
 
 			<div class="form-group">
-							<div class="vCeneter" id="img_c">
-								
-							</div>
-						</div>
-		</div>
+				<div class="vCeneter" id="img_c">
+					
+				</div>
+			</div>
+			</div>
+			<div class="row">
 
-		<div class="row">
-			<div class="col-lg-12">
 				<h3 class="page-header">Map</h3>
+	
+			<div class="col-lg-6">
+				<div id="map" style="height:500px; width:1000px; text-align:center; margin:0 auto;"></div>
 			</div>
-			<div class="col-md-4 col-xs-6">
-				<div id="map" style="height: 300px;"></div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-12">
-				<h3 class="page-header">Review</h3>
-			</div>
-			<div style="width:100%; text-align:center;">
-				<textarea id="reviewText" class="col-lg-6"></textarea><input type="button" class="btn-link-1" value="등록" onclick = "upload_review();"/>
-			</div>
-			<table class="table table-hover" width=700
+			<div class="row">
+			<h3 class="page-header">Review</h3>
+	
+			<div class="form-inline">
+				<input type="text" id="reviewText" class="form-control" style="width:800px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" value="등록" onclick = "upload_review();"/>
+			</div><br>
+			<table class="table table-striped" width=700
 				style="text-align: center;" id="reviewtable">
 				<tr>
 					<td style="width:20%;">작성자</td>
 					<td style="width:80%;">리뷰</td>
 				</tr>
 			</table>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-12" id="button-page">
+			</div>
+			<div id="button-page">
 				<a class="btn btn-default" href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"
 					role="button">목록</a> <a class="btn btn-default"
 					href="http://210.118.74.159:8100/Badac/write_application" role="button">견적서요청</a> <a
-					class="btn btn-default" href="#" role="button" onclick="add_bookmark();" id="bookBtn"></a>
+					class="btn btn-default" href="#" role="button" onclick="add_bookmark();" id="bookBtn">북마크 추가</a>
+			</div>
+			</div>
 			</div>
 		</div>
 
-	</div>
 	<!-- /.container -->
-
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
 
 	<script>
 	var point_x;

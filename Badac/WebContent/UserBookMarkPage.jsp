@@ -32,78 +32,76 @@ body {
 	onload = function on_load() {
 		var len = 0;
 
-		$
-				.get(
-						"http://210.118.74.159:8100/Badac/show_my_bookmark",
-						{
-							user_id : userId,
-						},
-						function(data) {
-							if (data.msg == "Success") {
-								var tempData = data.bookmarkList;
-								var memberData = {};
+		$.get(
+		"http://210.118.74.159:8100/Badac/show_my_bookmark",
+			{
+				user_id : userId,
+			},
+			function(data) {
+				if (data.msg == "Success") {
+					var tempData = data.bookmarkList;
+					var memberData = {};
 
-								for (var i = 0; i < tempData.length; i++) {
-									$
-											.ajax({
-												url : 'http://210.118.74.159:8100/Badac/get_member_info',
-												type : 'GET',
-												data : {
-													id : tempData[i].companyId
-												},
-												async : false,
-												success : function(data) {
-													if (data.msg == 'Success') {
-														memberData[tempData[i].companyId] = {
-															"company_name" : data.companyName,
-															"company_address" : data.companyRegion_2
-																	+ " "
-																	+ data.companyRegion_3,
-															"company_telephone" : data.companyTelephone,
-															"company_lng" : data.companyLat,
-															"company_lat" : data.companyLng,
-															"company_main_picture" : data.main_picture
-														}
-													} else {
-														alert(data.msg);
-													}
-												},
-												error : function(data) {
-													alert(data.msg);
-												}
-											});
-								}
-								for (var i = 0; i < tempData.length; i++) {
+					for (var i = 0; i < tempData.length; i++) {
+						$.ajax({
+									url : 'http://210.118.74.159:8100/Badac/get_member_info',
+									type : 'GET',
+									data : {
+										id : tempData[i].companyId
+									},
+									async : false,
+									success : function(data) {
+										if (data.msg == 'Success') {
+											memberData[tempData[i].companyId] = {
+												"company_name" : data.companyName,
+												"company_address" : data.companyRegion_2
+														+ " "
+														+ data.companyRegion_3,
+												"company_telephone" : data.companyTelephone,
+												"company_lng" : data.companyLat,
+												"company_lat" : data.companyLng,
+												"company_main_picture" : data.main_picture
+											}
+										} else {
+											alert(data.msg);
+										}
+									},
+									error : function(data) {
+										alert(data.msg);
+									}
+								});
+					}
+					for (var i = 0; i < tempData.length; i++) {
 
-									$('#region_member_list')
-											.append(
-													'<div class="col-md-3 col-sm-6 hero-feature" style="background-color: rgba(255, 255, 255, 0.8); width: 305px; height: 405px; border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><div class="caption" style="width: 300px; height: 320px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
-															+ '<h3>'
-															+ memberData[tempData[i].companyId].company_name
-															+ '</h3>'
-															+ '<h4>'
-															+ memberData[tempData[i].companyId].company_address
-															+ '</h4>'
-															+ '</div>'
-															+ '<div style="width: 300px; height: 80px;">'
-															+ '<p>'
-															+ memberData[tempData[i].companyId].company_telephone
-															+ '</p>'
-															+ '<input type="button" class="btn btn-primary" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
-															+ '</div></div>');
-									document.getElementById(""
-											+ tempData[i].companyId + "").onclick = function() {
-										var tempComId = $(this).attr('id');
-										document.cookie = "companyID="
-												+ tempComId;
-										location.href = "http://210.118.74.159:8100/Badac/show_member";
-									};
-								}
+						$('#region_member_list')
+								.append(
+										'<div class="col-md-3 col-sm-6 hero-feature" style="background-color: rgba(255, 255, 255, 0.8); width: 305px; height: 405px; border: 1px solid silver; border-radius: 3px; margin: 5px 3px 5px 3px; padding: 2px 2px 2px 2px;"><div class="caption" style="width: 300px; height: 320px;"><img src="'+(memberData[tempData[i].companyId].company_main_picture).substring(6)+'" width=180px, height=150px>'
+												+ '<h3>'
+												+ memberData[tempData[i].companyId].company_name
+												+ '</h3>'
+												+ '<h4>'
+												+ memberData[tempData[i].companyId].company_address
+												+ '</h4>'
+												+ '</div>'
+												+ '<div style="width: 300px; height: 80px;">'
+												+ '<p>'
+												+ memberData[tempData[i].companyId].company_telephone
+												+ '</p>'
+												+ '<input type="button" class="btn btn-primary" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
+												+ '</div></div>');
+						document.getElementById(""
+								+ tempData[i].companyId + "").onclick = function() {
+							var tempComId = $(this).attr('id');
+							document.cookie = "companyID="
+									+ tempComId;
+							location.href = "http://210.118.74.159:8100/Badac/show_member";
+						};
+					}
 
-							} else {
-								alert(data.msg);
-							}
-						});
+				} else {
+					alert(data.msg);
+				}
+			});
 	}
 </script>
 <body>
