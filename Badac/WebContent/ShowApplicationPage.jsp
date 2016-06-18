@@ -17,6 +17,11 @@ body {
     -o-background-size: cover;
 	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
+@font-face {
+    font-family: seoulNamsan;
+    src: url(fonts/SeoulNamsanB.ttf);
+}
+
 </style>
 <script>    
     ////////////////////////////////////////////////////////
@@ -150,9 +155,9 @@ body {
 	</nav>
 	<div class="contentwrap">
 		<article class="container">
-		<div class="jumbotron" style="background:rgba(176,176,176,0.65);">
-		<div class="page-header">
-			<h1>
+		<div class="jumbotron" style="background:rgba(176,176,176,0.65); ">
+		<div class="page-header" style="font-family:'seoulNamsan';">
+			<h1 style="font-family:seoulNamsan;">
 				견적 요청서 <small>보기</small>
 			</h1>
 		</div>
