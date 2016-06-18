@@ -8,7 +8,14 @@
 <title>견적 요청서 보기</title>
 <style>
 body {
-	padding-top: 70px;
+	padding-top: 100px;
+	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/showappbg.jpg');
+    background-size: cover;
+    -o-background-size: cover;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 </style>
 <script>    
@@ -143,6 +150,7 @@ body {
 	</nav>
 	<div class="contentwrap">
 		<article class="container">
+		<div class="jumbotron" style="background:rgba(176,176,176,0.65);">
 		<div class="page-header">
 			<h1>
 				견적 요청서 <small>보기</small>
@@ -200,6 +208,7 @@ body {
 					</td>
 				</tr>
 			</table>
+		</div>
 		</div>
 		</article>
 	</div>
