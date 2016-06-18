@@ -7,13 +7,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>거래 등록</title>
-
+<link href="css/button.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 70px;
 }
 .header > h1{
 	font-family: "고딕";
+}
+.btn{
+margin-right:5px;
 }
 </style>
 <script>
@@ -180,9 +183,9 @@ body {
 			</table>
 			<table cellspacing=0 cellpadding=0 border=0 width=500>
 				<tr>
-					<button type="button" class="btn btn-default"
+					<button type="button" class="btn"
 						onclick="insertApplication()">등록</button>
-					<a class="btn btn-default" onclick="toMainPage()">취소</a>
+					<a class="btn" onclick="toMainPage()">취소</a>
 				</tr>
 			</table>
 		</div>

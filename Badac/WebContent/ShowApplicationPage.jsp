@@ -6,6 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>견적 요청서 보기</title>
+<!-- 버튼CSS -->
+<link href="css/button.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 100px;
@@ -20,8 +22,7 @@ body {
 @font-face {
     font-family: seoulNamsan;
     src: url(fonts/SeoulNamsanB.ttf);
-}
-
+} 
 </style>
 <script>    
     ////////////////////////////////////////////////////////
@@ -208,7 +209,7 @@ body {
 			<table cellspacing=0 cellpadding=0 border=0 width=500>
 				<tr>
 					<td>
-						<button class="btn btn-default" type="submit"
+						<button class="btn" type="submit"
 							onclick="delApplication()">삭제</button>
 					</td>
 				</tr>

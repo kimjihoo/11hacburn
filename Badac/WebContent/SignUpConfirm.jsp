@@ -13,6 +13,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
+<link href="css/button.css" rel="stylesheet">
 <link href="css/business-casual.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-2.2.3.js"
 	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
@@ -127,10 +128,10 @@ body {
 				</form>
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary" onclick="signUp()">Continue</button>
+						<button type="button" class="btn" onclick="signUp()">Continue</button>
 					</div>
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn"
 							onclick="returnStartPage()">Cancel</button>
 					</div>
 				</div>

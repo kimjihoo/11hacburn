@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>견적 요청서 답변</title>
+<link href="css/button.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 70px;
@@ -125,8 +126,8 @@ function deleteReply() {
 				<td><textarea class="form-control" id="tunning_reply" rows="10" readonly></textarea></td>
 			</tr>
 		</table>
-		<span style="float: right"><button class="btn btn-default"
-				type="submit" onclick="deleteReply()">삭제</button> <a class="btn btn-default"
+		<span style="float: right"><button class="btn"
+				type="submit" onclick="deleteReply()">삭제</button> <a class="btn"
 			href="http://210.118.74.159:8100/Badac/member_main_page" role="button">목록</a></span>
 	</div>	
 </body>

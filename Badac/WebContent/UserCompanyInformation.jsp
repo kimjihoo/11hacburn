@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="css/button.css" rel="stylesheet">
 <title>업체 정보</title>
 
 <style>
@@ -29,6 +30,7 @@ body {
 	font-family:  "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: gray;
 }
+ 
 </style>
 <script type="text/javascript"
 	src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
@@ -282,7 +284,7 @@ function upload_review(){
 			<h3 class="page-header">Review</h3>
 	
 			<div class="form-inline">
-				<input type="text" id="reviewText" class="form-control" style="width:800px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-primary" value="등록" onclick = "upload_review();"/>
+				<input type="text" id="reviewText" class="form-control" style="width:790px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn-small" value="등록" onclick = "upload_review();"/>
 			</div><br>
 			<table class="table table-striped" width=700
 				style="text-align: center;" id="reviewtable">
@@ -293,10 +295,10 @@ function upload_review(){
 			</table>
 			</div>
 			<div id="button-page">
-				<a class="btn btn-default" href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"
-					role="button">목록</a> <a class="btn btn-default"
+				<a class="btn" href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"
+					role="button">목록</a> <a class="btn"
 					href="http://210.118.74.159:8100/Badac/write_application" role="button">견적서요청</a> <a
-					class="btn btn-default" href="#" role="button" onclick="add_bookmark();" id="bookBtn">북마크 추가</a>
+					class="btn" href="#" role="button" onclick="add_bookmark();" id="bookBtn">북마크 추가</a>
 			</div>
 			</div>
 			</div>

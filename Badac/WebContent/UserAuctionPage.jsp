@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>거래 목록</title>
-
+<link href="css/button.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 70px;
@@ -117,7 +117,7 @@ body {
 			<table class="table table-hover" cellspacing=0 cellpadding=0 border=0
 				width=500>
 				<thead>
-					<a class="btn btn-default"
+					<a class="btn"
 						href="http://210.118.74.159:8100/Badac/write_application"
 						role="button">등록</a>
 				</thead>

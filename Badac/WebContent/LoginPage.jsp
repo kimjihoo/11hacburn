@@ -4,9 +4,11 @@
 <head>
 <meta charset="utf-8" />
 <title>로그인</title>
+
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
+<link href="css/button.css" rel="stylesheet">
 <link href="css/business-casual.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-2.2.3.js"
 	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
@@ -138,7 +140,7 @@ body {
       				<label for="login_pw">Password:</label>
       				<input type="password" class="form-control" id="login_pw">
     			</div>
-    			<button type="button" class="btn btn-success" onclick="Login()" style="width:100%;">Login</button>
+    			<button type="button" class="btn" onclick="Login()" style="width:100%;">Login</button>
             </div>
             <div class="col-lg-4">
             </div>

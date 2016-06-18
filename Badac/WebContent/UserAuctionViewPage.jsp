@@ -7,10 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>거래 보기</title>
-
+<link href="css/button.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 70px;
+}
+.btn{
+margin-right:5px;
 }
 </style>
 <script>
@@ -220,9 +223,9 @@ Date today = new Date();
 			</table>
 			<table cellspacing=0 cellpadding=0 border=0 width=500>
 				<tr>
-					<button type="button" class="btn btn-default"
-						onclick="insertApplication()">등록</button>
-					<a class="btn btn-default" onclick="toMainPage()">취소</a>
+					<button type="button" class="btn"
+						onclick="insertApplication()">등록</button>  
+					<a role="button" class="btn" onclick="toMainPage()">취소</a>
 				</tr>
 			</table>
 		</div>

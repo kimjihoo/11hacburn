@@ -6,9 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 탈퇴</title>
+
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom CSS -->
+<!-- Custom CSS --> 
+<link href="css/button.css" rel="stylesheet">
 <link href="css/business-casual.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-2.2.3.js"
 	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
@@ -151,11 +153,11 @@ body {
 				</div>
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn"
 							onclick="deleteUser()">Ok</button>
 					</div>
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn"
 							onclick="returnMainPage()">Cancel</button>
 					</div>
 				</div>

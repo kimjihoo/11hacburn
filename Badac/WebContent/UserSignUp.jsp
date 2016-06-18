@@ -6,8 +6,9 @@
 <title>회원가입</title>
 <!-- Bootstrap Core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom CSS -->
+<!-- Custom CSS -->   
 <link href="css/business-casual.css" rel="stylesheet">
+<link href="css/button.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-2.2.3.js"
 	integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="
 	crossorigin="anonymous"></script>
@@ -268,8 +269,8 @@ body {
 					<div class="form-inline">
 						<input type="text" class="form-control input-sm"
 							id="user_region_1" placeholder="우편번호"> <input
-							type="button" class="btn btn-primary btn-sm"
-							onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+							type="button" class="btn-small"
+							onclick="sample6_execDaumPostcode()" value="우편번호 찾기" ><br>
 					</div>
 					<span id="helpBlock" class="help-block" style="color: white;">우편번호 찾기 버튼을 눌러 우편번호를
 						검색하세요.</span>
@@ -316,11 +317,11 @@ body {
 				</div>
 				<div class="btn-group btn-group-justified">
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary" onclick="signUp()">Sign
+						<button type="button" class="btn" onclick="signUp()">Sign
 							up</button>
 					</div>
 					<div class="btn-group">
-						<button type="button" class="btn btn-primary"
+						<button type="button" class="btn"
 							onclick="returnStartPage()">Cancel</button>
 					</div>
 				</div>
