@@ -140,7 +140,7 @@ body {
 								<div class="form-group">
 									<label for="form-title">제목</label> <input type=text
 										id="tunning_title" class="form-control input-sm" name=dbemail
-										size=50 maxlength=50 readonly>
+										size=50 maxlength=50>
 								</div>
 								<div class="form-group">
 									<label for="file">이미지</label>
@@ -148,7 +148,7 @@ body {
 								</div>
 								<div class="form-gruop">
 									<label>내용</label> <input class="form-control input-sm" type="text"
-										id="tunning_explanation" readonly> <br>
+										id="tunning_explanation"> <br>
 								</div>
 								<div class="form-gruop">
 									<label>답변</label>
