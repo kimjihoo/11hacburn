@@ -44,8 +44,6 @@
 						},
 						function(data) {
 							if (data.msg == "Success") {
-								document.getElementById("tunning_date").value = data.date;
-								document.getElementById("tunning_id").value = data.id;
 								document.getElementById("tunning_name").value = data.name;
 								document.getElementById("tunning_title").value = data.title;
 								document.getElementById("tunning_explanation").value = data.explanation;
@@ -140,7 +138,7 @@ body {
 								<div class="form-group">
 									<label for="form-title">제목</label> <input type=text
 										id="tunning_title" class="form-control input-sm" name=dbemail
-										size=50 maxlength=50>
+										size=50 maxlength=50 readonly>
 								</div>
 								<div class="form-group">
 									<label for="file">이미지</label>
@@ -148,7 +146,7 @@ body {
 								</div>
 								<div class="form-gruop">
 									<label>내용</label> <input class="form-control input-sm" type="text"
-										id="tunning_explanation"> <br>
+										id="tunning_explanation" readonly> <br>
 								</div>
 								<div class="form-gruop">
 									<label>답변</label>
@@ -166,7 +164,7 @@ body {
 											role="button">목록</a></span>
 									</center>
 								</div>
-
+								<br><br>
 								<div class="footer">
 									<center>
 										<hr>

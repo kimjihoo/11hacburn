@@ -124,13 +124,11 @@ margin: 1px;
 .footer{
 padding: 5px;
 
-}
- 
+} 
 </style>
 </head>
 <body>
 	<div class="top-content contentwrap">
-
 		<div class="inner-bg">
 			<div class="container">
 				<div class="row">
@@ -184,19 +182,13 @@ padding: 5px;
 										Copyright &copy; Badoc Corporation 2016
 									</center>
 								</div>
-							</div>
-							
+							</div>							
 						</div>
 					</div>
-
 				</div>
 			</div>
-		</div>
- 
-			
-			
+		</div>			
 	</div>
-
 
 	<!-- Javascript -->
 	<script src="js/jquery-1.11.1.min.js"></script> 

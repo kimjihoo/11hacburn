@@ -41,9 +41,6 @@
 			},
 			function(data) {
 				if (data.msg == "Success") {
-					document.getElementById("tunning_date").value = data.date;
-					document.getElementById("tunning_id").value = data.id;
-					document.getElementById("tunning_name").value = data.name;
 					document.getElementById("tunning_title").value = data.title;
 					document.getElementById("tunning_explanation").value = data.explanation;
 					document.getElementById("tunning_reply").value = data.reply;

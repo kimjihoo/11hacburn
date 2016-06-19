@@ -6,23 +6,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>견적 요청서 보기</title>
-<!-- 버튼CSS -->
+<!-- CSS -->
 <link href="css/button.css" rel="stylesheet">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css">
 <style>
 body {
-	padding-top: 100px;
+	padding-top: 70px;
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-image: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.3) 100%), url('img/showappbg.jpg');
     background-size: cover;
     -o-background-size: cover;
-	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
-@font-face {
-    font-family: seoulNamsan;
-    src: url(fonts/SeoulNamsanB.ttf);
-} 
+.button-group {
+	margin: 1px;
+}
+
+.footer {
+	padding: 5px;
+}
 </style>
 <script>    
     ////////////////////////////////////////////////////////
@@ -51,13 +56,13 @@ body {
 		$.get("http://210.118.74.159:8100/Badac/get_application_info",
 			{
 				tunningId : tunningId,
+				companyId : companyId,
 			},
 			function(data) {
 				if (data.msg == "Success") {
-					document.getElementById("tunning_date").value = data.date;
-					document.getElementById("tunning_id").value = data.id;
 					document.getElementById("tunning_title").value = data.title;
 					document.getElementById("tunning_explanation").value = data.explanation;
+					document.getElementById("tunning_reply").value = data.reply;
 				} else {
 					alert(data.msg);
 				}
@@ -120,13 +125,16 @@ body {
                     if (data.msg == 'Success') {
                         for (var g = 0; g < data.pictureList.length; g++) {
                         	var span_c = document.createElement('span');
-                        	span_c.style.width="150px";
-                        	span_c.style.height="150px";
+                        	span_c.style.width="220px";
+                        	span_c.style.height="180px";
                         	var gall_img = document.createElement('img');
                         	gall_img.src=data.pictureList[g].path;
                         	gall_img.style.borderRadius="6px";
-                        	gall_img.style.width="150px";
-                        	gall_img.style.height="150px";
+                        	gall_img.style.paddingLeft="50px";
+                        	gall_img.style.paddingTop="20px";
+                        	gall_img.style.paddingBottom="20px";
+                        	gall_img.style.width="220px";
+                        	gall_img.style.height="180px";
                         	span_c.appendChild(gall_img);
                         	img_c.appendChild(span_c);
                         }
@@ -151,72 +159,64 @@ body {
 </script>
 </head>
 <body>
-
-	<!-- /.container -->
-	</nav>
-	<div class="contentwrap">
-		<article class="container">
-		<div class="jumbotron" style="background:rgba(176,176,176,0.65); ">
-		<div class="page-header" style="font-family:'seoulNamsan';">
-			<h1 style="font-family:seoulNamsan;">
-				견적 요청서 <small>보기</small>
-			</h1>
-		</div>
-
-		<div class="container">
-			<table class="table table-hover" width=700
-				style="text-align: center;">
-				<tr>
-					<td style="width: 35%;"><b>날짜</b></td>
-					<td><input class="form-control" type="text" id="tunning_date"
-						readonly></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>코드</b></td>
-					<td><input class="form-control" type="text" id="tunning_id"
-						readonly></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>제목</b></td>
-					<td><input class="form-control" type="text" id="tunning_title"
-						readonly></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>이미지</b></td>
-					<td><div class="form-group">
-							<div class="vCeneter" id="img_c">
+	<div class="top-content">
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 text">
+						<h1>
+							<strong>견적 요청서 보기</strong>| Application View
+						</h1>
+						등록한 견적 요청서에 입니다.
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 col-sm-offset-3 form-box">
+						<div class="form-top">
+							<div class="form-top-left">
+								<h3>Application View</h3>
 							</div>
 						</div>
-						<p class="help-block">첨부된 자전거 사진</p> <br /></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>내용</b></td>
-					<td width=350><input class="form-control" type="text"
-						id="tunning_explanation" readonly></td>
-				</tr>
-			</table>
-			<br><br><br>
-			
-			<table class="table table-hover" width=700
-				style="text-align: center;" id="replytable">
-				<tr>
-					<td style="width:20%;">회사 이름</td>
-					<td style="width:70%;">답변 내용</td>
-					<td style="width:10%;"></td>
-				</tr>
-			</table>
-			
-			<table cellspacing=0 cellpadding=0 border=0 width=500>
-				<tr>
-					<td>
-						<button class="btn" type="submit"
-							onclick="delApplication()">삭제</button>
-					</td>
-				</tr>
-			</table>
+						<div class="form-bottom">
+							<div class="form-group">
+								<label for="form-title">제목</label> <input type=text
+									id="tunning_title" class="form-control input-sm" name=dbemail
+									size=50 maxlength=50 readonly>
+							</div>
+							<div class="form-group">
+								<label for="file">이미지</label>
+								<div class="one" id="img_c"></div>
+							</div>
+							<div class="form-gruop">
+								<label>내용</label> <input class="form-control input-sm"
+									type="text" id="tunning_explanation" readonly> <br>
+							</div>
+							<div class="form-gruop">
+									<label>답변</label>
+									<textarea name="comment" class="form-control input-sm"
+										id="tunning_reply" rows="10" style="height: 200px;" readonly></textarea>
+									<br>
+								</div>
+							<div class="button-group">
+								<center>
+									<span style="float: right">
+										<button class="btn" type="submit" onclick="delApplication()">삭제</button>
+									</span>
+								</center>
+							</div>
+							<br>
+							<br>
+							<div class="footer">
+								<center>
+									<hr>
+									Copyright &copy; Badoc Corporation 2016
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		</div>
-		</article>
 	</div>
 </body>
 </html>
