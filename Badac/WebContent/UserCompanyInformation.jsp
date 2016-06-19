@@ -35,7 +35,7 @@ body {
     font-size:16px;
     border-collapse: collapse;
     border-spacing: 0;
-	width:790px;
+	width:880px;
 	background-color: #fff;
 }
 
@@ -318,8 +318,8 @@ function upload_review(){
 			<div class="row" >
 			<h3 class="page-header">Review</h3>	
 			<div class="table">
-			<table width=700
-				style="text-align:center;" id="reviewtable">
+			<table
+				style="text-align:center; margin:0 auto;" id="reviewtable">
 				<tr>
 					<td id="header" style="width:20%;">작성자</td>
 					<td id="header" style="width:80%;">리뷰</td>
