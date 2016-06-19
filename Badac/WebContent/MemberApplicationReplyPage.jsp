@@ -152,8 +152,8 @@ body {
 								</div>
 								<div class="form-gruop">
 									<label>´äº¯</label>
-									<input type="text" class="form-control input-sm" id="tunning_reply"
-										style="height: 200px;">
+									<textarea name="comment" class="form-control input-sm"
+										id="tunning_reply" rows="10" style="height: 200px;"></textarea>
 									<br>
 								</div>
 
