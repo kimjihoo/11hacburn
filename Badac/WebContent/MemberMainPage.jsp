@@ -218,11 +218,6 @@ body {
 										</table>
 										<!-- 테이블 종료 -->
 									</div>
-									<div class="button-group">
-										<a class="btn-link-1"
-											href="http://210.118.74.159:8100/Badac/write_application"
-											role="button">등록</a>
-									</div>
 									<div class="footer">
 										<center style="color:white;">
 											<hr>
@@ -236,15 +231,15 @@ body {
 					<div class="col-md-6">
 						<div class="col-sm-8 col-sm-offset-2 text">
 							<h1>
-								<strong> 신청 제안서</strong>| Application List
+								<strong> 답변 요청서</strong>| Replied Application List
 							</h1>
-							신청한 제안서 목록입니다.
+							답변한 견적 요청서 목록입니다.
 						</div>
 						<div class="row">
 							<div class="col-sm-8 col-sm-offset-2 form-box">
 								<div class="form-top">
 									<div class="form-top-left">
-										<h3>Application List</h3>
+										<h3>Replied Application List</h3>
 									</div>
 								</div>
 								<div class="form-bottom">
@@ -266,11 +261,6 @@ body {
 											</tbody>
 										</table>
 										<!-- 테이블 종료 -->
-									</div>
-									<div class="button-group">
-										<a class="btn-link-1"
-											href="http://210.118.74.159:8100/Badac/write_application"
-											role="button">등록</a>
 									</div>
 									<div class="footer">
 										<center style="color:white;">
