@@ -15,6 +15,9 @@
 	list-style-image: url(/pororo.jpg);
 	list-style-type: disc;
 }
+table:hover{
+	background-color: gray;
+}
 </style>
 <script type="text/javascript">
 	onload = function on_load(){
