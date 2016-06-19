@@ -202,7 +202,7 @@ body {
 									<div class="form-group">
 										<!-- 테이블 시작 -->
 										<table class="table table-hover"
-											style="width: 100%; text-align: center;">
+											style="width: 100%; color:white; text-align: center;">
 											<thead>
 												<tr>
 													<td style="width: 15%;">번호</td>
@@ -212,7 +212,7 @@ body {
 												</tr>
 											</thead>
 											<tbody id="applicationListTable"
-												style="width: 100%; text-align: center;">
+												style="width: 100%; color: white; text-align: center;">
 
 											</tbody>
 										</table>
@@ -224,7 +224,7 @@ body {
 											role="button">등록</a>
 									</div>
 									<div class="footer">
-										<center>
+										<center style="color:white;">
 											<hr>
 											Copyright &copy; Badoc Corporation 2016
 										</center>
@@ -251,7 +251,7 @@ body {
 									<div class="form-group">
 										<!-- 테이블 시작 -->
 										<table class="table table-hover"
-											style="width: 100%; text-align: center;">
+											style="width: 100%; color:white; text-align: center;">
 											<thead>
 												<tr>
 													<td style="width: 15%;">번호</td>
@@ -261,7 +261,7 @@ body {
 												</tr>
 											</thead>
 											<tbody id="companyApplicationListTable"
-												style="width: 100%; text-align: center;">
+												style="width: 100%; color: white; text-align: center;">
 
 											</tbody>
 										</table>
@@ -273,7 +273,7 @@ body {
 											role="button">등록</a>
 									</div>
 									<div class="footer">
-										<center>
+										<center style="color:white;">
 											<hr>
 											Copyright &copy; Badoc Corporation 2016
 										</center>

@@ -59,14 +59,14 @@
                     if (data.msg == 'Success') {
                         for (var g = 0; g < data.pictureList.length; g++) {
                         	var span_c = document.createElement('span');
-                        	span_c.style.width="150px";
-                        	span_c.style.height="150px";
+                        	span_c.style.width="220px";
+                        	span_c.style.height="220px";
                         	var gall_img = document.createElement('img');
                         	gall_img.src=data.pictureList[g].path;
                         	gall_img.style.borderRadius="6px";
-                        	gall_img.style.paddingLeft="10px";
-                        	gall_img.style.width="150px";
-                        	gall_img.style.height="150px";
+                        	gall_img.style.paddingLeft="50px";
+                        	gall_img.style.width="220px";
+                        	gall_img.style.height="220px";
                         	span_c.appendChild(gall_img);
                         	img_c.appendChild(span_c);
                         }
@@ -113,59 +113,6 @@ body {
 
 .footer {
 	padding: 5px;
-}
-.one { 
-    width: 400px;
-    padding: 20px 25px;
-    border-top: 5px solid #000;
-    margin: 40px auto;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(transparent));
-    background-image: -webkit-linear-gradient(#000, transparent);
-    background-image:
-        -moz-linear-gradient(#000, transparent),
-        -moz-linear-gradient(#000, transparent)
-    ;
-    background-image:
-        -o-linear-gradient(#000, transparent),
-        -o-linear-gradient(#000, transparent)
-    ;
-    background-image: 
-        linear-gradient(#000, transparent),
-        linear-gradient(#000, transparent)
-    ;
-    -moz-background-size:5px 100%;
-    background-size:5px 100%;
-    background-position:0 0, 100% 0;
-    background-repeat:no-repeat;
-}
-
-.two {
-    position: relative;
-    width: 400px;
-    padding: 20px;
-    border: 5px solid transparent;
-    border-top-color: #000;
-    margin: 40px auto;
-}
-
-.two:before,
-.two:after {
-    content: "";
-    position: absolute;
-    top: -5px;
-    bottom: -5px;
-    left: -5px;
-    width: 5px;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(transparent));
-    background-image: -webkit-linear-gradient(#000, transparent);
-    background-image: -moz-linear-gradient(#000, transparent);
-    background-image: -o-linear-gradient(#000, transparent);
-    background-image: linear-gradient(#000, transparent);
-}
-
-.two:after {
-    left: auto;
-    right: -5px;
 }
 </style>
 </head>
