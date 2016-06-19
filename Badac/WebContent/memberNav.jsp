@@ -81,101 +81,23 @@
 <script>
 onload = function on_load(){
 	var profile_c = document.getElementById("profile_c");
-	$.get("http://210.118.74.159:8100/Badac/get_picture_list",{appId:-1,},
-            function (data) {
+	$.get("http://210.118.74.159:8100/Badac/get_company_main_picture",{
+		id:companyId
+		},	function (data) {
                 if (data.msg == "Success") {
                 	var gall_img = document.createElement('img');
-                	gall_img.src=data.pictureList[0].path;
+                	gall_img.src=data.p_path;
                 	gall_img.style.borderRadius="6px";
                 	gall_img.style.width="100%";
                 	gall_img.style.height="100%";
                 	profile_c.appendChild(gall_img);
                 	
-                    /*for (var g = 0; g < data.pictureList.length; g++) {
-                    	var temp_div = document.createElement('div');
-                    	temp_div.style.width="100%";
-                    	temp_div.style.height="100%";
-                    	//temp_div.style.borderRadius="6px";
-                    	var gall_img = document.createElement('img');
-                    	gall_img.src=data.pictureList[g].path;
-                    	gall_img.style.borderRadius="6px";
-                    	gall_img.style.width="100%";
-                    	gall_img.style.height="100%";
-                    	temp_div.appendChild(gall_img);
-                    	gallery_c.appendChild(temp_div);
-                    }*/
+                }else{
+                	alert(data.msg);
                 }
             });
 }
-function uploadUserFile(){
-	var user_img = $("#choice_profile_img").val();
-	if(user_img==""){
-		alert("사진을 선택하세요");
-	}else{
-		switch(user_img.substring(user_img.lastIndexOf('.')+1).toLowerCase()){
-		case 'gif': case 'jpg': case 'png': case 'bmp':
-			var fileSelect = document.getElementById("choice_profile_img");
-            var files = fileSelect.files;
 
-            if (files.length == 0) {
-                alert("파일을 선택하세요.");
-            }
-            else {
-                var formData = new FormData();
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-
-                    formData.append('file', file, file.name);
-                }
-				formData.append('appId', -1);
-                $.ajax({
-                    url: 'http://210.118.74.159:8100/Badac/upload_picture',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    async: false,
-                    success: function (data) {
-                        if (data.msg == 'Success') {
-                            location.reload();
-                        }else{
-                        	alert(data.msg);
-                        }
-                    }
-                });
-            }
-			
-			break;
-			default:
-				$("#choice_profile_img").val('');
-			alert('Not an Image format');
-			break;
-		}
-	}
-}
-function change_profile_dialog() {
-    var dialog;
-
-    dialog = $("#profile-dialog-form").dialog({
-        /*position: ,*/
-        autoOpen: false,
-        width: 700,
-        height: 520,
-        modal: true,
-        buttons: {
-            "선택": function () {
-            	location.reload();
-            },
-            "취소": function () {
-                dialog.dialog("close");
-            }
-        },
-        close: function () {
-            dialog.dialog("close");
-        }
-    });
-    dialog.dialog('open');
-}
 </script>
 </head>
 <body>
@@ -200,7 +122,7 @@ function change_profile_dialog() {
 						<li>						
 							<table>
 								<tr>
-									<td rowspan=2><div style="width:100px;height:100px;" id="profile_c"onclick="change_profile_dialog();"></div></td>
+									<td rowspan=2><div style="width:100px;height:100px;" id="profile_c"></div></td>
 									<td style="padding-left: 20px;">대표 <%=companyownername%></td>
 								</tr>
 
@@ -216,11 +138,5 @@ function change_profile_dialog() {
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container --> </nav>
-<div id="profile-dialog-form" title="이미지 선택" style="display:none;">
-    <div style="width:100%;">
-        <img class="opcity_img" src="images/upload_btn.png" width="60" height="30" id="upload_btn" style="float:right; margin-top:-3px;margin-left:5px;" onclick="uploadUserFile()">
-        <input type="file" id="choice_profile_img" style="float:right;">
-    </div>
-</div>
 </body>
 </html>

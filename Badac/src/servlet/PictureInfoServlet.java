@@ -191,7 +191,7 @@ public class PictureInfoServlet extends HttpServlet {
 			int c_id = Integer.parseInt(request.getParameter("id"));
 			PictureInfoDAO pid = new PictureInfoDAO();
 			String p_path = pid.selectPictureCompanyMain(c_id);
-			
+			System.out.println(p_path);
 			pid.disconnect();
 					
 			String msg = "Success";
