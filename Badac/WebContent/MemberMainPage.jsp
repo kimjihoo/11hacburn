@@ -233,7 +233,7 @@ body {
 					<div class="col-md-6">
 						<div class="col-sm-8 col-sm-offset-2 text">
 							<h1>
-								<strong> 답변 요청서</strong>| Replied Application List
+								<strong> 답변 요청서</strong>| Replied List
 							</h1>
 							답변한 견적 요청서 목록입니다.
 						</div>
@@ -241,7 +241,7 @@ body {
 							<div class="col-sm-8 col-sm-offset-2 form-box">
 								<div class="form-top">
 									<div class="form-top-left">
-										<h3>Replied Application List</h3>
+										<h3>Replied List</h3>
 									</div>
 								</div>
 								<div class="form-bottom">

@@ -15,6 +15,7 @@
 <script type="text/javascript"
 	src="https://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03&libraries=services">	
 </script>
+<link href="css/button.css" rel="stylesheet">
 <style>
 body {
 	padding-top: 70px;
@@ -87,7 +88,7 @@ body {
 												+ '<p>'
 												+ memberData[tempData[i].companyId].company_telephone
 												+ '</p>'
-												+ '<input type="button" class="btn btn-primary" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
+												+ '<input type="button" class="btn" id="'+tempData[i].companyId+'" value="업체 페이지 이동">'
 												+ '</div></div>');
 						document.getElementById(""
 								+ tempData[i].companyId + "").onclick = function() {
