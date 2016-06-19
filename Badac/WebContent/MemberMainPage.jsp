@@ -206,7 +206,7 @@ body {
 								<div class="form-bottom">
 									<div class="form-group">
 										<!-- 테이블 시작 -->
-										<table class="table table-hover"
+										<table class="table"
 											style="width: 100%; color:white; text-align: center;">
 											<thead>
 												<tr>
