@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="css/button.css" rel="stylesheet">
 <title>업체 정보</title>
-
+<script type="text/javascript"
+	src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
 <style>
 body {
 	padding-top: 70px;
@@ -51,7 +52,7 @@ body {
     background-color: #4CAF50;
     color: white;
 }
-#reviewtable #header{
+#reviewtable #header {
     background-color: #de615e;
     color:white;
 
@@ -62,8 +63,7 @@ body {
 
  
 </style>
-<script type="text/javascript"
-	src="http://apis.daum.net/maps/maps3.js?apikey=3a654d3947433483eca1b853767e0d03"></script>
+
 <script>    
     ////////////////////////////////////////////////////////
     <%// 쿠키값 가져오기
@@ -318,8 +318,7 @@ function upload_review(){
 			<div class="row" >
 			<h3 class="page-header">Review</h3>	
 			<div class="table">
-			<table
-				style="text-align:center; margin:0 auto;" id="reviewtable">
+			<table style="text-align:center; margin:0 auto;" id="reviewtable">
 				<tr>
 					<td id="header" style="width:20%;">작성자</td>
 					<td id="header" style="width:80%;">리뷰</td>
@@ -388,7 +387,6 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 			alert(data.msg);
 		}
 	});
-		
 	</script>
 
 </body>
