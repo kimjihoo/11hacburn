@@ -206,13 +206,9 @@ function change_profile_dialog() {
 
 							</table>
 						</li>
-					 <li class="divider"></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_application_page"><img src="img/applicationplus.png" style="width:20px;height:20px;">&nbsp&nbsp메인 메뉴</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/member_main_page"><img src="img/applicationview.png" style="width:20px;height:20px;">&nbsp&nbsp마이 페이지</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"><img src="img/star.png" style="width:20px;height:20px;">&nbsp&nbsp즐겨찾기</a></li>
 						<li class="divider"></li>
 						<li><a href="http://210.118.74.159:8100/Badac/member_logout"><img src="img/logout.png" style="width:20px;height:20px;">&nbsp&nbsp로그아웃</a></li>
-						<li><a href="http://210.118.74.159:8100/Badac/go_user_update_information"><img src="img/profile.png" style="width:20px;height:20px;">&nbsp&nbsp업체정보수정</a></li>
+						<li><a href="http://210.118.74.159:8100/Badac/go_member_update_information"><img src="img/profile.png" style="width:20px;height:20px;">&nbsp&nbsp업체정보수정</a></li>
 						<li><a href="http://210.118.74.159:8100/Badac/go_delete_user_page"><img src="img/x.png" style="width:20px;height:20px;">&nbsp&nbsp회원탈퇴</a></li>
 					</ul></li>
 			</ul>

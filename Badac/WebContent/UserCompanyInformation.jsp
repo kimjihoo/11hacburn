@@ -28,7 +28,7 @@ body {
 }
 .col-md-4 > h3{
 	font-family:  "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-	color: gray;
+	color: black;
 }
  
 </style>
@@ -227,7 +227,7 @@ function upload_review(){
 				<h2 class="page-header">Company Information</h2>
 			</div>
 
-			<div class="col-md-8 img-thumbnail" id="main_img_c" style="width:700px; height:600px;">
+			<div class="col-md-8 img-thumbnail" id="main_img_c">
 			</div>
 
 			<div class="col-md-4" style='font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;'>
