@@ -189,7 +189,7 @@ body {
 							<h1>
 								<strong>견적 요청서</strong>| Estimate List
 							</h1>
-							등록된 나의 견적 요청서 목록입니다.
+							등록된 견적 요청서 목록입니다.
 						</div>
 						<div class="row">
 							<div class="col-sm-8 col-sm-offset-2 form-box">

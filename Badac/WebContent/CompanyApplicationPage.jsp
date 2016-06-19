@@ -99,44 +99,48 @@ body {
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 text">
 						<h1>
-							<strong>견적 요청서 수정</strong>| Registration Form
+							<strong>답변 요청서 보기</strong>| Replied Application Form
 						</h1>
-						등록된 나의 견적 요청서를 수정해주세요.
+						답변한 견적 요청서 입니다.
 					</div>
 					<div class="row">
 						<div class="col-sm-6 col-sm-offset-3 form-box">
 							<div class="form-top">
 								<div class="form-top-left">
-									<h3>Registration Form</h3>
+									<h3>Replied Application Form</h3>
 								</div>
 							</div>
 							<div class="form-bottom">
 								<div class="form-group">
 									<label for="form-title">제목</label> <input type=text
 										id="tunning_title" class="form-control input-sm" name=dbemail
-										size=50 maxlength=50>
+										size=50 maxlength=50 readonly>
 								</div>
 								<div class="form-group">
-									<label for="file">자전거 이미지 업로드</label>
-									<form id="form1" runat="server">
-										<input type='file' id="file" multiple="multiple" class="btn" />
-										<span> <img id="blah1" src="images/no_image.gif"
-											alt="your image" width="100" height="100" /></span>
-										<span><p id="te_p"></p></span>
-									</form>
+									<label for="file">이미지</label>
+									<div class="one" id="img_c"></div>									
 								</div>
 								<div class="form-gruop">
 									<label>내용</label> <input class="form-control input-sm" type="text"
 										id="tunning_explanation" readonly> <br>
 								</div>
+								<div class="form-gruop">
+									<label>답변</label>
+									<textarea name="comment" class="form-control input-sm"
+										id="tunning_reply" rows="10" style="height: 200px;" readonly></textarea>
+									<br>
+								</div>
 
 								<div class="button-group">
 									<center>
-										<button type="submit" class="btn">재등록</button>
-										<a class="btn-link-1" href="UserMyApplicationPage.jsp"
-											role="button">목록</a>
+										<span style="float: right">
+										<button class="btn" type="submit" onclick="deleteReply()">삭제</button>
+										<a class="btn-link-1"
+											href="http://210.118.74.159:8100/Badac/member_main_page"
+											role="button">목록</a></span>
 									</center>
 								</div>
+								<br><br>
 
 								<div class="footer">
 									<center>
@@ -151,55 +155,5 @@ body {
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<table class="table table-hover" width=700
-				style="text-align: center;">
-				<tr>
-					<td style="width: 35%;"><b>날짜</b></td>
-					<td><input class="form-control" type="text" id="tunning_date"
-						readonly></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>코드</b></td>
-					<td><input class="form-control" type="text" id="tunning_id"
-						readonly></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>이름</b></td>
-					<td><input class="form-control" type="text" id="tunning_name"
-						readonly></td>
-			</tr>
-				<tr>
-					<td style="width: 35%;"><b>제목</b></td>
-					<td><input class="form-control" type="text" id="tunning_title"
-						readonly></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>이미지</b></td>
-					<td><div class="form-group">
-							<div class="vCeneter" id="img_c">
-								
-							</div>
-						</div>
-						<p class="help-block">첨부된 자전거 사진</p> <br /></td>
-				</tr>
-				<tr>
-					<td style="width: 35%;"><b>내용</b></td>
-					<td width=350><input class="form-control" type="text"
-						id="tunning_explanation" readonly></td>
-				</tr>
-			</table>
-		<br> <br> <br>
-
-		<table class="table table-hover" width=700 style="text-align: center;">
-			<tr>
-				<td style="width: 35%;"><b>답변</b></td>
-				<td><textarea class="form-control" id="tunning_reply" rows="10" readonly></textarea></td>
-			</tr>
-		</table>
-		<span style="float: right"><button class="btn"
-				type="submit" onclick="deleteReply()">삭제</button> <a class="btn"
-			href="http://210.118.74.159:8100/Badac/member_main_page" role="button">목록</a></span>
-	</div>	
 </body>
 </html>

@@ -34,7 +34,7 @@ body {
 	font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    background-image: url('img/aboutUsbg.jpg');
+    background-image: url('img/aboutusbg.png');
     background-size: cover;
     -o-background-size: cover;
 }
