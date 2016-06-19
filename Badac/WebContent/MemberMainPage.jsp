@@ -47,6 +47,7 @@
 							case 1:
 								title_var = document.createElement('p');
 								title_var.style.cursor="pointer";
+								title_var.style.color="white";
 								title_var.id = applicationData[tempData[i].id].tunning_id;
 								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
 								title_var.onclick = function () {
@@ -108,6 +109,7 @@
 							case 1:
 								title_var = document.createElement('p');
 								title_var.style.cursor="pointer";
+								title_var.style.color="white";
 								title_var.id = applicationData[tempData[i].id].tunning_id;
 								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
 								title_var.onclick = function () {
