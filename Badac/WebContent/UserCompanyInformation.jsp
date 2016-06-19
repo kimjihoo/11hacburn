@@ -30,6 +30,36 @@ body {
 	font-family:  "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: black;
 }
+#reviewtable {
+	text-align:center;
+    font-size:16px;
+    border-collapse: collapse;
+    border-spacing: 0;
+	width:790px;
+	background-color: #fff;
+}
+
+#reviewtable td, #reviewtable th {
+    text-align: center;
+    padding: 8px;
+}
+
+
+#reviewtable th {
+    padding-top: 11px;
+    padding-bottom: 11px;
+    background-color: #4CAF50;
+    color: white;
+}
+#reviewtable #header{
+    background-color: #de615e;
+    color:white;
+
+}
+.table #reviewtable{
+	text-align:center;
+}
+
  
 </style>
 <script type="text/javascript"
@@ -139,6 +169,12 @@ onload = function on_load() {
                         	gall_img.style.borderRadius="6px";
                         	gall_img.style.width="400px";
                         	gall_img.style.height="350px";
+                        	
+                        	gall_img.style.padding="1px";
+                        	gall_img.style.border="1px solid #021a40";
+
+                        	gall_img.style.borderRadius="5px";
+                        	
                         	main_img_c.appendChild(gall_img);
                     	}else{
                     		var span_c = document.createElement('span');
@@ -227,7 +263,7 @@ function upload_review(){
 				<h2 class="page-header">Company Information</h2>
 			</div>
 
-			<div class="col-md-8 img-thumbnail" id="main_img_c">
+			<div class="col-md-8" id="main_img_c">
 			</div>
 
 			<div class="col-md-4" style='font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;'>
@@ -279,19 +315,21 @@ function upload_review(){
 				<div id="map" style="height:500px; width:1000px; text-align:center; margin:0 auto;"></div>
 			</div>
 			</div>
-			<div class="row">
-			<h3 class="page-header">Review</h3>
-	
-			<div class="form-inline">
-				<input type="text" id="reviewText" class="form-control" style="width:790px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn-small" value="등록" onclick = "upload_review();"/>
-			</div><br>
-			<table class="table table-striped" width=700
-				style="text-align: center;" id="reviewtable">
+			<div class="row" >
+			<h3 class="page-header">Review</h3>	
+			<div class="table">
+			<table width=700
+				style="text-align:center;" id="reviewtable">
 				<tr>
-					<td style="width:20%;">작성자</td>
-					<td style="width:80%;">리뷰</td>
+					<td id="header" style="width:20%;">작성자</td>
+					<td id="header" style="width:80%;">리뷰</td>
 				</tr>
 			</table>
+			</div>
+			<div class="form-inline" style="text-align:center;">
+				<input type="text" id="reviewText" class="form-control" style="width:790px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn-small" value="등록" onclick = "upload_review();"/>
+			</div><br>
+
 			</div>
 			<div id="button-page">
 				<a class="btn" href="http://210.118.74.159:8100/Badac/go_my_bookmark_page"
