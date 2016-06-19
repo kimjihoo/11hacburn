@@ -60,13 +60,15 @@
                         for (var g = 0; g < data.pictureList.length; g++) {
                         	var span_c = document.createElement('span');
                         	span_c.style.width="220px";
-                        	span_c.style.height="220px";
+                        	span_c.style.height="180px";
                         	var gall_img = document.createElement('img');
                         	gall_img.src=data.pictureList[g].path;
                         	gall_img.style.borderRadius="6px";
                         	gall_img.style.paddingLeft="50px";
+                        	gall_img.style.paddingTop="20px";
+                        	gall_img.style.paddingBottom="20px";
                         	gall_img.style.width="220px";
-                        	gall_img.style.height="220px";
+                        	gall_img.style.height="180px";
                         	span_c.appendChild(gall_img);
                         	img_c.appendChild(span_c);
                         }
