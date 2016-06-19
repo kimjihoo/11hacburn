@@ -154,7 +154,7 @@ padding: 5px;
 										maxlength=50>
 								</div>
 								<div class="form-group">
-									<label for="file">자전거 이미지 업로드</label>
+									<label for="file">이미지 업로드</label>
 									<form id="form1" runat="server">
 
 										<input type='file' id="file" multiple="multiple" class="btn"/> <span><img
@@ -168,21 +168,22 @@ padding: 5px;
 										class="form-control input-sm textarea" cols=60 rows=10></textarea>
 									<br>
 								</div>
-
 								<div class="button-group">
 									<center>
-										<button type="button" class="btn"
-											onclick="insertApplication()">등록</button>
-										<a class="btn-link-1" onclick="toMainPage()">취소</a>
+										<span style="float: right">
+											<button type="button" class="btn"
+												onclick="insertApplication()">등록</button> <a
+											class="btn-link-1" onclick="toMainPage()">취소</a>
+										</span>
 									</center>
 								</div>
-								
+								<br><br>
 								<div class="footer">
-								<center>
-								<hr>
-								Copyright &copy; Badoc Corporation 2016
-								</center>
-							</div>
+									<center>
+										<hr>
+										Copyright &copy; Badoc Corporation 2016
+									</center>
+								</div>
 							</div>
 							
 						</div>

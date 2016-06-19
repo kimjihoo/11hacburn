@@ -127,7 +127,7 @@ body {
 				<div class="row">
 					<div class="col-sm-8 col-sm-offset-2 text">
 						<h1>
-							<strong>견적 요청서 수정</strong>| Registration Form
+							<strong>견적 요청서 수정</strong>| Application Modify Form
 						</h1>
 						등록된 나의 견적 요청서를 수정해주세요.
 					</div>
@@ -135,7 +135,7 @@ body {
 						<div class="col-sm-6 col-sm-offset-3 form-box">
 							<div class="form-top">
 								<div class="form-top-left">
-									<h3>Registration Form</h3>
+									<h3>Application Modify Form</h3>
 								</div>
 							</div>
 							<div class="form-bottom">
@@ -145,7 +145,7 @@ body {
 										maxlength=50>
 								</div>
 								<div class="form-group">
-									<label for="file">자전거 이미지 업로드</label>
+									<label for="file">이미지 업로드</label>
 									<form id="form1" runat="server">
 										<input type='file' id="file" multiple="multiple" class="btn" />
 										<span> <img id="blah1" src="images/no_image.gif"
@@ -159,15 +159,16 @@ body {
 										rows=10></textarea>
 									<br>
 								</div>
-
 								<div class="button-group">
 									<center>
-										<button type="submit" class="btn">재등록</button>
-										<a class="btn-link-1" href="UserMyApplicationPage.jsp"
+										<span style="float: right">
+											<button type="submit" class="btn">재등록</button> <a
+											class="btn-link-1" href="UserMyApplicationPage.jsp"
 											role="button">목록</a>
+										</span>
 									</center>
 								</div>
-
+								<br><br>
 								<div class="footer">
 									<center>
 										<hr>

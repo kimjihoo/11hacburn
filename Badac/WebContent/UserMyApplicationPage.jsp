@@ -115,7 +115,6 @@ body {
                                     </table>
                                     <!-- 테이블 종료 -->
                                 </div>
-                                <br><br>
 								<div class="button-group">
 									<center>
 										<span style="float: right"> <a class="btn-link-1"
