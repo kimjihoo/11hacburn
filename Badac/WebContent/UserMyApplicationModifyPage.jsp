@@ -121,9 +121,7 @@ body {
 </style>
 </head>
 <body>
-
 	<div class="top-content">
-
 		<div class="inner-bg">
 			<div class="container">
 				<div class="row">
@@ -149,11 +147,10 @@ body {
 								<div class="form-group">
 									<label for="file">자전거 이미지 업로드</label>
 									<form id="form1" runat="server">
-										<input type='file' id="file" multiple="multiple" class="btn"/> <span>
-										<img
-											id="blah1" src="images/no_image.gif" alt="your image"
-											width="100" height="100" /></span> <span><p id="te_p"></p></span>
-
+										<input type='file' id="file" multiple="multiple" class="btn" />
+										<span> <img id="blah1" src="images/no_image.gif"
+											alt="your image" width="100" height="100" /></span>
+										<span><p id="te_p"></p></span>
 									</form>
 								</div>
 								<div class="form-gruop">
@@ -166,7 +163,6 @@ body {
 								<div class="button-group">
 									<center>
 										<button type="submit" class="btn">재등록</button>
-
 										<a class="btn-link-1" href="UserMyApplicationPage.jsp"
 											role="button">목록</a>
 									</center>
@@ -179,18 +175,16 @@ body {
 									</center>
 								</div>
 							</div>
-
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Javascript -->
-		<script src="js/jquery-1.11.1.min.js"></script> 
-		<script src="js/jquery.backstretch.min.js"></script>
-		<script src="js/scripts.js"></script>
-</body>
+	<!-- Javascript -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/jquery.backstretch.min.js"></script>
+	<script src="js/scripts.js"></script>
 </body>
 </html>
