@@ -200,7 +200,7 @@ function change_profile_dialog() {
 						<li>						
 							<table>
 								<tr>
-									<td rowspan=2><div id="profile_c"onclick="change_profile_dialog();"></div></td>
+									<td rowspan=2><div style="width:100px;height:100px;" id="profile_c"onclick="change_profile_dialog();"></div></td>
 									<td style="padding-left: 20px;">대표 <%=companyownername%></td>
 								</tr>
 
