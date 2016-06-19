@@ -262,9 +262,8 @@ function upload_review(){
 			</div>
 			
 			<div class="row">
-			<div class="col-lg-12">
-				<h3 class="page-header">Company Photo</h3>
-			</div>
+
+			<h3 class="page-header">Company Photo</h3>
 
 			<div class="form-group">
 				<div class="vCeneter" id="img_c">
