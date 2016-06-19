@@ -167,7 +167,7 @@ body {
 						<h1>
 							<strong>견적 요청서 보기</strong>| Application View
 						</h1>
-						등록한 견적 요청서에 입니다.
+						등록한 견적 요청서 입니다.
 					</div>
 				</div>
 				<div class="row">
