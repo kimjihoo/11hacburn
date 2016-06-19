@@ -159,10 +159,11 @@ body {
 
 								<div class="button-group">
 									<center>
+										<span style="float: right">
 										<button type="submit" class="btn" onclick="answerReply()">등록</button>
 										<a class="btn-link-1"
 											href="http://210.118.74.159:8100/Badac/member_main_page"
-											role="button">목록</a>
+											role="button">목록</a></span>
 									</center>
 								</div>
 

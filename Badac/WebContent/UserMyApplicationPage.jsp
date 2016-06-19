@@ -37,6 +37,7 @@
 							case 1:
 								title_var = document.createElement('p');
 								title_var.style.cursor="pointer";
+								title_var.style.color="white";
 								title_var.id = applicationData[tempData[i].id].tunning_id;
 								title_var.appendChild(document.createTextNode(applicationData[tempData[i].id].tunning_title));
 								title_var.onclick = function () {
@@ -62,9 +63,7 @@
 		});
 	}
 </script>
-
 <!-- CSS -->
-
 <link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/form-elements.css">
 <link rel="stylesheet" href="css/style.css"> 
@@ -82,12 +81,9 @@ body {
 	padding: 5px;
 }
 </style>
-
 </head>
-<body>
-		
+<body>		
    <div class="top-content">
-
         <div class="inner-bg">
             <div class="container">
                 <div class="row">
@@ -106,7 +102,7 @@ body {
                             <div class="form-bottom">
                                 <div class="form-group">
                                     <!-- 테이블 시작 -->
-                                    <table class="table table-hover" style="width:100%; text-align:center;">
+                                    <table class="table table-hover" style="width:100%; color: white; text-align:center;">
                                         <thead>
                                             <tr>
                                                 <td style="width:15%;">번호</td>
@@ -114,39 +110,32 @@ body {
                                                 <td style="width:20%;">등록일자</td>
                                             </tr>
                                         </thead>
-                                        <tbody id="my_applicationListTable" style="width:100%; text-align:center;">
-
+                                        <tbody id="my_applicationListTable" style="width:100%; color: white; text-align:center;">
                                         </tbody>
                                     </table>
                                     <!-- 테이블 종료 -->
-
                                 </div>
-
-
-                                <div class="button-group">
-
-                                    <a class="btn-link-1" href="http://210.118.74.159:8100/Badac/write_application" role="button">등록</a>
-
-                                </div>
-
-                                <div class="footer">
+                                <br><br>
+								<div class="button-group">
+									<center>
+										<span style="float: right"> <a class="btn-link-1"
+											href="http://210.118.74.159:8100/Badac/write_application"
+											role="button">등록</a></span>
+									</center>
+								</div>
+								<br><br>
+								<div class="footer" style="color:white;">
                                     <center>
                                         <hr> Copyright &copy; Badoc Corporation 2016
                                     </center>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
-
-
-    </div>
-	
+    </div>	
 	
 	<!-- Javascript -->
 		<script src="js/jquery-1.11.1.min.js"></script> 
