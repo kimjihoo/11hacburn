@@ -15,7 +15,7 @@
 	list-style-image: url(/pororo.jpg);
 	list-style-type: disc;
 }
-table>tr:hover{
+tr:hover{
 	background-color: gray;
 }
 </style>
