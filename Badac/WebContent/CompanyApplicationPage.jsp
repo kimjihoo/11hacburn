@@ -6,12 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>견적 요청서 답변</title>
+<!-- CSS -->
 <link href="css/button.css" rel="stylesheet">
-<style>
-body {
-	padding-top: 70px;
-}
-</style>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/form-elements.css">
+<link rel="stylesheet" href="css/style.css">
 <script>    
     ////////////////////////////////////////////////////////
     <%// 쿠키값 가져오기
@@ -78,8 +77,80 @@ body {
 function deleteReply() {
 }
 </script>
+<style>
+body {
+	padding-top: 70px;
+	background-image: url('img/applicationbg.png'); 
+}
+
+.button-group {
+	margin: 1px;
+}
+
+.footer {
+	padding: 5px;
+}
+</style>
 </head>
 <body>
+	<div class="top-content">
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 text">
+						<h1>
+							<strong>견적 요청서 수정</strong>| Registration Form
+						</h1>
+						등록된 나의 견적 요청서를 수정해주세요.
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3 form-box">
+							<div class="form-top">
+								<div class="form-top-left">
+									<h3>Registration Form</h3>
+								</div>
+							</div>
+							<div class="form-bottom">
+								<div class="form-group">
+									<label for="form-title">제목</label> <input type=text
+										id="tunning_title" class="form-control input-sm" name=dbemail
+										size=50 maxlength=50>
+								</div>
+								<div class="form-group">
+									<label for="file">자전거 이미지 업로드</label>
+									<form id="form1" runat="server">
+										<input type='file' id="file" multiple="multiple" class="btn" />
+										<span> <img id="blah1" src="images/no_image.gif"
+											alt="your image" width="100" height="100" /></span>
+										<span><p id="te_p"></p></span>
+									</form>
+								</div>
+								<div class="form-gruop">
+									<label>내용</label> <input class="form-control input-sm" type="text"
+										id="tunning_explanation" readonly> <br>
+								</div>
+
+								<div class="button-group">
+									<center>
+										<button type="submit" class="btn">재등록</button>
+										<a class="btn-link-1" href="UserMyApplicationPage.jsp"
+											role="button">목록</a>
+									</center>
+								</div>
+
+								<div class="footer">
+									<center>
+										<hr>
+										Copyright &copy; Badoc Corporation 2016
+									</center>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<table class="table table-hover" width=700
 				style="text-align: center;">

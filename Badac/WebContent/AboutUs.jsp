@@ -94,8 +94,7 @@ body {
 					'바닥' 은 중고 자전거 처분을 위해 중계 역할을 수행하여 경매를 통해 빠른 처분을 돕겠습니다. <br>
 					'바닥' 은 중고 용품을 매매하여 처분하기 어려운 자전거 용품을 빠르게 처분할 수 있도록 돕겠습니다.
 				</p>
-				<br> <a class="btn btn-default btn-lg" href="#">Call to
-					Action &raquo;</a>
+				<br>
 			</div>
 			<div class="col-sm-4">
 				<h2>Contact Us</h2>

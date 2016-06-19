@@ -64,6 +64,7 @@
                         	var gall_img = document.createElement('img');
                         	gall_img.src=data.pictureList[g].path;
                         	gall_img.style.borderRadius="6px";
+                        	gall_img.style.paddingLeft="10px";
                         	gall_img.style.width="150px";
                         	gall_img.style.height="150px";
                         	span_c.appendChild(gall_img);
@@ -113,6 +114,59 @@ body {
 .footer {
 	padding: 5px;
 }
+.one { 
+    width: 400px;
+    padding: 20px 25px;
+    border-top: 5px solid #000;
+    margin: 40px auto;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(transparent));
+    background-image: -webkit-linear-gradient(#000, transparent);
+    background-image:
+        -moz-linear-gradient(#000, transparent),
+        -moz-linear-gradient(#000, transparent)
+    ;
+    background-image:
+        -o-linear-gradient(#000, transparent),
+        -o-linear-gradient(#000, transparent)
+    ;
+    background-image: 
+        linear-gradient(#000, transparent),
+        linear-gradient(#000, transparent)
+    ;
+    -moz-background-size:5px 100%;
+    background-size:5px 100%;
+    background-position:0 0, 100% 0;
+    background-repeat:no-repeat;
+}
+
+.two {
+    position: relative;
+    width: 400px;
+    padding: 20px;
+    border: 5px solid transparent;
+    border-top-color: #000;
+    margin: 40px auto;
+}
+
+.two:before,
+.two:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    width: 5px;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(transparent));
+    background-image: -webkit-linear-gradient(#000, transparent);
+    background-image: -moz-linear-gradient(#000, transparent);
+    background-image: -o-linear-gradient(#000, transparent);
+    background-image: linear-gradient(#000, transparent);
+}
+
+.two:after {
+    left: auto;
+    right: -5px;
+}
 </style>
 </head>
 <body>
@@ -140,8 +194,8 @@ body {
 										size=50 maxlength=50 readonly>
 								</div>
 								<div class="form-group">
-									<label for="file">자전거 이미지</label>
-									<div class="vCeneter" id="img_c"></div>									
+									<label for="file">이미지</label>
+									<div class="one" id="img_c"></div>									
 								</div>
 								<div class="form-gruop">
 									<label>내용</label> <input class="form-control input-sm" type="text"
@@ -149,8 +203,8 @@ body {
 								</div>
 								<div class="form-gruop">
 									<label>답변</label>
-									<textarea class="form-control input-sm" id="tunning_reply"
-										rows="10"></textarea>
+									<input type="text" class="form-control input-sm" id="tunning_reply"
+										style="height: 200px;">
 									<br>
 								</div>
 
